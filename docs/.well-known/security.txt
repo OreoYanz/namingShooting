@@ -1,0 +1,5 @@
+Contact: mailto:nameshootingmingxu@gmail.com
+Preferred-Languages: zh-Hant
+Canonical: https://www.mingxu.example/
+Policy: https://www.mingxu.example/privacy.html
+# 正式上線時請更新域名與聯絡信箱

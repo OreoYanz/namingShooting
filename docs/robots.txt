@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://oreoyanz.github.io/namingShooting/sitemap.xml

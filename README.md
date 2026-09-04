@@ -1,3 +1,6 @@
+> **名序形象官網（GitHub Pages）**：[https://oreoyanz.github.io/namingShooting/](https://oreoyanz.github.io/namingShooting/)  
+> 公開網站內容位於 `docs/`（由 `site/` 同步）。命名系統仍為本機工具，不透過此網址提供。
+
 # 台灣改名助手
 
 單機 **網頁版**：融合 **八字喜用神（扶抑＋調候）**、**十二生肖學**、**康熙筆畫三才五格**。  

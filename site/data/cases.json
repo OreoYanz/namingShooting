@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "note": "由 WinForms 匯出 PDF 時產生的 .case.json 併入此檔 cases 陣列。",
+  "cases": [
+    {
+      "id": "rn-20260922173029-OO",
+      "service": "rename",
+      "serviceLabel": "成人改名",
+      "birthDate": "1986/09/29",
+      "region": "高雄市",
+      "displayName": "張OO",
+      "gender": "男",
+      "exportedAt": "2026-09-22T17:30:29+08:00",
+      "image": "成長、生發、青枝向榮",
+      "macroStage": ""
+    }
+  ]
+}

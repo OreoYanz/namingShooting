@@ -6,8 +6,8 @@
     { href: "newborn.html", label: "新生兒命名" },
     { href: "rename.html", label: "成人改名" },
     { href: "liunian.html", label: "流年分析" },
-    { href: "works.html", label: "命名作品" },
-    { href: "memorial.html", label: "命名紀念" },
+    { href: "index.html#showcase", label: "成果展示" },
+    { href: "works.html", label: "真實案例" },
     { href: "faq.html", label: "常見問題" },
     { href: "contact.html", label: "聯絡方式" },
   ];
@@ -44,7 +44,7 @@
       <nav class="site-nav" id="siteNav" aria-label="主要導覽">
         <ul>${navHtml()}</ul>
         <div class="nav-cta">
-          <a class="btn btn-primary" href="contact.html">聯絡名序</a>
+          <a class="btn btn-primary" href="https://line.me/R/ti/p/@187xckjb" target="_blank" rel="noopener noreferrer" data-mx-track="line_add">Line 諮詢</a>
         </div>
       </nav>`;
     const backdrop = document.getElementById("navBackdrop");
@@ -70,7 +70,7 @@
               <li><a href="newborn.html">新生兒命名</a></li>
               <li><a href="rename.html">成人改名</a></li>
               <li><a href="liunian.html">流年分析</a></li>
-              <li><a href="contact.html">聯絡洽詢</a></li>
+              <li><a href="contact.html#line">Line 諮詢</a></li>
               <li><a href="index.html#purchase-flow">購買流程</a></li>
             </ul>
           </div>
@@ -78,8 +78,7 @@
             <h4>認識名序</h4>
             <ul>
               <li><a href="about.html">品牌故事</a></li>
-              <li><a href="works.html">命名作品</a></li>
-              <li><a href="memorial.html">命名紀念</a></li>
+              <li><a href="works.html">真實案例</a></li>
               <li><a href="faq.html">常見問題</a></li>
             </ul>
           </div>

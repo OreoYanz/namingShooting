@@ -25,6 +25,30 @@
       "exportedAt": "2026-09-23T13:14:58+08:00",
       "macroStage": "大運戊寅｜穩中求進",
       "image": ""
+    },
+    {
+      "id": "nb-20260924004122-OO",
+      "service": "newborn",
+      "serviceLabel": "新生兒命名",
+      "birthDate": "2026/10/12",
+      "region": "高雄市",
+      "displayName": "莊OO",
+      "gender": "女",
+      "exportedAt": "2026-09-24T00:41:22+08:00",
+      "image": "智慧、涵養、清流通達",
+      "macroStage": ""
+    },
+    {
+      "id": "nb-20260924004053-OO",
+      "service": "newborn",
+      "serviceLabel": "新生兒命名",
+      "birthDate": "2026/10/12",
+      "region": "高雄市",
+      "displayName": "莊OO",
+      "gender": "女",
+      "exportedAt": "2026-09-24T00:40:53+08:00",
+      "image": "智慧、涵養、清流通達",
+      "macroStage": ""
     }
   ]
 }

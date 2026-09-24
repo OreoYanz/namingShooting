@@ -1,0 +1,32 @@
+# OS / IDE
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+
+# Python leftovers (if any)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Build / temp
+build/
+dist/
+*.user
+*.suo
+*.cache
+_tmp_*
+*.log
+
+# WinForms build outputs (keep packages/ and _gen/)
+winforms/**/bin/
+winforms/**/obj/
+winforms/release/
+
+# Secrets — never commit real keys
+**/App.config.local
+**/*.exe.config.bak

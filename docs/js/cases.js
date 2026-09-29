@@ -1,10 +1,13 @@
-/** 真實案例：字卡輪換 */
+/** 真實案例：水平滑動字卡 */
 (function () {
   const root = document.querySelector("[data-cases]");
   if (!root) return;
 
+  const viewport = root.querySelector("[data-cases-viewport]");
   const track = root.querySelector("[data-cases-track]");
   const empty = root.querySelector("[data-cases-empty]");
+  const prevBtn = root.querySelector("[data-cases-prev]");
+  const nextBtn = root.querySelector("[data-cases-next]");
   const dots = root.querySelector("[data-cases-dots]");
   if (!track) return;
 
@@ -26,9 +29,7 @@
     const svc = c.service === "rename" || c.service === "liunian" ? c.service : "newborn";
     const label = c.serviceLabel || SERVICE[svc] || "名序服務";
     const highlight =
-      svc === "liunian"
-        ? c.macroStage || "流年觀察"
-        : c.image || "";
+      svc === "liunian" ? c.macroStage || "流年觀察" : c.image || "";
     const highlightLabel = svc === "liunian" ? "宏觀階段" : "意象";
     return (
       '<article class="case-card case-card--' +
@@ -62,77 +63,130 @@
     );
   }
 
-  function render(cases) {
-    if (!cases.length) {
-      track.innerHTML = "";
-      if (empty) empty.hidden = false;
-      if (dots) dots.innerHTML = "";
-      return;
-    }
-    if (empty) empty.hidden = true;
-    track.innerHTML = cases.map(cardHtml).join("");
-    setupRotate(cases.length);
-  }
-
-  function setupRotate(count) {
+  function setupSlider(count) {
+    const scroller = viewport || track;
     const cards = Array.prototype.slice.call(track.querySelectorAll(".case-card"));
     if (!cards.length) return;
 
-    let index = 0;
-    const desktop = window.matchMedia("(min-width: 720px)").matches;
-    const visible = Math.min(desktop ? 3 : 1, count);
     let timer = null;
+    let paused = false;
+
+    function cardStep() {
+      const first = cards[0];
+      if (!first) return scroller.clientWidth;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
+
+    function maxIndex() {
+      const step = cardStep();
+      if (step <= 0) return 0;
+      const visible = Math.max(1, Math.round(scroller.clientWidth / step));
+      return Math.max(0, count - visible);
+    }
+
+    function currentIndex() {
+      const step = cardStep();
+      if (step <= 0) return 0;
+      return Math.round(scroller.scrollLeft / step);
+    }
 
     function paintDots() {
       if (!dots) return;
-      if (count <= visible) {
+      const max = maxIndex();
+      if (max <= 0) {
         dots.innerHTML = "";
         return;
       }
-      const pages = Math.ceil(count / visible);
-      const page = Math.floor(index / visible) % pages;
-      dots.innerHTML = Array.from({ length: pages }, function (_, i) {
+      const active = Math.min(currentIndex(), max);
+      dots.innerHTML = Array.from({ length: max + 1 }, function (_, i) {
         return (
           '<button type="button" class="case-dot' +
-          (i === page ? " is-active" : "") +
-          '" data-page="' +
+          (i === active ? " is-active" : "") +
+          '" data-i="' +
           i +
           '" aria-label="第 ' +
           (i + 1) +
-          ' 頁"></button>'
+          ' 張"></button>'
         );
       }).join("");
-      dots.querySelectorAll("[data-page]").forEach(function (btn) {
+      dots.querySelectorAll("[data-i]").forEach(function (btn) {
         btn.addEventListener("click", function () {
-          index = Number(btn.getAttribute("data-page") || 0) * visible;
-          show();
+          goTo(Number(btn.getAttribute("data-i") || 0));
           restart();
         });
       });
     }
 
-    function show() {
-      cards.forEach(function (card, i) {
-        const on = i >= index && i < index + visible;
-        card.classList.toggle("is-visible", on);
-        card.hidden = !on;
-      });
-      paintDots();
+    function goTo(i) {
+      const max = maxIndex();
+      const target = ((i % (max + 1)) + (max + 1)) % (max + 1);
+      scroller.scrollTo({ left: target * cardStep(), behavior: "smooth" });
     }
 
     function next() {
-      if (count <= visible) return;
-      index = (index + visible) % count;
-      show();
+      const max = maxIndex();
+      if (max <= 0) return;
+      const i = currentIndex();
+      goTo(i >= max ? 0 : i + 1);
+    }
+
+    function prev() {
+      const max = maxIndex();
+      if (max <= 0) return;
+      const i = currentIndex();
+      goTo(i <= 0 ? max : i - 1);
     }
 
     function restart() {
       if (timer) clearInterval(timer);
-      if (count > visible) timer = setInterval(next, 5200);
+      if (maxIndex() > 0) {
+        timer = setInterval(function () {
+          if (!paused) next();
+        }, 4500);
+      }
     }
 
-    show();
+    if (prevBtn) prevBtn.addEventListener("click", function () { prev(); restart(); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { next(); restart(); });
+
+    scroller.addEventListener("scroll", function () {
+      window.clearTimeout(scroller._dotTimer);
+      scroller._dotTimer = window.setTimeout(paintDots, 80);
+    }, { passive: true });
+
+    root.addEventListener("mouseenter", function () { paused = true; });
+    root.addEventListener("mouseleave", function () { paused = false; });
+    root.addEventListener("focusin", function () { paused = true; });
+    root.addEventListener("focusout", function () { paused = false; });
+
+    scroller.addEventListener("touchstart", function () { paused = true; }, { passive: true });
+    scroller.addEventListener("touchend", function () {
+      paused = false;
+      restart();
+    }, { passive: true });
+
+    paintDots();
     restart();
+    window.addEventListener("resize", function () {
+      paintDots();
+      restart();
+    });
+  }
+
+  function render(cases) {
+    if (!cases.length) {
+      track.innerHTML = "";
+      if (empty) empty.hidden = false;
+      if (dots) dots.innerHTML = "";
+      root.classList.remove("has-cases");
+      return;
+    }
+    if (empty) empty.hidden = true;
+    root.classList.add("has-cases");
+    track.innerHTML = cases.map(cardHtml).join("");
+    setupSlider(cases.length);
   }
 
   const src = root.getAttribute("data-cases-src") || "data/cases.json";

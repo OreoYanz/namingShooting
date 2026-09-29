@@ -789,7 +789,7 @@ a:hover { text-decoration: underline; }
   white-space: pre-line;
 }
 
-/* Real cases carousel */
+/* Real cases slider */
 .cases-empty {
   text-align: center;
   color: var(--muted);
@@ -799,28 +799,56 @@ a:hover { text-decoration: underline; }
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.55);
 }
-.cases-track {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+.cases-shell {
+  display: none;
+  align-items: center;
+  gap: 10px;
 }
-@media (min-width: 720px) {
-  .cases-track { grid-template-columns: repeat(3, 1fr); }
+.cases.has-cases .cases-shell { display: flex; }
+.cases-nav {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.cases-nav:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.cases-viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cases-viewport::-webkit-scrollbar { display: none; }
+.cases-track {
+  display: flex;
+  gap: 16px;
+  padding: 4px 2px 8px;
 }
 .case-card {
+  flex: 0 0 min(280px, 82vw);
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 22px 20px 20px;
   min-height: 210px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  scroll-snap-align: start;
   border-top: 3px solid var(--case-accent, var(--gold));
 }
-.case-card.is-visible {
-  opacity: 1;
-  transform: none;
+@media (min-width: 720px) {
+  .case-card { flex-basis: calc((100% - 32px) / 3); }
 }
 .case-card--newborn {
   --case-accent: #4f7d62;
@@ -889,7 +917,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 18px;
+  margin-top: 14px;
   min-height: 12px;
 }
 .case-dot {
@@ -902,9 +930,6 @@ a:hover { text-decoration: underline; }
   cursor: pointer;
 }
 .case-dot.is-active { background: var(--gold); }
-  font-size: 0.9rem; line-height: 1.9; margin: 12px 0 0;
-  white-space: pre-line;
-}
 
 /* Page hero (inner) */
 .page-hero {

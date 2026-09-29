@@ -26,9 +26,9 @@
   <meta name="twitter:image" content="https://oreoyanz.github.io/namingShooting/assets/logo.png" />
   <link rel="icon" href="assets/logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/site.css?v=1.0.26" />
-  <script src="js/tracking-config.js?v=1.0.26"></script>
-  <script src="js/tracking.js?v=1.0.26"></script>
+  <link rel="stylesheet" href="css/site.css?v=1.0.29" />
+  <script src="js/tracking-config.js?v=1.0.29"></script>
+  <script src="js/tracking.js?v=1.0.29"></script>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,14 +61,20 @@
     <section class="section"><div class="container reveal">
       <div class="cases" data-cases data-cases-src="data/cases.json">
         <p class="cases-empty" data-cases-empty>案例累積中，完成訂單後將逐步公開。</p>
-        <div class="cases-track" data-cases-track></div>
+        <div class="cases-shell">
+          <button type="button" class="cases-nav" data-cases-prev aria-label="上一則">‹</button>
+          <div class="cases-viewport" data-cases-viewport>
+            <div class="cases-track" data-cases-track></div>
+          </div>
+          <button type="button" class="cases-nav" data-cases-next aria-label="下一則">›</button>
+        </div>
         <div class="cases-dots" data-cases-dots aria-label="案例分頁"></div>
       </div>
     </div></section>
   </main>
   <footer id="site-footer"></footer>
-  <script src="js/layout.js?v=1.0.26"></script>
-  <script src="js/site.js?v=1.0.26"></script>
-  <script src="js/cases.js?v=1.0.26"></script>
+  <script src="js/layout.js?v=1.0.29"></script>
+  <script src="js/site.js?v=1.0.29"></script>
+  <script src="js/cases.js?v=1.0.29"></script>
 </body>
 </html>

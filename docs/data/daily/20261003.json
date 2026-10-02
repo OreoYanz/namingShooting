@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-02T16:55:13",
+  "timezone": "Asia/Taipei",
+  "date": "2026-10-03",
+  "dateKey": "20261003",
+  "rocDate": "115年10月3日",
+  "lunarDate": "農曆八月廿三",
+  "dateLine1": "115年10月3日 農曆八月廿三",
+  "dateLine2": "丙午 [馬] 年丁酉月庚戌日",
+  "dayGanZhi": "庚戌",
+  "dayAnimalHint": "馬",
+  "fortuneLevel": "平",
+  "fortuneScore": 62,
+  "mainTheme": "嫁娶開運",
+  "secondaryTheme": "順水流財",
+  "yi": [
+    "嫁娶",
+    "訂盟",
+    "納採",
+    "祭祀",
+    "祈福",
+    "出行"
+  ],
+  "ji": [
+    "針灸",
+    "伐木",
+    "作梁",
+    "造廟"
+  ],
+  "summaryText": "今天適合嫁娶訂盟，出行與祈福，忌針灸與伐木。",
+  "shortMessage": "今天庚戌日，嫁娶、訂盟的好時機，記得出行祈福，避開針灸！",
+  "ctaLine": "想知道的不只是今天，還有你今年的方向？",
+  "ctaProduct": "名序｜流年分析",
+  "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
+  "brandName": "名序",
+  "brandTagline": "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+  "media": {
+    "gif": "assets/daily/daily_20261003.gif",
+    "webp": "assets/daily/daily_20261003.webp",
+    "preview": "assets/daily/daily_20261003_preview.jpg",
+    "scene": "assets/daily/scene_20261003.jpg",
+    "scenePng": "assets/daily/scene_20261003.png",
+    "gifDated": "assets/daily/daily_20261003.gif",
+    "previewDated": "assets/daily/daily_20261003_preview.jpg",
+    "latestGif": "assets/daily/latest.gif",
+    "latestPreview": "assets/daily/latest_preview.jpg"
+  },
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+}

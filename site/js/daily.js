@@ -407,6 +407,108 @@
     }
   }
 
+  function shortAlbumLabel(day) {
+    const key = String(day.dateKey || "");
+    if (key.length === 8) {
+      return key.slice(4, 6) + "/" + key.slice(6, 8);
+    }
+    return day.dateLine1 || key;
+  }
+
+  function selectAlbumDay(day, todayKey) {
+    const preview = document.getElementById("homeAlbumPreview");
+    const picked = document.getElementById("homeAlbumPicked");
+    const dl = document.getElementById("homeAlbumDownload");
+    if (!day) return;
+
+    const previewSrc = day.preview || day.gif || "";
+    if (preview && previewSrc) {
+      preview.src = previewSrc + "?t=" + Date.now();
+      preview.alt = (day.dateLine1 || day.dateKey || "") + " 預覽";
+    }
+    if (picked) {
+      const theme =
+        (day.fortuneLevel ? "今日" + day.fortuneLevel : "") +
+        (day.mainTheme ? "｜" + day.mainTheme : "");
+      picked.textContent =
+        (day.dateLine1 || day.dateKey || "") +
+        (theme ? "　" + theme : "") +
+        (String(day.dateKey) > todayKey ? "（已排程）" : "");
+    }
+    bindDownloadButton(dl, day.gif || "", day.dateKey);
+
+    document.querySelectorAll(".home-album-tile").forEach(function (tile) {
+      tile.classList.toggle("is-active", tile.getAttribute("data-date-key") === String(day.dateKey));
+    });
+  }
+
+  async function mountHomeAlbum() {
+    const root = document.getElementById("homeAlbum");
+    if (!root) return;
+    const status = document.getElementById("homeAlbumStatus");
+    const body = document.getElementById("homeAlbumBody");
+    const grid = document.getElementById("homeAlbumGrid");
+    const todayKey = taiwanDateKey();
+
+    try {
+      const archive = await fetchDailyArchive();
+      const days = archive.days || [];
+      if (!days.length) throw new Error("empty archive");
+      if (status) status.hidden = true;
+      if (body) body.hidden = false;
+
+      grid.innerHTML = days
+        .map(function (day) {
+          const key = escapeHtml(day.dateKey || "");
+          const rawKey = String(day.dateKey || "");
+          const isFuture = rawKey > todayKey;
+          const thumb = escapeHtml(day.preview || day.gif || "");
+          const label = escapeHtml(shortAlbumLabel(day));
+          return (
+            '<button type="button" class="home-album-tile' +
+            (isFuture ? " is-scheduled" : "") +
+            '" role="option" data-date-key="' +
+            key +
+            '" aria-label="' +
+            escapeHtml(day.dateLine1 || key) +
+            '">' +
+            (thumb ? '<img src="' + thumb + '" alt="" loading="lazy" />' : "") +
+            "<span>" +
+            label +
+            "</span>" +
+            "</button>"
+          );
+        })
+        .join("");
+
+      const byKey = {};
+      days.forEach(function (day) {
+        byKey[String(day.dateKey)] = day;
+      });
+
+      grid.querySelectorAll(".home-album-tile").forEach(function (tile) {
+        tile.addEventListener("click", function () {
+          const day = byKey[tile.getAttribute("data-date-key")];
+          if (day) selectAlbumDay(day, todayKey);
+        });
+      });
+
+      const preferred =
+        byKey[todayKey] ||
+        days.find(function (d) {
+          return String(d.dateKey) <= todayKey;
+        }) ||
+        days[0];
+      selectAlbumDay(preferred, todayKey);
+    } catch (e) {
+      if (status) {
+        status.hidden = false;
+        status.textContent = "相本準備中，發布每日內容後即可挑選。";
+      }
+      if (body) body.hidden = true;
+    }
+  }
+
   global.MingxuDaily = {
     taiwanDateKey: taiwanDateKey,
     resolveDisplayDaily: resolveDisplayDaily,
@@ -415,6 +517,7 @@
     downloadGif: downloadGif,
     mountDailyPage: mountDailyPage,
     mountHomeDaily: mountHomeDaily,
+    mountHomeAlbum: mountHomeAlbum,
     mountDailyArchive: mountDailyArchive,
   };
 
@@ -424,6 +527,9 @@
     }
     if (document.getElementById("homeDaily")) {
       mountHomeDaily();
+    }
+    if (document.getElementById("homeAlbum")) {
+      mountHomeAlbum();
     }
     if (document.getElementById("dailyArchiveList")) {
       mountDailyArchive();

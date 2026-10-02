@@ -64,7 +64,6 @@ a:hover { text-decoration: underline; }
 #naming-flow { scroll-margin-top: calc(var(--header-h) + 8px); }
 #purchase-flow { scroll-margin-top: calc(var(--header-h) + 8px); }
 #daily { scroll-margin-top: calc(var(--header-h) + 8px); }
-#daily-archive { scroll-margin-top: calc(var(--header-h) + 8px); }
 #archive { scroll-margin-top: calc(var(--header-h) + 8px); }
 .process-chain {
   margin: 0 0 24px;
@@ -1199,27 +1198,42 @@ body.nav-open { overflow: hidden; }
   .device-frame { width: min(100%, 380px); }
 }
 
-/* Homepage · 每日吉祥（緊湊橫幅） */
+/* Homepage · 每日吉祥＋歷日相本 */
 #daily.section {
   padding: 28px 0;
 }
-.home-daily .section-title {
-  margin: 0 0 6px;
-  font-size: clamp(1.25rem, 3vw, 1.55rem);
-}
-.home-daily .section-lead {
-  margin: 0 0 10px;
-  font-size: 0.92rem;
-}
-.home-daily-body {
+.home-daily-split {
   display: grid;
-  gap: 1rem;
-  align-items: center;
+  gap: 1.25rem;
 }
-@media (min-width: 820px) {
-  .home-daily-body {
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-    gap: 1.25rem;
+@media (min-width: 900px) {
+  .home-daily-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+.home-daily-panel {
+  background: rgba(255, 254, 251, 0.72);
+  border: 1px solid var(--line);
+  padding: 1rem 1.05rem 1.1rem;
+}
+.home-daily-panel .section-title {
+  margin: 0 0 6px;
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+}
+.home-daily-panel .section-lead {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+}
+.home-daily-today .home-daily-body {
+  display: grid;
+  gap: 0.85rem;
+}
+@media (min-width: 560px) {
+  .home-daily-today .home-daily-body {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: start;
   }
 }
 .home-daily-date {
@@ -1262,12 +1276,98 @@ body.nav-open { overflow: hidden; }
 }
 .home-daily-media img {
   width: 100%;
-  max-width: 260px;
+  max-width: 280px;
   display: block;
-  margin: 0 auto;
   border: 1px solid var(--line);
   background: #f0ebe3;
 }
+
+.home-album-body {
+  display: grid;
+  gap: 0.85rem;
+}
+.home-album-stage {
+  display: grid;
+  gap: 0.65rem;
+}
+@media (min-width: 520px) {
+  .home-album-stage {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+  }
+}
+.home-album-stage img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: #f0ebe3;
+  display: block;
+}
+.home-album-picked {
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.45;
+}
+.home-album-stage-meta .btn {
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+}
+.home-album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.45rem;
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 2px;
+}
+.home-album-tile {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  display: block;
+  position: relative;
+}
+.home-album-tile img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  background: #f0ebe3;
+}
+.home-album-tile span {
+  display: block;
+  padding: 0.2rem 0.25rem 0.3rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  line-height: 1.2;
+}
+.home-album-tile.is-active {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px rgba(166, 124, 61, 0.35);
+}
+.home-album-tile.is-scheduled {
+  opacity: 0.75;
+}
+.home-album-tile.is-scheduled::after {
+  content: "排程";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 0.62rem;
+  background: rgba(255, 254, 251, 0.92);
+  border: 1px solid var(--line);
+  padding: 0 0.25rem;
+  color: var(--muted);
+}
+
 .daily-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1276,7 +1376,7 @@ body.nav-open { overflow: hidden; }
 }
 .daily-actions .btn { margin: 0; }
 
-/* 歷日剪紙下載 */
+/* 歷日剪紙下載（daily.html） */
 .daily-archive-status {
   color: var(--muted);
   margin: 0 0 1rem;

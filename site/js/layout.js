@@ -2,6 +2,7 @@
 (function () {
   const NAV = [
     { href: "index.html", label: "首頁" },
+    { href: "daily.html", label: "每日吉祥" },
     { href: "about.html", label: "關於名序" },
     { href: "newborn.html", label: "新生兒命名" },
     { href: "rename.html", label: "成人改名" },
@@ -77,6 +78,7 @@
           <div>
             <h4>認識名序</h4>
             <ul>
+              <li><a href="daily.html">每日吉祥</a></li>
               <li><a href="about.html">品牌故事</a></li>
               <li><a href="works.html">真實案例</a></li>
               <li><a href="faq.html">常見問題</a></li>

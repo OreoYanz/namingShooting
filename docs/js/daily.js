@@ -407,38 +407,112 @@
     }
   }
 
-  function shortAlbumLabel(day) {
-    const key = String(day.dateKey || "");
-    if (key.length === 8) {
-      return key.slice(4, 6) + "/" + key.slice(6, 8);
-    }
-    return day.dateLine1 || key;
+  function closeDailyGifModal() {
+    const modal = document.getElementById("dailyGifModal");
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    const img = document.getElementById("dailyGifModalImg");
+    if (img) img.removeAttribute("src");
   }
 
-  function selectAlbumDay(day, todayKey) {
-    const preview = document.getElementById("homeAlbumPreview");
-    const picked = document.getElementById("homeAlbumPicked");
-    const dl = document.getElementById("homeAlbumDownload");
-    if (!day) return;
+  function openDailyGifModal(day) {
+    const modal = document.getElementById("dailyGifModal");
+    if (!modal || !day) return;
+    const title = document.getElementById("dailyGifModalTitle");
+    const meta = document.getElementById("dailyGifModalMeta");
+    const img = document.getElementById("dailyGifModalImg");
+    const dl = document.getElementById("dailyGifModalDownload");
+    const todayKey = taiwanDateKey();
 
-    const previewSrc = day.preview || day.gif || "";
-    if (preview && previewSrc) {
-      preview.src = previewSrc + "?t=" + Date.now();
-      preview.alt = (day.dateLine1 || day.dateKey || "") + " 預覽";
-    }
-    if (picked) {
+    if (title) title.textContent = day.dateLine1 || day.date || day.dateKey || "每日吉祥";
+    if (meta) {
       const theme =
         (day.fortuneLevel ? "今日" + day.fortuneLevel : "") +
-        (day.mainTheme ? "｜" + day.mainTheme : "");
-      picked.textContent =
-        (day.dateLine1 || day.dateKey || "") +
-        (theme ? "　" + theme : "") +
-        (String(day.dateKey) > todayKey ? "（已排程）" : "");
+        (day.mainTheme ? "｜" + day.mainTheme : "") +
+        (day.secondaryTheme ? "・" + day.secondaryTheme : "");
+      const summary = day.summaryText || "";
+      meta.textContent =
+        [theme, summary, String(day.dateKey) > todayKey ? "已排程，尚未到當天。" : ""]
+          .filter(Boolean)
+          .join("　");
     }
-    bindDownloadButton(dl, day.gif || "", day.dateKey);
+    if (img) {
+      const src = day.gif || day.preview || "";
+      img.src = src ? src + "?t=" + Date.now() : "";
+      img.alt = (day.dateLine1 || day.dateKey || "") + " GIF";
+    }
+    bindDownloadButton(dl, day.gif || day.preview || "", day.dateKey);
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
 
-    document.querySelectorAll(".home-album-tile").forEach(function (tile) {
-      tile.classList.toggle("is-active", tile.getAttribute("data-date-key") === String(day.dateKey));
+  function ensureGifModalHandlers() {
+    const modal = document.getElementById("dailyGifModal");
+    if (!modal || modal.dataset.bound === "1") return;
+    modal.dataset.bound = "1";
+    const closeIds = ["dailyGifModalBackdrop", "dailyGifModalClose", "dailyGifModalDismiss"];
+    closeIds.forEach(function (id) {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener("click", closeDailyGifModal);
+    });
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && !modal.hidden) closeDailyGifModal();
+    });
+  }
+
+  function renderHomeCalendar(year, month, byKey, todayKey) {
+    const grid = document.getElementById("homeCalGrid");
+    const title = document.getElementById("homeCalTitle");
+    if (!grid) return;
+
+    if (title) title.textContent = year + "年" + month + "月";
+
+    const first = new Date(year, month - 1, 1);
+    const startPad = first.getDay(); // 0 Sun
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const cells = [];
+
+    for (let i = 0; i < startPad; i++) {
+      cells.push('<button type="button" class="home-cal-cell is-muted" tabindex="-1" disabled></button>');
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      const key =
+        String(year) +
+        String(month).padStart(2, "0") +
+        String(day).padStart(2, "0");
+      const hit = byKey[key];
+      const isToday = key === todayKey;
+      const classes = ["home-cal-cell"];
+      if (hit) classes.push("has-gif");
+      if (isToday) classes.push("is-today");
+      cells.push(
+        '<button type="button" class="' +
+          classes.join(" ") +
+          '" data-date-key="' +
+          key +
+          '"' +
+          (hit ? "" : " disabled") +
+          ' aria-label="' +
+          year +
+          "年" +
+          month +
+          "月" +
+          day +
+          "日" +
+          (hit ? "，有剪紙可下載" : "") +
+          '">' +
+          day +
+          "</button>"
+      );
+    }
+    grid.innerHTML = cells.join("");
+
+    grid.querySelectorAll(".home-cal-cell.has-gif").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const day = byKey[btn.getAttribute("data-date-key")];
+        if (day) openDailyGifModal(day);
+      });
     });
   }
 
@@ -447,8 +521,8 @@
     if (!root) return;
     const status = document.getElementById("homeAlbumStatus");
     const body = document.getElementById("homeAlbumBody");
-    const grid = document.getElementById("homeAlbumGrid");
     const todayKey = taiwanDateKey();
+    ensureGifModalHandlers();
 
     try {
       const archive = await fetchDailyArchive();
@@ -457,53 +531,51 @@
       if (status) status.hidden = true;
       if (body) body.hidden = false;
 
-      grid.innerHTML = days
-        .map(function (day) {
-          const key = escapeHtml(day.dateKey || "");
-          const rawKey = String(day.dateKey || "");
-          const isFuture = rawKey > todayKey;
-          const thumb = escapeHtml(day.preview || day.gif || "");
-          const label = escapeHtml(shortAlbumLabel(day));
-          return (
-            '<button type="button" class="home-album-tile' +
-            (isFuture ? " is-scheduled" : "") +
-            '" role="option" data-date-key="' +
-            key +
-            '" aria-label="' +
-            escapeHtml(day.dateLine1 || key) +
-            '">' +
-            (thumb ? '<img src="' + thumb + '" alt="" loading="lazy" />' : "") +
-            "<span>" +
-            label +
-            "</span>" +
-            "</button>"
-          );
-        })
-        .join("");
-
       const byKey = {};
       days.forEach(function (day) {
-        byKey[String(day.dateKey)] = day;
+        if (day && day.dateKey) byKey[String(day.dateKey)] = day;
       });
 
-      grid.querySelectorAll(".home-album-tile").forEach(function (tile) {
-        tile.addEventListener("click", function () {
-          const day = byKey[tile.getAttribute("data-date-key")];
-          if (day) selectAlbumDay(day, todayKey);
-        });
-      });
+      let viewYear = parseInt(todayKey.slice(0, 4), 10);
+      let viewMonth = parseInt(todayKey.slice(4, 6), 10);
+      // Prefer month of newest available pack if today has none yet
+      if (!byKey[todayKey] && days[0] && String(days[0].dateKey).length === 8) {
+        const k = String(days[0].dateKey);
+        viewYear = parseInt(k.slice(0, 4), 10);
+        viewMonth = parseInt(k.slice(4, 6), 10);
+      }
 
-      const preferred =
-        byKey[todayKey] ||
-        days.find(function (d) {
-          return String(d.dateKey) <= todayKey;
-        }) ||
-        days[0];
-      selectAlbumDay(preferred, todayKey);
+      function paint() {
+        renderHomeCalendar(viewYear, viewMonth, byKey, todayKey);
+      }
+      paint();
+
+      const prev = document.getElementById("homeCalPrev");
+      const next = document.getElementById("homeCalNext");
+      if (prev) {
+        prev.onclick = function () {
+          viewMonth -= 1;
+          if (viewMonth < 1) {
+            viewMonth = 12;
+            viewYear -= 1;
+          }
+          paint();
+        };
+      }
+      if (next) {
+        next.onclick = function () {
+          viewMonth += 1;
+          if (viewMonth > 12) {
+            viewMonth = 1;
+            viewYear += 1;
+          }
+          paint();
+        };
+      }
     } catch (e) {
       if (status) {
         status.hidden = false;
-        status.textContent = "相本準備中，發布每日內容後即可挑選。";
+        status.textContent = "日曆準備中，發布每日內容後即可挑選。";
       }
       if (body) body.hidden = true;
     }

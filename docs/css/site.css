@@ -1327,6 +1327,25 @@ body.nav-open { overflow: hidden; }
   margin: 0;
   width: fit-content;
 }
+.daily-archive-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--line);
+  vertical-align: middle;
+}
+.daily-archive-badge.is-today {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.daily-archive-badge.is-scheduled {
+  color: var(--muted);
+}
+.daily-archive-item.is-scheduled {
+  opacity: 0.88;
+}
 @media (max-width: 560px) {
   .daily-archive-item {
     grid-template-columns: 72px minmax(0, 1fr);

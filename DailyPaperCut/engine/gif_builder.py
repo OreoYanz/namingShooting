@@ -151,17 +151,20 @@ def build_animated_frames(
             else:
                 line2 = gz
 
-    brand = "名序"
-    slogan = "知名・知運・知人生"
-    # Prefer explicit brand fields; fallback closingMessage "名序｜slogan"
-    if daily.get("brandName"):
-        brand = str(daily["brandName"]).strip() or brand
-    if daily.get("brandTagline"):
-        slogan = str(daily["brandTagline"]).strip() or slogan
-    else:
+    from . import load_settings
+
+    brand_cfg = load_settings().get("brand") or {}
+    brand = str(brand_cfg.get("name") or daily.get("brandName") or "名序").strip() or "名序"
+    slogan = str(
+        brand_cfg.get("tagline")
+        or daily.get("brandTagline")
+        or "新生兒命名 ‧ 專業改名 ‧ 流年運勢"
+    ).strip() or "新生兒命名 ‧ 專業改名 ‧ 流年運勢"
+    if not brand_cfg.get("tagline") and not daily.get("brandTagline"):
         closing = str(daily.get("closingMessage") or "")
-        if closing.startswith("名序") and "｜" in closing:
-            parts = closing.split("｜", 1)
+        if closing.startswith("名序") and ("｜" in closing or "|" in closing):
+            sep = "｜" if "｜" in closing else "|"
+            parts = closing.split(sep, 1)
             brand = parts[0].strip() or brand
             slogan = parts[1].strip() or slogan
 

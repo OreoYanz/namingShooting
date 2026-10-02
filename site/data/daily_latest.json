@@ -1,6 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T15:22:46",
+  "updatedAt": "2026-10-02T15:40:47",
+  "timezone": "Asia/Taipei",
   "date": "2026-10-02",
   "dateKey": "20261002",
   "rocDate": "115年10月2日",
@@ -31,12 +32,17 @@
   "brandName": "名序",
   "brandTagline": "知名・知運・知人生",
   "media": {
-    "gif": "assets/daily/latest.gif",
-    "webp": "assets/daily/latest.webp",
-    "preview": "assets/daily/latest_preview.jpg",
-    "scene": "assets/daily/latest_scene.jpg",
+    "gif": "assets/daily/daily_20261002.gif",
+    "webp": "assets/daily/daily_20261002.webp",
+    "preview": "assets/daily/daily_20261002_preview.jpg",
+    "scene": "assets/daily/scene_20261002.jpg",
+    "scenePng": "assets/daily/scene_20261002.png",
     "gifDated": "assets/daily/daily_20261002.gif",
-    "previewDated": "assets/daily/daily_20261002_preview.jpg"
+    "previewDated": "assets/daily/daily_20261002_preview.jpg",
+    "latestGif": "assets/daily/latest.gif",
+    "latestPreview": "assets/daily/latest_preview.jpg"
   },
-  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
+  "displayKey": "20261002",
+  "resolvedFor": "20261002"
 }

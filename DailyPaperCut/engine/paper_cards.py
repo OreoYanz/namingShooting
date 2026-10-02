@@ -221,7 +221,7 @@ def render_summary_card(
 
 def render_logo_slogan_card(
     brand: str = "名序",
-    slogan: str = "知名・知運・知人生",
+    slogan: str = "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
     canvas_size: Tuple[int, int] = (1080, 1080),
     top_y: int | None = None,
 ) -> Image.Image:
@@ -231,18 +231,18 @@ def render_logo_slogan_card(
     line = f"{brand} | {slogan}" if slogan else brand
 
     probe = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
-    max_w = int(canvas_size[0] * 0.88)
-    size = 40
+    max_w = int(canvas_size[0] * 0.92)
+    size = 36
     font = _font(size, bold=True)
-    while size >= 26:
+    while size >= 18:
         font = _font(size, bold=True)
-        if probe.textlength(line, font=font) <= max_w - 48:
+        if probe.textlength(line, font=font) <= max_w - 40:
             break
         size -= 2
 
     text_w = int(probe.textlength(line, font=font))
-    card_w = min(max_w, max(480, text_w + 56))
-    card_h = 96
+    card_w = min(max_w, max(480, text_w + 48))
+    card_h = 88
     plate = _translucent_block((card_w, card_h), (255, 252, 247, 240), radius=24)
     y = top_y if top_y is not None else int(canvas_size[1] * STACK_Y["logo"])
     out, x, y = _place_card(canvas_size, plate, y)
@@ -271,7 +271,7 @@ def render_list_card(
 def render_logo_card(text: str = "名序", canvas_size: Tuple[int, int] = (1080, 1080)) -> Image.Image:
     parts = text.split("｜", 1) if "｜" in text else text.split("|", 1)
     brand = parts[0].strip() or "名序"
-    slogan = parts[1].strip() if len(parts) > 1 else "知名・知運・知人生"
+    slogan = parts[1].strip() if len(parts) > 1 else "新生兒命名 ‧ 專業改名 ‧ 流年運勢"
     return render_logo_slogan_card(brand=brand, slogan=slogan, canvas_size=canvas_size)
 
 

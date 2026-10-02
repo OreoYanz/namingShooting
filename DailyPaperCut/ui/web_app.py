@@ -286,9 +286,15 @@ def api_publish(
     if "site" in selected:
         try:
             from engine.publishers.site import publish_to_site
+            from engine.publishers.git_push import commit_and_push_site
 
             results["site"] = publish_to_site(yyyymmdd)
             publish["channels"]["site"] = True
+            if results["site"].get("ok"):
+                git_result = commit_and_push_site(yyyymmdd)
+                results["git"] = git_result
+                if not git_result.get("ok"):
+                    errors.append(f"git: {git_result.get('error') or 'commit/push 失敗'}")
         except Exception as e:
             errors.append(f"site: {e}")
             publish["channels"]["site"] = False
@@ -306,25 +312,35 @@ def api_publish(
                 "message": f"「{ch}」發布接線尚未啟用，已記錄勾選。",
             }
 
-    if results and not errors:
-        publish["status"] = "published" if "site" in selected and results.get("site", {}).get("ok") else publish.get("status") or "draft"
-        if results.get("site", {}).get("ok"):
-            publish["publishedAt"] = datetime.now().isoformat(timespec="seconds")
-            if not publish.get("confirmedAt"):
-                publish["confirmedAt"] = publish["publishedAt"]
+    if results.get("site", {}).get("ok"):
+        publish["status"] = "published"
+        publish["publishedAt"] = datetime.now().isoformat(timespec="seconds")
+        if not publish.get("confirmedAt"):
+            publish["confirmedAt"] = publish["publishedAt"]
+    elif results and not errors:
+        publish["status"] = publish.get("status") or "draft"
     publish["results"] = {**(publish.get("results") or {}), **results}
     publish["lastSelected"] = selected
     save_json(pub_path, publish)
 
-    if errors and "site" in selected and not results.get("site", {}).get("ok"):
-        raise HTTPException(status_code=400, detail="; ".join(errors))
+    if "site" in selected and not results.get("site", {}).get("ok"):
+        raise HTTPException(status_code=400, detail="; ".join(errors) or "官網發布失敗")
 
     msg_parts = []
     if results.get("site", {}).get("ok"):
-        msg_parts.append("官網資料已更新（site/data/daily_latest.json + assets/daily/）")
+        msg_parts.append("官網資料已更新（site/ + docs/）")
         note = results["site"].get("note")
         if note:
             msg_parts.append(note)
+    git_res = results.get("git") or {}
+    if git_res.get("ok"):
+        msg_parts.append(git_res.get("message") or "已 commit／push")
+        if git_res.get("url"):
+            msg_parts.append(git_res["url"])
+    elif git_res.get("error"):
+        msg_parts.append("Git 上線失敗：" + str(git_res.get("error")))
+        if git_res.get("stderr"):
+            msg_parts.append(str(git_res["stderr"])[:400])
     if pending:
         msg_parts.append("尚未啟用：" + "、".join(pending))
 

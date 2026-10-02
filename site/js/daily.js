@@ -1,4 +1,4 @@
-/** 名序｜每日吉祥：載入、今日下載、歷日下載 */
+/** 名序｜每日吉祥：依台北時間顯示當日；可預先發布未來日 */
 (function (global) {
   function gifFilename(dateKey) {
     const key = String(dateKey || "").replace(/\D/g, "") || "latest";
@@ -6,8 +6,11 @@
   }
 
   function gifUrl(data) {
-    if (!data || !data.media) return "";
-    return data.media.gifDated || data.media.gif || data.media.webp || "";
+    if (!data) return "";
+    if (data.media) {
+      return data.media.gifDated || data.media.gif || data.media.webp || "";
+    }
+    return data.gif || "";
   }
 
   function escapeHtml(s) {
@@ -18,16 +21,105 @@
       .replace(/"/g, "&quot;");
   }
 
-  async function fetchDailyLatest() {
-    const res = await fetch("data/daily_latest.json?t=" + Date.now());
-    if (!res.ok) throw new Error("no daily data");
+  /** Asia/Taipei calendar date as YYYYMMDD */
+  function taiwanDateKey(dateObj) {
+    const d = dateObj || new Date();
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Taipei",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(d);
+    const get = function (type) {
+      const hit = parts.find(function (p) {
+        return p.type === type;
+      });
+      return hit ? hit.value : "";
+    };
+    return get("year") + get("month") + get("day");
+  }
+
+  async function fetchJson(path) {
+    const res = await fetch(path + (path.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now());
+    if (!res.ok) throw new Error("fetch failed: " + path);
     return res.json();
   }
 
+  async function fetchDailyByKey(dateKey) {
+    return fetchJson("data/daily/" + dateKey + ".json");
+  }
+
+  async function fetchDailyLatest() {
+    return fetchJson("data/daily_latest.json");
+  }
+
   async function fetchDailyArchive() {
-    const res = await fetch("data/daily_archive.json?t=" + Date.now());
-    if (!res.ok) throw new Error("no archive");
-    return res.json();
+    return fetchJson("data/daily_archive.json");
+  }
+
+  /**
+   * Resolve what the site should show "today":
+   * 1) exact Taipei today if published
+   * 2) else newest published day <= today
+   * 3) else daily_latest.json fallback
+   */
+  async function resolveDisplayDaily() {
+    const todayKey = taiwanDateKey();
+    try {
+      const exact = await fetchDailyByKey(todayKey);
+      return { data: exact, mode: "today", todayKey: todayKey };
+    } catch (e) {
+      /* continue */
+    }
+
+    try {
+      const archive = await fetchDailyArchive();
+      const days = (archive.days || [])
+        .map(function (d) {
+          return d;
+        })
+        .filter(function (d) {
+          return d && String(d.dateKey || "") <= todayKey;
+        })
+        .sort(function (a, b) {
+          return String(b.dateKey).localeCompare(String(a.dateKey));
+        });
+      if (days.length) {
+        try {
+          const keyed = await fetchDailyByKey(days[0].dateKey);
+          return {
+            data: keyed,
+            mode: "fallback",
+            todayKey: todayKey,
+            fallbackKey: days[0].dateKey,
+          };
+        } catch (e2) {
+          return {
+            data: {
+              dateKey: days[0].dateKey,
+              dateLine1: days[0].dateLine1,
+              fortuneLevel: days[0].fortuneLevel,
+              mainTheme: days[0].mainTheme,
+              secondaryTheme: days[0].secondaryTheme,
+              summaryText: days[0].summaryText,
+              media: { gifDated: days[0].gif, gif: days[0].gif },
+            },
+            mode: "fallback",
+            todayKey: todayKey,
+            fallbackKey: days[0].dateKey,
+          };
+        }
+      }
+    } catch (e3) {
+      /* continue */
+    }
+
+    const latest = await fetchDailyLatest();
+    const latestKey = String(latest.dateKey || "");
+    if (latestKey && latestKey <= todayKey) {
+      return { data: latest, mode: "latest", todayKey: todayKey };
+    }
+    throw new Error("no displayable daily for " + todayKey);
   }
 
   async function downloadGif(url, filename) {
@@ -95,6 +187,7 @@
     if (!listEl) return;
     const opts = options || {};
     const limit = opts.limit || 0;
+    const todayKey = opts.todayKey || taiwanDateKey();
     const items = Array.isArray(days) ? days.slice() : [];
     const shown = limit > 0 ? items.slice(0, limit) : items;
 
@@ -106,6 +199,14 @@
     listEl.innerHTML = shown
       .map(function (day) {
         const key = escapeHtml(day.dateKey || "");
+        const rawKey = String(day.dateKey || "");
+        const isFuture = rawKey > todayKey;
+        const isToday = rawKey === todayKey;
+        const badge = isToday
+          ? '<span class="daily-archive-badge is-today">今日</span>'
+          : isFuture
+            ? '<span class="daily-archive-badge is-scheduled">已排程</span>'
+            : "";
         const title = escapeHtml(day.dateLine1 || day.date || key);
         const theme = escapeHtml(
           (day.fortuneLevel ? "今日" + day.fortuneLevel : "") +
@@ -115,7 +216,10 @@
         const preview = escapeHtml(day.preview || "");
         const gif = escapeHtml(day.gif || "");
         return (
-          '<article class="daily-archive-item" data-date-key="' +
+          '<article class="daily-archive-item' +
+          (isFuture ? " is-scheduled" : "") +
+          (isToday ? " is-today" : "") +
+          '" data-date-key="' +
           key +
           '">' +
           '<div class="daily-archive-thumb">' +
@@ -126,6 +230,8 @@
           '<div class="daily-archive-meta">' +
           "<h3>" +
           title +
+          " " +
+          badge +
           "</h3>" +
           (theme ? '<p class="daily-archive-theme">' + theme + "</p>" : "") +
           (summary ? '<p class="daily-archive-summary">' + summary + "</p>" : "") +
@@ -151,6 +257,7 @@
     const statusEl = document.getElementById("dailyArchiveStatus");
     const countEl = document.getElementById("dailyArchiveCount");
     if (!listEl) return;
+    const todayKey = taiwanDateKey();
 
     try {
       const archive = await fetchDailyArchive();
@@ -160,7 +267,10 @@
       if (countEl) countEl.textContent = String(archive.count || days.length);
       const limitAttr = listEl.getAttribute("data-limit");
       const limit = limitAttr ? parseInt(limitAttr, 10) : 0;
-      renderArchiveList(listEl, days, { limit: limit > 0 ? limit : 0 });
+      renderArchiveList(listEl, days, {
+        limit: limit > 0 ? limit : 0,
+        todayKey: todayKey,
+      });
     } catch (e) {
       if (statusEl) {
         statusEl.hidden = false;
@@ -170,13 +280,35 @@
     }
   }
 
+  function applyDailyData(d, meta) {
+    const mode = (meta && meta.mode) || "today";
+    const todayKey = (meta && meta.todayKey) || taiwanDateKey();
+    return { d: d, mode: mode, todayKey: todayKey, fallbackKey: meta && meta.fallbackKey };
+  }
+
   async function mountDailyPage() {
     const empty = document.getElementById("dailyEmpty");
     const kicker = document.getElementById("dailyKicker");
+    const noteEl = document.getElementById("dailyScheduleNote");
     try {
-      const d = await fetchDailyLatest();
+      const resolved = await resolveDisplayDaily();
+      const info = applyDailyData(resolved.data, resolved);
+      const d = info.d;
       if (kicker) {
         kicker.textContent = (d.brandName || "名序") + "｜" + (d.brandTagline || "");
+      }
+      if (noteEl) {
+        if (info.mode === "today") {
+          noteEl.hidden = true;
+        } else {
+          noteEl.hidden = false;
+          noteEl.textContent =
+            "今日（" +
+            info.todayKey +
+            "）尚未到點或尚未發布，暫顯示最近一日" +
+            (info.fallbackKey || d.dateKey || "") +
+            "。";
+        }
       }
 
       const dateCard = document.getElementById("dailyDateCard");
@@ -213,6 +345,10 @@
     } catch (e) {
       if (kicker) kicker.textContent = "尚無內容";
       if (empty) empty.hidden = false;
+      if (noteEl) {
+        noteEl.hidden = false;
+        noteEl.textContent = "今日內容尚未發布；若已預先排程，等到當日 00:00（台北時間）後會自動顯示。";
+      }
     }
   }
 
@@ -222,8 +358,18 @@
     const status = document.getElementById("homeDailyStatus");
     const body = document.getElementById("homeDailyBody");
     try {
-      const d = await fetchDailyLatest();
-      if (status) status.hidden = true;
+      const resolved = await resolveDisplayDaily();
+      const info = applyDailyData(resolved.data, resolved);
+      const d = info.d;
+      if (status) {
+        if (info.mode === "today") {
+          status.hidden = true;
+        } else {
+          status.hidden = false;
+          status.textContent =
+            "今日內容尚未發布，暫顯示最近一日。預先排程的日期到當天會自動切換。";
+        }
+      }
       if (body) body.hidden = false;
 
       const dateEl = document.getElementById("homeDailyDate");
@@ -255,13 +401,15 @@
     } catch (e) {
       if (status) {
         status.hidden = false;
-        status.textContent = "今日內容準備中，請稍後再來。";
+        status.textContent = "今日內容準備中；預先排程後，到當天會自動顯示。";
       }
       if (body) body.hidden = true;
     }
   }
 
   global.MingxuDaily = {
+    taiwanDateKey: taiwanDateKey,
+    resolveDisplayDaily: resolveDisplayDaily,
     fetchDailyLatest: fetchDailyLatest,
     fetchDailyArchive: fetchDailyArchive,
     downloadGif: downloadGif,

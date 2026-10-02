@@ -68,7 +68,7 @@ def _fallback_copy(daily: Dict[str, Any], settings: Dict[str, Any]) -> Dict[str,
         "facebook": base + f"\n\n{tags}",
         "threads": f"今日{level}｜{theme}\n宜：{yi}\n忌：{ji}\n{cta['line']}\n{cta['url']}\n{tags}",
         "shortMessage": daily.get("shortMessage") or f"今日{level}，守住節奏也能遇見好運。",
-        "closingMessage": daily.get("closingMessage") or "名序｜知名・知運・知人生",
+        "closingMessage": daily.get("closingMessage") or "名序｜新生兒命名 ‧ 專業改名 ‧ 流年運勢",
         "summaryText": daily.get("summaryText") or _fallback_summary(daily),
     }
 

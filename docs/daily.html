@@ -17,7 +17,7 @@
   <meta property="og:image" content="https://oreoyanz.github.io/namingShooting/assets/logo.png" />
   <link rel="icon" href="assets/logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/site.css?v=1.0.33" />
+  <link rel="stylesheet" href="css/site.css?v=1.0.34" />
   <script src="js/tracking-config.js?v=1.0.32"></script>
   <script src="js/tracking.js?v=1.0.32"></script>
   <style>
@@ -44,6 +44,11 @@
       display: block;
     }
     .daily-empty { color: #9b3b3b; }
+    .daily-schedule-note {
+      margin: 0.5rem 0 0;
+      color: #6b635a;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body data-page="daily">
@@ -53,6 +58,7 @@
     <section class="page-hero"><div class="container daily-wrap">
       <h1>每日吉祥</h1>
       <p class="lead" id="dailyKicker">載入中…</p>
+      <p class="daily-schedule-note" id="dailyScheduleNote" hidden></p>
     </div></section>
     <section class="section"><div class="container daily-wrap">
       <div class="daily-card" id="dailyDateCard" hidden>
@@ -92,6 +98,6 @@
   <footer id="site-footer"></footer>
   <script src="js/layout.js?v=1.0.32"></script>
   <script src="js/site.js?v=1.0.32"></script>
-  <script src="js/daily.js?v=1.0.33"></script>
+  <script src="js/daily.js?v=1.0.34"></script>
 </body>
 </html>

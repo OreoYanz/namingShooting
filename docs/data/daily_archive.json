@@ -1,6 +1,8 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T15:22:46",
+  "updatedAt": "2026-10-02T15:40:47",
+  "timezone": "Asia/Taipei",
+  "todayKey": "20261002",
   "count": 1,
   "days": [
     {

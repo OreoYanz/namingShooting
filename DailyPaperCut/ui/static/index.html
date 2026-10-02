@@ -178,14 +178,14 @@
           <button class="ghost" id="btnConfirm">標記確認</button>
           <div class="publish-targets" id="publishTargets">
             <span>發布到</span>
-            <label class="check"><input type="checkbox" name="ch" value="site" checked /> 官網</label>
+            <label class="check"><input type="checkbox" name="ch" value="site" checked /> 官網（寫入後自動 commit／push）</label>
             <label class="check soon"><input type="checkbox" name="ch" value="line" /> LINE VOOM <em>即將</em></label>
             <label class="check soon"><input type="checkbox" name="ch" value="facebook" /> Facebook <em>即將</em></label>
             <label class="check soon"><input type="checkbox" name="ch" value="instagram" /> Instagram <em>即將</em></label>
             <label class="check soon"><input type="checkbox" name="ch" value="threads" /> Threads <em>即將</em></label>
             <label class="check soon"><input type="checkbox" name="ch" value="youtube" /> YouTube Shorts <em>即將</em></label>
           </div>
-          <button class="ghost" id="btnPublish">發布</button>
+          <button class="ghost" id="btnPublish">發布官網並上線</button>
           <div class="status" id="dailyStatus"></div>
         </div>
         <div class="box">
@@ -344,7 +344,7 @@
         setStatus($("dailyStatus"), "請至少勾選一個發布目標", false);
         return;
       }
-      setStatus($("dailyStatus"), "發布中…");
+      setStatus($("dailyStatus"), "發布並上線中（含 commit／push）…");
       const fd = new FormData();
       fd.append("channels", channels.join(","));
       const res = await fetch(`/api/day/${d}/publish`, { method: "POST", body: fd });
@@ -353,7 +353,8 @@
         setStatus($("dailyStatus"), data.detail || "發布失敗", false);
         return;
       }
-      setStatus($("dailyStatus"), data.message || "已發布", true);
+      const gitOk = !data.results || !data.results.git || data.results.git.ok !== false;
+      setStatus($("dailyStatus"), data.message || "已發布", gitOk);
       await renderDay(d);
     };
 

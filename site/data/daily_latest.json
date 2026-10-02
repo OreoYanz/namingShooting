@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T16:02:41",
+  "updatedAt": "2026-10-02T17:16:36",
   "timezone": "Asia/Taipei",
   "date": "2026-10-02",
   "dateKey": "20261002",
@@ -44,5 +44,6 @@
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
   "displayKey": "20261002",
-  "resolvedFor": "20261002"
+  "resolvedFor": "20261002",
+  "page": "daily/20261002.html"
 }

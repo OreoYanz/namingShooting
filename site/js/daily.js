@@ -395,6 +395,11 @@
       if (summaryEl) summaryEl.textContent = d.summaryText || d.shortMessage || "";
 
       bindDownloadButton(document.getElementById("homeDownloadGif"), d);
+      const fullPage = document.getElementById("homeDailyFullPage");
+      if (fullPage && d.dateKey) {
+        fullPage.href = (d.page || ("daily/" + d.dateKey + ".html"));
+        fullPage.textContent = "查看完整頁";
+      }
     } catch (e) {
       if (status) {
         status.hidden = false;
@@ -489,7 +494,7 @@
     const cells = [];
 
     for (let i = 0; i < startPad; i++) {
-      cells.push('<button type="button" class="home-cal-cell is-muted" tabindex="-1" disabled></button>');
+      cells.push('<span class="home-cal-cell is-muted" aria-hidden="true"></span>');
     }
     for (let day = 1; day <= daysInMonth; day++) {
       const key =
@@ -501,34 +506,36 @@
       const classes = ["home-cal-cell"];
       if (hit) classes.push("has-gif");
       if (isToday) classes.push("is-today");
-      cells.push(
-        '<button type="button" class="' +
-          classes.join(" ") +
-          '" data-date-key="' +
-          key +
-          '"' +
-          (hit ? "" : " disabled") +
-          ' aria-label="' +
-          year +
-          "年" +
-          month +
-          "月" +
-          day +
-          "日" +
-          (hit ? "，有剪紙可下載" : "") +
-          '">' +
-          day +
-          "</button>"
-      );
+      const label =
+        formatRocDate(key) + (hit ? "，查看每日吉祥" : "");
+      if (hit) {
+        const href = hit.page || ("daily/" + key + ".html");
+        cells.push(
+          '<a class="' +
+            classes.join(" ") +
+            '" href="' +
+            href +
+            '" data-date-key="' +
+            key +
+            '" aria-label="' +
+            label +
+            '">' +
+            day +
+            "</a>"
+        );
+      } else {
+        cells.push(
+          '<span class="' +
+            classes.join(" ") +
+            '" data-date-key="' +
+            key +
+            '" aria-hidden="true">' +
+            day +
+            "</span>"
+        );
+      }
     }
     grid.innerHTML = cells.join("");
-
-    grid.querySelectorAll(".home-cal-cell.has-gif").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        const day = byKey[btn.getAttribute("data-date-key")];
-        if (day) openDailyGifModal(day);
-      });
-    });
   }
 
   async function mountHomeAlbum() {

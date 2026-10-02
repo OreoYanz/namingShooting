@@ -2,14 +2,64 @@
   "version": 1,
   "entries": [
     {
+      "date": "20261001",
+      "mainTheme": "冠笄開運",
+      "heroId": "",
+      "materialIds": [
+        "love_喜鵲_001"
+      ],
+      "recordedAt": "2026-10-02T16:06:25",
+      "backgroundId": "love_喜鵲_001"
+    },
+    {
       "date": "20261002",
       "mainTheme": "祭祀開運",
       "heroId": "",
       "materialIds": [
         "plant_櫻花_001"
       ],
-      "recordedAt": "2026-10-02T14:52:11",
+      "recordedAt": "2026-10-02T15:44:33",
       "backgroundId": "plant_櫻花_001"
+    },
+    {
+      "date": "20261003",
+      "mainTheme": "嫁娶開運",
+      "heroId": "",
+      "materialIds": [
+        "fortune_福袋_001"
+      ],
+      "recordedAt": "2026-10-02T16:49:42",
+      "backgroundId": "fortune_福袋_001"
+    },
+    {
+      "date": "20261004",
+      "mainTheme": "出行開運",
+      "heroId": "",
+      "materialIds": [
+        "season_冬日暖陽_001"
+      ],
+      "recordedAt": "2026-10-02T16:57:45",
+      "backgroundId": "season_冬日暖陽_001"
+    },
+    {
+      "date": "20261005",
+      "mainTheme": "祭祀開運",
+      "heroId": "",
+      "materialIds": [
+        "season_四季花環_001"
+      ],
+      "recordedAt": "2026-10-02T17:07:42",
+      "backgroundId": "season_四季花環_001"
+    },
+    {
+      "date": "20261006",
+      "mainTheme": "嫁娶開運",
+      "heroId": "",
+      "materialIds": [
+        "plant_蓮葉與稻穗框_002"
+      ],
+      "recordedAt": "2026-10-02T17:11:24",
+      "backgroundId": "plant_蓮葉與稻穗框_002"
     },
     {
       "date": "20261011",

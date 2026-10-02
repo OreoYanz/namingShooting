@@ -33,20 +33,25 @@ def commit_and_push_site(yyyymmdd: str) -> Dict[str, Any]:
 
     paths = [
         "site/daily.html",
+        "site/daily",
         "site/data/daily_latest.json",
         "site/data/daily_archive.json",
         "site/data/daily",
         "site/assets/daily",
+        "site/sitemap.xml",
         "docs/daily.html",
+        "docs/daily",
         "docs/data/daily_latest.json",
         "docs/data/daily_archive.json",
         "docs/data/daily",
         "docs/assets/daily",
+        "docs/sitemap.xml",
         "docs/js/layout.js",
         "docs/index.html",
         "site/index.html",
         "site/js/daily.js",
         "docs/js/daily.js",
+        "site/js/layout.js",
         "site/css/site.css",
         "docs/css/site.css",
     ]
@@ -102,6 +107,6 @@ def commit_and_push_site(yyyymmdd: str) -> Dict[str, Any]:
         "ok": True,
         "pushed": True,
         "commit": sha,
+        "url": f"https://oreoyanz.github.io/namingShooting/daily/{yyyymmdd}.html",
         "message": f"已 commit／push（{sha or 'ok'}），GitHub Pages 稍後會更新",
-        "url": "https://oreoyanz.github.io/namingShooting/daily.html",
     }

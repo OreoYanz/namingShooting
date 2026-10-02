@@ -1,5 +1,10 @@
 /** 名序官網 · 共用 Header / Footer */
 (function () {
+  const BASE = (document.body && document.body.dataset.assetBase) || "";
+  function u(path) {
+    return BASE + path;
+  }
+
   const NAV = [
     { href: "index.html", label: "首頁" },
     { href: "daily.html", label: "每日吉祥" },
@@ -17,6 +22,7 @@
   const year = new Date().getFullYear();
 
   function isActive(href) {
+    if (page === "daily-day" && href === "daily.html") return true;
     const key = href === "index.html" ? "home" : href.replace(".html", "");
     return page === key;
   }
@@ -24,7 +30,7 @@
   function navHtml() {
     return NAV.map(
       (n) =>
-        `<li><a href="${n.href}" class="${isActive(n.href) ? "active" : ""}">${n.label}</a></li>`
+        `<li><a href="${u(n.href)}" class="${isActive(n.href) ? "active" : ""}">${n.label}</a></li>`
     ).join("");
   }
 
@@ -33,8 +39,8 @@
     header.className = "site-header";
     header.innerHTML = `
       <div class="header-inner">
-        <a class="brand-link" href="index.html" aria-label="名序首頁">
-          <img class="brand-logo" src="assets/logo.png" width="40" height="40" alt="" />
+        <a class="brand-link" href="${u("index.html")}" aria-label="名序首頁">
+          <img class="brand-logo" src="${u("assets/logo.png")}" width="40" height="40" alt="" />
           <span class="brand-name">名序</span>
         </a>
         <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="開啟選單">
@@ -68,27 +74,27 @@
           <div>
             <h4>服務</h4>
             <ul>
-              <li><a href="newborn.html">新生兒命名</a></li>
-              <li><a href="rename.html">成人改名</a></li>
-              <li><a href="liunian.html">流年分析</a></li>
-              <li><a href="contact.html#line">Line 諮詢</a></li>
-              <li><a href="index.html#purchase-flow">購買流程</a></li>
+              <li><a href="${u("newborn.html")}">新生兒命名</a></li>
+              <li><a href="${u("rename.html")}">專業改名</a></li>
+              <li><a href="${u("liunian.html")}">流年分析</a></li>
+              <li><a href="${u("contact.html")}#line">Line 諮詢</a></li>
+              <li><a href="${u("index.html")}#purchase-flow">購買流程</a></li>
             </ul>
           </div>
           <div>
             <h4>認識名序</h4>
             <ul>
-              <li><a href="daily.html">每日吉祥</a></li>
-              <li><a href="about.html">品牌故事</a></li>
-              <li><a href="works.html">真實案例</a></li>
-              <li><a href="faq.html">常見問題</a></li>
+              <li><a href="${u("daily.html")}">每日吉祥</a></li>
+              <li><a href="${u("about.html")}">品牌故事</a></li>
+              <li><a href="${u("works.html")}">真實案例</a></li>
+              <li><a href="${u("faq.html")}">常見問題</a></li>
             </ul>
           </div>
           <div>
             <h4>聯絡</h4>
             <ul>
-              <li><a href="contact.html">聯絡方式</a></li>
-              <li><a href="contact.html#line">Line 官方帳號</a></li>
+              <li><a href="${u("contact.html")}">聯絡方式</a></li>
+              <li><a href="${u("contact.html")}#line">Line 官方帳號</a></li>
               <li><a href="mailto:nameshootingmingxu@gmail.com">電子信箱</a></li>
               <li><a href="https://tw.shp.ee/WSCcyTJW" target="_blank" rel="noopener noreferrer">蝦皮賣場</a></li>
             </ul>

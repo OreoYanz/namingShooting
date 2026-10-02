@@ -37,8 +37,10 @@ def _archive_entry(yyyymmdd: str, daily: Dict[str, Any], payload: Dict[str, Any]
         "mainTheme": daily.get("mainTheme") or payload.get("mainTheme") or "",
         "secondaryTheme": daily.get("secondaryTheme") or payload.get("secondaryTheme") or "",
         "summaryText": daily.get("summaryText") or payload.get("summaryText") or "",
+        "rocDate": daily.get("rocDate") or payload.get("rocDate") or "",
         "gif": f"assets/daily/daily_{yyyymmdd}.gif",
         "preview": f"assets/daily/daily_{yyyymmdd}_preview.jpg",
+        "page": f"daily/{yyyymmdd}.html",
     }
 
 
@@ -67,8 +69,10 @@ def _update_archive(root: Path, entry: Dict[str, Any]) -> str:
                 "mainTheme": item.get("mainTheme") or "",
                 "secondaryTheme": item.get("secondaryTheme") or "",
                 "summaryText": item.get("summaryText") or "",
+                "rocDate": item.get("rocDate") or "",
                 "gif": media.get("gifDated") or f"assets/daily/daily_{key}.gif",
                 "preview": media.get("previewDated") or f"assets/daily/daily_{key}_preview.jpg",
+                "page": f"daily/{key}.html",
             }
 
     days[entry["dateKey"]] = entry
@@ -117,6 +121,7 @@ def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]
         "ctaUrl": daily.get("ctaUrl"),
         "brandName": daily.get("brandName") or "名序",
         "brandTagline": daily.get("brandTagline") or "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+        "page": f"daily/{yyyymmdd}.html",
         "media": {
             # Prefer dated paths so the site can schedule by calendar day.
             "gif": gif_dated,
@@ -182,8 +187,62 @@ def _refresh_latest_pointer(root: Path, copied: List[str]) -> None:
             copied.append(str(dst.relative_to(root)).replace("\\", "/"))
 
 
+def _write_seo_pages(root: Path, copied: List[str]) -> None:
+    """Write crawlable daily/*.html, hub daily.html, and refresh sitemap.xml."""
+    from .daily_seo import render_day_html, render_daily_hub_html, write_sitemap
+
+    daily_dir = root / "data" / "daily"
+    out_dir = root / "daily"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    today = _taipei_today_key()
+    days: List[Dict[str, Any]] = []
+    keys: List[str] = []
+
+    payloads: List[Dict[str, Any]] = []
+    if daily_dir.is_dir():
+        for p in sorted(daily_dir.glob("*.json"), reverse=True):
+            if not p.stem.isdigit():
+                continue
+            try:
+                item = load_json(p)
+            except Exception:
+                continue
+            key = str(item.get("dateKey") or p.stem)
+            keys.append(key)
+            payloads.append(item)
+            days.append(
+                {
+                    "dateKey": key,
+                    "rocDate": item.get("rocDate") or "",
+                    "fortuneLevel": item.get("fortuneLevel"),
+                    "mainTheme": item.get("mainTheme") or "",
+                    "summaryText": item.get("summaryText") or "",
+                    "page": f"daily/{key}.html",
+                }
+            )
+
+    # Chronological neighbors for crawlable prev/next (keys already newest-first)
+    chrono = list(reversed(keys))
+    idx_map = {k: i for i, k in enumerate(chrono)}
+    for item in payloads:
+        key = str(item.get("dateKey") or "")
+        i = idx_map.get(key, -1)
+        prev_key = chrono[i - 1] if i > 0 else ""
+        next_key = chrono[i + 1] if 0 <= i < len(chrono) - 1 else ""
+        html = render_day_html(item, prev_key=prev_key, next_key=next_key)
+        out = out_dir / f"{key}.html"
+        out.write_text(html, encoding="utf-8")
+        copied.append(str(out.relative_to(root)).replace("\\", "/"))
+
+    hub = root / "daily.html"
+    hub.write_text(render_daily_hub_html(days, today), encoding="utf-8")
+    copied.append("daily.html")
+    write_sitemap(root, keys)
+    copied.append("sitemap.xml")
+
+
 def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]) -> List[str]:
-    """Write dated media + JSON; refresh calendar latest pointer."""
+    """Write dated media + JSON; refresh calendar latest pointer; write SEO pages."""
     assets_dir = root / "assets" / "daily"
     assets_dir.mkdir(parents=True, exist_ok=True)
     data_dir = root / "data"
@@ -191,7 +250,6 @@ def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dic
 
     base = day_dir(yyyymmdd)
     copied: List[str] = []
-    # Dated copies only — latest.* is refreshed separately by calendar rules.
     dated_map = [
         (base / "gif" / f"daily_{yyyymmdd}.gif", assets_dir / f"daily_{yyyymmdd}.gif"),
         (base / "gif" / f"daily_{yyyymmdd}.webp", assets_dir / f"daily_{yyyymmdd}.webp"),
@@ -212,16 +270,17 @@ def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dic
     copied.append(archive_rel)
 
     _refresh_latest_pointer(root, copied)
-
-    site_page = SITE_ROOT / "daily.html"
-    if site_page.exists() and root != SITE_ROOT:
-        _copy_if_exists(site_page, root / "daily.html")
-        copied.append("daily.html")
+    _write_seo_pages(root, copied)
 
     site_js = SITE_ROOT / "js" / "daily.js"
     if site_js.exists() and root != SITE_ROOT:
         _copy_if_exists(site_js, root / "js" / "daily.js")
         copied.append("js/daily.js")
+
+    site_layout = SITE_ROOT / "js" / "layout.js"
+    if site_layout.exists() and root != SITE_ROOT:
+        _copy_if_exists(site_layout, root / "js" / "layout.js")
+        copied.append("js/layout.js")
 
     return copied
 
@@ -278,6 +337,6 @@ def publish_to_site(yyyymmdd: str) -> Dict[str, Any]:
         "latest": str(DOCS_ROOT / "data" / "daily_latest.json"),
         "archive": str(DOCS_ROOT / "data" / "daily_archive.json"),
         "page": "daily.html",
-        "url": "https://oreoyanz.github.io/namingShooting/daily.html",
+        "url": f"https://oreoyanz.github.io/namingShooting/daily/{yyyymmdd}.html",
         "note": note,
     }

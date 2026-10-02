@@ -1,4 +1,4 @@
-"""Shorts 9:16 MP4 — same Scene / Animation Engine as GIF; crop 1:1 sides to fill vertical."""
+"""Shorts 9:16 MP4 — same Scene / Animation Engine as GIF; letterbox full 1:1 (no side crop)."""
 from __future__ import annotations
 
 import shutil
@@ -9,11 +9,15 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from .gif_builder import _load_scene, build_animated_frames, _elements_from_inputs
 
+# Match gif_builder letterbox cream so Shorts pad matches brand paper tone
+_LETTERBOX_RGB = (247, 244, 239)
 
-def crop_square_to_vertical(square_frames, size: Tuple[int, int]):
+
+def letterbox_square_to_vertical(square_frames, size: Tuple[int, int]):
     """
-    Fit 1:1 frames into 9:16 by scaling to full height, then cropping left/right.
-    Example: 1080×1080 → scale to 1920×1920 → center-crop to 1080×1920.
+    Fit full 1:1 frames into 9:16 without cropping.
+    Scale to fit width, center vertically on cream bars (top/bottom).
+    Example: 1080×1080 → centered on 1080×1920.
     """
     from PIL import Image
 
@@ -21,22 +25,28 @@ def crop_square_to_vertical(square_frames, size: Tuple[int, int]):
     out = []
     for fr in square_frames:
         im = fr.convert("RGB") if hasattr(fr, "convert") else fr
-        # scale so height fills 9:16 canvas
-        scale = out_h / float(im.size[1])
-        nw = max(out_w, int(round(im.size[0] * scale)))
-        nh = out_h
-        scaled = im.resize((nw, nh), Image.Resampling.LANCZOS)
-        left = max(0, (nw - out_w) // 2)
-        cropped = scaled.crop((left, 0, left + out_w, out_h))
-        if cropped.size != size:
-            cropped = cropped.resize(size, Image.Resampling.LANCZOS)
-        out.append(cropped)
+        sw, sh = im.size
+        # Contain: never crop; scale so the square fits inside the vertical canvas
+        scale = min(out_w / float(sw), out_h / float(sh))
+        nw = max(1, int(round(sw * scale)))
+        nh = max(1, int(round(sh * scale)))
+        if (nw, nh) != (sw, sh):
+            im = im.resize((nw, nh), Image.Resampling.LANCZOS)
+        canvas = Image.new("RGB", size, _LETTERBOX_RGB)
+        x0 = (out_w - nw) // 2
+        y0 = (out_h - nh) // 2
+        canvas.paste(im, (x0, y0))
+        out.append(canvas)
     return out
 
 
-# backward-compatible alias
+# backward-compatible aliases (old crop path was cutting content; now letterbox)
+def crop_square_to_vertical(square_frames, size: Tuple[int, int]):
+    return letterbox_square_to_vertical(square_frames, size)
+
+
 def letterbox_frames(square_frames, size: Tuple[int, int], daily: Optional[Dict] = None):
-    return crop_square_to_vertical(square_frames, size)
+    return letterbox_square_to_vertical(square_frames, size)
 
 
 def build_short_frames(
@@ -48,7 +58,7 @@ def build_short_frames(
     cutouts: Optional[List[Dict]] = None,
     materials: Optional[Dict[str, Any]] = None,
 ):
-    # Animate on square, then crop left/right into 9:16
+    # Animate on square (same as GIF content), then letterbox into 9:16
     scene_size = (size[0], size[0])
     elements = _elements_from_inputs(materials, cutouts, scene_size)
     frames, _meta = build_animated_frames(
@@ -57,15 +67,15 @@ def build_short_frames(
         float(duration_sec),
         fps,
         elements,
-        letterbox=None,
+        letterbox=size,
         card_pace=1.0,
     )
     if not frames:
         from PIL import Image
 
         scene = _load_scene(scene_png, scene_size)
-        frames = [scene.convert("RGB")]
-    return crop_square_to_vertical(frames, size)
+        frames = letterbox_square_to_vertical([scene.convert("RGB")], size)
+    return frames
 
 
 def _write_mp4_imageio(frames, mp4: Path, fps: int) -> bool:
@@ -138,7 +148,7 @@ def export_short(
 ) -> Dict[str, str]:
     short_dir.mkdir(parents=True, exist_ok=True)
     if square_frames:
-        frames = crop_square_to_vertical(square_frames, size)
+        frames = letterbox_square_to_vertical(square_frames, size)
     else:
         frames = build_short_frames(
             scene_png, daily, size, duration_sec, fps, cutouts=cutouts, materials=materials

@@ -45,5 +45,6 @@
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg"
   },
-  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
+  "page": "daily/20261005.html"
 }

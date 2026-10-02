@@ -1345,6 +1345,11 @@ body.nav-open { overflow: hidden; }
   padding: 0;
   cursor: default;
   border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 .home-cal-cell.is-muted {
   visibility: hidden;

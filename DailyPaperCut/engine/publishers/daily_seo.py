@@ -3,12 +3,13 @@ from __future__ import annotations
 
 import html
 import json
-from datetime import datetime
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Sequence
 from xml.sax.saxutils import escape as xml_escape
 
 SITE_BASE = "https://oreoyanz.github.io/namingShooting"
+_GLOSSARY_PATH = Path(__file__).resolve().parents[2] / "config" / "yi_ji_glossary.json"
 
 
 def _esc(s: Any) -> str:
@@ -27,6 +28,38 @@ def _join_list(items: Sequence[Any]) -> str:
     return "、".join(str(x) for x in (items or []) if str(x).strip())
 
 
+@lru_cache(maxsize=1)
+def load_yi_ji_glossary() -> Dict[str, str]:
+    try:
+        data = json.loads(_GLOSSARY_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return {str(k): str(v) for k, v in (data or {}).items() if str(k).strip() and str(v).strip()}
+
+
+def _explain_term(term: str, glossary: Dict[str, str]) -> str:
+    tip = glossary.get(term) or glossary.get(term.replace("樑", "梁"))
+    if tip:
+        return tip
+    return f"「{term}」為傳統通書用語，可依字面理解其吉凶所指。"
+
+
+def format_yi_ji_html(items: Sequence[Any], *, tone: str = "yi") -> str:
+    """Render 宜/忌 terms as hover/focus tip chips with vernacular explanations."""
+    glossary = load_yi_ji_glossary()
+    parts: List[str] = []
+    for raw in items or []:
+        term = str(raw).strip()
+        if not term:
+            continue
+        tip = _explain_term(term, glossary)
+        parts.append(
+            f'<span class="yi-term yi-term--{tone}" tabindex="0" '
+            f'data-tip="{_esc(tip)}" title="{_esc(tip)}">{_esc(term)}</span>'
+        )
+    return "、".join(parts) if parts else "—"
+
+
 def render_day_html(
     payload: Dict[str, Any],
     *,
@@ -41,8 +74,12 @@ def render_day_html(
     level = payload.get("fortuneLevel") or ""
     theme = payload.get("mainTheme") or ""
     secondary = payload.get("secondaryTheme") or ""
-    yi = _join_list(payload.get("yi") or [])
-    ji = _join_list(payload.get("ji") or [])
+    yi_items = [str(x).strip() for x in (payload.get("yi") or []) if str(x).strip()]
+    ji_items = [str(x).strip() for x in (payload.get("ji") or []) if str(x).strip()]
+    yi = _join_list(yi_items)
+    ji = _join_list(ji_items)
+    yi_html = format_yi_ji_html(yi_items, tone="yi")
+    ji_html = format_yi_ji_html(ji_items, tone="ji")
     summary = payload.get("summaryText") or payload.get("shortMessage") or ""
     note = payload.get("fortuneNote") or ""
     brand = payload.get("brandName") or "名序"
@@ -123,6 +160,73 @@ def render_day_html(
     .daily-meta {{ color:#5c656d; line-height:1.7; margin:0; }}
     .daily-yi {{ color:#96322c; }}
     .daily-ji {{ color:#666; }}
+    .yi-term {{
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      border-bottom: 1px dotted currentColor;
+      outline: none;
+    }}
+    .yi-term::after {{
+      content: attr(data-tip);
+      position: absolute;
+      left: calc(100% + 0.55rem);
+      top: 50%;
+      transform: translateY(-50%);
+      min-width: 10rem;
+      max-width: 14rem;
+      padding: 0.45rem 0.6rem;
+      background: #2b3036;
+      color: #f7f4ef;
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+      white-space: normal;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(26,31,36,0.18);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 0.12s ease;
+    }}
+    .yi-term::before {{
+      content: "";
+      position: absolute;
+      left: calc(100% + 0.2rem);
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-right-color: #2b3036;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 21;
+      transition: opacity 0.12s ease;
+    }}
+    .yi-term:hover::after,
+    .yi-term:focus::after,
+    .yi-term:hover::before,
+    .yi-term:focus::before {{
+      opacity: 1;
+    }}
+    @media (max-width: 640px) {{
+      .yi-term::after {{
+        left: 50%;
+        top: auto;
+        bottom: calc(100% + 0.45rem);
+        transform: translateX(-50%);
+        max-width: min(14rem, 70vw);
+      }}
+      .yi-term::before {{
+        left: 50%;
+        top: auto;
+        bottom: calc(100% - 0.15rem);
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #2b3036;
+        border-right-color: transparent;
+      }}
+    }}
     .daily-summary {{ font-size:1.05rem; line-height:1.6; margin:0; }}
     .daily-media img {{ width:100%; border:1px solid #e4ddd2; background:#f0ebe3; display:block; }}
     .daily-actions {{ display:flex; flex-wrap:wrap; gap:0.5rem; }}
@@ -149,8 +253,9 @@ def render_day_html(
       <article class="daily-card">
         <h2>運勢與主題</h2>
         <p class="daily-meta">{_esc(theme_line)}</p>
-        <p class="daily-meta daily-yi">宜：{_esc(yi or '—')}</p>
-        <p class="daily-meta daily-ji">忌：{_esc(ji or '—')}</p>
+        <p class="daily-meta daily-yi">宜：{yi_html}</p>
+        <p class="daily-meta daily-ji">忌：{ji_html}</p>
+        <p class="daily-meta" style="margin-top:0.55rem;font-size:0.9rem">將滑鼠移到詞語上（手機可點一下）可看白話解釋。</p>
       </article>
       <article class="daily-card">
         <h2>今日總結</h2>

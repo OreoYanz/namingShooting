@@ -37,6 +37,7 @@ def commit_and_push_site(yyyymmdd: str) -> Dict[str, Any]:
         "site/data/daily_latest.json",
         "site/data/daily_archive.json",
         "site/data/daily",
+        "site/data/yi_ji_glossary.json",
         "site/assets/daily",
         "site/sitemap.xml",
         "docs/daily.html",
@@ -44,6 +45,7 @@ def commit_and_push_site(yyyymmdd: str) -> Dict[str, Any]:
         "docs/data/daily_latest.json",
         "docs/data/daily_archive.json",
         "docs/data/daily",
+        "docs/data/yi_ji_glossary.json",
         "docs/assets/daily",
         "docs/sitemap.xml",
         "docs/js/layout.js",
@@ -54,6 +56,8 @@ def commit_and_push_site(yyyymmdd: str) -> Dict[str, Any]:
         "site/js/layout.js",
         "site/css/site.css",
         "docs/css/site.css",
+        "DailyPaperCut/config/yi_ji_glossary.json",
+        "DailyPaperCut/engine/publishers/daily_seo.py",
     ]
     existing = [p for p in paths if (REPO_ROOT / p).exists()]
     if not existing:

@@ -21,6 +21,53 @@
       .replace(/"/g, "&quot;");
   }
 
+  var yiJiGlossaryCache = null;
+  async function loadYiJiGlossary() {
+    if (yiJiGlossaryCache) return yiJiGlossaryCache;
+    try {
+      yiJiGlossaryCache = await fetchJson("data/yi_ji_glossary.json");
+    } catch (e) {
+      yiJiGlossaryCache = {};
+    }
+    return yiJiGlossaryCache;
+  }
+
+  function explainYiJiTerm(term, glossary) {
+    var tip =
+      (glossary && (glossary[term] || glossary[String(term).replace("樑", "梁")])) ||
+      "";
+    if (tip) return tip;
+    return "「" + term + "」為傳統通書用語，可依字面理解其吉凶所指。";
+  }
+
+  function formatYiJiHtml(items, tone, glossary) {
+    var list = Array.isArray(items) ? items : [];
+    var parts = [];
+    for (var i = 0; i < list.length; i++) {
+      var term = String(list[i] || "").trim();
+      if (!term) continue;
+      var tip = explainYiJiTerm(term, glossary || {});
+      parts.push(
+        '<span class="yi-term yi-term--' +
+          escapeHtml(tone || "yi") +
+          '" tabindex="0" data-tip="' +
+          escapeHtml(tip) +
+          '" title="' +
+          escapeHtml(tip) +
+          '">' +
+          escapeHtml(term) +
+          "</span>"
+      );
+    }
+    return parts.length ? parts.join("、") : "—";
+  }
+
+  async function fillYiJiLine(el, label, items, tone) {
+    if (!el) return;
+    var glossary = await loadYiJiGlossary();
+    el.innerHTML = escapeHtml(label) + formatYiJiHtml(items, tone, glossary);
+  }
+
   /** Asia/Taipei calendar date as YYYYMMDD */
   function taiwanDateKey(dateObj) {
     const d = dateObj || new Date();
@@ -324,8 +371,8 @@
         document.getElementById("dailyFortuneLines").textContent =
           "今日" + (d.fortuneLevel || "") + "｜" + (d.mainTheme || "") +
           (d.secondaryTheme ? "・" + d.secondaryTheme : "");
-        document.getElementById("dailyYi").textContent = "宜：" + (d.yi || []).join("、");
-        document.getElementById("dailyJi").textContent = "忌：" + (d.ji || []).join("、");
+        await fillYiJiLine(document.getElementById("dailyYi"), "宜：", d.yi || [], "yi");
+        await fillYiJiLine(document.getElementById("dailyJi"), "忌：", d.ji || [], "ji");
       }
 
       if (d.summaryText) {
@@ -387,9 +434,9 @@
       }
 
       const yiEl = document.getElementById("homeDailyYi");
-      if (yiEl) yiEl.textContent = "宜：" + (d.yi || []).join("、");
       const jiEl = document.getElementById("homeDailyJi");
-      if (jiEl) jiEl.textContent = "忌：" + (d.ji || []).join("、");
+      await fillYiJiLine(yiEl, "宜：", d.yi || [], "yi");
+      await fillYiJiLine(jiEl, "忌：", d.ji || [], "ji");
 
       const summaryEl = document.getElementById("homeDailySummary");
       if (summaryEl) summaryEl.textContent = d.summaryText || d.shortMessage || "";

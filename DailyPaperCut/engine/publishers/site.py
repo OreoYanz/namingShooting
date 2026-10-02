@@ -240,6 +240,15 @@ def _write_seo_pages(root: Path, copied: List[str]) -> None:
     write_sitemap(root, keys)
     copied.append("sitemap.xml")
 
+    # Keep frontend glossary in sync for homepage hover tips
+    gloss_src = ROOT / "config" / "yi_ji_glossary.json"
+    if gloss_src.exists():
+        data_dir = root / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        dst = data_dir / "yi_ji_glossary.json"
+        shutil.copy2(gloss_src, dst)
+        copied.append(str(dst.relative_to(root)).replace("\\", "/"))
+
 
 def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]) -> List[str]:
     """Write dated media + JSON; refresh calendar latest pointer; write SEO pages."""

@@ -29,6 +29,73 @@
     .daily-meta { color:#5c656d; line-height:1.7; margin:0; }
     .daily-yi { color:#96322c; }
     .daily-ji { color:#666; }
+    .yi-term {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      border-bottom: 1px dotted currentColor;
+      outline: none;
+    }
+    .yi-term::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: calc(100% + 0.55rem);
+      top: 50%;
+      transform: translateY(-50%);
+      min-width: 10rem;
+      max-width: 14rem;
+      padding: 0.45rem 0.6rem;
+      background: #2b3036;
+      color: #f7f4ef;
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+      white-space: normal;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(26,31,36,0.18);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+      transition: opacity 0.12s ease;
+    }
+    .yi-term::before {
+      content: "";
+      position: absolute;
+      left: calc(100% + 0.2rem);
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-right-color: #2b3036;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 21;
+      transition: opacity 0.12s ease;
+    }
+    .yi-term:hover::after,
+    .yi-term:focus::after,
+    .yi-term:hover::before,
+    .yi-term:focus::before {
+      opacity: 1;
+    }
+    @media (max-width: 640px) {
+      .yi-term::after {
+        left: 50%;
+        top: auto;
+        bottom: calc(100% + 0.45rem);
+        transform: translateX(-50%);
+        max-width: min(14rem, 70vw);
+      }
+      .yi-term::before {
+        left: 50%;
+        top: auto;
+        bottom: calc(100% - 0.15rem);
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #2b3036;
+        border-right-color: transparent;
+      }
+    }
     .daily-summary { font-size:1.05rem; line-height:1.6; margin:0; }
     .daily-media img { width:100%; border:1px solid #e4ddd2; background:#f0ebe3; display:block; }
     .daily-actions { display:flex; flex-wrap:wrap; gap:0.5rem; }
@@ -55,8 +122,9 @@
       <article class="daily-card">
         <h2>運勢與主題</h2>
         <p class="daily-meta">今日中吉｜嫁娶開運・順水流財</p>
-        <p class="daily-meta daily-yi">宜：嫁娶、造車器、安機械、祭祀、祈福、開光</p>
-        <p class="daily-meta daily-ji">忌：納採、訂盟、架馬、詞訟</p>
+        <p class="daily-meta daily-yi">宜：<span class="yi-term yi-term--yi" tabindex="0" data-tip="結婚、迎娶或出嫁。" title="結婚、迎娶或出嫁。">嫁娶</span>、<span class="yi-term yi-term--yi" tabindex="0" data-tip="製造車輛或機械器具。" title="製造車輛或機械器具。">造車器</span>、<span class="yi-term yi-term--yi" tabindex="0" data-tip="安裝機器設備。" title="安裝機器設備。">安機械</span>、<span class="yi-term yi-term--yi" tabindex="0" data-tip="祭拜祖先或神明，表達敬意與祈願。" title="祭拜祖先或神明，表達敬意與祈願。">祭祀</span>、<span class="yi-term yi-term--yi" tabindex="0" data-tip="祈求平安、順利與福氣。" title="祈求平安、順利與福氣。">祈福</span>、<span class="yi-term yi-term--yi" tabindex="0" data-tip="為神像、佛像或法器舉行開光儀式。" title="為神像、佛像或法器舉行開光儀式。">開光</span></p>
+        <p class="daily-meta daily-ji">忌：<span class="yi-term yi-term--ji" tabindex="0" data-tip="提親下聘，正式談婚嫁禮。" title="提親下聘，正式談婚嫁禮。">納採</span>、<span class="yi-term yi-term--ji" tabindex="0" data-tip="訂婚、結盟或約定重要承諾。" title="訂婚、結盟或約定重要承諾。">訂盟</span>、<span class="yi-term yi-term--ji" tabindex="0" data-tip="搭建鷹架（傳統建築用語）。" title="搭建鷹架（傳統建築用語）。">架馬</span>、<span class="yi-term yi-term--ji" tabindex="0" data-tip="打官司、訴訟。" title="打官司、訴訟。">詞訟</span></p>
+        <p class="daily-meta" style="margin-top:0.55rem;font-size:0.9rem">將滑鼠移到詞語上（手機可點一下）可看白話解釋。</p>
       </article>
       <article class="daily-card">
         <h2>今日總結</h2>

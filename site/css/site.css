@@ -1227,14 +1227,7 @@ body.nav-open { overflow: hidden; }
   font-size: 0.9rem;
 }
 .home-daily-today .home-daily-body {
-  display: grid;
-  gap: 0.85rem;
-}
-@media (min-width: 560px) {
-  .home-daily-today .home-daily-body {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-    align-items: start;
-  }
+  display: block;
 }
 .home-daily-date {
   margin: 0 0 0.15rem;
@@ -1273,13 +1266,6 @@ body.nav-open { overflow: hidden; }
   margin: 0;
   padding: 8px 16px;
   font-size: 0.9rem;
-}
-.home-daily-media img {
-  width: 100%;
-  max-width: 280px;
-  display: block;
-  border: 1px solid var(--line);
-  background: #f0ebe3;
 }
 
 .home-album-body {

@@ -373,7 +373,10 @@
       if (body) body.hidden = false;
 
       const dateEl = document.getElementById("homeDailyDate");
-      if (dateEl) dateEl.textContent = d.dateLine1 || d.date || "";
+      if (dateEl) {
+        dateEl.textContent =
+          d.rocDate || formatRocDate(d.dateKey) || d.dateLine1 || d.date || "";
+      }
 
       const fortuneEl = document.getElementById("homeDailyFortune");
       if (fortuneEl) {
@@ -391,12 +394,6 @@
       const summaryEl = document.getElementById("homeDailySummary");
       if (summaryEl) summaryEl.textContent = d.summaryText || d.shortMessage || "";
 
-      const gifPath = gifUrl(d);
-      const img = document.getElementById("homeDailyGif");
-      if (img && gifPath) {
-        img.src = gifPath + "?t=" + Date.now();
-        img.hidden = false;
-      }
       bindDownloadButton(document.getElementById("homeDownloadGif"), d);
     } catch (e) {
       if (status) {
@@ -405,6 +402,19 @@
       }
       if (body) body.hidden = true;
     }
+  }
+
+  /** YYYYMMDD → 民國Y年M月D日 */
+  function formatRocDate(dateKey, opts) {
+    const key = String(dateKey || "").replace(/\D/g, "");
+    if (key.length !== 8) return String(dateKey || "");
+    const y = parseInt(key.slice(0, 4), 10);
+    const m = parseInt(key.slice(4, 6), 10);
+    const d = parseInt(key.slice(6, 8), 10);
+    if (!y || !m || !d) return key;
+    const roc = y - 1911;
+    if (opts && opts.monthOnly) return roc + "年" + m + "月";
+    return roc + "年" + m + "月" + d + "日";
   }
 
   function closeDailyGifModal() {
@@ -424,25 +434,27 @@
     const img = document.getElementById("dailyGifModalImg");
     const dl = document.getElementById("dailyGifModalDownload");
     const todayKey = taiwanDateKey();
+    const roc = day.rocDate || formatRocDate(day.dateKey);
 
-    if (title) title.textContent = day.dateLine1 || day.date || day.dateKey || "每日吉祥";
+    if (title) title.textContent = roc || "每日吉祥";
     if (meta) {
       const theme =
         (day.fortuneLevel ? "今日" + day.fortuneLevel : "") +
         (day.mainTheme ? "｜" + day.mainTheme : "") +
         (day.secondaryTheme ? "・" + day.secondaryTheme : "");
+      const lunar = day.lunarDate || "";
       const summary = day.summaryText || "";
-      meta.textContent =
-        [theme, summary, String(day.dateKey) > todayKey ? "已排程，尚未到當天。" : ""]
-          .filter(Boolean)
-          .join("　");
+      meta.textContent = [lunar, theme, summary, String(day.dateKey) > todayKey ? "已排程" : ""]
+        .filter(Boolean)
+        .join("　");
     }
     if (img) {
-      const src = day.gif || day.preview || "";
+      // Prefer animated GIF for the popup viewer
+      const src = day.gif || (day.media && day.media.gifDated) || day.preview || "";
       img.src = src ? src + "?t=" + Date.now() : "";
-      img.alt = (day.dateLine1 || day.dateKey || "") + " GIF";
+      img.alt = roc + " 剪紙 GIF";
     }
-    bindDownloadButton(dl, day.gif || day.preview || "", day.dateKey);
+    bindDownloadButton(dl, day.gif || (day.media && day.media.gifDated) || "", day.dateKey);
     modal.hidden = false;
     document.body.style.overflow = "hidden";
   }
@@ -466,7 +478,10 @@
     const title = document.getElementById("homeCalTitle");
     if (!grid) return;
 
-    if (title) title.textContent = year + "年" + month + "月";
+    if (title) title.textContent = formatRocDate(
+      String(year) + String(month).padStart(2, "0") + "01",
+      { monthOnly: true }
+    );
 
     const first = new Date(year, month - 1, 1);
     const startPad = first.getDay(); // 0 Sun

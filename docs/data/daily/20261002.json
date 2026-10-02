@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T15:40:47",
+  "updatedAt": "2026-10-02T15:58:15",
   "timezone": "Asia/Taipei",
   "date": "2026-10-02",
   "dateKey": "20261002",
@@ -24,13 +24,13 @@
     "修造",
     "動土"
   ],
-  "summaryText": "祭祀開運求順遂，出行愉快避大事。",
-  "shortMessage": "今日祭祀開運，出行順利，避開嫁娶入宅。",
+  "summaryText": "今天適合祭祀以開運，出行常能順水流財，忌避重大變動。",
+  "shortMessage": "今天適合祭祀開運，並出行，切忌嫁娶及入宅。",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
   "brandName": "名序",
-  "brandTagline": "知名・知運・知人生",
+  "brandTagline": "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
   "media": {
     "gif": "assets/daily/daily_20261002.gif",
     "webp": "assets/daily/daily_20261002.webp",

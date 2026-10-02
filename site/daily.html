@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>名序｜每日吉祥</title>
+  <meta name="description" content="名序每日吉祥剪紙：當日宜忌、主題與開運短語。" />
+  <link rel="canonical" href="https://oreoyanz.github.io/namingShooting/daily.html" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+  <link rel="stylesheet" href="css/site.css?v=1.0.30" />
+  <style>
+    .daily-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .daily-wrap h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      margin: 0 0 0.35rem;
+    }
+    .daily-kicker {
+      color: #6b635a;
+      margin: 0 0 1.5rem;
+      font-size: 0.95rem;
+    }
+    .daily-card {
+      background: #fffefb;
+      border: 1px solid #e4ddd2;
+      padding: 1.1rem 1.2rem;
+      margin: 0 0 1rem;
+    }
+    .daily-card h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+    }
+    .daily-meta {
+      color: #5c656d;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .daily-yi { color: #96322c; }
+    .daily-ji { color: #666; }
+    .daily-summary {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .daily-media img, .daily-media video {
+      width: 100%;
+      border: 1px solid #e4ddd2;
+      background: #f0ebe3;
+      display: block;
+    }
+    .daily-empty { color: #9b3b3b; }
+    .daily-back { margin-top: 1.5rem; }
+    .daily-back a { color: #2f5d50; }
+  </style>
+</head>
+<body>
+  <main class="daily-wrap">
+    <h1>名序｜每日吉祥</h1>
+    <p class="daily-kicker" id="dailyKicker">載入中…</p>
+
+    <div class="daily-card" id="dailyDateCard" hidden>
+      <h2>日期</h2>
+      <p class="daily-meta" id="dailyDateLines"></p>
+    </div>
+
+    <div class="daily-card" id="dailyFortuneCard" hidden>
+      <h2>運勢與主題</h2>
+      <p class="daily-meta" id="dailyFortuneLines"></p>
+      <p class="daily-meta daily-yi" id="dailyYi"></p>
+      <p class="daily-meta daily-ji" id="dailyJi"></p>
+    </div>
+
+    <div class="daily-card" id="dailySummaryCard" hidden>
+      <h2>今日總結</h2>
+      <p class="daily-summary" id="dailySummary"></p>
+    </div>
+
+    <div class="daily-card daily-media" id="dailyMediaCard" hidden>
+      <h2>今日剪紙</h2>
+      <img id="dailyGif" alt="每日吉祥 GIF" />
+    </div>
+
+    <p class="daily-empty" id="dailyEmpty" hidden>尚無已發布的每日內容。</p>
+    <p class="daily-back"><a href="index.html">← 回名序首頁</a></p>
+  </main>
+  <script>
+    (async function () {
+      const empty = document.getElementById("dailyEmpty");
+      const kicker = document.getElementById("dailyKicker");
+      try {
+        const res = await fetch("data/daily_latest.json?t=" + Date.now());
+        if (!res.ok) throw new Error("no data");
+        const d = await res.json();
+        kicker.textContent = (d.brandName || "名序") + "｜" + (d.brandTagline || "");
+
+        document.getElementById("dailyDateCard").hidden = false;
+        document.getElementById("dailyDateLines").innerHTML =
+          (d.dateLine1 || "") + "<br/>" + (d.dateLine2 || "");
+
+        document.getElementById("dailyFortuneCard").hidden = false;
+        document.getElementById("dailyFortuneLines").textContent =
+          `今日${d.fortuneLevel || ""}｜${d.mainTheme || ""}${d.secondaryTheme ? "・" + d.secondaryTheme : ""}`;
+        document.getElementById("dailyYi").textContent = "宜：" + (d.yi || []).join("、");
+        document.getElementById("dailyJi").textContent = "忌：" + (d.ji || []).join("、");
+
+        if (d.summaryText) {
+          document.getElementById("dailySummaryCard").hidden = false;
+          document.getElementById("dailySummary").textContent = d.summaryText;
+        }
+
+        const gif = document.getElementById("dailyGif");
+        const gifPath = (d.media && (d.media.gif || d.media.webp)) || "";
+        if (gifPath) {
+          document.getElementById("dailyMediaCard").hidden = false;
+          gif.src = gifPath + "?t=" + Date.now();
+        }
+      } catch (e) {
+        kicker.textContent = "";
+        empty.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>

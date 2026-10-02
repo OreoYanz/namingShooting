@@ -1,0 +1,49 @@
+{
+  "date": "20261002",
+  "version": "0.2.0",
+  "generatedAt": "2026-10-02T14:52:11",
+  "fortune": {
+    "level": "平",
+    "score": 53,
+    "ganzhi": "己酉",
+    "source": "FortuneEngine.v2.lunar_python"
+  },
+  "theme": {
+    "main": "祭祀開運",
+    "secondary": "順水流財"
+  },
+  "materialIds": [
+    "plant_櫻花_001"
+  ],
+  "heroId": null,
+  "layers": {
+    "background": "plant_櫻花_001",
+    "nature": null,
+    "plants": null,
+    "animals": null,
+    "fortune": null
+  },
+  "files": {
+    "dailyJson": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\data\\daily.json",
+    "fortuneJson": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\data\\fortune.json",
+    "generationJson": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\data\\generation.json",
+    "scenePng": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\scene\\scene_20261002.png",
+    "sceneJpg": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\scene\\scene_20261002.jpg",
+    "sceneJson": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\scene\\scene.json",
+    "gif": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\gif\\daily_20261002.gif",
+    "webp": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\gif\\daily_20261002.webp",
+    "shortMp4": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\short\\daily_20261002.mp4",
+    "shortPreview": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\short\\daily_20261002_preview.jpg",
+    "social": {
+      "youtube": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\social\\youtube.txt",
+      "instagram": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\social\\instagram.txt",
+      "facebook": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\social\\facebook.txt",
+      "threads": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\social\\threads.txt"
+    },
+    "publish": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\publish\\publish.json",
+    "cutouts": [
+      "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\cutout\\plant_櫻花_001.png"
+    ]
+  },
+  "publishStatus": "pending_review"
+}

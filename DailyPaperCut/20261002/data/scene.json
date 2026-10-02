@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "date": "20261002",
+    "theme": "祭祀開運",
+    "template": "bg_only",
+    "animation": {
+      "timeline": {
+        "duration": 10.0,
+        "beats": {
+          "1_background": [
+            0.0,
+            0.8
+          ],
+          "2_date": [
+            0.8,
+            2.162
+          ],
+          "3_yi": [
+            2.162,
+            3.882
+          ],
+          "4_ji": [
+            3.882,
+            6.052
+          ],
+          "5_summary": [
+            6.052,
+            8.229999999999999
+          ],
+          "6_logo": [
+            8.229999999999999,
+            10.0
+          ]
+        }
+      },
+      "elementCount": 1
+    }
+  },
+  "elements": [
+    {
+      "asset_id": "plant_櫻花_001",
+      "category": "Background",
+      "role": "environment",
+      "cutout": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\cutout\\plant_櫻花_001.png",
+      "name": "plant_櫻花_001",
+      "x": 540.0,
+      "y": 540.0,
+      "scale": 1.05,
+      "rotation": 0,
+      "depth": "background",
+      "visual_weight": 20,
+      "animation_type": "slow_reveal",
+      "start_time": 0.0,
+      "duration": 1.2,
+      "anchor": "center",
+      "base_w": 1101,
+      "base_h": 1101,
+      "tags": []
+    }
+  ]
+}

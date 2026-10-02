@@ -1,0 +1,588 @@
+{
+  "plan": {
+    "setId": "set_財運_20261002_114305_016",
+    "theme": "財運開展",
+    "profileKey": "財運",
+    "profileLabel": "今日財運",
+    "template": "fortune_scene",
+    "style": "現代彩色立體紙雕藝術",
+    "palette": "warm gold, soft teal water, cream paper, limited crimson accents",
+    "slots": [
+      {
+        "category": "Background",
+        "role": "environment",
+        "labelZh": "背景",
+        "name": "金色湖畔晨光",
+        "en": "golden lakeside morning mist",
+        "tags": [
+          "財運",
+          "水",
+          "金",
+          "晨光",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「金色湖畔晨光」 (golden lakeside morning mist). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene."
+      },
+      {
+        "category": "Plants",
+        "role": "frame",
+        "labelZh": "框",
+        "name": "左右金竹框",
+        "en": "golden bamboo side frames",
+        "tags": [
+          "財運",
+          "竹",
+          "框景",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required."
+      },
+      {
+        "category": "Hero",
+        "role": "hero",
+        "labelZh": "主角",
+        "name": "錦鯉",
+        "en": "a single elegant koi fish only",
+        "tags": [
+          "財運",
+          "錦鯉",
+          "hero",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「錦鯉」 (a single elegant koi fish only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required."
+      },
+      {
+        "category": "Accent",
+        "role": "decorative",
+        "labelZh": "點綴",
+        "name": "金色粒子",
+        "en": "pure golden paper particles only",
+        "tags": [
+          "財運",
+          "粒子",
+          "點綴",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required."
+      }
+    ]
+  },
+  "materials": {
+    "themeProfile": {
+      "profileKey": "財運",
+      "label": "今日財運",
+      "template": "fortune_scene",
+      "sourceTheme": "財運開展"
+    },
+    "template": "fortune_scene",
+    "themeSetId": "set_財運_20261002_114305_016",
+    "style": "現代彩色立體紙雕藝術",
+    "palette": "warm gold, soft teal water, cream paper, limited crimson accents",
+    "hero": {
+      "id": "hero_錦鯉_001",
+      "category": "Hero",
+      "name": "錦鯉",
+      "tags": [
+        "財運",
+        "錦鯉",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_錦鯉_001.png",
+      "createdAt": "2026-10-02T11:43:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「錦鯉」 (a single elegant koi fish only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    "background": {
+      "id": "bg_金色湖畔晨光_001",
+      "category": "Background",
+      "name": "金色湖畔晨光",
+      "tags": [
+        "財運",
+        "水",
+        "金",
+        "晨光",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_金色湖畔晨光_001.png",
+      "createdAt": "2026-10-02T11:43:49",
+      "method": "openai:gpt-image-1",
+      "slot": "Background",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「金色湖畔晨光」 (golden lakeside morning mist). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    },
+    "nature": null,
+    "plants": [
+      {
+        "id": "plant_左右金竹框_001",
+        "category": "Plants",
+        "name": "左右金竹框",
+        "tags": [
+          "財運",
+          "竹",
+          "框景",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "frame",
+          "support"
+        ],
+        "file": "materials/assets/Plants/plant_左右金竹框_001.png",
+        "createdAt": "2026-10-02T11:43:47",
+        "method": "openai:gpt-image-1",
+        "slot": "Plants",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "frame",
+        "depth": "midground",
+        "visualWeight": 50
+      },
+      {
+        "id": "plant_左右金竹框_001",
+        "category": "Plants",
+        "name": "左右金竹框",
+        "tags": [
+          "財運",
+          "竹",
+          "框景",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "frame",
+          "support"
+        ],
+        "file": "materials/assets/Plants/plant_左右金竹框_001.png",
+        "createdAt": "2026-10-02T11:43:47",
+        "method": "openai:gpt-image-1",
+        "slot": "Plants",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "frame",
+        "depth": "midground",
+        "visualWeight": 50
+      },
+      {
+        "id": "plant_左右金竹框_001",
+        "category": "Plants",
+        "name": "左右金竹框",
+        "tags": [
+          "財運",
+          "竹",
+          "框景",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "frame",
+          "support"
+        ],
+        "file": "materials/assets/Plants/plant_左右金竹框_001.png",
+        "createdAt": "2026-10-02T11:43:47",
+        "method": "openai:gpt-image-1",
+        "slot": "Plants",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "frame",
+        "depth": "midground",
+        "visualWeight": 50
+      }
+    ],
+    "accent": {
+      "id": "accent_金色粒子_001",
+      "category": "Accent",
+      "name": "金色粒子",
+      "tags": [
+        "財運",
+        "粒子",
+        "點綴",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "decorative",
+        "particles"
+      ],
+      "file": "materials/assets/Accent/accent_金色粒子_001.png",
+      "createdAt": "2026-10-02T11:43:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 25
+    },
+    "accents": [
+      {
+        "id": "accent_金色粒子_001",
+        "category": "Accent",
+        "name": "金色粒子",
+        "tags": [
+          "財運",
+          "粒子",
+          "點綴",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "decorative",
+          "particles"
+        ],
+        "file": "materials/assets/Accent/accent_金色粒子_001.png",
+        "createdAt": "2026-10-02T11:43:45",
+        "method": "openai:gpt-image-1",
+        "slot": "Accent",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "decorative",
+        "depth": "foreground",
+        "visualWeight": 25
+      }
+    ],
+    "season": null,
+    "layers": {
+      "background": {
+        "id": "bg_金色湖畔晨光_001",
+        "category": "Background",
+        "name": "金色湖畔晨光",
+        "tags": [
+          "財運",
+          "水",
+          "金",
+          "晨光",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "environment",
+          "background"
+        ],
+        "file": "materials/assets/Background/bg_金色湖畔晨光_001.png",
+        "createdAt": "2026-10-02T11:43:49",
+        "method": "openai:gpt-image-1",
+        "slot": "Background",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「金色湖畔晨光」 (golden lakeside morning mist). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+        "role": "environment",
+        "depth": "background",
+        "visualWeight": 20
+      },
+      "nature": null,
+      "plants": {
+        "id": "plant_左右金竹框_001",
+        "category": "Plants",
+        "name": "左右金竹框",
+        "tags": [
+          "財運",
+          "竹",
+          "框景",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "frame",
+          "support"
+        ],
+        "file": "materials/assets/Plants/plant_左右金竹框_001.png",
+        "createdAt": "2026-10-02T11:43:47",
+        "method": "openai:gpt-image-1",
+        "slot": "Plants",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "frame",
+        "depth": "midground",
+        "visualWeight": 50
+      },
+      "animals": {
+        "id": "hero_錦鯉_001",
+        "category": "Hero",
+        "name": "錦鯉",
+        "tags": [
+          "財運",
+          "錦鯉",
+          "hero",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "hero"
+        ],
+        "file": "materials/assets/Hero/hero_錦鯉_001.png",
+        "createdAt": "2026-10-02T11:43:42",
+        "method": "openai:gpt-image-1",
+        "slot": "Hero",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「錦鯉」 (a single elegant koi fish only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "hero",
+        "depth": "hero",
+        "visualWeight": 92
+      },
+      "fortune": {
+        "id": "accent_金色粒子_001",
+        "category": "Accent",
+        "name": "金色粒子",
+        "tags": [
+          "財運",
+          "粒子",
+          "點綴",
+          "財運",
+          "theme_set",
+          "set_財運_20261002_114305_016"
+        ],
+        "roleHints": [
+          "decorative",
+          "particles"
+        ],
+        "file": "materials/assets/Accent/accent_金色粒子_001.png",
+        "createdAt": "2026-10-02T11:43:45",
+        "method": "openai:gpt-image-1",
+        "slot": "Accent",
+        "themeSetId": "set_財運_20261002_114305_016",
+        "themeProfile": "財運",
+        "theme": "財運開展",
+        "template": "fortune_scene",
+        "style": "現代彩色立體紙雕藝術",
+        "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+        "role": "decorative",
+        "depth": "foreground",
+        "visualWeight": 25
+      }
+    },
+    "animals": {
+      "id": "hero_錦鯉_001",
+      "category": "Hero",
+      "name": "錦鯉",
+      "tags": [
+        "財運",
+        "錦鯉",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_錦鯉_001.png",
+      "createdAt": "2026-10-02T11:43:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「錦鯉」 (a single elegant koi fish only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    "fortune": {
+      "id": "accent_金色粒子_001",
+      "category": "Accent",
+      "name": "金色粒子",
+      "tags": [
+        "財運",
+        "粒子",
+        "點綴",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "decorative",
+        "particles"
+      ],
+      "file": "materials/assets/Accent/accent_金色粒子_001.png",
+      "createdAt": "2026-10-02T11:43:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 25
+    },
+    "allIds": [
+      "hero_錦鯉_001",
+      "bg_金色湖畔晨光_001",
+      "plant_左右金竹框_001",
+      "accent_金色粒子_001"
+    ],
+    "generation": {
+      "mode": "theme_set_api",
+      "setId": "set_財運_20261002_114305_016",
+      "errors": [],
+      "slots": [
+        {
+          "category": "Background",
+          "role": "environment",
+          "labelZh": "背景",
+          "name": "金色湖畔晨光",
+          "en": "golden lakeside morning mist",
+          "tags": [
+            "財運",
+            "水",
+            "金",
+            "晨光",
+            "財運",
+            "theme_set",
+            "set_財運_20261002_114305_016"
+          ],
+          "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「金色湖畔晨光」 (golden lakeside morning mist). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene."
+        },
+        {
+          "category": "Plants",
+          "role": "frame",
+          "labelZh": "框",
+          "name": "左右金竹框",
+          "en": "golden bamboo side frames",
+          "tags": [
+            "財運",
+            "竹",
+            "框景",
+            "財運",
+            "theme_set",
+            "set_財運_20261002_114305_016"
+          ],
+          "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required."
+        },
+        {
+          "category": "Hero",
+          "role": "hero",
+          "labelZh": "主角",
+          "name": "錦鯉",
+          "en": "a single elegant koi fish only",
+          "tags": [
+            "財運",
+            "錦鯉",
+            "hero",
+            "財運",
+            "theme_set",
+            "set_財運_20261002_114305_016"
+          ],
+          "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「錦鯉」 (a single elegant koi fish only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required."
+        },
+        {
+          "category": "Accent",
+          "role": "decorative",
+          "labelZh": "點綴",
+          "name": "金色粒子",
+          "en": "pure golden paper particles only",
+          "tags": [
+            "財運",
+            "粒子",
+            "點綴",
+            "財運",
+            "theme_set",
+            "set_財運_20261002_114305_016"
+          ],
+          "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required."
+        }
+      ],
+      "items": {
+        "Hero": {
+          "id": "hero_錦鯉_001",
+          "file": "materials/assets/Hero/hero_錦鯉_001.png",
+          "method": "openai:gpt-image-1"
+        },
+        "Accent": {
+          "id": "accent_金色粒子_001",
+          "file": "materials/assets/Accent/accent_金色粒子_001.png",
+          "method": "openai:gpt-image-1"
+        },
+        "Plants": {
+          "id": "plant_左右金竹框_001",
+          "file": "materials/assets/Plants/plant_左右金竹框_001.png",
+          "method": "openai:gpt-image-1"
+        },
+        "Background": {
+          "id": "bg_金色湖畔晨光_001",
+          "file": "materials/assets/Background/bg_金色湖畔晨光_001.png",
+          "method": "openai:gpt-image-1"
+        }
+      }
+    }
+  }
+}

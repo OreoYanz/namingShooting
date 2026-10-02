@@ -1,0 +1,3 @@
+copied_from=materials/assets/Background/plant_櫻花_001.png
+layer=background
+role=environment

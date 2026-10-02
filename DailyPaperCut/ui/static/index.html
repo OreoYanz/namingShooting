@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>名序｜每日吉祥剪紙工作台</title>
+  <style>
+    :root {
+      --ink: #1a1f24;
+      --muted: #5c656d;
+      --gold: #a67c3d;
+      --paper: #f7f4ef;
+      --line: #e4ddd2;
+      --card: #fffefb;
+      --accent: #2f5d50;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif TC", "Source Han Serif TC", "Microsoft JhengHei", serif;
+      background:
+        radial-gradient(ellipse at 20% 0%, #fff 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 10%, #ebe4d8 0%, transparent 45%),
+        linear-gradient(180deg, #faf7f2 0%, var(--paper) 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    header {
+      padding: 1.25rem 1.5rem 0.5rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    header h1 { margin: 0; font-size: 1.4rem; letter-spacing: 0.08em; color: var(--gold); }
+    header p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    nav { display: flex; gap: 0.5rem; }
+    nav button {
+      border: 1px solid var(--line);
+      background: transparent;
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+      font: inherit;
+      color: var(--muted);
+    }
+    nav button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    main { padding: 1.25rem 1.5rem 3rem; max-width: 1180px; margin: 0 auto; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .row { display: grid; grid-template-columns: 320px 1fr; gap: 1.25rem; }
+    @media (max-width: 860px) { .row { grid-template-columns: 1fr; } }
+    .box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 1rem 1.1rem;
+    }
+    label { display: block; font-size: 0.85rem; color: var(--muted); margin: 0.6rem 0 0.25rem; }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid var(--line);
+      background: #fff;
+      font: inherit;
+    }
+    button.primary {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.7rem;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+      letter-spacing: 0.06em;
+    }
+    button.ghost {
+      margin-top: 0.5rem;
+      width: 100%;
+      padding: 0.55rem;
+      border: 1px solid var(--line);
+      background: transparent;
+      font: inherit;
+      cursor: pointer;
+    }
+    .status { margin-top: 0.75rem; font-size: 0.9rem; color: var(--muted); white-space: pre-wrap; }
+    .status.ok { color: var(--accent); }
+    .status.err { color: #9b3b3b; }
+    .preview img, .preview video {
+      max-width: 100%;
+      border: 1px solid var(--line);
+      background: #eee;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+    }
+    .tile {
+      border: 1px solid var(--line);
+      padding: 0.5rem;
+      background: #fff;
+      font-size: 0.8rem;
+    }
+    .tile img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #f0ebe3; }
+    .tile .meta { margin-top: 0.35rem; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.35rem;
+      border: 1px solid var(--line);
+      color: var(--gold);
+    }
+    h2 { font-size: 1.1rem; margin: 0 0 0.75rem; }
+    .social pre {
+      background: #f3efe8;
+      padding: 0.75rem;
+      overflow: auto;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+    }
+    .publish-targets {
+      margin-top: 0.85rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+    }
+    .publish-targets > span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+    .publish-targets label.check {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0.28rem 0;
+      font-size: 0.9rem;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .publish-targets input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      accent-color: var(--accent);
+    }
+    .publish-targets label.check.soon {
+      color: var(--muted);
+    }
+    .publish-targets label.check.soon em {
+      font-style: normal;
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>名序｜每日吉祥剪紙工作台</h1>
+      <p>產生 → 預覽 → 勾選發布目標 → 發布｜素材池獨立生成，每日只取用</p>
+    </div>
+    <nav>
+      <button type="button" class="active" data-tab="daily">每日產生</button>
+      <button type="button" data-tab="studio">素材工作室</button>
+    </nav>
+  </header>
+  <main>
+    <section id="panel-daily" class="panel active">
+      <div class="row">
+        <div class="box">
+          <h2>Generate Daily</h2>
+          <label>日期 YYYYMMDD</label>
+          <input id="dateIn" value="20261002" />
+          <button class="primary" id="btnGenerate">產生當日包</button>
+          <button class="ghost" id="btnLoad">載入已有結果</button>
+          <button class="ghost" id="btnConfirm">標記確認</button>
+          <div class="publish-targets" id="publishTargets">
+            <span>發布到</span>
+            <label class="check"><input type="checkbox" name="ch" value="site" checked /> 官網</label>
+            <label class="check soon"><input type="checkbox" name="ch" value="line" /> LINE VOOM <em>即將</em></label>
+            <label class="check soon"><input type="checkbox" name="ch" value="facebook" /> Facebook <em>即將</em></label>
+            <label class="check soon"><input type="checkbox" name="ch" value="instagram" /> Instagram <em>即將</em></label>
+            <label class="check soon"><input type="checkbox" name="ch" value="threads" /> Threads <em>即將</em></label>
+            <label class="check soon"><input type="checkbox" name="ch" value="youtube" /> YouTube Shorts <em>即將</em></label>
+          </div>
+          <button class="ghost" id="btnPublish">發布</button>
+          <div class="status" id="dailyStatus"></div>
+        </div>
+        <div class="box">
+          <h2>預覽</h2>
+          <div id="dailyMeta"></div>
+          <div class="preview" id="dailyPreview"></div>
+          <div class="social" id="dailySocial"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-studio" class="panel">
+      <div class="row">
+        <div class="box">
+          <h2>生成素材（寫入素材池）</h2>
+          <p style="margin:0 0 0.5rem;color:var(--muted);font-size:0.85rem">類別來自 <code>materials/assets/</code> 資料夾，增減資料夾後重整即可</p>
+          <label>類別</label>
+          <select id="catIn"></select>
+          <label>名稱</label>
+          <input id="nameIn" placeholder="例如：錦鯉" />
+          <label>標籤（逗號分隔）</label>
+          <input id="tagsIn" placeholder="wealth, water" />
+          <label>角色（逗號分隔）</label>
+          <input id="rolesIn" value="support" placeholder="hero, support, environment, auspicious" />
+          <label><input type="checkbox" id="phIn" /> 僅用 placeholder（不呼叫圖像 API）</label>
+          <button class="primary" id="btnPoolGen">生成並加入素材池</button>
+          <button class="ghost" id="btnSeed">為現有庫目補 placeholder 檔</button>
+          <button class="ghost" id="btnSyncCats">同步類別（掃 assets 資料夾）</button>
+          <div class="status" id="studioStatus"></div>
+        </div>
+        <div class="box">
+          <h2>素材池 <span id="poolCount" class="badge"></span></h2>
+          <label>篩選類別</label>
+          <select id="catFilter"><option value="">全部</option></select>
+          <div class="grid" id="poolGrid" style="margin-top:1rem"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const setStatus = (el, msg, ok) => {
+      el.textContent = msg;
+      el.className = "status " + (ok === true ? "ok" : ok === false ? "err" : "");
+    };
+
+    document.querySelectorAll("nav button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("nav button").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".panel").forEach((p) => p.classList.remove("active"));
+        $("panel-" + btn.dataset.tab).classList.add("active");
+      });
+    });
+
+    async function loadCategories() {
+      const res = await fetch("/api/categories");
+      const data = await res.json();
+      const cats = data.categories || [];
+      ["catIn", "catFilter"].forEach((id) => {
+        const sel = $(id);
+        const prev = sel.value;
+        const keepAll = id === "catFilter";
+        if (!keepAll) sel.innerHTML = "";
+        else while (sel.options.length > 1) sel.remove(1);
+        cats.forEach((c) => {
+          const o = document.createElement("option");
+          o.value = c; o.textContent = c;
+          sel.appendChild(o);
+        });
+        if (prev && [...sel.options].some((o) => o.value === prev)) sel.value = prev;
+      });
+    }
+
+    async function loadPool() {
+      const cat = $("catFilter").value;
+      const url = cat ? `/api/pool?category=${encodeURIComponent(cat)}` : "/api/pool";
+      const res = await fetch(url);
+      const data = await res.json();
+      $("poolCount").textContent = `${data.ready}/${data.count} 就緒`;
+      const grid = $("poolGrid");
+      grid.innerHTML = "";
+      data.items.forEach((it) => {
+        const div = document.createElement("div");
+        div.className = "tile";
+        const img = it.ready
+          ? `<img src="/api/pool/file/${it.id}?t=${Date.now()}" alt="${it.name}" />`
+          : `<div style="aspect-ratio:1;background:#efe9df;display:flex;align-items:center;justify-content:center;color:#999">無檔</div>`;
+        div.innerHTML = `${img}<div><strong>${it.name}</strong></div>
+          <div class="meta">${it.id}<br/>${(it.roleHints||[]).join(", ")}
+          ${it.ready ? '<span class="badge">ready</span>' : ""}</div>`;
+        grid.appendChild(div);
+      });
+    }
+
+    async function renderDay(yyyymmdd) {
+      const res = await fetch(`/api/day/${yyyymmdd}`);
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setStatus($("dailyStatus"), err.detail || "尚無資料", false);
+        return;
+      }
+      const data = await res.json();
+      const d = data.daily;
+      const f = data.fortune || {};
+      $("dailyMeta").innerHTML = `
+        <p><strong>${d.fortuneLevel || ""}</strong>（${d.fortuneScore ?? ""}）｜${d.dayGanZhi || ""}｜${d.lunarDate || ""}</p>
+        <p>主題：${d.mainTheme || ""}／${d.secondaryTheme || ""}</p>
+        <p>宜：${(d.yi||[]).join("、")}</p>
+        <p>忌：${(d.ji||[]).join("、")}</p>
+        <p>CTA：${d.ctaUrl || ""}</p>
+        <p>狀態：${data.publish.status || "—"}</p>`;
+      const t = Date.now();
+      $("dailyPreview").innerHTML = `
+        <p>場景</p><img src="${data.files.scene}?t=${t}" onerror="this.style.display='none'" />
+        <p>Shorts 預覽</p><img src="${data.files.preview}?t=${t}" onerror="this.style.display='none'" />
+        <p>GIF</p><img src="${data.files.gif}?t=${t}" onerror="this.style.display='none'" />
+        <p>MP4</p><video controls src="${data.files.mp4}?t=${t}"></video>`;
+      const social = $("dailySocial");
+      social.innerHTML = "<h2>文案</h2>";
+      Object.entries(data.social || {}).forEach(([k, v]) => {
+        social.innerHTML += `<details><summary>${k}</summary><pre>${v}</pre></details>`;
+      });
+      setStatus($("dailyStatus"), `已載入 ${yyyymmdd}`, true);
+    }
+
+    $("btnGenerate").onclick = async () => {
+      setStatus($("dailyStatus"), "產生中…");
+      const fd = new FormData();
+      fd.append("date", $("dateIn").value.trim());
+      const res = await fetch("/api/generate", { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus($("dailyStatus"), data.detail || "失敗", false);
+        return;
+      }
+      setStatus($("dailyStatus"), `完成 ${data.date}\nMP4: ${data.files.shortMp4 || ""}`, true);
+      await renderDay(data.date);
+    };
+    $("btnLoad").onclick = () => renderDay($("dateIn").value.trim());
+    $("btnConfirm").onclick = async () => {
+      const d = $("dateIn").value.trim();
+      const res = await fetch(`/api/day/${d}/confirm`, { method: "POST" });
+      const data = await res.json();
+      setStatus($("dailyStatus"), res.ok ? "已標記確認" : (data.detail || "失敗"), res.ok);
+    };
+    function selectedChannels() {
+      return Array.from(document.querySelectorAll('#publishTargets input[name="ch"]:checked'))
+        .map((el) => el.value);
+    }
+
+    $("btnPublish").onclick = async () => {
+      const d = $("dateIn").value.trim();
+      const channels = selectedChannels();
+      if (!channels.length) {
+        setStatus($("dailyStatus"), "請至少勾選一個發布目標", false);
+        return;
+      }
+      setStatus($("dailyStatus"), "發布中…");
+      const fd = new FormData();
+      fd.append("channels", channels.join(","));
+      const res = await fetch(`/api/day/${d}/publish`, { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus($("dailyStatus"), data.detail || "發布失敗", false);
+        return;
+      }
+      setStatus($("dailyStatus"), data.message || "已發布", true);
+      await renderDay(d);
+    };
+
+    $("btnPoolGen").onclick = async () => {
+      setStatus($("studioStatus"), "生成中…");
+      const fd = new FormData();
+      fd.append("category", $("catIn").value);
+      fd.append("name", $("nameIn").value.trim());
+      fd.append("tags", $("tagsIn").value);
+      fd.append("roles", $("rolesIn").value);
+      fd.append("placeholder", $("phIn").checked ? "true" : "false");
+      const res = await fetch("/api/pool/generate", { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus($("studioStatus"), data.detail || "失敗", false);
+        return;
+      }
+      setStatus($("studioStatus"), `已加入 ${data.item.id}（${data.item.method}）`, true);
+      await loadPool();
+    };
+    $("btnSeed").onclick = async () => {
+      setStatus($("studioStatus"), "補檔中…");
+      const res = await fetch("/api/pool/seed-placeholders", { method: "POST" });
+      const data = await res.json();
+      setStatus($("studioStatus"), `更新 ${data.updated} 筆`, true);
+      await loadCategories();
+      await loadPool();
+    };
+    $("btnSyncCats").onclick = async () => {
+      setStatus($("studioStatus"), "同步類別中…");
+      const res = await fetch("/api/pool/sync-categories", { method: "POST" });
+      const data = await res.json();
+      setStatus($("studioStatus"), `類別 ${ (data.categories||[]).join(", ") }`, true);
+      await loadCategories();
+      await loadPool();
+    };
+    $("catFilter").onchange = loadPool;
+
+    loadCategories().then(loadPool);
+  </script>
+</body>
+</html>

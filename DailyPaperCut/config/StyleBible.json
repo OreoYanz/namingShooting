@@ -1,0 +1,22 @@
+{
+  "style": "Contemporary Colorful Paper Art",
+  "styleZh": "現代彩色立體紙雕藝術",
+  "material": "Layered Paper",
+  "depth": "3D",
+  "texture": "Visible Paper Fiber",
+  "lighting": "Soft Studio Lighting",
+  "shadow": "Soft Layered Shadow",
+  "color": "Multi-color pastel and vivid accents, limited traditional crimson",
+  "background": "Transparent (except full-bleed Background slot)",
+  "outline": "None",
+  "text": "None",
+  "forbidden": [
+    "traditional red window lattice",
+    "black thick outline",
+    "flat 2D sticker look",
+    "any readable text or characters in the image",
+    "AI watermark",
+    "photorealistic human face"
+  ],
+  "promptSuffix": "Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene."
+}

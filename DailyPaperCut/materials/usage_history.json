@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "date": "20261002",
+      "mainTheme": "祭祀開運",
+      "heroId": "",
+      "materialIds": [
+        "plant_櫻花_001"
+      ],
+      "recordedAt": "2026-10-02T14:52:11",
+      "backgroundId": "plant_櫻花_001"
+    },
+    {
+      "date": "20261011",
+      "mainTheme": "財運開展",
+      "heroId": "fortune_金幣_001",
+      "materialIds": [
+        "fortune_金幣_001",
+        "bg_秋日楓林_001",
+        "nature_流星_001",
+        "fortune_豐收果籃_001",
+        "plant_石榴_001",
+        "plant_葡萄藤_001",
+        "season_秋日稻穗_001"
+      ],
+      "recordedAt": "2026-10-02T08:36:40",
+      "backgroundId": "bg_秋日楓林_001"
+    },
+    {
+      "date": "20261012",
+      "mainTheme": "事業突破",
+      "heroId": "career_旗幟_001",
+      "materialIds": [
+        "career_旗幟_001",
+        "bg_春日花園_001",
+        "nature_太陽光芒_001",
+        "fortune_如意_001",
+        "plant_葫蘆藤_001",
+        "plant_柳樹_001",
+        "season_冬日松枝_001"
+      ],
+      "recordedAt": "2026-10-02T08:40:31",
+      "backgroundId": "bg_春日花園_001"
+    },
+    {
+      "date": "20261013",
+      "mainTheme": "愛情桃花",
+      "heroId": "animal_海豚_001",
+      "materialIds": [
+        "animal_海豚_001",
+        "bg_祥雲天空_002",
+        "nature_彩色雲朵_001",
+        "love_紅線_001",
+        "plant_梅花_001",
+        "plant_桃花_001",
+        "season_秋日微風_001"
+      ],
+      "recordedAt": "2026-10-02T08:42:30",
+      "backgroundId": "bg_祥雲天空_002"
+    }
+  ]
+}

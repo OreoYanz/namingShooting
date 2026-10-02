@@ -1,0 +1,41 @@
+{
+  "date": "20261002",
+  "status": "published",
+  "channels": {
+    "youtube": false,
+    "instagram": false,
+    "facebook": false,
+    "threads": false,
+    "site": true
+  },
+  "confirmedAt": "2026-10-02T14:53:16",
+  "publishedAt": "2026-10-02T14:53:20",
+  "note": "第一階段不自動發布，需人工確認。",
+  "results": {
+    "site": {
+      "ok": true,
+      "channel": "site",
+      "siteRoot": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\site",
+      "files": [
+        "assets/daily/daily_20261002.gif",
+        "assets/daily/latest.gif",
+        "assets/daily/daily_20261002.webp",
+        "assets/daily/latest.webp",
+        "assets/daily/daily_20261002_preview.jpg",
+        "assets/daily/latest_preview.jpg",
+        "assets/daily/scene_20261002.jpg",
+        "assets/daily/latest_scene.jpg",
+        "assets/daily/scene_20261002.png",
+        "assets/daily/latest_scene.png",
+        "data/daily_latest.json",
+        "data/daily/20261002.json"
+      ],
+      "latest": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\site\\data\\daily_latest.json",
+      "page": "daily.html",
+      "note": "已寫入 site/。若官網為 GitHub Pages，請再 commit + push 才會上線。"
+    }
+  },
+  "lastSelected": [
+    "site"
+  ]
+}

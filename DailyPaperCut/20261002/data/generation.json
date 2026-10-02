@@ -1,0 +1,130 @@
+{
+  "date": "20261002",
+  "generatedAt": "2026-10-02T14:52:11",
+  "materials": {
+    "themeProfile": {
+      "hero_categories": [
+        "Hero"
+      ],
+      "support_categories": [
+        "Nature",
+        "Plants"
+      ],
+      "accent_categories": [
+        "Accent"
+      ],
+      "preferred_tags": [
+        "財運",
+        "富足",
+        "水",
+        "金",
+        "wealth",
+        "gold",
+        "koi",
+        "錦鯉",
+        "金幣",
+        "元寶",
+        "fortune"
+      ],
+      "template": "bg_only",
+      "label": "今日財運",
+      "profileKey": "財運",
+      "sourceTheme": "祭祀開運"
+    },
+    "template": "bg_only",
+    "hero": null,
+    "background": {
+      "id": "plant_櫻花_001",
+      "category": "Background",
+      "name": "plant_櫻花_001",
+      "tags": [],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/plant_櫻花_001.png",
+      "method": "background_folder_random",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20,
+      "anchor": [
+        "center"
+      ],
+      "scaleRange": [
+        1.0,
+        1.08
+      ]
+    },
+    "nature": null,
+    "plants": [],
+    "accent": null,
+    "accents": [],
+    "season": null,
+    "layers": {
+      "background": {
+        "id": "plant_櫻花_001",
+        "category": "Background",
+        "name": "plant_櫻花_001",
+        "tags": [],
+        "roleHints": [
+          "environment",
+          "background"
+        ],
+        "file": "materials/assets/Background/plant_櫻花_001.png",
+        "method": "background_folder_random",
+        "role": "environment",
+        "depth": "background",
+        "visualWeight": 20,
+        "anchor": [
+          "center"
+        ],
+        "scaleRange": [
+          1.0,
+          1.08
+        ]
+      },
+      "nature": null,
+      "plants": null,
+      "animals": null,
+      "fortune": null
+    },
+    "layerOrder": [
+      "background",
+      "nature",
+      "plants",
+      "animals",
+      "fortune"
+    ],
+    "animals": null,
+    "fortune": null,
+    "supports": [],
+    "environment": null,
+    "auspicious": null,
+    "allIds": [
+      "plant_櫻花_001"
+    ],
+    "colorNote": {
+      "heroFamily": null
+    },
+    "backgroundSource": "materials/assets/Background"
+  },
+  "cutouts": [
+    {
+      "id": "plant_櫻花_001",
+      "layer": "background",
+      "role": "environment",
+      "category": "Background",
+      "name": "plant_櫻花_001",
+      "cutout": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\cutout\\plant_櫻花_001.png",
+      "source": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\materials\\assets\\Background\\plant_櫻花_001.png",
+      "style": "Contemporary Colorful Paper Art"
+    }
+  ],
+  "openaiCopy": true,
+  "imageGenerationEnabled": true,
+  "sceneEngine": {
+    "template": "bg_only",
+    "heroId": null,
+    "elementCount": 1
+  }
+}

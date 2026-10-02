@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-02",
+  "rocDate": "115年10月2日",
+  "lunarDate": "農曆八月廿二",
+  "dateLine1": "115年10月2日 農曆八月廿二",
+  "dateLine2": "丙午 [馬] 年丁酉月己酉日",
+  "yearGanZhi": "丙午",
+  "monthGanZhi": "丁酉",
+  "dayGanZhi": "己酉",
+  "dayAnimalHint": "馬",
+  "fortuneLevel": "平",
+  "fortuneScore": 53,
+  "yi": [
+    "祭祀",
+    "出行"
+  ],
+  "ji": [
+    "嫁娶",
+    "入宅",
+    "修造",
+    "動土"
+  ],
+  "yiFull": [
+    "祭祀",
+    "出行"
+  ],
+  "jiFull": [
+    "嫁娶",
+    "入宅",
+    "修造",
+    "動土",
+    "會親友",
+    "破土"
+  ],
+  "luckyColor": "土褐",
+  "luckyDirection": "西",
+  "luckyTime": "17:00-19:00",
+  "luckyElements": [
+    "己",
+    "酉",
+    "紙"
+  ],
+  "themeCandidates": [
+    "祭祀開運",
+    "順水流財",
+    "貴人靠近"
+  ],
+  "source": "FortuneEngine.v2.lunar_python",
+  "note": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+}

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-02T14:53:20",
+  "date": "2026-10-02",
+  "dateKey": "20261002",
+  "rocDate": "115年10月2日",
+  "lunarDate": "農曆八月廿二",
+  "dateLine1": "115年10月2日 農曆八月廿二",
+  "dateLine2": "丙午 [馬] 年丁酉月己酉日",
+  "dayGanZhi": "己酉",
+  "dayAnimalHint": "馬",
+  "fortuneLevel": "平",
+  "fortuneScore": 53,
+  "mainTheme": "祭祀開運",
+  "secondaryTheme": "順水流財",
+  "yi": [
+    "祭祀",
+    "出行"
+  ],
+  "ji": [
+    "嫁娶",
+    "入宅",
+    "修造",
+    "動土"
+  ],
+  "summaryText": "祭祀開運求順遂，出行愉快避大事。",
+  "shortMessage": "今日祭祀開運，出行順利，避開嫁娶入宅。",
+  "ctaLine": "想知道的不只是今天，還有你今年的方向？",
+  "ctaProduct": "名序｜流年分析",
+  "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
+  "brandName": "名序",
+  "brandTagline": "知名・知運・知人生",
+  "media": {
+    "gif": "assets/daily/latest.gif",
+    "webp": "assets/daily/latest.webp",
+    "preview": "assets/daily/latest_preview.jpg",
+    "scene": "assets/daily/latest_scene.jpg",
+    "gifDated": "assets/daily/daily_20261002.gif"
+  },
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+}

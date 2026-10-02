@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "date": "20261002",
+    "theme": "祭祀開運",
+    "template": "bg_only",
+    "profile": "財運"
+  },
+  "elements": [
+    {
+      "asset_id": "plant_櫻花_001",
+      "category": "Background",
+      "role": "environment",
+      "cutout": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\DailyPaperCut\\20261002\\cutout\\plant_櫻花_001.png",
+      "name": "plant_櫻花_001",
+      "x": 540.0,
+      "y": 540.0,
+      "scale": 1.05,
+      "rotation": 0,
+      "depth": "background",
+      "visual_weight": 20,
+      "animation_type": "slow_reveal",
+      "start_time": 0.0,
+      "duration": 1.2,
+      "anchor": "center",
+      "base_w": 1101,
+      "base_h": 1101,
+      "tags": []
+    }
+  ]
+}

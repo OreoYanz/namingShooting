@@ -1,0 +1,50 @@
+{
+  "projectName": "名序每日吉祥剪紙引擎",
+  "version": "0.2.0",
+  "paths": {
+    "root": ".",
+    "outputRoot": ".",
+    "materialsRoot": "materials",
+    "configRoot": "config",
+    "logoPath": "../site/assets/logo.png",
+    "historyPath": "materials/usage_history.json"
+  },
+  "openai": {
+    "apiKeyEnv": "OPENAI_API_KEY",
+    "baseUrl": "https://api.openai.com/v1",
+    "copyModel": "gpt-4o-mini",
+    "imageModel": "gpt-image-1",
+    "enableImageGeneration": true,
+    "dailyThemeSetGeneration": true,
+    "themeSetWorkers": 1
+  },
+  "cta": {
+    "line": "想知道的不只是今天，還有你今年的方向？",
+    "product": "名序｜流年分析",
+    "url": "https://oreoyanz.github.io/namingShooting/"
+  },
+  "brand": {
+    "name": "名序",
+    "tagline": "知名・知運・知人生",
+    "forbidConsumerAiWording": true
+  },
+  "media": {
+    "gifSize": [1080, 1080],
+    "shortSize": [1080, 1920],
+    "durationSec": 20,
+    "fps": 10
+  },
+  "reuseRules": {
+    "sameMaterialMinDays": 7,
+    "sameThemeMinDays": 2,
+    "sameHeroVisualMinDays": 3,
+    "sameBackgroundMinDays": 2
+  },
+  "hashtags": [
+    "#名序",
+    "#每日吉凶",
+    "#今日運勢",
+    "#開運",
+    "#生活"
+  ]
+}

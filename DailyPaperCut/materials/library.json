@@ -1,0 +1,4184 @@
+{
+  "version": 1,
+  "categories": [
+    "Accent",
+    "Background",
+    "Hero",
+    "Nature",
+    "Plants"
+  ],
+  "items": [
+    {
+      "id": "animal_龍_001",
+      "category": "Hero",
+      "name": "龍",
+      "tags": [
+        "吉祥、權勢、祥瑞"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_龍_001.png",
+      "createdAt": "2026-10-01T14:52:14",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_鳳凰_001",
+      "category": "Hero",
+      "name": "鳳凰",
+      "tags": [
+        "重生、榮耀、好運"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_鳳凰_001.png",
+      "createdAt": "2026-10-01T14:53:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_錦鯉_001",
+      "category": "Hero",
+      "name": "錦鯉",
+      "tags": [
+        "財運、好運"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_錦鯉_001.png",
+      "createdAt": "2026-10-01T14:54:37",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_龍_002",
+      "category": "Hero",
+      "name": "龍",
+      "tags": [
+        "吉祥",
+        "權勢",
+        "祥瑞",
+        "Dragon"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_龍_002.png",
+      "createdAt": "2026-10-01T14:56:50",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_鳳凰_002",
+      "category": "Hero",
+      "name": "鳳凰",
+      "tags": [
+        "重生",
+        "榮耀",
+        "好運",
+        "Phoenix"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_鳳凰_002.png",
+      "createdAt": "2026-10-01T14:57:33",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_錦鯉_002",
+      "category": "Hero",
+      "name": "錦鯉",
+      "tags": [
+        "財運",
+        "好運",
+        "Koi Fish"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_錦鯉_002.png",
+      "createdAt": "2026-10-01T14:58:14",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_兔子_001",
+      "category": "Hero",
+      "name": "兔子",
+      "tags": [
+        "溫柔",
+        "機會",
+        "活力",
+        "Rabbit"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_兔子_001.png",
+      "createdAt": "2026-10-01T14:58:55",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_鹿_001",
+      "category": "Hero",
+      "name": "鹿",
+      "tags": [
+        "福氣",
+        "平安",
+        "長壽",
+        "Deer"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_鹿_001.png",
+      "createdAt": "2026-10-01T14:59:37",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_蝴蝶_001",
+      "category": "Hero",
+      "name": "蝴蝶",
+      "tags": [
+        "轉變",
+        "自由",
+        "感情",
+        "Butterfly"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_蝴蝶_001.png",
+      "createdAt": "2026-10-01T15:00:16",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_孔雀_001",
+      "category": "Hero",
+      "name": "孔雀",
+      "tags": [
+        "美麗",
+        "榮耀",
+        "人緣",
+        "Peacock"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_孔雀_001.png",
+      "createdAt": "2026-10-01T15:01:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_白鶴_001",
+      "category": "Hero",
+      "name": "白鶴",
+      "tags": [
+        "長壽",
+        "吉祥",
+        "Crane"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_白鶴_001.png",
+      "createdAt": "2026-10-01T15:01:51",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_喜鵲_001",
+      "category": "Hero",
+      "name": "喜鵲",
+      "tags": [
+        "喜事",
+        "好消息",
+        "Magpie"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_喜鵲_001.png",
+      "createdAt": "2026-10-01T15:02:35",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_燕子_001",
+      "category": "Hero",
+      "name": "燕子",
+      "tags": [
+        "歸來",
+        "家庭",
+        "希望",
+        "Swallow"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_燕子_001.png",
+      "createdAt": "2026-10-01T15:03:18",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_貓_001",
+      "category": "Hero",
+      "name": "貓",
+      "tags": [
+        "陪伴",
+        "招財",
+        "幸運",
+        "Cat"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_貓_001.png",
+      "createdAt": "2026-10-01T15:04:01",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_招財貓_001",
+      "category": "Hero",
+      "name": "招財貓",
+      "tags": [
+        "財運",
+        "招財",
+        "Maneki-neko"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_招財貓_001.png",
+      "createdAt": "2026-10-01T15:04:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_狐狸_001",
+      "category": "Hero",
+      "name": "狐狸",
+      "tags": [
+        "智慧",
+        "機敏",
+        "Fox"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_狐狸_001.png",
+      "createdAt": "2026-10-01T15:05:25",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_熊貓_001",
+      "category": "Hero",
+      "name": "熊貓",
+      "tags": [
+        "和諧",
+        "平安",
+        "Panda"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_熊貓_001.png",
+      "createdAt": "2026-10-01T15:06:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_大象_001",
+      "category": "Hero",
+      "name": "大象",
+      "tags": [
+        "穩定",
+        "智慧",
+        "好運",
+        "Elephant"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_大象_001.png",
+      "createdAt": "2026-10-01T15:06:50",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_大象守護_001",
+      "category": "Hero",
+      "name": "大象守護",
+      "tags": [
+        "穩定",
+        "守護",
+        "Elephant Guardian"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_大象守護_001.png",
+      "createdAt": "2026-10-01T15:07:34",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_老虎_001",
+      "category": "Hero",
+      "name": "老虎",
+      "tags": [
+        "勇氣",
+        "力量",
+        "Tiger"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_老虎_001.png",
+      "createdAt": "2026-10-01T15:08:15",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_獅子_001",
+      "category": "Hero",
+      "name": "獅子",
+      "tags": [
+        "領導",
+        "勇氣",
+        "Lion"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_獅子_001.png",
+      "createdAt": "2026-10-01T15:08:57",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_馬_001",
+      "category": "Hero",
+      "name": "馬",
+      "tags": [
+        "事業",
+        "速度",
+        "成功",
+        "Horse"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_馬_001.png",
+      "createdAt": "2026-10-01T15:09:35",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_羊_001",
+      "category": "Hero",
+      "name": "羊",
+      "tags": [
+        "溫和",
+        "和氣",
+        "福氣",
+        "Sheep"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_羊_001.png",
+      "createdAt": "2026-10-01T15:10:14",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_牛_001",
+      "category": "Hero",
+      "name": "牛",
+      "tags": [
+        "勤勞",
+        "穩定",
+        "收穫",
+        "Ox"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_牛_001.png",
+      "createdAt": "2026-10-01T15:10:54",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_猴子_001",
+      "category": "Hero",
+      "name": "猴子",
+      "tags": [
+        "聰明",
+        "靈活",
+        "Monkey"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_猴子_001.png",
+      "createdAt": "2026-10-01T15:11:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_狗_001",
+      "category": "Hero",
+      "name": "狗",
+      "tags": [
+        "守護",
+        "忠誠",
+        "Dog"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_狗_001.png",
+      "createdAt": "2026-10-01T15:12:18",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_海豚_001",
+      "category": "Hero",
+      "name": "海豚",
+      "tags": [
+        "幸福",
+        "智慧",
+        "人際",
+        "Dolphin"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_海豚_001.png",
+      "createdAt": "2026-10-01T15:13:01",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_鯨魚_001",
+      "category": "Hero",
+      "name": "鯨魚",
+      "tags": [
+        "寬廣",
+        "力量",
+        "守護",
+        "Whale"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_鯨魚_001.png",
+      "createdAt": "2026-10-01T15:13:44",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_天鵝_001",
+      "category": "Hero",
+      "name": "天鵝",
+      "tags": [
+        "愛情",
+        "優雅",
+        "和諧",
+        "Swan"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_天鵝_001.png",
+      "createdAt": "2026-10-01T15:14:25",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_蜻蜓_001",
+      "category": "Hero",
+      "name": "蜻蜓",
+      "tags": [
+        "轉機",
+        "自由",
+        "好運",
+        "Dragonfly"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_蜻蜓_001.png",
+      "createdAt": "2026-10-01T15:15:03",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_蜜蜂_001",
+      "category": "Hero",
+      "name": "蜜蜂",
+      "tags": [
+        "勤奮",
+        "合作",
+        "收穫",
+        "Bee"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_蜜蜂_001.png",
+      "createdAt": "2026-10-01T15:15:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_金魚_001",
+      "category": "Hero",
+      "name": "金魚",
+      "tags": [
+        "財富",
+        "富足",
+        "Goldfish"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_金魚_001.png",
+      "createdAt": "2026-10-01T15:16:23",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "animal_烏龜_001",
+      "category": "Hero",
+      "name": "烏龜",
+      "tags": [
+        "長壽",
+        "穩定",
+        "守成",
+        "Turtle"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/animal_烏龜_001.png",
+      "createdAt": "2026-10-01T15:17:04",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "plant_牡丹_001",
+      "category": "Plants",
+      "name": "牡丹",
+      "tags": [
+        "富貴",
+        "繁榮",
+        "吉祥",
+        "Peony"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_牡丹_001.png",
+      "createdAt": "2026-10-01T15:19:33",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_蓮花_001",
+      "category": "Plants",
+      "name": "蓮花",
+      "tags": [
+        "清淨",
+        "圓滿",
+        "智慧",
+        "Lotus"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_蓮花_001.png",
+      "createdAt": "2026-10-01T15:20:16",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_梅花_001",
+      "category": "Plants",
+      "name": "梅花",
+      "tags": [
+        "堅韌",
+        "希望",
+        "迎春",
+        "Plum Blossom"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_梅花_001.png",
+      "createdAt": "2026-10-01T15:20:57",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_桃花_001",
+      "category": "Plants",
+      "name": "桃花",
+      "tags": [
+        "感情",
+        "人緣",
+        "桃花運",
+        "Peach Blossom"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_桃花_001.png",
+      "createdAt": "2026-10-01T15:21:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_桂花_001",
+      "category": "Plants",
+      "name": "桂花",
+      "tags": [
+        "富貴",
+        "收穫",
+        "好運",
+        "Osmanthus"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_桂花_001.png",
+      "createdAt": "2026-10-01T15:22:15",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_菊花_001",
+      "category": "Plants",
+      "name": "菊花",
+      "tags": [
+        "長壽",
+        "平安",
+        "高雅",
+        "Chrysanthemum"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_菊花_001.png",
+      "createdAt": "2026-10-01T15:22:54",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_蘭花_001",
+      "category": "Plants",
+      "name": "蘭花",
+      "tags": [
+        "高雅",
+        "品格",
+        "人緣",
+        "Orchid"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_蘭花_001.png",
+      "createdAt": "2026-10-01T15:23:34",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_竹子_001",
+      "category": "Plants",
+      "name": "竹子",
+      "tags": [
+        "平安",
+        "節節高升",
+        "Bamboo"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_竹子_001.png",
+      "createdAt": "2026-10-01T15:24:12",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_松樹_001",
+      "category": "Plants",
+      "name": "松樹",
+      "tags": [
+        "長壽",
+        "穩定",
+        "堅韌",
+        "Pine Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_松樹_001.png",
+      "createdAt": "2026-10-01T15:24:53",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_柳樹_001",
+      "category": "Plants",
+      "name": "柳樹",
+      "tags": [
+        "柔韌",
+        "順遂",
+        "生命力",
+        "Willow"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_柳樹_001.png",
+      "createdAt": "2026-10-01T15:25:31",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_櫻花_001",
+      "category": "Plants",
+      "name": "櫻花",
+      "tags": [
+        "美好",
+        "希望",
+        "相遇",
+        "Cherry Blossom"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_櫻花_001.png",
+      "createdAt": "2026-10-01T15:26:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_向日葵_001",
+      "category": "Plants",
+      "name": "向日葵",
+      "tags": [
+        "陽光",
+        "正能量",
+        "成功",
+        "Sunflower"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_向日葵_001.png",
+      "createdAt": "2026-10-01T15:26:50",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_百合_001",
+      "category": "Plants",
+      "name": "百合",
+      "tags": [
+        "和諧",
+        "純潔",
+        "家庭",
+        "Lily"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_百合_001.png",
+      "createdAt": "2026-10-01T15:27:29",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_紫藤_001",
+      "category": "Plants",
+      "name": "紫藤",
+      "tags": [
+        "浪漫",
+        "長久",
+        "幸福",
+        "Wisteria"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_紫藤_001.png",
+      "createdAt": "2026-10-01T15:28:13",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_薔薇_001",
+      "category": "Plants",
+      "name": "薔薇",
+      "tags": [
+        "愛情",
+        "人緣",
+        "美好",
+        "Rose"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_薔薇_001.png",
+      "createdAt": "2026-10-01T15:28:56",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_茉莉花_001",
+      "category": "Plants",
+      "name": "茉莉花",
+      "tags": [
+        "純潔",
+        "溫柔",
+        "好人緣",
+        "Jasmine"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_茉莉花_001.png",
+      "createdAt": "2026-10-01T15:29:39",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_水仙_001",
+      "category": "Plants",
+      "name": "水仙",
+      "tags": [
+        "新年",
+        "希望",
+        "好運",
+        "Narcissus"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_水仙_001.png",
+      "createdAt": "2026-10-01T15:30:21",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_山茶花_001",
+      "category": "Plants",
+      "name": "山茶花",
+      "tags": [
+        "堅定",
+        "美麗",
+        "幸福",
+        "Camellia"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_山茶花_001.png",
+      "createdAt": "2026-10-01T15:31:04",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_荷葉_001",
+      "category": "Plants",
+      "name": "荷葉",
+      "tags": [
+        "圓滿",
+        "平靜",
+        "清雅",
+        "Lotus Leaf"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_荷葉_001.png",
+      "createdAt": "2026-10-01T15:31:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_葫蘆藤_001",
+      "category": "Plants",
+      "name": "葫蘆藤",
+      "tags": [
+        "福氣",
+        "健康",
+        "守護",
+        "Gourd Vine"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_葫蘆藤_001.png",
+      "createdAt": "2026-10-01T15:32:24",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_葡萄藤_001",
+      "category": "Plants",
+      "name": "葡萄藤",
+      "tags": [
+        "豐收",
+        "富足",
+        "家庭",
+        "Grape Vine"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_葡萄藤_001.png",
+      "createdAt": "2026-10-01T15:33:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_石榴_001",
+      "category": "Plants",
+      "name": "石榴",
+      "tags": [
+        "多子多福",
+        "繁榮",
+        "Pomegranate"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_石榴_001.png",
+      "createdAt": "2026-10-01T15:33:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_柿子樹_001",
+      "category": "Plants",
+      "name": "柿子樹",
+      "tags": [
+        "事事如意",
+        "好事",
+        "Persimmon Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_柿子樹_001.png",
+      "createdAt": "2026-10-01T15:34:34",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_枇杷樹_001",
+      "category": "Plants",
+      "name": "枇杷樹",
+      "tags": [
+        "豐收",
+        "健康",
+        "家庭",
+        "Loquat Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_枇杷樹_001.png",
+      "createdAt": "2026-10-01T15:35:15",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_楓樹_001",
+      "category": "Plants",
+      "name": "楓樹",
+      "tags": [
+        "秋季",
+        "轉變",
+        "成熟",
+        "Maple Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_楓樹_001.png",
+      "createdAt": "2026-10-01T15:35:57",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_銀杏樹_001",
+      "category": "Plants",
+      "name": "銀杏樹",
+      "tags": [
+        "長壽",
+        "智慧",
+        "守護",
+        "Ginkgo Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_銀杏樹_001.png",
+      "createdAt": "2026-10-01T15:36:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_四葉草_001",
+      "category": "Plants",
+      "name": "四葉草",
+      "tags": [
+        "幸運",
+        "希望",
+        "機會",
+        "Four-leaf Clover"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_四葉草_001.png",
+      "createdAt": "2026-10-01T15:37:15",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_幸福樹_001",
+      "category": "Plants",
+      "name": "幸福樹",
+      "tags": [
+        "幸福",
+        "家庭",
+        "好運",
+        "Happiness Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_幸福樹_001.png",
+      "createdAt": "2026-10-01T15:37:56",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_金錢樹_001",
+      "category": "Plants",
+      "name": "金錢樹",
+      "tags": [
+        "財運",
+        "富足",
+        "招財",
+        "Money Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_金錢樹_001.png",
+      "createdAt": "2026-10-01T15:38:34",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "plant_發財樹_001",
+      "category": "Plants",
+      "name": "發財樹",
+      "tags": [
+        "財富",
+        "事業",
+        "成長",
+        "Pachira Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "hero"
+      ],
+      "file": "materials/assets/Plants/plant_發財樹_001.png",
+      "createdAt": "2026-10-01T15:39:13",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "career_登山者_001",
+      "category": "Hero",
+      "name": "登山者",
+      "tags": [
+        "突破",
+        "努力",
+        "成長",
+        "Mountain Climber"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Hero/career_登山者_001.png",
+      "createdAt": "2026-10-01T15:41:21",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "career_階梯_001",
+      "category": "Hero",
+      "name": "階梯",
+      "tags": [
+        "步步高升",
+        "升遷",
+        "Success Stairs"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Hero/career_階梯_001.png",
+      "createdAt": "2026-10-01T15:41:22",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "career_山峰_001",
+      "category": "Hero",
+      "name": "山峰",
+      "tags": [
+        "登峰",
+        "成就",
+        "事業高度",
+        "Mountain Peak"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Hero/career_山峰_001.png",
+      "createdAt": "2026-10-01T15:41:22",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "career_航船_001",
+      "category": "Hero",
+      "name": "航船",
+      "tags": [
+        "前進",
+        "事業航程",
+        "Sailing Ship"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Hero/career_航船_001.png",
+      "createdAt": "2026-10-01T15:41:26",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "career_指路箭頭_001",
+      "category": "Hero",
+      "name": "指路箭頭",
+      "tags": [
+        "決策",
+        "方向",
+        "Direction Arrow"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/_unused/career_指路箭頭_001.png",
+      "createdAt": "2026-10-01T15:41:59",
+      "method": "openai:gpt-image-1",
+      "slot": "unused",
+      "ready": false,
+      "disabled": true
+    },
+    {
+      "id": "career_道路_001",
+      "category": "Hero",
+      "name": "道路",
+      "tags": [
+        "人生方向",
+        "選擇",
+        "Career Path"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Hero/career_道路_001.png",
+      "createdAt": "2026-10-01T15:41:59",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "career_燈塔_001",
+      "category": "Hero",
+      "name": "燈塔",
+      "tags": [
+        "方向",
+        "目標",
+        "指引",
+        "Lighthouse"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Hero/career_燈塔_001.png",
+      "createdAt": "2026-10-01T15:42:00",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "career_旗幟_001",
+      "category": "Accent",
+      "name": "旗幟",
+      "tags": [
+        "成功",
+        "達成目標",
+        "Victory Flag"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/career_旗幟_001.png",
+      "createdAt": "2026-10-01T15:42:07",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "career_皇冠_001",
+      "category": "Accent",
+      "name": "皇冠",
+      "tags": [
+        "領導",
+        "榮耀",
+        "升遷",
+        "Crown"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/career_皇冠_001.png",
+      "createdAt": "2026-10-01T15:42:37",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "career_勳章_001",
+      "category": "Accent",
+      "name": "勳章",
+      "tags": [
+        "成就",
+        "肯定",
+        "Achievement Medal"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/career_勳章_001.png",
+      "createdAt": "2026-10-01T15:42:37",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_聚寶盆_001",
+      "category": "Accent",
+      "name": "聚寶盆",
+      "tags": [
+        "聚財",
+        "財源",
+        "Treasure Bowl"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_聚寶盆_001.png",
+      "createdAt": "2026-10-01T15:44:15",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金幣_001",
+      "category": "Accent",
+      "name": "金幣",
+      "tags": [
+        "收入",
+        "財運",
+        "Gold Coins"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金幣_001.png",
+      "createdAt": "2026-10-01T15:44:16",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金元寶樹_001",
+      "category": "Accent",
+      "name": "金元寶樹",
+      "tags": [
+        "財富成長",
+        "Golden Money Tree"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金元寶樹_001.png",
+      "createdAt": "2026-10-01T15:44:16",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_元寶_001",
+      "category": "Accent",
+      "name": "元寶",
+      "tags": [
+        "財富",
+        "聚財",
+        "Gold Ingot"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_元寶_001.png",
+      "createdAt": "2026-10-01T15:44:24",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_紅包_001",
+      "category": "Accent",
+      "name": "紅包",
+      "tags": [
+        "福氣",
+        "財運",
+        "Red Envelope"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_紅包_001.png",
+      "createdAt": "2026-10-01T15:44:52",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_如意_001",
+      "category": "Accent",
+      "name": "如意",
+      "tags": [
+        "如意",
+        "順遂",
+        "Ruyi Scepter"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_如意_001.png",
+      "createdAt": "2026-10-01T15:44:53",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_福袋_001",
+      "category": "Accent",
+      "name": "福袋",
+      "tags": [
+        "福氣",
+        "好運",
+        "Fortune Bag"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_福袋_001.png",
+      "createdAt": "2026-10-01T15:44:53",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_錦鯉_001",
+      "category": "Accent",
+      "name": "錦鯉",
+      "tags": [
+        "好運",
+        "財運",
+        "Lucky Koi"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_錦鯉_001.png",
+      "createdAt": "2026-10-01T15:45:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_聚財金葫蘆_001",
+      "category": "Accent",
+      "name": "聚財金葫蘆",
+      "tags": [
+        "福氣",
+        "守財",
+        "Golden Gourd"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_聚財金葫蘆_001.png",
+      "createdAt": "2026-10-01T15:45:31",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "love_玫瑰花_001",
+      "category": "Plants",
+      "name": "玫瑰花",
+      "tags": [
+        "熱戀",
+        "浪漫"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "frame"
+      ],
+      "file": "materials/assets/Plants/love_玫瑰花_001.png",
+      "createdAt": "2026-10-01T15:45:31",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "fortune_金色祥雲_001",
+      "category": "Accent",
+      "name": "金色祥雲",
+      "tags": [
+        "吉祥",
+        "貴人",
+        "Golden Auspicious Cloud"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色祥雲_001.png",
+      "createdAt": "2026-10-01T15:45:32",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_招財貓_001",
+      "category": "Accent",
+      "name": "招財貓",
+      "tags": [
+        "招財",
+        "生意",
+        "Lucky Cat"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_招財貓_001.png",
+      "createdAt": "2026-10-01T15:45:36",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色聚寶箱_001",
+      "category": "Accent",
+      "name": "金色聚寶箱",
+      "tags": [
+        "財富",
+        "寶藏",
+        "Golden Treasure Chest"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色聚寶箱_001.png",
+      "createdAt": "2026-10-01T15:45:44",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "love_桃花_001",
+      "category": "Plants",
+      "name": "桃花",
+      "tags": [
+        "桃花運",
+        "人緣"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "frame"
+      ],
+      "file": "materials/assets/Plants/love_桃花_001.png",
+      "createdAt": "2026-10-01T15:45:59",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants"
+    },
+    {
+      "id": "fortune_財富之門_001",
+      "category": "Accent",
+      "name": "財富之門",
+      "tags": [
+        "新機會",
+        "財運",
+        "Fortune Gate"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_財富之門_001.png",
+      "createdAt": "2026-10-01T15:46:09",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色鑰匙_001",
+      "category": "Accent",
+      "name": "金色鑰匙",
+      "tags": [
+        "機會",
+        "財富之門",
+        "Golden Key"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色鑰匙_001.png",
+      "createdAt": "2026-10-01T15:46:14",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色皇冠_001",
+      "category": "Accent",
+      "name": "金色皇冠",
+      "tags": [
+        "成功",
+        "地位",
+        "Golden Crown"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色皇冠_001.png",
+      "createdAt": "2026-10-01T15:46:18",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色獎盃_001",
+      "category": "Accent",
+      "name": "金色獎盃",
+      "tags": [
+        "成就",
+        "勝利",
+        "Golden Trophy"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色獎盃_001.png",
+      "createdAt": "2026-10-01T15:46:23",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_四葉幸運草_001",
+      "category": "Accent",
+      "name": "四葉幸運草",
+      "tags": [
+        "幸運",
+        "機會",
+        "Four-leaf Clover"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_四葉幸運草_001.png",
+      "createdAt": "2026-10-01T15:46:47",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "love_雙蝶_001",
+      "category": "Hero",
+      "name": "雙蝶",
+      "tags": [
+        "相愛",
+        "陪伴"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/love_雙蝶_001.png",
+      "createdAt": "2026-10-01T15:46:52",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "fortune_幸運星_001",
+      "category": "Accent",
+      "name": "幸運星",
+      "tags": [
+        "好運",
+        "願望",
+        "Lucky Star"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_幸運星_001.png",
+      "createdAt": "2026-10-01T15:46:56",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_彩虹_001",
+      "category": "Accent",
+      "name": "彩虹",
+      "tags": [
+        "希望",
+        "轉機",
+        "Rainbow"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_彩虹_001.png",
+      "createdAt": "2026-10-01T15:46:59",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_流星_001",
+      "category": "Accent",
+      "name": "流星",
+      "tags": [
+        "願望",
+        "機會",
+        "Shooting Star"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_流星_001.png",
+      "createdAt": "2026-10-01T15:47:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "love_鴛鴦_001",
+      "category": "Hero",
+      "name": "鴛鴦",
+      "tags": [
+        "伴侶",
+        "婚姻"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/love_鴛鴦_001.png",
+      "createdAt": "2026-10-01T15:47:18",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "fortune_金色蝴蝶_001",
+      "category": "Accent",
+      "name": "金色蝴蝶",
+      "tags": [
+        "轉機",
+        "財運",
+        "Golden Butterfly"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色蝴蝶_001.png",
+      "createdAt": "2026-10-01T15:47:23",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "love_天鵝_001",
+      "category": "Hero",
+      "name": "天鵝",
+      "tags": [
+        "忠貞",
+        "長久"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/love_天鵝_001.png",
+      "createdAt": "2026-10-01T15:47:30",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "fortune_金色鳳凰_001",
+      "category": "Accent",
+      "name": "金色鳳凰",
+      "tags": [
+        "重生",
+        "成功",
+        "Golden Phoenix"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色鳳凰_001.png",
+      "createdAt": "2026-10-01T15:47:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色鹿_001",
+      "category": "Accent",
+      "name": "金色鹿",
+      "tags": [
+        "福氣",
+        "貴人",
+        "Golden Deer"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色鹿_001.png",
+      "createdAt": "2026-10-01T15:47:41",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "love_喜鵲_001",
+      "category": "Hero",
+      "name": "喜鵲",
+      "tags": [
+        "喜事",
+        "良緣"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/love_喜鵲_001.png",
+      "createdAt": "2026-10-01T15:47:44",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "fortune_金色白鶴_001",
+      "category": "Accent",
+      "name": "金色白鶴",
+      "tags": [
+        "長壽",
+        "祥瑞",
+        "Golden Crane"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色白鶴_001.png",
+      "createdAt": "2026-10-01T15:47:46",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色竹子_001",
+      "category": "Accent",
+      "name": "金色竹子",
+      "tags": [
+        "節節高升",
+        "Golden Bamboo"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色竹子_001.png",
+      "createdAt": "2026-10-01T15:48:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_豐收稻穗_001",
+      "category": "Accent",
+      "name": "豐收稻穗",
+      "tags": [
+        "豐收",
+        "成果",
+        "Harvest Rice"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_豐收稻穗_001.png",
+      "createdAt": "2026-10-01T15:48:12",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_豐收果籃_001",
+      "category": "Accent",
+      "name": "豐收果籃",
+      "tags": [
+        "收穫",
+        "富足",
+        "Harvest Basket"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_豐收果籃_001.png",
+      "createdAt": "2026-10-01T15:48:20",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色葡萄_001",
+      "category": "Accent",
+      "name": "金色葡萄",
+      "tags": [
+        "豐盛",
+        "累積",
+        "Golden Grapes"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色葡萄_001.png",
+      "createdAt": "2026-10-01T15:48:23",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_寶石寶箱_001",
+      "category": "Accent",
+      "name": "寶石寶箱",
+      "tags": [
+        "財富",
+        "珍貴",
+        "Jewel Treasure Chest"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_寶石寶箱_001.png",
+      "createdAt": "2026-10-01T15:48:43",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "fortune_金色聚財流水_001",
+      "category": "Accent",
+      "name": "金色聚財流水",
+      "tags": [
+        "財源流動",
+        "源源不絕",
+        "Golden Wealth Stream"
+      ],
+      "roleHints": [
+        "auspicious",
+        "support",
+        "hero",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/fortune_金色聚財流水_001.png",
+      "createdAt": "2026-10-01T15:48:49",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "nature_彩虹_001",
+      "category": "Nature",
+      "name": "彩虹",
+      "tags": [
+        "希望",
+        "轉機",
+        "幸福",
+        "Rainbow"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_彩虹_001.png",
+      "createdAt": "2026-10-01T15:50:46",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_月亮_001",
+      "category": "Nature",
+      "name": "月亮",
+      "tags": [
+        "寧靜",
+        "感情",
+        "思念",
+        "Moon"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_月亮_001.png",
+      "createdAt": "2026-10-01T15:50:47",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_太陽_001",
+      "category": "Nature",
+      "name": "太陽",
+      "tags": [
+        "光明",
+        "希望",
+        "活力",
+        "Sun"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_太陽_001.png",
+      "createdAt": "2026-10-01T15:50:49",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_太陽光芒_001",
+      "category": "Nature",
+      "name": "太陽光芒",
+      "tags": [
+        "能量",
+        "成功",
+        "好運",
+        "Sun Rays"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_太陽光芒_001.png",
+      "createdAt": "2026-10-01T15:50:49",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_星星_001",
+      "category": "Nature",
+      "name": "星星",
+      "tags": [
+        "夢想",
+        "指引",
+        "願望",
+        "Stars"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_星星_001.png",
+      "createdAt": "2026-10-01T15:51:25",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_流星_001",
+      "category": "Nature",
+      "name": "流星",
+      "tags": [
+        "願望",
+        "機會",
+        "奇蹟",
+        "Shooting Star"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_流星_001.png",
+      "createdAt": "2026-10-01T15:51:26",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_祥雲_001",
+      "category": "Nature",
+      "name": "祥雲",
+      "tags": [
+        "吉祥",
+        "貴人",
+        "好運",
+        "Auspicious Clouds"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_祥雲_001.png",
+      "createdAt": "2026-10-01T15:51:26",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_星河_001",
+      "category": "Nature",
+      "name": "星河",
+      "tags": [
+        "無限可能",
+        "夢想",
+        "Milky Way"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_星河_001.png",
+      "createdAt": "2026-10-01T15:51:34",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_彩色雲朵_001",
+      "category": "Nature",
+      "name": "彩色雲朵",
+      "tags": [
+        "幸福",
+        "童趣",
+        "好運",
+        "Colorful Clouds"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_彩色雲朵_001.png",
+      "createdAt": "2026-10-01T15:52:03",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_山峰_001",
+      "category": "Nature",
+      "name": "山峰",
+      "tags": [
+        "成就",
+        "穩定",
+        "突破",
+        "Mountain Peak"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_山峰_001.png",
+      "createdAt": "2026-10-01T15:52:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_白雲_001",
+      "category": "Nature",
+      "name": "白雲",
+      "tags": [
+        "自由",
+        "平靜",
+        "White Clouds"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_白雲_001.png",
+      "createdAt": "2026-10-01T15:52:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_遠山_001",
+      "category": "Nature",
+      "name": "遠山",
+      "tags": [
+        "遠景",
+        "方向",
+        "人生",
+        "Distant Mountains"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_遠山_001.png",
+      "createdAt": "2026-10-01T15:52:14",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_湖泊_001",
+      "category": "Nature",
+      "name": "湖泊",
+      "tags": [
+        "平靜",
+        "智慧",
+        "內心",
+        "Lake"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_湖泊_001.png",
+      "createdAt": "2026-10-01T15:52:43",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_瀑布_001",
+      "category": "Nature",
+      "name": "瀑布",
+      "tags": [
+        "能量",
+        "流動",
+        "洗滌",
+        "Waterfall"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_瀑布_001.png",
+      "createdAt": "2026-10-01T15:52:43",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_河流_001",
+      "category": "Nature",
+      "name": "河流",
+      "tags": [
+        "順勢",
+        "財運",
+        "前進",
+        "River"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_河流_001.png",
+      "createdAt": "2026-10-01T15:52:48",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_海浪_001",
+      "category": "Nature",
+      "name": "海浪",
+      "tags": [
+        "活力",
+        "突破",
+        "旅行",
+        "Ocean Waves"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_海浪_001.png",
+      "createdAt": "2026-10-01T15:52:51",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_水波_001",
+      "category": "Nature",
+      "name": "水波",
+      "tags": [
+        "財運",
+        "變化",
+        "流動",
+        "Water Ripples"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_水波_001.png",
+      "createdAt": "2026-10-01T15:53:20",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_海面_001",
+      "category": "Nature",
+      "name": "海面",
+      "tags": [
+        "廣闊",
+        "自由",
+        "機會",
+        "Ocean"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_海面_001.png",
+      "createdAt": "2026-10-01T15:53:24",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_朝霞_001",
+      "category": "Nature",
+      "name": "朝霞",
+      "tags": [
+        "新開始",
+        "希望",
+        "Morning Glow"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_朝霞_001.png",
+      "createdAt": "2026-10-01T15:53:29",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_晚霞_001",
+      "category": "Nature",
+      "name": "晚霞",
+      "tags": [
+        "收穫",
+        "圓滿",
+        "回顧",
+        "Evening Glow"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_晚霞_001.png",
+      "createdAt": "2026-10-01T15:53:30",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_薄霧_001",
+      "category": "Nature",
+      "name": "薄霧",
+      "tags": [
+        "神秘",
+        "轉機",
+        "未知",
+        "Morning Mist"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_薄霧_001.png",
+      "createdAt": "2026-10-01T15:53:59",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_雨滴_001",
+      "category": "Nature",
+      "name": "雨滴",
+      "tags": [
+        "滋養",
+        "淨化",
+        "重生",
+        "Raindrops"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_雨滴_001.png",
+      "createdAt": "2026-10-01T15:54:02",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_雨後陽光_001",
+      "category": "Nature",
+      "name": "雨後陽光",
+      "tags": [
+        "轉運",
+        "突破",
+        "希望",
+        "Sun After Rain"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_雨後陽光_001.png",
+      "createdAt": "2026-10-01T15:54:09",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_雷電_001",
+      "category": "Nature",
+      "name": "雷電",
+      "tags": [
+        "力量",
+        "突破",
+        "覺醒",
+        "Lightning"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_雷電_001.png",
+      "createdAt": "2026-10-01T15:54:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_雪花_001",
+      "category": "Nature",
+      "name": "雪花",
+      "tags": [
+        "純潔",
+        "寧靜",
+        "新開始",
+        "Snowflakes"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_雪花_001.png",
+      "createdAt": "2026-10-01T15:54:36",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_楓葉飄落_001",
+      "category": "Nature",
+      "name": "楓葉飄落",
+      "tags": [
+        "秋季",
+        "轉變",
+        "收穫",
+        "Falling Leaves"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_楓葉飄落_001.png",
+      "createdAt": "2026-10-01T15:54:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_花瓣飛舞_001",
+      "category": "Nature",
+      "name": "花瓣飛舞",
+      "tags": [
+        "浪漫",
+        "祝福",
+        "緣分",
+        "Floating Petals"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_花瓣飛舞_001.png",
+      "createdAt": "2026-10-01T15:54:48",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_風_001",
+      "category": "Nature",
+      "name": "風",
+      "tags": [
+        "自由",
+        "順勢",
+        "變化",
+        "Gentle Wind"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_風_001.png",
+      "createdAt": "2026-10-01T15:54:48",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_光之粒子_001",
+      "category": "Nature",
+      "name": "光之粒子",
+      "tags": [
+        "能量",
+        "幸運",
+        "神秘",
+        "Golden Light Particles"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_光之粒子_001.png",
+      "createdAt": "2026-10-01T15:55:16",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "love_月光橋_001",
+      "category": "Nature",
+      "name": "月光橋",
+      "tags": [
+        "相遇",
+        "緣分"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "environment"
+      ],
+      "file": "materials/assets/Nature/love_月光橋_001.png",
+      "createdAt": "2026-10-01T15:55:18",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_流光_001",
+      "category": "Nature",
+      "name": "流光",
+      "tags": [
+        "時間",
+        "運勢",
+        "人生流動",
+        "Flowing Light"
+      ],
+      "roleHints": [
+        "environment",
+        "support",
+        "auspicious"
+      ],
+      "file": "materials/assets/Nature/nature_流光_001.png",
+      "createdAt": "2026-10-01T15:55:24",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "love_紅線_001",
+      "category": "Hero",
+      "name": "紅線",
+      "tags": [
+        "姻緣",
+        "命中注定"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/love_紅線_001.png",
+      "createdAt": "2026-10-01T15:55:29",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "love_流星_001",
+      "category": "Nature",
+      "name": "流星",
+      "tags": [
+        "願望",
+        "邂逅"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "environment"
+      ],
+      "file": "materials/assets/Nature/love_流星_001.png",
+      "createdAt": "2026-10-01T15:55:55",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "love_愛情鳥_001",
+      "category": "Hero",
+      "name": "愛情鳥",
+      "tags": [
+        "甜蜜",
+        "伴侶"
+      ],
+      "roleHints": [
+        "hero",
+        "support"
+      ],
+      "file": "materials/assets/Hero/love_愛情鳥_001.png",
+      "createdAt": "2026-10-01T15:56:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero"
+    },
+    {
+      "id": "love_月亮_001",
+      "category": "Nature",
+      "name": "月亮",
+      "tags": [
+        "浪漫",
+        "思念"
+      ],
+      "roleHints": [
+        "hero",
+        "support",
+        "environment"
+      ],
+      "file": "materials/assets/Nature/love_月亮_001.png",
+      "createdAt": "2026-10-01T15:56:50",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature"
+    },
+    {
+      "id": "season_春雨_001",
+      "category": "Accent",
+      "name": "春雨",
+      "tags": [
+        "滋養",
+        "成長",
+        "轉機",
+        "Spring Rain"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_春雨_001.png",
+      "createdAt": "2026-10-01T15:58:13",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_春日花瓣_001",
+      "category": "Accent",
+      "name": "春日花瓣",
+      "tags": [
+        "浪漫",
+        "活力",
+        "桃花",
+        "Spring Petals"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_春日花瓣_001.png",
+      "createdAt": "2026-10-01T15:58:17",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_春日嫩芽_001",
+      "category": "Accent",
+      "name": "春日嫩芽",
+      "tags": [
+        "新生",
+        "希望",
+        "開始",
+        "Spring Sprouts"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_春日嫩芽_001.png",
+      "createdAt": "2026-10-01T15:58:18",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_春燕_001",
+      "category": "Accent",
+      "name": "春燕",
+      "tags": [
+        "歸來",
+        "新開始",
+        "Spring Swallow"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_春燕_001.png",
+      "createdAt": "2026-10-01T15:58:19",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_春日蝴蝶_001",
+      "category": "Accent",
+      "name": "春日蝴蝶",
+      "tags": [
+        "相遇",
+        "轉變",
+        "Spring Butterfly"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_春日蝴蝶_001.png",
+      "createdAt": "2026-10-01T15:58:57",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_夏日陽光_001",
+      "category": "Accent",
+      "name": "夏日陽光",
+      "tags": [
+        "活力",
+        "成功",
+        "熱情",
+        "Summer Sunshine"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_夏日陽光_001.png",
+      "createdAt": "2026-10-01T15:58:57",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_夏日荷葉_001",
+      "category": "Accent",
+      "name": "夏日荷葉",
+      "tags": [
+        "平靜",
+        "清新",
+        "Summer Lotus Leaves"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_夏日荷葉_001.png",
+      "createdAt": "2026-10-01T15:58:58",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_夏日海浪_001",
+      "category": "Accent",
+      "name": "夏日海浪",
+      "tags": [
+        "自由",
+        "旅行",
+        "活力",
+        "Summer Waves"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_夏日海浪_001.png",
+      "createdAt": "2026-10-01T15:59:07",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_夏日冰飲_001",
+      "category": "Accent",
+      "name": "夏日冰飲",
+      "tags": [
+        "輕鬆",
+        "歡樂",
+        "Summer Cool Drink"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_夏日冰飲_001.png",
+      "createdAt": "2026-10-01T15:59:40",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日楓葉_001",
+      "category": "Accent",
+      "name": "秋日楓葉",
+      "tags": [
+        "收穫",
+        "轉變",
+        "Autumn Maple Leaves"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日楓葉_001.png",
+      "createdAt": "2026-10-01T15:59:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_夏日螢火蟲_001",
+      "category": "Accent",
+      "name": "夏日螢火蟲",
+      "tags": [
+        "浪漫",
+        "希望",
+        "Summer Fireflies"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_夏日螢火蟲_001.png",
+      "createdAt": "2026-10-01T15:59:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日銀杏_001",
+      "category": "Accent",
+      "name": "秋日銀杏",
+      "tags": [
+        "智慧",
+        "成熟",
+        "Autumn Ginkgo Leaves"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日銀杏_001.png",
+      "createdAt": "2026-10-01T15:59:51",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日稻穗_001",
+      "category": "Accent",
+      "name": "秋日稻穗",
+      "tags": [
+        "豐收",
+        "財富",
+        "Autumn Rice Ears"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日稻穗_001.png",
+      "createdAt": "2026-10-01T16:00:16",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日果實_001",
+      "category": "Accent",
+      "name": "秋日果實",
+      "tags": [
+        "成果",
+        "富足",
+        "Autumn Fruits"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日果實_001.png",
+      "createdAt": "2026-10-01T16:00:22",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日南瓜_001",
+      "category": "Accent",
+      "name": "秋日南瓜",
+      "tags": [
+        "豐收",
+        "溫暖",
+        "Autumn Pumpkin"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日南瓜_001.png",
+      "createdAt": "2026-10-01T16:00:25",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日落葉_001",
+      "category": "Accent",
+      "name": "秋日落葉",
+      "tags": [
+        "放下",
+        "轉變",
+        "Falling Autumn Leaves"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日落葉_001.png",
+      "createdAt": "2026-10-01T16:00:27",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_秋日微風_001",
+      "category": "Accent",
+      "name": "秋日微風",
+      "tags": [
+        "順勢",
+        "變化",
+        "Autumn Breeze"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_秋日微風_001.png",
+      "createdAt": "2026-10-01T16:01:03",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_冬日雪花_001",
+      "category": "Accent",
+      "name": "冬日雪花",
+      "tags": [
+        "純潔",
+        "新開始",
+        "Winter Snowflakes"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_冬日雪花_001.png",
+      "createdAt": "2026-10-01T16:01:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_冬日霜花_001",
+      "category": "Accent",
+      "name": "冬日霜花",
+      "tags": [
+        "堅韌",
+        "沉澱",
+        "Winter Frost Flowers"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_冬日霜花_001.png",
+      "createdAt": "2026-10-01T16:01:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_冬日松枝_001",
+      "category": "Accent",
+      "name": "冬日松枝",
+      "tags": [
+        "長青",
+        "守護",
+        "Winter Pine Branch"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_冬日松枝_001.png",
+      "createdAt": "2026-10-01T16:01:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_冬日暖陽_001",
+      "category": "Accent",
+      "name": "冬日暖陽",
+      "tags": [
+        "溫暖",
+        "希望",
+        "Winter Sunlight"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_冬日暖陽_001.png",
+      "createdAt": "2026-10-01T16:01:51",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_四季風_001",
+      "category": "Accent",
+      "name": "四季風",
+      "tags": [
+        "流動",
+        "變化",
+        "Seasonal Wind"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_四季風_001.png",
+      "createdAt": "2026-10-01T16:01:56",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_冬日雪景_001",
+      "category": "Accent",
+      "name": "冬日雪景",
+      "tags": [
+        "寧靜",
+        "純潔",
+        "Winter Snow Scene"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_冬日雪景_001.png",
+      "createdAt": "2026-10-01T16:01:58",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_冬日熱茶_001",
+      "category": "Accent",
+      "name": "冬日熱茶",
+      "tags": [
+        "平靜",
+        "療癒",
+        "Winter Tea"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_冬日熱茶_001.png",
+      "createdAt": "2026-10-01T16:02:05",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_四季彩蝶_001",
+      "category": "Accent",
+      "name": "四季彩蝶",
+      "tags": [
+        "成長",
+        "蛻變",
+        "Seasonal Butterfly"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_四季彩蝶_001.png",
+      "createdAt": "2026-10-01T16:02:32",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_四季樹_001",
+      "category": "Accent",
+      "name": "四季樹",
+      "tags": [
+        "成長",
+        "人生",
+        "Four Seasons Tree"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_四季樹_001.png",
+      "createdAt": "2026-10-01T16:02:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_四季花環_001",
+      "category": "Accent",
+      "name": "四季花環",
+      "tags": [
+        "圓滿",
+        "循環",
+        "Seasonal Flower Wreath"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_四季花環_001.png",
+      "createdAt": "2026-10-01T16:02:41",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_四季日曆_001",
+      "category": "Accent",
+      "name": "四季日曆",
+      "tags": [
+        "時間",
+        "流年",
+        "Seasonal Calendar"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_四季日曆_001.png",
+      "createdAt": "2026-10-01T16:02:49",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_節氣輪盤_001",
+      "category": "Accent",
+      "name": "節氣輪盤",
+      "tags": [
+        "節氣",
+        "時間",
+        "流轉",
+        "Solar Term Wheel"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_節氣輪盤_001.png",
+      "createdAt": "2026-10-01T16:03:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "season_四季流光_001",
+      "category": "Accent",
+      "name": "四季流光",
+      "tags": [
+        "時間",
+        "運勢",
+        "人生流轉",
+        "Four Seasons Light"
+      ],
+      "roleHints": [
+        "support",
+        "environment",
+        "auspicious",
+        "decorative"
+      ],
+      "file": "materials/assets/Accent/season_四季流光_001.png",
+      "createdAt": "2026-10-01T16:03:25",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent"
+    },
+    {
+      "id": "bg_奇幻東方仙境_001",
+      "category": "Nature",
+      "name": "bg_奇幻東方仙境_001",
+      "tags": [],
+      "roleHints": [
+        "environment"
+      ],
+      "file": "materials/assets/Nature/bg_奇幻東方仙境_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Nature"
+    },
+    {
+      "id": "bg_山水晨曦_001",
+      "category": "Background",
+      "name": "bg_山水晨曦_001",
+      "tags": [],
+      "roleHints": [],
+      "file": "materials/assets/Background/bg_山水晨曦_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Background"
+    },
+    {
+      "id": "bg_星空月夜_001",
+      "category": "Nature",
+      "name": "bg_星空月夜_001",
+      "tags": [],
+      "roleHints": [
+        "environment"
+      ],
+      "file": "materials/assets/Nature/bg_星空月夜_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Nature"
+    },
+    {
+      "id": "bg_春日花園_001",
+      "category": "Background",
+      "name": "bg_春日花園_001",
+      "tags": [],
+      "roleHints": [],
+      "file": "materials/assets/Background/bg_春日花園_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Background"
+    },
+    {
+      "id": "bg_海洋晨曦_001",
+      "category": "Background",
+      "name": "bg_海洋晨曦_001",
+      "tags": [],
+      "roleHints": [],
+      "file": "materials/assets/Background/bg_海洋晨曦_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Background"
+    },
+    {
+      "id": "bg_湖畔荷塘_001",
+      "category": "Background",
+      "name": "bg_湖畔荷塘_001",
+      "tags": [],
+      "roleHints": [],
+      "file": "materials/assets/Background/bg_湖畔荷塘_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Background"
+    },
+    {
+      "id": "bg_祥雲天空_002",
+      "category": "Nature",
+      "name": "bg_祥雲天空_002",
+      "tags": [],
+      "roleHints": [
+        "environment"
+      ],
+      "file": "materials/assets/Nature/bg_祥雲天空_002.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Nature"
+    },
+    {
+      "id": "bg_秋日楓林_001",
+      "category": "Background",
+      "name": "bg_秋日楓林_001",
+      "tags": [],
+      "roleHints": [],
+      "file": "materials/assets/Background/bg_秋日楓林_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Background"
+    },
+    {
+      "id": "bg_竹林清境_001",
+      "category": "Background",
+      "name": "bg_竹林清境_001",
+      "tags": [],
+      "roleHints": [],
+      "file": "materials/assets/Background/bg_竹林清境_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Background"
+    },
+    {
+      "id": "bg_金色晨光_001",
+      "category": "Nature",
+      "name": "bg_金色晨光_001",
+      "tags": [],
+      "roleHints": [
+        "environment"
+      ],
+      "file": "materials/assets/Nature/bg_金色晨光_001.png",
+      "createdAt": "2026-10-01T16:19:03",
+      "method": "synced_from_assets",
+      "slot": "Nature"
+    },
+    {
+      "id": "nature_流金光粒子_001",
+      "category": "Nature",
+      "name": "流金光粒子",
+      "tags": [
+        "財運",
+        "光",
+        "粒子",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_112247_015"
+      ],
+      "roleHints": [
+        "environment",
+        "support"
+      ],
+      "file": "materials/assets/Nature/nature_流金光粒子_001.png",
+      "createdAt": "2026-10-02T11:23:27",
+      "method": "openai:gpt-image-1",
+      "slot": "Nature",
+      "themeSetId": "set_財運_20261002_112247_015",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All five assets must feel like matching pieces from the same paper-cut set. Create a MID/ENVIRONENT nature element: 「流金光粒子」 (drifting golden light particles). Single atmospheric motif (sun, moon, clouds, light, water hint) for the center zone. Not a full landscape background. Transparent background, floating paper layers. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "environment",
+      "depth": "environment",
+      "visualWeight": 40
+    },
+    {
+      "id": "plant_銀杏與金錢草框_001",
+      "category": "Plants",
+      "name": "銀杏與金錢草框",
+      "tags": [
+        "財運",
+        "金",
+        "框景",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_112247_015"
+      ],
+      "roleHints": [
+        "frame",
+        "support"
+      ],
+      "file": "materials/assets/Plants/plant_銀杏與金錢草框_001.png",
+      "createdAt": "2026-10-02T11:23:28",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants",
+      "themeSetId": "set_財運_20261002_112247_015",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All five assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「銀杏與金錢草框」 (ginkgo and money-plant frame). Arranged as left-right or bottom framing foliage only. Do NOT put a large plant occupying the center. Transparent background, isolated paper layers, suitable as side/bottom frames. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "frame",
+      "depth": "midground",
+      "visualWeight": 50
+    },
+    {
+      "id": "bg_秋日豐收田野_001",
+      "category": "Background",
+      "name": "秋日豐收田野",
+      "tags": [
+        "財運",
+        "豐收",
+        "秋",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_112247_015"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_秋日豐收田野_001.png",
+      "createdAt": "2026-10-02T11:23:28",
+      "method": "openai:gpt-image-1",
+      "slot": "Background",
+      "themeSetId": "set_財運_20261002_112247_015",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All five assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「秋日豐收田野」 (autumn harvest field soft hills). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, no single oversized hero object in the exact center, leave soft space for overlay cutouts. Opaque or softly filled paper background is OK (not transparent). Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    },
+    {
+      "id": "accent_小元寶點綴_001",
+      "category": "Accent",
+      "name": "小元寶點綴",
+      "tags": [
+        "財運",
+        "元寶",
+        "點綴",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_112247_015"
+      ],
+      "roleHints": [
+        "decorative",
+        "auspicious"
+      ],
+      "file": "materials/assets/Accent/accent_小元寶點綴_001.png",
+      "createdAt": "2026-10-02T11:23:59",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_112247_015",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All five assets must feel like matching pieces from the same paper-cut set. Create a SMALL DECORATIVE accent: 「小元寶點綴」 (tiny gold ingot accent). Tiny, sparse, ornamental only — must look like a garnish, not a second hero. Transparent background, compact subject. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 35
+    },
+    {
+      "id": "hero_招財瑞獸_001",
+      "category": "Hero",
+      "name": "招財瑞獸",
+      "tags": [
+        "財運",
+        "瑞獸",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_112247_015"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_招財瑞獸_001.png",
+      "createdAt": "2026-10-02T11:24:06",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_112247_015",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All five assets must feel like matching pieces from the same paper-cut set. Create the HERO subject: 「招財瑞獸」 (lucky mythical creature for wealth as hero). One clear main character/object, centered composition, high visual weight, readable silhouette, elegant paper depth. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    {
+      "id": "hero_錦鯉_001",
+      "category": "Hero",
+      "name": "錦鯉",
+      "tags": [
+        "財運",
+        "錦鯉",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_錦鯉_001.png",
+      "createdAt": "2026-10-02T11:43:42",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「錦鯉」 (a single elegant koi fish only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    {
+      "id": "accent_金色粒子_001",
+      "category": "Accent",
+      "name": "金色粒子",
+      "tags": [
+        "財運",
+        "粒子",
+        "點綴",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "decorative",
+        "particles"
+      ],
+      "file": "materials/assets/Accent/accent_金色粒子_001.png",
+      "createdAt": "2026-10-02T11:43:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「金色粒子」 (pure golden paper particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 25
+    },
+    {
+      "id": "plant_左右金竹框_001",
+      "category": "Plants",
+      "name": "左右金竹框",
+      "tags": [
+        "財運",
+        "竹",
+        "框景",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "frame",
+        "support"
+      ],
+      "file": "materials/assets/Plants/plant_左右金竹框_001.png",
+      "createdAt": "2026-10-02T11:43:47",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「左右金竹框」 (golden bamboo side frames). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "frame",
+      "depth": "midground",
+      "visualWeight": 50
+    },
+    {
+      "id": "bg_金色湖畔晨光_001",
+      "category": "Background",
+      "name": "金色湖畔晨光",
+      "tags": [
+        "財運",
+        "水",
+        "金",
+        "晨光",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_114305_016"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_金色湖畔晨光_001.png",
+      "createdAt": "2026-10-02T11:43:49",
+      "method": "openai:gpt-image-1",
+      "slot": "Background",
+      "themeSetId": "set_財運_20261002_114305_016",
+      "themeProfile": "財運",
+      "theme": "財運開展",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「金色湖畔晨光」 (golden lakeside morning mist). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    },
+    {
+      "id": "hero_元寶_001",
+      "category": "Hero",
+      "name": "元寶",
+      "tags": [
+        "財運",
+        "元寶",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_122628_891"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_元寶_001.png",
+      "createdAt": "2026-10-02T12:27:07",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_122628_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「元寶」 (a single gold ingot only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    {
+      "id": "plant_蓮葉與稻穗框_001",
+      "category": "Plants",
+      "name": "蓮葉與稻穗框",
+      "tags": [
+        "財運",
+        "蓮",
+        "豐收",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_122628_891"
+      ],
+      "roleHints": [
+        "frame",
+        "support"
+      ],
+      "file": "materials/assets/Plants/plant_蓮葉與稻穗框_001.png",
+      "createdAt": "2026-10-02T12:27:10",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants",
+      "themeSetId": "set_財運_20261002_122628_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「蓮葉與稻穗框」 (lotus leaves and rice ears frame). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "frame",
+      "depth": "midground",
+      "visualWeight": 50
+    },
+    {
+      "id": "bg_錦鯉蓮池全景_001",
+      "category": "Background",
+      "name": "錦鯉蓮池全景",
+      "tags": [
+        "財運",
+        "水",
+        "蓮",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_122628_891"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_錦鯉蓮池全景_001.png",
+      "createdAt": "2026-10-02T12:27:11",
+      "method": "openai:gpt-image-1",
+      "slot": "Background",
+      "themeSetId": "set_財運_20261002_122628_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「錦鯉蓮池全景」 (koi lotus pond panorama). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    },
+    {
+      "id": "accent_光點粒子_001",
+      "category": "Accent",
+      "name": "光點粒子",
+      "tags": [
+        "財運",
+        "粒子",
+        "點綴",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_122628_891"
+      ],
+      "roleHints": [
+        "decorative",
+        "particles"
+      ],
+      "file": "materials/assets/Accent/accent_光點粒子_001.png",
+      "createdAt": "2026-10-02T12:27:41",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_122628_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「光點粒子」 (pure soft light speck particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 25
+    },
+    {
+      "id": "hero_元寶_002",
+      "category": "Hero",
+      "name": "元寶",
+      "tags": [
+        "財運",
+        "元寶",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_123502_891"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_元寶_002.png",
+      "createdAt": "2026-10-02T12:35:38",
+      "method": "openai:gpt-image-1",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_123502_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「元寶」 (a single gold ingot only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    {
+      "id": "bg_錦鯉蓮池全景_002",
+      "category": "Background",
+      "name": "錦鯉蓮池全景",
+      "tags": [
+        "財運",
+        "水",
+        "蓮",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_123502_891"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_錦鯉蓮池全景_002.png",
+      "createdAt": "2026-10-02T12:35:45",
+      "method": "openai:gpt-image-1",
+      "slot": "Background",
+      "themeSetId": "set_財運_20261002_123502_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「錦鯉蓮池全景」 (koi lotus pond panorama). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    },
+    {
+      "id": "plant_蓮葉與稻穗框_002",
+      "category": "Plants",
+      "name": "蓮葉與稻穗框",
+      "tags": [
+        "財運",
+        "蓮",
+        "豐收",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_123502_891"
+      ],
+      "roleHints": [
+        "frame",
+        "support"
+      ],
+      "file": "materials/assets/Plants/plant_蓮葉與稻穗框_002.png",
+      "createdAt": "2026-10-02T12:35:48",
+      "method": "openai:gpt-image-1",
+      "slot": "Plants",
+      "themeSetId": "set_財運_20261002_123502_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts: 「蓮葉與稻穗框」 (lotus leaves and rice ears frame). Left-right or bottom framing foliage only. Do NOT occupy center. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "frame",
+      "depth": "midground",
+      "visualWeight": 50
+    },
+    {
+      "id": "accent_光點粒子_002",
+      "category": "Accent",
+      "name": "光點粒子",
+      "tags": [
+        "財運",
+        "粒子",
+        "點綴",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_123502_891"
+      ],
+      "roleHints": [
+        "decorative",
+        "particles"
+      ],
+      "file": "materials/assets/Accent/accent_光點粒子_002.png",
+      "createdAt": "2026-10-02T12:36:13",
+      "method": "openai:gpt-image-1",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_123502_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create PURE PARTICLES accent ONLY: 「光點粒子」 (pure soft light speck particles only). STRICT: only scattered tiny paper light particles / spark dots / glitter flecks. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO objects besides particles. Sparse particle field. Transparent background. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Transparent background required.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 25
+    },
+    {
+      "id": "hero_元寶_003",
+      "category": "Hero",
+      "name": "元寶",
+      "tags": [
+        "財運",
+        "元寶",
+        "hero",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_125759_891"
+      ],
+      "roleHints": [
+        "hero"
+      ],
+      "file": "materials/assets/Hero/hero_元寶_003.png",
+      "createdAt": "2026-10-02T12:58:37",
+      "method": "openai:gpt-image-1:alpha",
+      "slot": "Hero",
+      "themeSetId": "set_財運_20261002_125759_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create the HERO subject ONLY: 「元寶」 (a single gold ingot only). STRICT: only the main subject body/silhouette. NO pedestal, NO base, NO coins, NO clouds, NO plants, NO frames, NO ornaments, NO secondary objects, NO background scenery. Clean isolated cutout alone. TRUE TRANSPARENT BACKGROUND (alpha). No solid plate, no white fill, no cream square. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Mandatory: transparent background PNG.",
+      "role": "hero",
+      "depth": "hero",
+      "visualWeight": 92
+    },
+    {
+      "id": "plant_蓮葉與稻穗框_003",
+      "category": "Plants",
+      "name": "蓮葉與稻穗框",
+      "tags": [
+        "財運",
+        "蓮",
+        "豐收",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_125759_891"
+      ],
+      "roleHints": [
+        "frame",
+        "support"
+      ],
+      "file": "materials/assets/Plants/plant_蓮葉與稻穗框_003.png",
+      "createdAt": "2026-10-02T12:58:41",
+      "method": "openai:gpt-image-1:alpha",
+      "slot": "Plants",
+      "themeSetId": "set_財運_20261002_125759_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create FRAME / BORDER plant cutouts ONLY: 「蓮葉與稻穗框」 (lotus leaves and rice ears frame). Foliage arranged as left-right or bottom frame pieces only. Do NOT occupy center. CRITICAL OUTPUT FORMAT: isolated paper-cut silhouette on TRUE TRANSPARENT BACKGROUND (alpha channel / PNG transparency). ABSOLUTELY FORBIDDEN: any solid plate, paper sheet, cream square, white fill, beige board, painted backdrop, gradient backdrop, or opaque rectangle behind the plants. Only the plant/frame paper pieces themselves — everything else must be fully transparent. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Mandatory: transparent background PNG, no opaque canvas.",
+      "role": "frame",
+      "depth": "midground",
+      "visualWeight": 50
+    },
+    {
+      "id": "bg_錦鯉蓮池全景_003",
+      "category": "Background",
+      "name": "錦鯉蓮池全景",
+      "tags": [
+        "財運",
+        "水",
+        "蓮",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_125759_891"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_錦鯉蓮池全景_003.png",
+      "createdAt": "2026-10-02T12:58:46",
+      "method": "openai:gpt-image-1",
+      "slot": "Background",
+      "themeSetId": "set_財運_20261002_125759_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create a FULL-BLEED BACKGROUND paper-cut scene: 「錦鯉蓮池全景」 (koi lotus pond panorama). Fill the entire square canvas edge-to-edge. Soft depth layers, gentle atmosphere, leave soft space on left/right edges for overlay cutouts. Opaque paper background OK. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    },
+    {
+      "id": "accent_光點粒子場_001",
+      "category": "Accent",
+      "name": "光點粒子場",
+      "tags": [
+        "財運",
+        "粒子",
+        "點綴",
+        "全畫面",
+        "財運",
+        "theme_set",
+        "set_財運_20261002_125759_891"
+      ],
+      "roleHints": [
+        "decorative",
+        "particles"
+      ],
+      "file": "materials/assets/Accent/accent_光點粒子場_001.png",
+      "createdAt": "2026-10-02T12:59:14",
+      "method": "openai:gpt-image-1:alpha",
+      "slot": "Accent",
+      "themeSetId": "set_財運_20261002_125759_891",
+      "themeProfile": "財運",
+      "theme": "祭祀開運",
+      "template": "fortune_scene",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme family: 今日財運 (財運). Shared color mood: warm gold, soft teal water, cream paper, limited crimson accents. All assets must feel like matching pieces from the same paper-cut set. Create ONE full-square PARTICLE OVERLAY image: 「光點粒子場」 (random soft light speckles scattered across full canvas). Fill the entire 1024x1024 canvas with MANY tiny paper light particles / spark dots / glitter flecks randomly scattered across the WHOLE frame (not clustered in one corner, not one clump, not a single object in the center). Vary sizes slightly; keep density light-to-medium so the scene underneath remains readable. STRICT: only particles. NO coins, NO ingots, NO flowers, NO animals, NO clouds, NO ribbons, NO symbols, NO plants, NO frames, NO large shapes. TRUE TRANSPARENT BACKGROUND (alpha) — particles float on empty transparency; FORBIDDEN: any opaque plate, white fill, cream square, or solid backdrop. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene. Mandatory: transparent PNG particle field covering the full canvas.",
+      "role": "decorative",
+      "depth": "foreground",
+      "visualWeight": 25
+    },
+    {
+      "id": "bg_順水流財_錦鯉蓮池全景_001",
+      "category": "Background",
+      "name": "順水流財・錦鯉蓮池全景",
+      "tags": [
+        "財運",
+        "水",
+        "蓮",
+        "財運",
+        "daily_bg",
+        "bg_財運_20261002_131009_001",
+        "順水流財"
+      ],
+      "roleHints": [
+        "environment",
+        "background"
+      ],
+      "file": "materials/assets/Background/bg_順水流財_錦鯉蓮池全景_001.png",
+      "createdAt": "2026-10-02T13:10:09",
+      "method": "placeholder",
+      "slot": "Background",
+      "themeSetId": "bg_財運_20261002_131009_001",
+      "themeProfile": "財運",
+      "theme": "順水流財",
+      "template": "bg_only",
+      "style": "現代彩色立體紙雕藝術",
+      "prompt": "Theme: 「順水流財」 (財運). Color mood: warm gold, soft teal water, cream paper, limited crimson accents. Create ONE complete FULL-BLEED paper-cut SCENE as a single background image: 「順水流財・錦鯉蓮池全景」 (順水流財: koi lotus pond panorama with warm gold accents). The image itself is the finished daily scene — include atmosphere, soft depth, and thematic motifs that match the theme. Fill the entire square canvas edge-to-edge. Do NOT leave empty margins for overlays. Opaque paper background OK. No separate cutout layers — everything is painted into this one scene. Art style: 現代彩色立體紙雕藝術. Material: layered colored paper with visible fiber texture, soft studio lighting, soft layered drop shadows, contemporary colorful Oriental paper-cut sculpture (NOT traditional red lattice window cutouts). No black thick outlines, no readable text, no letters, no watermark, no photorealistic human face. Contemporary colorful layered paper-cut sculpture, visible paper fiber texture, soft studio lighting, soft layered shadows, multi-layer depth of field, Oriental cultural motifs but NOT traditional red window paper-cut, no black thick outlines, no text, no watermark, no letters, matching set cohesion for theme-based daily scene.",
+      "role": "environment",
+      "depth": "background",
+      "visualWeight": 20
+    }
+  ]
+}

@@ -63,6 +63,9 @@ a:hover { text-decoration: underline; }
 #compare { scroll-margin-top: calc(var(--header-h) + 8px); }
 #naming-flow { scroll-margin-top: calc(var(--header-h) + 8px); }
 #purchase-flow { scroll-margin-top: calc(var(--header-h) + 8px); }
+#daily { scroll-margin-top: calc(var(--header-h) + 8px); }
+#daily-archive { scroll-margin-top: calc(var(--header-h) + 8px); }
+#archive { scroll-margin-top: calc(var(--header-h) + 8px); }
 .process-chain {
   margin: 0 0 24px;
   padding: 14px 18px;
@@ -1195,3 +1198,126 @@ body.nav-open { overflow: hidden; }
   }
   .device-frame { width: min(100%, 380px); }
 }
+
+/* Homepage · 每日吉祥 */
+.home-daily-body {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+@media (min-width: 820px) {
+  .home-daily-body {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2rem;
+  }
+}
+.home-daily-date {
+  margin: 0 0 0.35rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.home-daily-fortune {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.home-daily-yi {
+  margin: 0 0 0.2rem;
+  color: #96322c;
+}
+.home-daily-ji {
+  margin: 0 0 0.75rem;
+  color: #666;
+}
+.home-daily-summary {
+  margin: 0 0 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.home-daily-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+.home-daily-actions .btn {
+  margin: 0;
+}
+.home-daily-media img {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  background: #f0ebe3;
+}
+.daily-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+}
+.daily-actions .btn { margin: 0; }
+
+/* 歷日剪紙下載 */
+.daily-archive-status {
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+.daily-archive-empty {
+  color: var(--muted);
+  margin: 0;
+}
+.daily-archive-list {
+  display: grid;
+  gap: 0.9rem;
+}
+.daily-archive-item {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  background: #fffefb;
+}
+.daily-archive-thumb img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  display: block;
+  background: #f0ebe3;
+  border: 1px solid var(--line);
+}
+.daily-archive-meta h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.daily-archive-theme {
+  margin: 0 0 0.25rem;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+.daily-archive-summary {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.daily-archive-item .btn {
+  margin: 0;
+  width: fit-content;
+}
+@media (max-width: 560px) {
+  .daily-archive-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+  .daily-archive-thumb img {
+    width: 72px;
+    height: 72px;
+  }
+}
+

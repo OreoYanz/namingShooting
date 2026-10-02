@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>名序｜每日吉祥</title>
-  <meta name="description" content="名序每日吉祥剪紙：當日宜忌、主題與開運短語。" />
+  <meta name="description" content="名序每日吉祥剪紙：當日宜忌、主題與開運短語。免費下載今日 GIF。" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://oreoyanz.github.io/namingShooting/daily.html" />
   <meta name="theme-color" content="#f7f4ef" />
@@ -12,14 +12,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="名序" />
   <meta property="og:title" content="名序｜每日吉祥" />
-  <meta property="og:description" content="名序每日吉祥剪紙：當日宜忌、主題與開運短語。" />
+  <meta property="og:description" content="名序每日吉祥剪紙：當日宜忌、主題與開運短語。免費下載今日 GIF。" />
   <meta property="og:url" content="https://oreoyanz.github.io/namingShooting/daily.html" />
   <meta property="og:image" content="https://oreoyanz.github.io/namingShooting/assets/logo.png" />
   <link rel="icon" href="assets/logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/site.css?v=1.0.30" />
-  <script src="js/tracking-config.js?v=1.0.30"></script>
-  <script src="js/tracking.js?v=1.0.30"></script>
+  <link rel="stylesheet" href="css/site.css?v=1.0.32" />
+  <script src="js/tracking-config.js?v=1.0.32"></script>
+  <script src="js/tracking.js?v=1.0.32"></script>
   <style>
     .daily-wrap { max-width: 720px; margin: 0 auto; }
     .daily-card {
@@ -72,50 +72,26 @@
       <div class="daily-card daily-media" id="dailyMediaCard" hidden>
         <h2>今日剪紙</h2>
         <img id="dailyGif" alt="每日吉祥 GIF" />
+        <div class="daily-actions" id="dailyActions" hidden>
+          <button type="button" class="btn btn-primary" id="btnDownloadGif">免費下載 GIF</button>
+          <a class="btn btn-outline" href="index.html#daily">回首頁區塊</a>
+        </div>
       </div>
       <p class="daily-empty" id="dailyEmpty" hidden>尚無已發布的每日內容。</p>
     </div></section>
+
+    <section class="section section-alt" id="archive">
+      <div class="container daily-wrap" id="dailyArchive">
+        <h2 class="section-title">歷日剪紙下載</h2>
+        <p class="section-lead">可免費下載每一天的 GIF（目前 <span id="dailyArchiveCount">0</span> 天）。</p>
+        <p class="daily-archive-status" id="dailyArchiveStatus">載入歷日…</p>
+        <div class="daily-archive-list" id="dailyArchiveList"></div>
+      </div>
+    </section>
   </main>
   <footer id="site-footer"></footer>
-  <script src="js/layout.js?v=1.0.30"></script>
-  <script src="js/main.js?v=1.0.30"></script>
-  <script>
-    (async function () {
-      const empty = document.getElementById("dailyEmpty");
-      const kicker = document.getElementById("dailyKicker");
-      try {
-        const res = await fetch("data/daily_latest.json?t=" + Date.now());
-        if (!res.ok) throw new Error("no data");
-        const d = await res.json();
-        kicker.textContent = (d.brandName || "名序") + "｜" + (d.brandTagline || "");
-
-        document.getElementById("dailyDateCard").hidden = false;
-        document.getElementById("dailyDateLines").innerHTML =
-          (d.dateLine1 || "") + "<br/>" + (d.dateLine2 || "");
-
-        document.getElementById("dailyFortuneCard").hidden = false;
-        document.getElementById("dailyFortuneLines").textContent =
-          "今日" + (d.fortuneLevel || "") + "｜" + (d.mainTheme || "") +
-          (d.secondaryTheme ? "・" + d.secondaryTheme : "");
-        document.getElementById("dailyYi").textContent = "宜：" + (d.yi || []).join("、");
-        document.getElementById("dailyJi").textContent = "忌：" + (d.ji || []).join("、");
-
-        if (d.summaryText) {
-          document.getElementById("dailySummaryCard").hidden = false;
-          document.getElementById("dailySummary").textContent = d.summaryText;
-        }
-
-        const gif = document.getElementById("dailyGif");
-        const gifPath = (d.media && (d.media.gif || d.media.webp)) || "";
-        if (gifPath) {
-          document.getElementById("dailyMediaCard").hidden = false;
-          gif.src = gifPath + "?t=" + Date.now();
-        }
-      } catch (e) {
-        kicker.textContent = "尚無內容";
-        empty.hidden = false;
-      }
-    })();
-  </script>
+  <script src="js/layout.js?v=1.0.32"></script>
+  <script src="js/site.js?v=1.0.32"></script>
+  <script src="js/daily.js?v=1.0.32"></script>
 </body>
 </html>

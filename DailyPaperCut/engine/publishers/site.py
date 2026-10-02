@@ -21,6 +21,63 @@ def _copy_if_exists(src: Path, dst: Path) -> bool:
     return True
 
 
+def _archive_entry(yyyymmdd: str, daily: Dict[str, Any], payload: Dict[str, Any]) -> Dict[str, Any]:
+    return {
+        "dateKey": yyyymmdd,
+        "date": daily.get("date") or payload.get("date"),
+        "dateLine1": daily.get("dateLine1") or payload.get("dateLine1") or "",
+        "dateLine2": daily.get("dateLine2") or payload.get("dateLine2") or "",
+        "fortuneLevel": daily.get("fortuneLevel") or payload.get("fortuneLevel"),
+        "mainTheme": daily.get("mainTheme") or payload.get("mainTheme") or "",
+        "secondaryTheme": daily.get("secondaryTheme") or payload.get("secondaryTheme") or "",
+        "summaryText": daily.get("summaryText") or payload.get("summaryText") or "",
+        "gif": f"assets/daily/daily_{yyyymmdd}.gif",
+        "preview": f"assets/daily/daily_{yyyymmdd}_preview.jpg",
+    }
+
+
+def _update_archive(root: Path, entry: Dict[str, Any]) -> str:
+    """Merge / rebuild daily_archive.json from data/daily/*.json + new entry."""
+    data_dir = root / "data"
+    daily_dir = data_dir / "daily"
+    days: Dict[str, Dict[str, Any]] = {}
+
+    if daily_dir.is_dir():
+        for p in daily_dir.glob("*.json"):
+            try:
+                item = load_json(p)
+            except Exception:
+                continue
+            key = str(item.get("dateKey") or p.stem)
+            if not key.isdigit():
+                continue
+            media = item.get("media") or {}
+            days[key] = {
+                "dateKey": key,
+                "date": item.get("date"),
+                "dateLine1": item.get("dateLine1") or "",
+                "dateLine2": item.get("dateLine2") or "",
+                "fortuneLevel": item.get("fortuneLevel"),
+                "mainTheme": item.get("mainTheme") or "",
+                "secondaryTheme": item.get("secondaryTheme") or "",
+                "summaryText": item.get("summaryText") or "",
+                "gif": media.get("gifDated") or f"assets/daily/daily_{key}.gif",
+                "preview": f"assets/daily/daily_{key}_preview.jpg",
+            }
+
+    days[entry["dateKey"]] = entry
+    ordered = [days[k] for k in sorted(days.keys(), reverse=True)]
+    archive = {
+        "version": 1,
+        "updatedAt": datetime.now().isoformat(timespec="seconds"),
+        "count": len(ordered),
+        "days": ordered,
+    }
+    archive_path = data_dir / "daily_archive.json"
+    save_json(archive_path, archive)
+    return str(archive_path.relative_to(root)).replace("\\", "/")
+
+
 def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]) -> List[str]:
     """Write media + JSON under one web root. Returns relative paths from that root."""
     assets_dir = root / "assets" / "daily"
@@ -80,6 +137,7 @@ def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dic
             "preview": "assets/daily/latest_preview.jpg",
             "scene": scene_rel,
             "gifDated": f"assets/daily/daily_{yyyymmdd}.gif",
+            "previewDated": f"assets/daily/daily_{yyyymmdd}_preview.jpg",
         },
         "fortuneNote": fortune.get("note") or "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
     }
@@ -94,6 +152,9 @@ def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dic
             str(dated_json.relative_to(root)).replace("\\", "/"),
         ]
     )
+
+    archive_rel = _update_archive(root, _archive_entry(yyyymmdd, daily, payload))
+    copied.append(archive_rel)
 
     # Keep daily.html in sync if present under site/
     site_page = SITE_ROOT / "daily.html"
@@ -143,7 +204,8 @@ def publish_to_site(yyyymmdd: str) -> Dict[str, Any]:
         "docsRoot": str(DOCS_ROOT),
         "files": all_copied,
         "latest": str(DOCS_ROOT / "data" / "daily_latest.json"),
+        "archive": str(DOCS_ROOT / "data" / "daily_archive.json"),
         "page": "daily.html",
-        "url": "https://oreoyanz.github.io/namingShooting/daily.html",
-        "note": "已寫入 site/ 與 docs/。請 commit + push docs/ 後 GitHub Pages 才會上線。",
+        "url": "https://oreoyanz.github.io/namingShooting/daily.html#archive",
+        "note": "已寫入 site/ 與 docs/（含歷日索引）。請 commit + push docs/ 後 GitHub Pages 才會上線。",
     }

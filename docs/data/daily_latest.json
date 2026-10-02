@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T15:04:07",
+  "updatedAt": "2026-10-02T15:22:46",
   "date": "2026-10-02",
   "dateKey": "20261002",
   "rocDate": "115年10月2日",
@@ -35,7 +35,8 @@
     "webp": "assets/daily/latest.webp",
     "preview": "assets/daily/latest_preview.jpg",
     "scene": "assets/daily/latest_scene.jpg",
-    "gifDated": "assets/daily/daily_20261002.gif"
+    "gifDated": "assets/daily/daily_20261002.gif",
+    "previewDated": "assets/daily/daily_20261002_preview.jpg"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

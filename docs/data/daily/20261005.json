@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-02T17:09:20",
+  "timezone": "Asia/Taipei",
+  "date": "2026-10-05",
+  "dateKey": "20261005",
+  "rocDate": "115年10月5日",
+  "lunarDate": "農曆八月廿五",
+  "dateLine1": "115年10月5日 農曆八月廿五",
+  "dateLine2": "丙午 [馬] 年丁酉月壬子日",
+  "dayGanZhi": "壬子",
+  "dayAnimalHint": "馬",
+  "fortuneLevel": "平",
+  "fortuneScore": 59,
+  "mainTheme": "祭祀開運",
+  "secondaryTheme": "順水流財",
+  "yi": [
+    "祭祀",
+    "沐浴",
+    "修飾垣牆",
+    "平治道塗",
+    "餘事勿取"
+  ],
+  "ji": [
+    "齋醮",
+    "嫁娶",
+    "移徙",
+    "出行"
+  ],
+  "summaryText": "祭祀開運讓財運順流，避免出行保持安靜。",
+  "shortMessage": "今天適合祭祀與沐浴，讓運勢更流暢，記得避免出行！",
+  "ctaLine": "想知道的不只是今天，還有你今年的方向？",
+  "ctaProduct": "名序｜流年分析",
+  "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
+  "brandName": "名序",
+  "brandTagline": "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+  "media": {
+    "gif": "assets/daily/daily_20261005.gif",
+    "webp": "assets/daily/daily_20261005.webp",
+    "preview": "assets/daily/daily_20261005_preview.jpg",
+    "scene": "assets/daily/scene_20261005.jpg",
+    "scenePng": "assets/daily/scene_20261005.png",
+    "gifDated": "assets/daily/daily_20261005.gif",
+    "previewDated": "assets/daily/daily_20261005_preview.jpg",
+    "latestGif": "assets/daily/latest.gif",
+    "latestPreview": "assets/daily/latest_preview.jpg"
+  },
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+}

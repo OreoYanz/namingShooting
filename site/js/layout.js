@@ -10,7 +10,7 @@
     { href: "daily.html", label: "每日吉祥" },
     { href: "about.html", label: "關於名序" },
     { href: "newborn.html", label: "新生兒命名" },
-    { href: "rename.html", label: "成人改名" },
+    { href: "rename.html", label: "專業改名" },
     { href: "liunian.html", label: "流年分析" },
     { href: "index.html#showcase", label: "成果展示" },
     { href: "works.html", label: "真實案例" },

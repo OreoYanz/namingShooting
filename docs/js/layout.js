@@ -102,8 +102,58 @@
         </div>
         <div class="footer-bottom">
           <p>名序 · 版權所有 © ${year}</p>
+          <p class="footer-visits">網站瀏覽：<span id="siteVisitCount">—</span> 人次</p>
           <p class="footer-legal">本網站內容僅供文化參考，命理分析不構成人生保證。用字與改名請向戶政事務所確認。</p>
         </div>
       </div>`;
   }
+
+  // Site-wide visit counter (once per browser session)
+  (function mountVisitCounter() {
+    const el = document.getElementById("siteVisitCount");
+    if (!el) return;
+    const host = (location && location.hostname) || "";
+    if (!host || host === "localhost" || host === "127.0.0.1") {
+      el.textContent = "—";
+      return;
+    }
+    const storageKey = "mx_visit_counted_v1";
+    const cacheKey = "mx_visit_count_v1";
+    const apiBase = "https://abacus.jasoncameron.dev";
+    const ns = "oreoyanz.github.io";
+    const key = "namingShooting";
+
+    function paint(n) {
+      const num = Number(n);
+      if (!isFinite(num) || num < 0) {
+        el.textContent = "—";
+        return;
+      }
+      el.textContent = Math.floor(num).toLocaleString("zh-TW");
+    }
+
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) paint(cached);
+
+    const already = sessionStorage.getItem(storageKey) === "1";
+    const endpoint = already
+      ? apiBase + "/get/" + encodeURIComponent(ns) + "/" + encodeURIComponent(key)
+      : apiBase + "/hit/" + encodeURIComponent(ns) + "/" + encodeURIComponent(key);
+
+    fetch(endpoint, { method: "GET", mode: "cors", credentials: "omit" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("counter failed");
+        return res.json();
+      })
+      .then(function (data) {
+        const value = data && (data.value != null ? data.value : data.count);
+        if (value == null) throw new Error("no value");
+        sessionStorage.setItem(cacheKey, String(value));
+        if (!already) sessionStorage.setItem(storageKey, "1");
+        paint(value);
+      })
+      .catch(function () {
+        if (!cached) el.textContent = "—";
+      });
+  })();
 })();

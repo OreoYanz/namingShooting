@@ -1034,6 +1034,16 @@ a:hover { text-decoration: underline; }
   padding-top: 20px; text-align: center; font-size: 0.78rem;
   color: var(--muted);
 }
+.footer-visits {
+  margin: 0.55rem 0 0;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.footer-visits span {
+  color: var(--gold);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
 .footer-legal { margin-top: 8px; opacity: 0.75; }
 
 body.nav-open { overflow: hidden; }

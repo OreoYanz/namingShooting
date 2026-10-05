@@ -169,29 +169,12 @@
     throw new Error("no displayable daily for " + todayKey);
   }
 
-  var SITE_PUBLIC_BASE = "https://oreoyanz.github.io/namingShooting";
-
-  function absoluteSiteUrl(pathOrUrl) {
-    const raw = String(pathOrUrl || "").trim();
-    if (!raw) return SITE_PUBLIC_BASE + "/";
-    if (/^https?:\/\//i.test(raw)) return raw.split("?")[0].split("#")[0];
-    const cleaned = raw
-      .replace(/^\.\//, "")
-      .replace(/^(\.\.\/)+/, "")
-      .replace(/^\//, "")
-      .split("?")[0]
-      .split("#")[0];
-    return SITE_PUBLIC_BASE + "/" + cleaned;
-  }
-
-  function imageSharePath(dataOrUrl, dateKey) {
+  function lastImagePath(dataOrUrl, dateKey) {
     let key = dateKey ? String(dateKey).replace(/\D/g, "") : "";
     let last = "";
-    let gif = "";
     let preview = "";
     if (dataOrUrl && typeof dataOrUrl === "object") {
       key = key || String(dataOrUrl.dateKey || "").replace(/\D/g, "");
-      gif = gifUrl(dataOrUrl) || dataOrUrl.gif || "";
       preview =
         (dataOrUrl.media &&
           (dataOrUrl.media.previewDated || dataOrUrl.media.preview)) ||
@@ -206,37 +189,22 @@
         dataOrUrl.shareImage ||
         "";
     } else if (typeof dataOrUrl === "string") {
-      if (/\.(gif|webp|jpe?g|png)(?:$|\?)/i.test(dataOrUrl)) {
-        if (/_last\.jpe?g(?:$|\?)/i.test(dataOrUrl)) last = dataOrUrl;
-        else if (/\.gif(?:$|\?)/i.test(dataOrUrl)) gif = dataOrUrl;
-        else preview = dataOrUrl;
-      }
+      if (/\.(jpe?g|png|webp)(?:$|\?)/i.test(dataOrUrl)) last = dataOrUrl;
     }
     if (!last && key) last = "assets/daily/daily_" + key + "_last.jpg";
-    if (!gif && key) gif = "assets/daily/daily_" + key + ".gif";
     if (!preview && key) preview = "assets/daily/daily_" + key + "_preview.jpg";
-    // Prefer GIF final-frame still for LINE share
-    return last || preview || gif || "";
+    return last || preview || "";
   }
 
-  function lineShareUrlFor(dataOrUrl, dateKey) {
-    const imagePath = imageSharePath(dataOrUrl, dateKey);
-    const target = imagePath || "assets/logo.png";
-    return (
-      "https://social-plugins.line.me/lineit/share?url=" +
-      encodeURIComponent(absoluteSiteUrl(target))
-    );
+  function imageFilename(dateKey) {
+    const key = String(dateKey || "").replace(/\D/g, "") || "latest";
+    return "名序_每日吉祥_" + key + ".jpg";
   }
 
-  function shareToLine(dataOrUrl, dateKey) {
-    const shareUrl = lineShareUrlFor(dataOrUrl, dateKey);
-    window.open(shareUrl, "_blank", "noopener,noreferrer");
-  }
-
-  async function downloadGif(url, filename) {
+  async function downloadFile(url, filename) {
     if (!url) return;
     const clean = url.split("?")[0];
-    const name = filename || "名序_每日吉祥.gif";
+    const name = filename || "名序_每日吉祥.bin";
     try {
       const res = await fetch(clean + "?t=" + Date.now());
       if (!res.ok) throw new Error("fetch failed");
@@ -264,6 +232,44 @@
     }
   }
 
+  async function downloadGif(url, filename) {
+    return downloadFile(url, filename || "名序_每日吉祥.gif");
+  }
+
+  function bindFileDownloadButton(btn, url, filename, label) {
+    if (!btn) return;
+    if (!url) {
+      btn.hidden = true;
+      return;
+    }
+    btn.hidden = false;
+    btn.disabled = false;
+    btn.classList.add("btn");
+    btn.classList.remove("btn-line");
+    if (btn.tagName === "A") {
+      btn.href = url;
+      btn.setAttribute("download", filename || "");
+      btn.removeAttribute("target");
+      return;
+    }
+    const text =
+      (btn.textContent && btn.textContent.indexOf("下載") >= 0 && btn.textContent) ||
+      label ||
+      "下載";
+    btn.textContent = text;
+    btn.onclick = async function () {
+      btn.disabled = true;
+      const prev = btn.textContent;
+      btn.textContent = "下載中…";
+      try {
+        await downloadFile(url, filename);
+      } finally {
+        btn.textContent = prev;
+        btn.disabled = false;
+      }
+    };
+  }
+
   function bindDownloadButton(btn, dataOrUrl, dateKey) {
     if (!btn) return;
     let url = "";
@@ -274,77 +280,23 @@
       url = gifUrl(dataOrUrl) || dataOrUrl.gif || "";
       key = key || dataOrUrl.dateKey || dataOrUrl.date;
     }
-    if (!url) {
-      btn.hidden = true;
-      return;
-    }
-    btn.hidden = false;
-    btn.disabled = false;
-    btn.classList.add("btn");
-    btn.classList.remove("btn-line");
     if (!btn.classList.contains("btn-outline") && !btn.classList.contains("btn-primary")) {
       btn.classList.add("btn-primary");
     }
-    btn.textContent = btn.textContent && btn.textContent.indexOf("下載") >= 0
-      ? btn.textContent
-      : "下載 GIF";
-    const name = gifFilename(key);
-    btn.onclick = async function () {
-      btn.disabled = true;
-      const prev = btn.textContent;
-      btn.textContent = "下載中…";
-      try {
-        await downloadGif(url, name);
-      } finally {
-        btn.textContent = prev;
-        btn.disabled = false;
-      }
-    };
+    bindFileDownloadButton(btn, url, gifFilename(key), "下載 GIF");
   }
 
-  function lineIconSrc() {
-    const base =
-      (document.body && document.body.dataset && document.body.dataset.assetBase) ||
-      "";
-    return base + "assets/line-icon.svg";
-  }
-
-  function lineShareButtonInnerHtml() {
-    return (
-      '<span class="btn-line-icon" aria-hidden="true"><img src="' +
-      escapeHtml(lineIconSrc()) +
-      '" alt="" width="22" height="22" /></span><span>分享</span>'
-    );
-  }
-
-  function decorateLineShareButton(btn) {
+  function bindDownloadImageButton(btn, dataOrUrl, dateKey) {
     if (!btn) return;
-    btn.classList.add("btn", "btn-line");
-    btn.classList.remove("btn-primary", "btn-outline");
-    btn.setAttribute("aria-label", "分享到 LINE");
-    btn.removeAttribute("download");
-    btn.innerHTML = lineShareButtonInnerHtml();
-  }
-
-  function bindShareLineButton(btn, dataOrUrl, dateKey) {
-    if (!btn) return;
-    const imagePath = imageSharePath(dataOrUrl, dateKey);
-    if (!imagePath) {
-      btn.hidden = true;
-      return;
+    let key = dateKey;
+    if (dataOrUrl && typeof dataOrUrl === "object") {
+      key = key || dataOrUrl.dateKey || dataOrUrl.date;
     }
-    btn.hidden = false;
-    btn.disabled = false;
-    decorateLineShareButton(btn);
-    if (btn.tagName === "A") {
-      btn.href = lineShareUrlFor(dataOrUrl, dateKey);
-      btn.target = "_blank";
-      btn.rel = "noopener noreferrer";
-      return;
+    const url = lastImagePath(dataOrUrl, key);
+    if (!btn.classList.contains("btn-primary")) {
+      btn.classList.add("btn-outline");
     }
-    btn.onclick = function () {
-      shareToLine(dataOrUrl, dateKey);
-    };
+    bindFileDownloadButton(btn, url, imageFilename(key), "下載圖檔");
   }
 
   function renderArchiveList(listEl, days, options) {
@@ -405,13 +357,9 @@
           '" data-key="' +
           key +
           '">下載 GIF</button>' +
-          '<button type="button" class="btn btn-line daily-archive-share" data-gif="' +
-          gif +
-          '" data-key="' +
+          '<button type="button" class="btn btn-outline daily-archive-img" data-key="' +
           key +
-          '" aria-label="分享到 LINE">' +
-          lineShareButtonInnerHtml() +
-          "</button>" +
+          '">下載圖檔</button>' +
           "</div>" +
           "</div>" +
           "</article>"
@@ -426,15 +374,8 @@
         btn.getAttribute("data-key")
       );
     });
-    listEl.querySelectorAll(".daily-archive-share").forEach(function (btn) {
-      bindShareLineButton(
-        btn,
-        {
-          dateKey: btn.getAttribute("data-key"),
-          gif: btn.getAttribute("data-gif"),
-        },
-        btn.getAttribute("data-key")
-      );
+    listEl.querySelectorAll(".daily-archive-img").forEach(function (btn) {
+      bindDownloadImageButton(btn, null, btn.getAttribute("data-key"));
     });
   }
 
@@ -528,7 +469,11 @@
         const actions = document.getElementById("dailyActions");
         if (actions) actions.hidden = false;
         bindDownloadButton(document.getElementById("btnDownloadGif"), d);
-        bindShareLineButton(document.getElementById("btnShareLine"), d);
+        bindDownloadImageButton(
+          document.getElementById("btnDownloadImage") ||
+            document.getElementById("btnShareLine"),
+          d
+        );
       }
     } catch (e) {
       if (kicker) kicker.textContent = "尚無內容";
@@ -583,7 +528,7 @@
       if (summaryEl) summaryEl.textContent = d.summaryText || d.shortMessage || "";
 
       bindDownloadButton(document.getElementById("homeDownloadGif"), d);
-      bindShareLineButton(document.getElementById("homeShareLine"), d);
+      bindDownloadImageButton(document.getElementById("homeDownloadImage"), d);
       const fullPage = document.getElementById("homeDailyFullPage");
       if (fullPage && d.dateKey) {
         fullPage.href = (d.page || ("daily/" + d.dateKey + ".html"));
@@ -627,7 +572,9 @@
     const meta = document.getElementById("dailyGifModalMeta");
     const img = document.getElementById("dailyGifModalImg");
     const downloadBtn = document.getElementById("dailyGifModalDownload");
-    const shareBtn = document.getElementById("dailyGifModalShareLine");
+    const imageBtn =
+      document.getElementById("dailyGifModalDownloadImage") ||
+      document.getElementById("dailyGifModalShareLine");
     const todayKey = taiwanDateKey();
     const roc = day.rocDate || formatRocDate(day.dateKey);
 
@@ -654,7 +601,7 @@
       day.gif || (day.media && day.media.gifDated) || "",
       day.dateKey
     );
-    bindShareLineButton(shareBtn, day, day.dateKey);
+    bindDownloadImageButton(imageBtn, day, day.dateKey);
     modal.hidden = false;
     document.body.style.overflow = "hidden";
   }
@@ -804,9 +751,9 @@
     fetchDailyLatest: fetchDailyLatest,
     fetchDailyArchive: fetchDailyArchive,
     downloadGif: downloadGif,
-    shareToLine: shareToLine,
+    downloadFile: downloadFile,
     bindDownloadButton: bindDownloadButton,
-    bindShareLineButton: bindShareLineButton,
+    bindDownloadImageButton: bindDownloadImageButton,
     mountDailyPage: mountDailyPage,
     mountHomeDaily: mountHomeDaily,
     mountHomeAlbum: mountHomeAlbum,

@@ -5,7 +5,7 @@
     {
       "id": "rn-20260922173029-OO",
       "service": "rename",
-      "serviceLabel": "成人改名",
+      "serviceLabel": "專業改名",
       "birthDate": "1986/09/29",
       "region": "高雄市",
       "displayName": "張OO",
@@ -48,6 +48,18 @@
       "gender": "女",
       "exportedAt": "2026-09-24T00:40:53+08:00",
       "image": "智慧、涵養、清流通達",
+      "macroStage": ""
+    },
+    {
+      "id": "nb-20261003214446-OO",
+      "service": "newborn",
+      "serviceLabel": "新生兒命名",
+      "birthDate": "2026/11/06",
+      "region": "高雄市",
+      "displayName": "翁OO",
+      "gender": "女",
+      "exportedAt": "2026-10-03T21:44:46+08:00",
+      "image": "清正、鋒芒、金玉其質",
       "macroStage": ""
     }
   ]

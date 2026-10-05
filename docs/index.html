@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://oreoyanz.github.io/namingShooting/assets/logo.png" />
   <link rel="icon" href="assets/logo.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
-  <link rel="stylesheet" href="css/site.css?v=1.0.40" />
+  <link rel="stylesheet" href="css/site.css?v=1.0.41" />
   <script src="js/tracking-config.js?v=1.0.32"></script>
   <script src="js/tracking.js?v=1.0.32"></script>
   <script type="application/ld+json">
@@ -180,6 +180,10 @@
               <p class="home-daily-summary" id="homeDailySummary"></p>
               <div class="home-daily-actions">
                 <button type="button" class="btn btn-primary" id="homeDownloadGif">免費下載 GIF</button>
+                <button type="button" class="btn btn-line" id="homeShareLine" aria-label="分享到 LINE">
+                  <span class="btn-line-icon" aria-hidden="true"><img src="assets/line-icon.svg" alt="" width="22" height="22" /></span>
+                  <span>分享</span>
+                </button>
                 <a class="btn btn-outline" id="homeDailyFullPage" href="daily.html">查看完整頁</a>
               </div>
             </div>
@@ -202,7 +206,7 @@
               <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
             </div>
             <div class="home-cal-grid" id="homeCalGrid" role="grid" aria-label="歷日日曆"></div>
-            <p class="home-cal-hint">反白日期有剪紙，點選進入當日頁（可預覽並下載 GIF）。</p>
+            <p class="home-cal-hint">反白日期有剪紙，點選進入當日頁（可下載 GIF 或分享到 LINE）。</p>
             <p class="home-cal-hint"><a href="daily.html">打開每日吉祥彙整頁</a></p>
           </div>
         </div>
@@ -218,6 +222,10 @@
         <img id="dailyGifModalImg" alt="當日剪紙 GIF" />
         <div class="daily-gif-modal-actions">
           <button type="button" class="btn btn-primary" id="dailyGifModalDownload">下載 GIF</button>
+          <button type="button" class="btn btn-line" id="dailyGifModalShareLine" aria-label="分享到 LINE">
+            <span class="btn-line-icon" aria-hidden="true"><img src="assets/line-icon.svg" alt="" width="22" height="22" /></span>
+            <span>分享</span>
+          </button>
           <button type="button" class="btn btn-outline" id="dailyGifModalDismiss">關閉</button>
         </div>
       </div>

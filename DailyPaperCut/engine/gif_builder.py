@@ -120,15 +120,19 @@ def build_animated_frames(
     *,
     letterbox: Optional[Tuple[int, int]] = None,
     card_pace: float = 1.0,
+    logo_hold: Optional[float] = None,
 ) -> Tuple[List[Image.Image], Dict[str, Any]]:
     """
     Shared frame builder for GIF (square) and Shorts (optional 9:16 letterbox).
     letterbox = (width, height) of final canvas; scene square is centered.
     card_pace: 1.0 normal (MP4); 0.5 half card gaps (GIF).
+    logo_hold: optional fixed last-scene hold (seconds); GIF uses 3.0.
     """
     yi = [to_traditional(x) for x in (daily.get("yi") or [])]
     ji = [to_traditional(x) for x in (daily.get("ji") or [])]
-    tl = build_timeline(yi, ji, base=float(duration_sec), card_pace=card_pace)
+    tl = build_timeline(
+        yi, ji, base=float(duration_sec), card_pace=card_pace, logo_hold=logo_hold
+    )
 
     line1 = daily.get("dateLine1") or ""
     line2 = daily.get("dateLine2") or ""
@@ -244,7 +248,13 @@ def build_gif_frames(
 ) -> List[Image.Image]:
     elements = _elements_from_inputs(materials, cutouts, size)
     frames, _ = build_animated_frames(
-        daily, size, float(duration_sec), fps, elements, card_pace=0.5
+        daily,
+        size,
+        float(duration_sec),
+        fps,
+        elements,
+        card_pace=0.5,
+        logo_hold=3.0,
     )
     if not frames and scene_png.exists():
         frames = [_load_scene(scene_png, size).convert("RGB")]
@@ -266,7 +276,13 @@ def export_gif_webp(
     gif_dir.mkdir(parents=True, exist_ok=True)
     elements = _elements_from_inputs(materials, cutouts, size)
     frames, meta = build_animated_frames(
-        daily, size, float(duration_sec), fps, elements, card_pace=0.5
+        daily,
+        size,
+        float(duration_sec),
+        fps,
+        elements,
+        card_pace=0.5,
+        logo_hold=3.0,
     )
 
     if scene_json_path:
@@ -285,6 +301,7 @@ def export_gif_webp(
 
     gif_path = gif_dir / f"daily_{yyyymmdd}.gif"
     webp_path = gif_dir / f"daily_{yyyymmdd}.webp"
+    last_path = gif_dir / f"daily_{yyyymmdd}_last.jpg"
     duration_ms = int(1000 / max(1, fps))
     frames[0].save(
         gif_path,
@@ -305,12 +322,35 @@ def export_gif_webp(
         )
     except Exception:
         frames[len(frames) // 2].save(webp_path, format="WEBP")
+    # Still of the final frame — used for LINE share / static preview
+    frames[-1].convert("RGB").save(last_path, quality=92, optimize=True)
     out = {
         "gif": str(gif_path),
         "webp": str(webp_path),
+        "last": str(last_path),
         "durationSec": meta["timeline"]["duration"],
         "frames": frames,
         "elements": elements,
         "animationMeta": meta,
     }
     return out
+
+
+def extract_last_frame_jpg(gif_path: Path, out_jpg: Path) -> bool:
+    """Write the last frame of an existing GIF as a JPEG (backfill helper)."""
+    if not gif_path.exists():
+        return False
+    try:
+        with Image.open(gif_path) as im:
+            last = im.convert("RGB")
+            try:
+                while True:
+                    im.seek(im.tell() + 1)
+                    last = im.convert("RGB")
+            except EOFError:
+                pass
+            out_jpg.parent.mkdir(parents=True, exist_ok=True)
+            last.save(out_jpg, quality=92, optimize=True)
+        return out_jpg.exists() and out_jpg.stat().st_size > 0
+    except Exception:
+        return False

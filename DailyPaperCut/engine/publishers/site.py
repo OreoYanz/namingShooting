@@ -40,6 +40,7 @@ def _archive_entry(yyyymmdd: str, daily: Dict[str, Any], payload: Dict[str, Any]
         "rocDate": daily.get("rocDate") or payload.get("rocDate") or "",
         "gif": f"assets/daily/daily_{yyyymmdd}.gif",
         "preview": f"assets/daily/daily_{yyyymmdd}_preview.jpg",
+        "last": f"assets/daily/daily_{yyyymmdd}_last.jpg",
         "page": f"daily/{yyyymmdd}.html",
     }
 
@@ -72,6 +73,9 @@ def _update_archive(root: Path, entry: Dict[str, Any]) -> str:
                 "rocDate": item.get("rocDate") or "",
                 "gif": media.get("gifDated") or f"assets/daily/daily_{key}.gif",
                 "preview": media.get("previewDated") or f"assets/daily/daily_{key}_preview.jpg",
+                "last": media.get("lastDated")
+                or media.get("shareImage")
+                or f"assets/daily/daily_{key}_last.jpg",
                 "page": f"daily/{key}.html",
             }
 
@@ -94,6 +98,7 @@ def _update_archive(root: Path, entry: Dict[str, Any]) -> str:
 def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]) -> Dict[str, Any]:
     gif_dated = f"assets/daily/daily_{yyyymmdd}.gif"
     preview_dated = f"assets/daily/daily_{yyyymmdd}_preview.jpg"
+    last_dated = f"assets/daily/daily_{yyyymmdd}_last.jpg"
     scene_jpg = f"assets/daily/scene_{yyyymmdd}.jpg"
     scene_png = f"assets/daily/scene_{yyyymmdd}.png"
     return {
@@ -127,12 +132,16 @@ def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]
             "gif": gif_dated,
             "webp": f"assets/daily/daily_{yyyymmdd}.webp",
             "preview": preview_dated,
+            "last": last_dated,
+            "shareImage": last_dated,
             "scene": scene_jpg,
             "scenePng": scene_png,
             "gifDated": gif_dated,
             "previewDated": preview_dated,
+            "lastDated": last_dated,
             "latestGif": "assets/daily/latest.gif",
             "latestPreview": "assets/daily/latest_preview.jpg",
+            "latestLast": "assets/daily/latest_last.jpg",
         },
         "fortuneNote": fortune.get("note") or "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
     }
@@ -178,6 +187,7 @@ def _refresh_latest_pointer(root: Path, copied: List[str]) -> None:
         (assets_dir / f"daily_{active}.gif", assets_dir / "latest.gif"),
         (assets_dir / f"daily_{active}.webp", assets_dir / "latest.webp"),
         (assets_dir / f"daily_{active}_preview.jpg", assets_dir / "latest_preview.jpg"),
+        (assets_dir / f"daily_{active}_last.jpg", assets_dir / "latest_last.jpg"),
         (assets_dir / f"scene_{active}.jpg", assets_dir / "latest_scene.jpg"),
         (assets_dir / f"scene_{active}.png", assets_dir / "latest_scene.png"),
     ]
@@ -259,9 +269,19 @@ def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dic
 
     base = day_dir(yyyymmdd)
     copied: List[str] = []
+
+    # Ensure GIF last-frame still exists (backfill from existing GIF if needed)
+    gif_src = base / "gif" / f"daily_{yyyymmdd}.gif"
+    last_src = base / "gif" / f"daily_{yyyymmdd}_last.jpg"
+    if gif_src.exists() and not last_src.exists():
+        from ..gif_builder import extract_last_frame_jpg
+
+        extract_last_frame_jpg(gif_src, last_src)
+
     dated_map = [
-        (base / "gif" / f"daily_{yyyymmdd}.gif", assets_dir / f"daily_{yyyymmdd}.gif"),
+        (gif_src, assets_dir / f"daily_{yyyymmdd}.gif"),
         (base / "gif" / f"daily_{yyyymmdd}.webp", assets_dir / f"daily_{yyyymmdd}.webp"),
+        (last_src, assets_dir / f"daily_{yyyymmdd}_last.jpg"),
         (base / "short" / f"daily_{yyyymmdd}_preview.jpg", assets_dir / f"daily_{yyyymmdd}_preview.jpg"),
         (base / "scene" / f"scene_{yyyymmdd}.jpg", assets_dir / f"scene_{yyyymmdd}.jpg"),
         (base / "scene" / f"scene_{yyyymmdd}.png", assets_dir / f"scene_{yyyymmdd}.png"),

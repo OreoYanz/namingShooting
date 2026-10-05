@@ -232,6 +232,31 @@ a:hover { text-decoration: underline; }
 .btn-outline:hover { background: var(--gold-soft); color: var(--gold); border-color: var(--gold); }
 .btn-gold { background: var(--gold); color: #fff; }
 .btn-gold:hover { background: #8f6934; color: #fff; }
+.btn-line {
+  background: #06C755;
+  color: #fff;
+  border-color: #06C755;
+  gap: 0.45rem;
+  padding-left: 16px;
+  padding-right: 18px;
+}
+.btn-line:hover {
+  background: #05b34c;
+  border-color: #05b34c;
+  color: #fff;
+}
+.btn-line-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+  display: block;
+}
+.btn-line-icon img,
+.btn-line-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 
 /* Hero */
@@ -1529,7 +1554,7 @@ body.nav-open { overflow: hidden; }
 }
 .daily-actions .btn { margin: 0; }
 
-/* 歷日剪紙下載（daily.html） */
+/* 歷日剪紙列表（daily.html） */
 .daily-archive-status {
   color: var(--muted);
   margin: 0 0 1rem;
@@ -1541,6 +1566,12 @@ body.nav-open { overflow: hidden; }
 .daily-archive-list {
   display: grid;
   gap: 0.9rem;
+}
+.daily-archive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
 }
 .daily-archive-item {
   display: grid;

@@ -181,6 +181,7 @@ def generate_daily(
         "sceneJson": str(base / "scene" / "scene.json"),
         "gif": gif_files.get("gif"),
         "webp": gif_files.get("webp"),
+        "gifLast": gif_files.get("last"),
         "shortMp4": short_files.get("mp4"),
         "shortPreview": short_files.get("preview"),
         "social": social_files,

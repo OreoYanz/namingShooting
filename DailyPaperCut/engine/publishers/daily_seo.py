@@ -86,6 +86,13 @@ def render_day_html(
     media = payload.get("media") or {}
     gif = media.get("gifDated") or media.get("gif") or f"assets/daily/daily_{key}.gif"
     preview = media.get("previewDated") or media.get("preview") or f"assets/daily/daily_{key}_preview.jpg"
+    last = (
+        media.get("lastDated")
+        or media.get("shareImage")
+        or media.get("last")
+        or f"assets/daily/daily_{key}_last.jpg"
+    )
+    share_image = last or preview or gif
     # pages live under daily/, so assets are one level up
     gif_href = f"../{gif}"
     page_url = f"{SITE_BASE}/daily/{key}.html"
@@ -109,7 +116,7 @@ def render_day_html(
             "name": brand,
             "logo": {"@type": "ImageObject", "url": f"{SITE_BASE}/assets/logo.png"},
         },
-        "image": [f"{SITE_BASE}/{preview}", f"{SITE_BASE}/{gif}"],
+        "image": [f"{SITE_BASE}/{share_image}", f"{SITE_BASE}/{preview}", f"{SITE_BASE}/{gif}"],
         "mainEntityOfPage": page_url,
     }
     ld_crumb = {
@@ -146,13 +153,13 @@ def render_day_html(
   <meta property="og:title" content="{_esc(title)}" />
   <meta property="og:description" content="{_esc(description)}" />
   <meta property="og:url" content="{_esc(page_url)}" />
-  <meta property="og:image" content="{_esc(SITE_BASE + '/' + preview)}" />
+  <meta property="og:image" content="{_esc(SITE_BASE + '/' + share_image)}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{_esc(title)}" />
   <meta name="twitter:description" content="{_esc(description)}" />
-  <meta name="twitter:image" content="{_esc(SITE_BASE + '/' + preview)}" />
+  <meta name="twitter:image" content="{_esc(SITE_BASE + '/' + share_image)}" />
   <link rel="icon" href="../assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="../css/site.css?v=1.0.40" />
+  <link rel="stylesheet" href="../css/site.css?v=1.0.41" />
   <style>
     .daily-wrap {{ max-width: 720px; margin: 0 auto; }}
     .daily-card {{ background:#fffefb; border:1px solid #e4ddd2; padding:1.1rem 1.2rem; margin:0 0 1rem; }}
@@ -266,6 +273,7 @@ def render_day_html(
         <img src="{_esc(gif_href)}" alt="{_esc(roc + ' 名序每日吉祥剪紙 GIF')}" width="1080" height="1080" />
         <div class="daily-actions" style="margin-top:0.9rem">
           <a class="btn btn-primary" href="{_esc(gif_href)}" download="名序_每日吉祥_{_esc(key)}.gif">下載 GIF</a>
+          <a class="btn btn-line" href="https://social-plugins.line.me/lineit/share?url={_esc(SITE_BASE + '/' + share_image)}" target="_blank" rel="noopener noreferrer" aria-label="分享到 LINE"><span class="btn-line-icon" aria-hidden="true"><img src="../assets/line-icon.svg" alt="" width="22" height="22" /></span><span>分享</span></a>
           <a class="btn btn-outline" href="../index.html#daily">回首頁日曆</a>
         </div>
       </article>
@@ -309,7 +317,7 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "name": "名序｜每日吉祥剪紙彙整",
-        "description": "名序每日吉祥剪紙彙整：依日期查看宜忌、主題、今日總結，並免費下載 GIF。",
+        "description": "名序每日吉祥剪紙彙整：依日期查看宜忌、主題、今日總結，下載 GIF 或分享到 LINE。",
         "url": f"{SITE_BASE}/daily.html",
         "inLanguage": "zh-Hant",
         "isPartOf": {"@type": "WebSite", "name": "名序", "url": f"{SITE_BASE}/"},
@@ -332,7 +340,7 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>名序｜每日吉祥剪紙彙整</title>
-  <meta name="description" content="名序每日吉祥剪紙彙整：依日期查看宜忌、主題、今日總結，並免費下載 GIF。" />
+  <meta name="description" content="名序每日吉祥剪紙彙整：依日期查看宜忌、主題、今日總結，下載 GIF 或分享到 LINE。" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="keywords" content="名序,每日吉祥,剪紙,宜忌,開運,每日運勢" />
   <link rel="canonical" href="{SITE_BASE}/daily.html" />
@@ -340,11 +348,11 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="名序" />
   <meta property="og:title" content="名序｜每日吉祥剪紙彙整" />
-  <meta property="og:description" content="名序每日吉祥剪紙彙整：依日期查看宜忌、主題與 GIF 下載。" />
+  <meta property="og:description" content="名序每日吉祥剪紙彙整：依日期查看宜忌、主題，下載 GIF 或分享到 LINE。" />
   <meta property="og:url" content="{SITE_BASE}/daily.html" />
   <meta property="og:image" content="{SITE_BASE}/assets/logo.png" />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="css/site.css?v=1.0.40" />
+  <link rel="stylesheet" href="css/site.css?v=1.0.41" />
   <script src="js/tracking-config.js?v=1.0.40"></script>
   <script src="js/tracking.js?v=1.0.40"></script>
   <style>
@@ -361,7 +369,7 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
   <main id="main">
     <section class="page-hero"><div class="container daily-wrap">
       <h1>每日吉祥</h1>
-      <p class="lead">名序每日剪紙宜忌與開運短語。可依日期閱讀並下載 GIF。</p>
+      <p class="lead">名序每日剪紙宜忌與開運短語。可依日期閱讀、下載 GIF 或分享到 LINE。</p>
       <p class="lead"><a class="btn btn-primary" href="{_esc(today_link)}">查看今日</a>
       <a class="btn btn-outline" href="index.html#daily" style="margin-left:0.5rem">回首頁日曆</a></p>
     </div></section>

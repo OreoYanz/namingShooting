@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02T16:33:27",
+  "updatedAt": "2026-10-05T08:49:18",
   "timezone": "Asia/Taipei",
   "date": "2026-10-01",
   "dateKey": "20261001",
@@ -35,17 +35,21 @@
   "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
   "brandName": "名序",
   "brandTagline": "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+  "page": "daily/20261001.html",
   "media": {
     "gif": "assets/daily/daily_20261001.gif",
     "webp": "assets/daily/daily_20261001.webp",
     "preview": "assets/daily/daily_20261001_preview.jpg",
+    "last": "assets/daily/daily_20261001_last.jpg",
+    "shareImage": "assets/daily/daily_20261001_last.jpg",
     "scene": "assets/daily/scene_20261001.jpg",
     "scenePng": "assets/daily/scene_20261001.png",
     "gifDated": "assets/daily/daily_20261001.gif",
     "previewDated": "assets/daily/daily_20261001_preview.jpg",
+    "lastDated": "assets/daily/daily_20261001_last.jpg",
     "latestGif": "assets/daily/latest.gif",
-    "latestPreview": "assets/daily/latest_preview.jpg"
+    "latestPreview": "assets/daily/latest_preview.jpg",
+    "latestLast": "assets/daily/latest_last.jpg"
   },
-  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
-  "page": "daily/20261001.html"
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

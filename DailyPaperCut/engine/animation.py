@@ -194,10 +194,12 @@ def build_timeline(
     base: float = 20.0,
     *,
     card_pace: float = 1.0,
+    logo_hold: float | None = None,
 ) -> Timeline:
     """BG → Date → 宜 → 忌 → 今日總結 → Logo.
 
     card_pace: 1.0 = normal 20s (MP4); 0.5 = same beats at half speed spacing (GIF ~10s).
+    logo_hold: if set, force last logo beat length in seconds (after pace scaling).
     """
     pace = max(0.25, float(card_pace))
     yi_n = max(1, len([x for x in yi_items if x]))
@@ -248,6 +250,9 @@ def build_timeline(
         summary_end *= pace
         logo_start *= pace
         total *= pace
+
+    if logo_hold is not None and float(logo_hold) > 0:
+        total = logo_start + float(logo_hold)
 
     tl = Timeline(duration=total)
     tl.bg_end = bg_end

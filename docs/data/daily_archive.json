@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T15:17:47",
+  "updatedAt": "2026-10-05T16:31:14",
   "timezone": "Asia/Taipei",
   "todayKey": "20261005",
-  "count": 17,
+  "count": 18,
   "days": [
+    {
+      "dateKey": "20261018",
+      "date": "2026-10-18",
+      "dateLine1": "115年10月18日 農曆九月初九",
+      "dateLine2": "丙午 [馬] 年戊戌月乙丑日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "解除開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "適合解除與祭祀，避開嫁娶與開市，順水流財迎好運。",
+      "rocDate": "115年10月18日",
+      "gif": "assets/daily/daily_20261018.gif",
+      "preview": "assets/daily/daily_20261018_preview.jpg",
+      "last": "assets/daily/daily_20261018_last.jpg",
+      "mp4": "assets/daily/daily_20261018.mp4",
+      "page": "daily/20261018.html"
+    },
     {
       "dateKey": "20261017",
       "date": "2026-10-17",

@@ -5,12 +5,34 @@
     return "名序_每日吉祥_" + key + ".gif";
   }
 
+  function mp4Filename(dateKey) {
+    const key = String(dateKey || "").replace(/\D/g, "") || "latest";
+    return "名序_每日吉祥_" + key + ".mp4";
+  }
+
   function gifUrl(data) {
     if (!data) return "";
     if (data.media) {
       return data.media.gifDated || data.media.gif || data.media.webp || "";
     }
     return data.gif || "";
+  }
+
+  function mp4Url(dataOrUrl, dateKey) {
+    let key = dateKey ? String(dateKey).replace(/\D/g, "") : "";
+    let url = "";
+    if (dataOrUrl && typeof dataOrUrl === "object") {
+      key = key || String(dataOrUrl.dateKey || "").replace(/\D/g, "");
+      url =
+        (dataOrUrl.media &&
+          (dataOrUrl.media.mp4Dated || dataOrUrl.media.mp4)) ||
+        dataOrUrl.mp4 ||
+        "";
+    } else if (typeof dataOrUrl === "string") {
+      if (/\.mp4(?:$|\?)/i.test(dataOrUrl)) url = dataOrUrl;
+    }
+    if (!url && key) url = "assets/daily/daily_" + key + ".mp4";
+    return url;
   }
 
   function escapeHtml(s) {
@@ -283,7 +305,7 @@
     if (!btn.classList.contains("btn-outline") && !btn.classList.contains("btn-primary")) {
       btn.classList.add("btn-primary");
     }
-    bindFileDownloadButton(btn, url, gifFilename(key), "下載 GIF");
+    bindFileDownloadButton(btn, url, gifFilename(key), "下載GIF");
   }
 
   function bindDownloadImageButton(btn, dataOrUrl, dateKey) {
@@ -296,7 +318,20 @@
     if (!btn.classList.contains("btn-primary")) {
       btn.classList.add("btn-outline");
     }
-    bindFileDownloadButton(btn, url, imageFilename(key), "下載圖檔");
+    bindFileDownloadButton(btn, url, imageFilename(key), "下載圖片");
+  }
+
+  function bindDownloadMp4Button(btn, dataOrUrl, dateKey) {
+    if (!btn) return;
+    let key = dateKey;
+    if (dataOrUrl && typeof dataOrUrl === "object") {
+      key = key || dataOrUrl.dateKey || dataOrUrl.date;
+    }
+    const url = mp4Url(dataOrUrl, key);
+    if (!btn.classList.contains("btn-primary")) {
+      btn.classList.add("btn-outline");
+    }
+    bindFileDownloadButton(btn, url, mp4Filename(key), "下載MP4");
   }
 
   function renderArchiveList(listEl, days, options) {
@@ -356,10 +391,10 @@
           gif +
           '" data-key="' +
           key +
-          '">下載 GIF</button>' +
+          '">下載GIF</button>' +
           '<button type="button" class="btn btn-outline daily-archive-img" data-key="' +
           key +
-          '">下載圖檔</button>' +
+          '">下載圖片</button>' +
           "</div>" +
           "</div>" +
           "</article>"
@@ -754,6 +789,7 @@
     downloadFile: downloadFile,
     bindDownloadButton: bindDownloadButton,
     bindDownloadImageButton: bindDownloadImageButton,
+    bindDownloadMp4Button: bindDownloadMp4Button,
     mountDailyPage: mountDailyPage,
     mountHomeDaily: mountHomeDaily,
     mountHomeAlbum: mountHomeAlbum,

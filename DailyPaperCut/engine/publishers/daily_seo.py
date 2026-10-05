@@ -272,8 +272,8 @@ def render_day_html(
         <h2>今日剪紙</h2>
         <img src="{_esc(gif_href)}" alt="{_esc(roc + ' 名序每日吉祥剪紙 GIF')}" width="1080" height="1080" />
         <div class="daily-actions" style="margin-top:0.9rem">
-          <a class="btn btn-primary" href="{_esc(gif_href)}" download="名序_每日吉祥_{_esc(key)}.gif">下載 GIF</a>
-          <a class="btn btn-outline" href="{_esc('../' + share_image)}" download="名序_每日吉祥_{_esc(key)}.jpg">下載圖檔</a>
+          <a class="btn btn-primary" href="{_esc(gif_href)}" download="名序_每日吉祥_{_esc(key)}.gif">下載GIF</a>
+          <a class="btn btn-outline" href="{_esc('../' + share_image)}" download="名序_每日吉祥_{_esc(key)}.jpg">下載圖片</a>
           <a class="btn btn-outline" href="../index.html#daily">回首頁日曆</a>
         </div>
       </article>

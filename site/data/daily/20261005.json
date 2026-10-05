@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T08:49:20",
+  "updatedAt": "2026-10-05T16:45:02",
   "timezone": "Asia/Taipei",
   "date": "2026-10-05",
   "dateKey": "20261005",
@@ -27,8 +27,8 @@
     "移徙",
     "出行"
   ],
-  "summaryText": "祭祀開運讓財運順流，避免出行保持安靜。",
-  "shortMessage": "今天適合祭祀與沐浴，讓運勢更流暢，記得避免出行！",
+  "summaryText": "祭祀開運與沐浴是今天的良策，避免出行與嫁娶，讓運勢靜靜…",
+  "shortMessage": "今天適合祭祀開運與沐浴，避免出行與嫁娶，讓心靈平靜，運勢自然來。",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
@@ -40,15 +40,18 @@
     "webp": "assets/daily/daily_20261005.webp",
     "preview": "assets/daily/daily_20261005_preview.jpg",
     "last": "assets/daily/daily_20261005_last.jpg",
+    "mp4": "assets/daily/daily_20261005.mp4",
     "shareImage": "assets/daily/daily_20261005_last.jpg",
     "scene": "assets/daily/scene_20261005.jpg",
     "scenePng": "assets/daily/scene_20261005.png",
     "gifDated": "assets/daily/daily_20261005.gif",
     "previewDated": "assets/daily/daily_20261005_preview.jpg",
     "lastDated": "assets/daily/daily_20261005_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261005.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

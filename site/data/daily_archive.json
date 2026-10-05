@@ -1,10 +1,25 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T11:24:36",
+  "updatedAt": "2026-10-05T11:29:45",
   "timezone": "Asia/Taipei",
   "todayKey": "20261005",
-  "count": 8,
+  "count": 9,
   "days": [
+    {
+      "dateKey": "20261009",
+      "date": "2026-10-09",
+      "dateLine1": "115年10月9日 農曆八月廿九",
+      "dateLine2": "丙午 [馬] 年戊戌月丙辰日",
+      "fortuneLevel": "吉",
+      "mainTheme": "順水流財",
+      "secondaryTheme": "祭祀開運",
+      "summaryText": "今日祭祀能開運，避免多餘行動，讓吉運如流水般至。",
+      "rocDate": "115年10月9日",
+      "gif": "assets/daily/daily_20261009.gif",
+      "preview": "assets/daily/daily_20261009_preview.jpg",
+      "last": "assets/daily/daily_20261009_last.jpg",
+      "page": "daily/20261009.html"
+    },
     {
       "dateKey": "20261008",
       "date": "2026-10-08",

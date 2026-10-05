@@ -1,10 +1,25 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T12:33:21",
+  "updatedAt": "2026-10-05T12:45:22",
   "timezone": "Asia/Taipei",
   "todayKey": "20261005",
-  "count": 11,
+  "count": 12,
   "days": [
+    {
+      "dateKey": "20261012",
+      "date": "2026-10-12",
+      "dateLine1": "115年10月12日 農曆九月初三",
+      "dateLine2": "丙午 [馬] 年戊戌月己未日",
+      "fortuneLevel": "平",
+      "mainTheme": "順水流財",
+      "secondaryTheme": "嫁娶開運",
+      "summaryText": "把握今日嫁娶與納財的良機，讓福氣隨著水流而來。",
+      "rocDate": "115年10月12日",
+      "gif": "assets/daily/daily_20261012.gif",
+      "preview": "assets/daily/daily_20261012_preview.jpg",
+      "last": "assets/daily/daily_20261012_last.jpg",
+      "page": "daily/20261012.html"
+    },
     {
       "dateKey": "20261011",
       "date": "2026-10-11",

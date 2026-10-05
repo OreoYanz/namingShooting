@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-05T12:45:22",
+  "timezone": "Asia/Taipei",
+  "date": "2026-10-12",
+  "dateKey": "20261012",
+  "rocDate": "115年10月12日",
+  "lunarDate": "農曆九月初三",
+  "dateLine1": "115年10月12日 農曆九月初三",
+  "dateLine2": "丙午 [馬] 年戊戌月己未日",
+  "dayGanZhi": "己未",
+  "dayAnimalHint": "馬",
+  "fortuneLevel": "平",
+  "fortuneScore": 56,
+  "mainTheme": "順水流財",
+  "secondaryTheme": "嫁娶開運",
+  "yi": [
+    "嫁娶",
+    "祭祀",
+    "作灶",
+    "納財"
+  ],
+  "ji": [
+    "安葬",
+    "開市",
+    "修墳",
+    "立碑"
+  ],
+  "summaryText": "把握今日嫁娶與納財的良機，讓福氣隨著水流而來。",
+  "shortMessage": "今天是己未，適合嫁娶與納財，避開安葬！",
+  "ctaLine": "想知道的不只是今天，還有你今年的方向？",
+  "ctaProduct": "名序｜流年分析",
+  "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
+  "brandName": "名序",
+  "brandTagline": "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+  "page": "daily/20261012.html",
+  "media": {
+    "gif": "assets/daily/daily_20261012.gif",
+    "webp": "assets/daily/daily_20261012.webp",
+    "preview": "assets/daily/daily_20261012_preview.jpg",
+    "last": "assets/daily/daily_20261012_last.jpg",
+    "shareImage": "assets/daily/daily_20261012_last.jpg",
+    "scene": "assets/daily/scene_20261012.jpg",
+    "scenePng": "assets/daily/scene_20261012.png",
+    "gifDated": "assets/daily/daily_20261012.gif",
+    "previewDated": "assets/daily/daily_20261012_preview.jpg",
+    "lastDated": "assets/daily/daily_20261012_last.jpg",
+    "latestGif": "assets/daily/latest.gif",
+    "latestPreview": "assets/daily/latest_preview.jpg",
+    "latestLast": "assets/daily/latest_last.jpg"
+  },
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+}

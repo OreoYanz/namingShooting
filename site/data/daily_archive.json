@@ -1,10 +1,25 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T12:45:22",
+  "updatedAt": "2026-10-05T12:47:54",
   "timezone": "Asia/Taipei",
   "todayKey": "20261005",
-  "count": 12,
+  "count": 13,
   "days": [
+    {
+      "dateKey": "20261013",
+      "date": "2026-10-13",
+      "dateLine1": "115年10月13日 農曆九月初四",
+      "dateLine2": "丙午 [馬] 年戊戌月庚申日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "嫁娶開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "把握今天的嫁娶良機，避開安葬與安床的安排。",
+      "rocDate": "115年10月13日",
+      "gif": "assets/daily/daily_20261013.gif",
+      "preview": "assets/daily/daily_20261013_preview.jpg",
+      "last": "assets/daily/daily_20261013_last.jpg",
+      "page": "daily/20261013.html"
+    },
     {
       "dateKey": "20261012",
       "date": "2026-10-12",

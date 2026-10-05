@@ -858,11 +858,26 @@ a:hover { text-decoration: underline; }
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
+/* transform 輪播：關閉原生 scroll／snap，改由 JS 緩動 */
+.cases-viewport.is-transform {
+  overflow: hidden;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.cases-viewport.is-transform:active {
+  cursor: grabbing;
+}
 .cases-viewport::-webkit-scrollbar { display: none; }
 .cases-track {
   display: flex;
   gap: 16px;
   padding: 4px 2px 8px;
+}
+.cases-viewport.is-transform .cases-track {
+  padding-bottom: 4px;
+  backface-visibility: hidden;
 }
 .case-card {
   flex: 0 0 min(280px, 82vw);
@@ -873,6 +888,25 @@ a:hover { text-decoration: underline; }
   min-height: 210px;
   scroll-snap-align: start;
   border-top: 3px solid var(--case-accent, var(--gold));
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.cases-viewport.is-transform .case-card {
+  scroll-snap-align: none;
+}
+.case-card--clone {
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .cases-viewport.is-transform .case-card:hover {
+    box-shadow: 0 10px 28px rgba(26, 31, 36, 0.08);
+    transform: translateY(-2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cases-viewport.is-transform .case-card,
+  .cases-viewport.is-transform .cases-track {
+    transition: none !important;
+  }
 }
 @media (min-width: 720px) {
   .case-card { flex-basis: calc((100% - 32px) / 3); }

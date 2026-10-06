@@ -41,6 +41,7 @@ def _archive_entry(yyyymmdd: str, daily: Dict[str, Any], payload: Dict[str, Any]
         "gif": f"assets/daily/daily_{yyyymmdd}.gif",
         "preview": f"assets/daily/daily_{yyyymmdd}_preview.jpg",
         "last": f"assets/daily/daily_{yyyymmdd}_last.jpg",
+        "mp4": f"assets/daily/daily_{yyyymmdd}.mp4",
         "page": f"daily/{yyyymmdd}.html",
     }
 
@@ -76,6 +77,7 @@ def _update_archive(root: Path, entry: Dict[str, Any]) -> str:
                 "last": media.get("lastDated")
                 or media.get("shareImage")
                 or f"assets/daily/daily_{key}_last.jpg",
+                "mp4": media.get("mp4Dated") or media.get("mp4") or f"assets/daily/daily_{key}.mp4",
                 "page": f"daily/{key}.html",
             }
 
@@ -99,6 +101,7 @@ def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]
     gif_dated = f"assets/daily/daily_{yyyymmdd}.gif"
     preview_dated = f"assets/daily/daily_{yyyymmdd}_preview.jpg"
     last_dated = f"assets/daily/daily_{yyyymmdd}_last.jpg"
+    mp4_dated = f"assets/daily/daily_{yyyymmdd}.mp4"
     scene_jpg = f"assets/daily/scene_{yyyymmdd}.jpg"
     scene_png = f"assets/daily/scene_{yyyymmdd}.png"
     return {
@@ -133,15 +136,18 @@ def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]
             "webp": f"assets/daily/daily_{yyyymmdd}.webp",
             "preview": preview_dated,
             "last": last_dated,
+            "mp4": mp4_dated,
             "shareImage": last_dated,
             "scene": scene_jpg,
             "scenePng": scene_png,
             "gifDated": gif_dated,
             "previewDated": preview_dated,
             "lastDated": last_dated,
+            "mp4Dated": mp4_dated,
             "latestGif": "assets/daily/latest.gif",
             "latestPreview": "assets/daily/latest_preview.jpg",
             "latestLast": "assets/daily/latest_last.jpg",
+            "latestMp4": "assets/daily/latest.mp4",
         },
         "fortuneNote": fortune.get("note") or "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
     }
@@ -188,6 +194,7 @@ def _refresh_latest_pointer(root: Path, copied: List[str]) -> None:
         (assets_dir / f"daily_{active}.webp", assets_dir / "latest.webp"),
         (assets_dir / f"daily_{active}_preview.jpg", assets_dir / "latest_preview.jpg"),
         (assets_dir / f"daily_{active}_last.jpg", assets_dir / "latest_last.jpg"),
+        (assets_dir / f"daily_{active}.mp4", assets_dir / "latest.mp4"),
         (assets_dir / f"scene_{active}.jpg", assets_dir / "latest_scene.jpg"),
         (assets_dir / f"scene_{active}.png", assets_dir / "latest_scene.png"),
     ]
@@ -283,6 +290,7 @@ def _publish_into(root: Path, yyyymmdd: str, daily: Dict[str, Any], fortune: Dic
         (base / "gif" / f"daily_{yyyymmdd}.webp", assets_dir / f"daily_{yyyymmdd}.webp"),
         (last_src, assets_dir / f"daily_{yyyymmdd}_last.jpg"),
         (base / "short" / f"daily_{yyyymmdd}_preview.jpg", assets_dir / f"daily_{yyyymmdd}_preview.jpg"),
+        (base / "short" / f"daily_{yyyymmdd}.mp4", assets_dir / f"daily_{yyyymmdd}.mp4"),
         (base / "scene" / f"scene_{yyyymmdd}.jpg", assets_dir / f"scene_{yyyymmdd}.jpg"),
         (base / "scene" / f"scene_{yyyymmdd}.png", assets_dir / f"scene_{yyyymmdd}.png"),
     ]
@@ -366,6 +374,6 @@ def publish_to_site(yyyymmdd: str) -> Dict[str, Any]:
         "latest": str(DOCS_ROOT / "data" / "daily_latest.json"),
         "archive": str(DOCS_ROOT / "data" / "daily_archive.json"),
         "page": "daily.html",
-        "url": f"https://oreoyanz.github.io/namingShooting/daily/{yyyymmdd}.html",
+        "url": f"https://mingxu.mingxu.workers.dev/daily/{yyyymmdd}.html",
         "note": note,
     }

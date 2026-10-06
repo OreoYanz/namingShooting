@@ -173,19 +173,24 @@
           <h2>Generate Daily</h2>
           <label>日期 YYYYMMDD</label>
           <input id="dateIn" value="20261002" />
-          <button class="primary" id="btnGenerate">產生當日包</button>
+          <button class="primary" id="btnGenerate">產生當日包（完成後自動上官網）</button>
           <button class="ghost" id="btnLoad">載入已有結果</button>
           <button class="ghost" id="btnConfirm">標記確認</button>
           <div class="publish-targets" id="publishTargets">
-            <span>發布到</span>
-            <label class="check"><input type="checkbox" name="ch" value="site" checked /> 官網（寫入後自動 commit／push）</label>
+            <span>額外發布</span>
+            <label class="check"><input type="checkbox" name="ch" value="youtube" /> YouTube Shorts</label>
+            <label class="check"><input type="checkbox" name="ch" value="facebook" /> Facebook <em>圖＋Reels</em></label>
+            <label class="check"><input type="checkbox" name="ch" value="instagram" /> Instagram <em>圖＋Reels</em></label>
+            <label class="check"><input type="checkbox" name="ch" value="threads" /> Threads <em>圖＋影</em></label>
             <label class="check soon"><input type="checkbox" name="ch" value="line" /> LINE VOOM <em>即將</em></label>
-            <label class="check soon"><input type="checkbox" name="ch" value="facebook" /> Facebook <em>即將</em></label>
-            <label class="check soon"><input type="checkbox" name="ch" value="instagram" /> Instagram <em>即將</em></label>
-            <label class="check soon"><input type="checkbox" name="ch" value="threads" /> Threads <em>即將</em></label>
-            <label class="check soon"><input type="checkbox" name="ch" value="youtube" /> YouTube Shorts <em>即將</em></label>
           </div>
-          <button class="ghost" id="btnPublish">發布官網並上線</button>
+          <p style="margin:0.4rem 0 0;color:var(--muted);font-size:0.8rem">
+            產生完成後會自動：寄信、上官網、上傳 YouTube Shorts（需先授權，見 <code>docs/YOUTUBE_SETUP.md</code>）。
+            <button type="button" class="ghost" id="btnMetaStatus" style="margin-left:0.4rem;padding:0.15rem 0.5rem;font-size:0.78rem">檢查 Meta</button>
+            <button type="button" class="ghost" id="btnYtStatus" style="margin-left:0.25rem;padding:0.15rem 0.5rem;font-size:0.78rem">檢查 YouTube</button>
+          </p>
+          <button class="ghost" id="btnPublish">補發選取頻道</button>
+          <button class="ghost" id="btnRepublishSite">僅重發官網</button>
           <div class="status" id="dailyStatus"></div>
         </div>
         <div class="box">
@@ -313,7 +318,7 @@
     }
 
     $("btnGenerate").onclick = async () => {
-      setStatus($("dailyStatus"), "產生中…");
+      setStatus($("dailyStatus"), "產生中（完成後會自動上官網並寄信）…");
       const fd = new FormData();
       fd.append("date", $("dateIn").value.trim());
       const res = await fetch("/api/generate", { method: "POST", body: fd });
@@ -322,7 +327,39 @@
         setStatus($("dailyStatus"), data.detail || "失敗", false);
         return;
       }
-      setStatus($("dailyStatus"), `完成 ${data.date}\nMP4: ${data.files.shortMp4 || ""}`, true);
+      const mailLine = data.mail && data.mail.ok
+        ? `已寄信至 ${data.mail.to}`
+        : data.mail && data.mail.skipped
+          ? `寄信略過：${data.mail.error || "未設定 Gmail"}`
+          : data.mail && data.mail.error
+            ? `寄信失敗：${data.mail.error}`
+            : "";
+      const sp = data.sitePublish || {};
+      const siteOk = sp.site && sp.site.ok;
+      const git = sp.git || {};
+      const siteLine = sp.error
+        ? `官網自動發布失敗：${sp.error}`
+        : siteOk
+          ? `官網已自動更新` + (git.ok ? `／${git.message || "已 push"}` : git.error ? `／git：${git.error}` : "")
+          : sp.site
+            ? `官網寫入失敗`
+            : "";
+      const yt = data.youtubePublish || {};
+      const ytLine = yt.ok
+        ? `YouTube Shorts：${yt.url || yt.videoId || "已上傳"}`
+        : yt.skipped
+          ? `YouTube 略過：${yt.error || "未授權"}`
+          : yt.error
+            ? `YouTube 失敗：${yt.error}`
+            : "";
+      const ok = !!(siteOk || !sp.site) && !(data.mail && data.mail.error && !data.mail.skipped);
+      setStatus(
+        $("dailyStatus"),
+        [`完成 ${data.date}`, `MP4: ${(data.files && data.files.shortMp4) || ""}`, mailLine, siteLine, ytLine]
+          .filter(Boolean)
+          .join("\n"),
+        ok
+      );
       await renderDay(data.date);
     };
     $("btnLoad").onclick = () => renderDay($("dateIn").value.trim());
@@ -337,6 +374,34 @@
         .map((el) => el.value);
     }
 
+    $("btnMetaStatus").onclick = async () => {
+      const res = await fetch("/api/meta/status");
+      const data = await res.json().catch(() => ({}));
+      const c = (data && data.config) || {};
+      const lines = [
+        `Facebook：${c.facebook_ready ? "就緒" : "未設定"}（Page ${c.page_id || "—"}）`,
+        `Instagram：${c.instagram_ready ? "就緒" : "未設定"}（IG ${c.ig_user_id || "—"}）`,
+        `Threads：${c.threads_ready ? "就緒" : "未設定"}（User ${c.threads_user_id || "—"}）`,
+        `公開媒體：${c.public_base_url || "—"}`,
+        "",
+        "設定步驟見 DailyPaperCut/docs/META_SETUP.md",
+      ];
+      setStatus($("dailyStatus"), lines.join("\n"), !!(c.facebook_ready || c.instagram_ready || c.threads_ready));
+    };
+
+    $("btnYtStatus").onclick = async () => {
+      const res = await fetch("/api/youtube/status");
+      const data = await res.json().catch(() => ({}));
+      const lines = [
+        `YouTube：${data.ready ? "就緒（可自動上傳 Shorts）" : "未授權"}`,
+        `client_secret：${data.clientSecretsExists ? "有" : "無"}`,
+        `token：${data.tokenExists ? "有" : "無"}`,
+        "",
+        data.hint || "見 docs/YOUTUBE_SETUP.md",
+      ];
+      setStatus($("dailyStatus"), lines.join("\n"), !!data.ready);
+    };
+
     $("btnPublish").onclick = async () => {
       const d = $("dateIn").value.trim();
       const channels = selectedChannels();
@@ -344,7 +409,13 @@
         setStatus($("dailyStatus"), "請至少勾選一個發布目標", false);
         return;
       }
-      setStatus($("dailyStatus"), "發布並上線中（含 commit／push）…");
+      const social = channels.some((c) => ["facebook", "instagram", "threads"].includes(c));
+      setStatus(
+        $("dailyStatus"),
+        social
+          ? "發布中（官網媒體 → push → Meta 靜態圖／Reels，可能需要 1～3 分鐘）…"
+          : "發布並上線中（含 commit／push）…"
+      );
       const fd = new FormData();
       fd.append("channels", channels.join(","));
       const res = await fetch(`/api/day/${d}/publish`, { method: "POST", body: fd });
@@ -353,8 +424,28 @@
         setStatus($("dailyStatus"), data.detail || "發布失敗", false);
         return;
       }
+      const warn = (data.warnings || []).length ? "\n⚠ " + data.warnings.join("；") : "";
+      const socialFail = ["facebook", "instagram", "threads"].some(
+        (c) => channels.includes(c) && data.results && data.results[c] && data.results[c].ok === false
+      );
       const gitOk = !data.results || !data.results.git || data.results.git.ok !== false;
-      setStatus($("dailyStatus"), data.message || "已發布", gitOk);
+      setStatus($("dailyStatus"), (data.message || "已發布") + warn, gitOk && !socialFail);
+      await renderDay(d);
+    };
+
+    $("btnRepublishSite").onclick = async () => {
+      const d = $("dateIn").value.trim();
+      setStatus($("dailyStatus"), "重發官網中（含 commit／push）…");
+      const fd = new FormData();
+      fd.append("channels", "site");
+      const res = await fetch(`/api/day/${d}/publish`, { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setStatus($("dailyStatus"), data.detail || "發布失敗", false);
+        return;
+      }
+      const gitOk = !data.results || !data.results.git || data.results.git.ok !== false;
+      setStatus($("dailyStatus"), data.message || "官網已重發", gitOk);
       await renderDay(d);
     };
 

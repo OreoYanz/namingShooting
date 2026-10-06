@@ -168,6 +168,19 @@ def api_pool_file(item_id: str):
     raise HTTPException(404, "素材檔不存在")
 
 
+@app.get("/api/youtube/status")
+def api_youtube_status():
+    from engine.publishers.youtube import youtube_ready, _token_path, _client_secrets_path
+
+    return {
+        "ok": True,
+        "ready": youtube_ready(),
+        "tokenExists": _token_path().exists(),
+        "clientSecretsExists": _client_secrets_path().exists(),
+        "hint": "見 docs/YOUTUBE_SETUP.md；授權：python youtube_auth.py",
+    }
+
+
 @app.post("/api/generate")
 def api_generate(date: str = Form(...)):
     try:
@@ -183,6 +196,9 @@ def api_generate(date: str = Form(...)):
                 if k not in ("social", "cutouts")
             },
             "materialIds": result["materials"].get("allIds"),
+            "mail": result.get("mail"),
+            "sitePublish": result.get("sitePublish"),
+            "youtubePublish": result.get("youtubePublish"),
         }
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
@@ -251,14 +267,23 @@ def api_confirm(yyyymmdd: str):
     return {"ok": True, "publish": data}
 
 
+@app.get("/api/meta/status")
+def api_meta_status():
+    """Check whether Meta env credentials look ready (tokens masked)."""
+    from engine.publishers.meta_config import load_meta_config
+
+    return {"ok": True, "config": load_meta_config().summary()}
+
+
 @app.post("/api/day/{yyyymmdd}/publish")
 def api_publish(
     yyyymmdd: str,
     channels: str = Form("site"),
 ):
     """
-    Publish selected channels. Currently implemented: site (官網).
-    channels: comma-separated, e.g. "site,line,youtube"
+    Publish selected channels.
+    Implemented: site, facebook, instagram, threads.
+    channels: comma-separated, e.g. "site,facebook,instagram,threads"
     """
     base = day_dir(yyyymmdd)
     daily_p = base / "data" / "daily.json"
@@ -282,8 +307,43 @@ def api_publish(
 
     results = {}
     errors = []
+    social_selected = [c for c in selected if c in ("facebook", "instagram", "threads")]
+    site_via_social = False
 
-    if "site" in selected:
+    # Meta 社群需要公開媒體 URL → 內部會先 site + git push
+    if social_selected:
+        try:
+            from engine.publishers.social_meta import publish_social_channels
+
+            social_bundle = publish_social_channels(
+                yyyymmdd, social_selected, ensure_media=True
+            )
+            results["social"] = social_bundle
+            prep = social_bundle.get("prep") or {}
+            if prep.get("site"):
+                results["site"] = prep["site"]
+                site_via_social = True
+                publish["channels"]["site"] = bool(prep["site"].get("ok"))
+            if prep.get("git"):
+                results["git"] = prep["git"]
+            for ch in social_selected:
+                ch_res = (social_bundle.get("channels") or {}).get(ch) or {
+                    "ok": False,
+                    "error": "未執行",
+                }
+                results[ch] = ch_res
+                publish["channels"][ch] = bool(ch_res.get("ok"))
+                if not ch_res.get("ok"):
+                    errors.append(f"{ch}: {ch_res.get('error') or '失敗'}")
+            if not social_bundle.get("ok") and social_bundle.get("error"):
+                errors.append(str(social_bundle["error"]))
+        except Exception as e:
+            errors.append(f"social: {e}")
+            for ch in social_selected:
+                publish["channels"][ch] = False
+                results[ch] = {"ok": False, "error": str(e)}
+
+    if "site" in selected and not site_via_social:
         try:
             from engine.publishers.site import publish_to_site
             from engine.publishers.git_push import commit_and_push_site
@@ -300,9 +360,22 @@ def api_publish(
             publish["channels"]["site"] = False
             results["site"] = {"ok": False, "error": str(e)}
 
-    # Placeholders for future channels (checkbox may be sent; return clear status)
+    if "youtube" in selected:
+        try:
+            from engine.publishers.youtube import publish_day as publish_youtube_day
+
+            yt = publish_youtube_day(yyyymmdd)
+            results["youtube"] = yt
+            publish["channels"]["youtube"] = bool(yt.get("ok"))
+            if not yt.get("ok") and not yt.get("skipped"):
+                errors.append(f"youtube: {yt.get('error') or '失敗'}")
+        except Exception as e:
+            errors.append(f"youtube: {e}")
+            publish["channels"]["youtube"] = False
+            results["youtube"] = {"ok": False, "error": str(e)}
+
     pending = []
-    for ch in ("line", "facebook", "instagram", "threads", "youtube"):
+    for ch in ("line",):
         if ch in selected:
             pending.append(ch)
             publish["channels"][ch] = False
@@ -312,7 +385,11 @@ def api_publish(
                 "message": f"「{ch}」發布接線尚未啟用，已記錄勾選。",
             }
 
-    if results.get("site", {}).get("ok"):
+    any_channel_ok = bool(results.get("site", {}).get("ok")) or any(
+        results.get(ch, {}).get("ok")
+        for ch in ("facebook", "instagram", "threads", "youtube")
+    )
+    if any_channel_ok:
         publish["status"] = "published"
         publish["publishedAt"] = datetime.now().isoformat(timespec="seconds")
         if not publish.get("confirmedAt"):
@@ -323,7 +400,7 @@ def api_publish(
     publish["lastSelected"] = selected
     save_json(pub_path, publish)
 
-    if "site" in selected and not results.get("site", {}).get("ok"):
+    if "site" in selected and not results.get("site", {}).get("ok") and not social_selected:
         raise HTTPException(status_code=400, detail="; ".join(errors) or "官網發布失敗")
 
     msg_parts = []
@@ -341,6 +418,31 @@ def api_publish(
         msg_parts.append("Git 上線失敗：" + str(git_res.get("error")))
         if git_res.get("stderr"):
             msg_parts.append(str(git_res["stderr"])[:400])
+
+    for ch in ("facebook", "instagram", "threads"):
+        if ch not in selected:
+            continue
+        ch_res = results.get(ch) or {}
+        if ch_res.get("ok"):
+            posts = ch_res.get("posts") or {}
+            bits = []
+            if posts.get("photo", {}).get("ok"):
+                bits.append("靜態圖")
+            if posts.get("reel", {}).get("ok"):
+                bits.append("Reels")
+            msg_parts.append(f"{ch}：已發 " + ("、".join(bits) or "內容"))
+        elif ch_res.get("error"):
+            msg_parts.append(f"{ch} 失敗：{ch_res['error']}")
+
+    if "youtube" in selected:
+        yt = results.get("youtube") or {}
+        if yt.get("ok"):
+            msg_parts.append("YouTube Shorts：" + (yt.get("url") or yt.get("videoId") or "已上傳"))
+        elif yt.get("skipped"):
+            msg_parts.append("YouTube 略過：" + str(yt.get("error") or ""))
+        elif yt.get("error"):
+            msg_parts.append("YouTube 失敗：" + str(yt["error"]))
+
     if pending:
         msg_parts.append("尚未啟用：" + "、".join(pending))
 
@@ -351,4 +453,5 @@ def api_publish(
         "results": results,
         "publish": publish,
         "message": "\n".join(msg_parts) or "已處理",
+        "warnings": errors,
     }

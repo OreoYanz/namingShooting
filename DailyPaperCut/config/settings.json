@@ -1,6 +1,6 @@
 {
   "projectName": "名序每日吉祥剪紙引擎",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "paths": {
     "root": ".",
     "outputRoot": ".",
@@ -21,7 +21,7 @@
   "cta": {
     "line": "想知道的不只是今天，還有你今年的方向？",
     "product": "名序｜流年分析",
-    "url": "https://oreoyanz.github.io/namingShooting/"
+    "url": "https://mingxu.mingxu.workers.dev/"
   },
   "brand": {
     "name": "名序",
@@ -32,7 +32,8 @@
     "gifSize": [1080, 1080],
     "shortSize": [1080, 1920],
     "durationSec": 20,
-    "fps": 10
+    "fps": 10,
+    "shortsVersion": "v3"
   },
   "reuseRules": {
     "sameMaterialMinDays": 7,

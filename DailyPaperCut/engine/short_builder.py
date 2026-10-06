@@ -1,16 +1,117 @@
 """Shorts 9:16 MP4 — same Scene / Animation Engine as GIF; letterbox full 1:1 (no side crop)."""
 from __future__ import annotations
 
+import hashlib
+import random
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from . import ROOT
 from .gif_builder import _load_scene, build_animated_frames, _elements_from_inputs
 
 # Match gif_builder letterbox cream so Shorts pad matches brand paper tone
 _LETTERBOX_RGB = (247, 244, 239)
+
+BGM_DIR = ROOT / "materials" / "assets" / "BGM"
+_BGM_EXTS = {".wav", ".mp3", ".m4a", ".aac", ".ogg", ".flac"}
+
+
+def list_bgm_files() -> List[Path]:
+    if not BGM_DIR.is_dir():
+        return []
+    return sorted(
+        p for p in BGM_DIR.iterdir()
+        if p.is_file() and p.suffix.lower() in _BGM_EXTS
+    )
+
+
+def pick_bgm(yyyymmdd: str) -> Optional[Path]:
+    """Deterministic daily pick: N 選 1 from materials/assets/BGM."""
+    files = list_bgm_files()
+    if not files:
+        return None
+    seed = int(hashlib.md5(f"bgm:{yyyymmdd}".encode("utf-8")).hexdigest()[:8], 16)
+    return random.Random(seed).choice(files)
+
+
+def _resolve_ffmpeg() -> Optional[str]:
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg:
+        return ffmpeg
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return None
+
+
+def mux_bgm_into_mp4(
+    mp4: Path,
+    bgm: Path,
+    *,
+    duration_sec: Optional[float] = None,
+    volume: float = 0.42,
+) -> bool:
+    """Mux / replace audio with BGM (loop+trim to video length, soft fade-out)."""
+    ffmpeg = _resolve_ffmpeg()
+    if not ffmpeg or not mp4.exists() or not bgm.exists():
+        return False
+
+    dur = float(duration_sec) if duration_sec and duration_sec > 0 else 0.0
+    fade_dur = 1.2
+    if dur > 0:
+        fade_start = max(0.0, dur - fade_dur)
+        afilter = f"volume={volume},afade=t=out:st={fade_start:.2f}:d={fade_dur:.2f}"
+    else:
+        afilter = f"volume={volume}"
+
+    out = mp4.with_suffix(".bgm.mp4")
+    cmd = [
+        ffmpeg,
+        "-y",
+        "-i",
+        str(mp4),
+        "-stream_loop",
+        "-1",
+        "-i",
+        str(bgm),
+        "-c:v",
+        "copy",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-ac",
+        "2",
+        "-ar",
+        "44100",
+        "-filter:a",
+        afilter,
+        "-shortest",
+        "-movflags",
+        "+faststart",
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+        str(out),
+    ]
+    try:
+        subprocess.run(cmd, check=True, capture_output=True)
+        if out.exists() and out.stat().st_size > 0:
+            out.replace(mp4)
+            return True
+    except Exception:
+        if out.exists():
+            try:
+                out.unlink()
+            except Exception:
+                pass
+    return False
 
 
 def letterbox_square_to_vertical(square_frames, size: Tuple[int, int]):
@@ -100,14 +201,9 @@ def _write_mp4_imageio(frames, mp4: Path, fps: int) -> bool:
 
 
 def _write_mp4_ffmpeg(frames, mp4: Path, fps: int) -> bool:
-    ffmpeg = shutil.which("ffmpeg")
+    ffmpeg = _resolve_ffmpeg()
     if not ffmpeg:
-        try:
-            import imageio_ffmpeg
-
-            ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
-        except Exception:
-            return False
+        return False
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         for i, fr in enumerate(frames):
@@ -168,4 +264,18 @@ def export_short(
     pending = short_dir / f"daily_{yyyymmdd}_mp4_pending.txt"
     if pending.exists():
         pending.unlink()
-    return {"mp4": str(mp4), "preview": str(preview)}
+
+    # Background music: random 1 of N from materials/assets/BGM (seeded by date)
+    bgm = pick_bgm(yyyymmdd)
+    bgm_ok = False
+    video_dur = len(frames) / float(max(1, fps))
+    if bgm is not None:
+        bgm_ok = mux_bgm_into_mp4(mp4, bgm, duration_sec=video_dur, volume=0.42)
+
+    return {
+        "mp4": str(mp4),
+        "preview": str(preview),
+        "bgm": str(bgm) if bgm else "",
+        "bgmName": bgm.name if bgm else "",
+        "bgmMuxed": bgm_ok,
+    }

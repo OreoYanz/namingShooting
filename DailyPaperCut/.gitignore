@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 ui/__pycache__/
 engine/__pycache__/
-# generated daily packs (keep structure, ignore large binaries if desired)
-# Uncomment to skip committing daily media:
-# 20*/
+config/youtube_token.json
+config/youtube_client_secret.json
+config/_youtube_client_installed_wrap.json
+# generated daily packs (local media; site/docs hold the published copies)
+20*/

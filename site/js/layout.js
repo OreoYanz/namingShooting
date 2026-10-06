@@ -120,8 +120,8 @@
     const storageKey = "mx_visit_counted_v1";
     const cacheKey = "mx_visit_count_v1";
     const apiBase = "https://abacus.jasoncameron.dev";
-    const ns = "oreoyanz.github.io";
-    const key = "namingShooting";
+    const ns = "mingxu.mingxu.workers.dev";
+    const key = "mingxu";
 
     function paint(n) {
       const num = Number(n);

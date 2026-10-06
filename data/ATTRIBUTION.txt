@@ -1,0 +1,31 @@
+資料來源與授權（請一併保留）
+
+1. 康熙字典筆劃數對照表
+   breezyreeds/kangxi-strokecount
+   https://github.com/breezyreeds/kangxi-strokecount
+   MIT License © 2018 Kawai Lo
+   檔案：data/kangxi_strokes.csv
+
+2. 取名用字五行／字義種子（簡轉繁後使用）
+   wheatma/naming-word
+   https://github.com/wheatma/naming-word
+   MIT License
+   檔案：data/word_seed.csv
+
+3. 八字節氣／大運／流年干支
+   lunar-python（6tail）
+   https://github.com/6tail/lunar-python
+
+4. 菜市場名種子
+   內政部《全國姓名統計分析》及公開新聞年榜整理，非即時戶政 API。
+   請以 data/hot_names_template.csv 每年自行更新。
+
+5. 單字部首／漢語拼音／語料頻率
+   Unicode Unihan Database（Unicode 17.0）
+   https://www.unicode.org/charts/unihan.html
+   Terms of Use: https://www.unicode.org/terms_of_use.html
+   檔案：data/hanzi_meta.csv（由 Unihan_IRGSources kRSUnicode、Unihan_Readings kMandarin／kHanyuPinlu 編譯）
+   注音由拼音轉換；字義五行優先採 word_seed，否則依部首推估。
+   Character Style（現代／古典／文學／典雅／可愛／中性／剛健／柔和）為本系統啟發式＋校準覆寫，非官方評分。
+
+本軟體命理規則為文化參考實作，與市面命理師見解可能不同。

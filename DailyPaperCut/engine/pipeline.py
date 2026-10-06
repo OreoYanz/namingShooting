@@ -12,7 +12,7 @@ except ImportError:  # optional
     def load_dotenv(*args, **kwargs):
         return False
 
-from . import ROOT, ensure_day_folders, load_settings, parse_date_arg, save_json
+from . import ROOT, ensure_day_folders, load_json, load_settings, parse_date_arg, save_json
 from .ai_copy import choose_theme, generate_social_copy
 from .cutout_from_pool import ensure_cutouts
 from .fortune import generate_fortune
@@ -30,7 +30,7 @@ def generate_daily(
     force_theme: Optional[str] = None,
     use_theme_set: Optional[bool] = None,
 ) -> Dict[str, Any]:
-    load_dotenv(ROOT / ".env")
+    load_dotenv(ROOT / ".env", override=True)
     d, yyyymmdd = parse_date_arg(date_str)
     settings = load_settings()
     base = ensure_day_folders(yyyymmdd)
@@ -46,8 +46,19 @@ def generate_daily(
             "secondaryTheme": themes.get("secondaryTheme") or force_theme,
         }
 
-    # Background: random pick from materials/assets/Background/
+    # Background: theme cast (Hero / Plants / Nature / Accent) for Shorts V3.
+    # GIF keeps current bg_only look — do not change square GIF composition.
     materials = pick_materials(d, themes["mainTheme"])
+    gif_materials = {
+        **materials,
+        "template": "bg_only",
+        "hero": None,
+        "nature": None,
+        "plants": [],
+        "accent": None,
+        "accents": [],
+        "season": None,
+    }
 
     cutouts = ensure_cutouts(materials, base / "cutout", base / "source")
     by_id = {c["id"]: c["cutout"] for c in cutouts if c.get("id")}
@@ -57,6 +68,7 @@ def generate_daily(
         materials.get("background"),
         materials.get("nature"),
         materials.get("accent"),
+        materials.get("season"),
         *list(materials.get("plants") or []),
         *list(materials.get("accents") or []),
     ):
@@ -66,16 +78,19 @@ def generate_daily(
     scene_png = base / "scene" / f"scene_{yyyymmdd}.png"
     media = settings["media"]
     gif_size = tuple(media["gifSize"])
-    elements = build_scene_elements(materials, by_id, gif_size)
-    compose_scene(cutouts, scene_png, size=gif_size, materials=materials)
+    short_size = tuple(media["shortSize"])
+    # Square scene preview follows GIF (bg_only) so existing GIF look stays
+    elements = build_scene_elements(gif_materials, by_id, gif_size)
+    compose_scene(cutouts, scene_png, size=gif_size, materials=gif_materials)
     save_scene_json(
         base / "scene" / "scene.json",
         elements,
         {
             "date": yyyymmdd,
             "theme": themes["mainTheme"],
-            "template": materials.get("template"),
+            "template": gif_materials.get("template"),
             "profile": (materials.get("themeProfile") or {}).get("profileKey"),
+            "shortsTemplate": materials.get("template"),
         },
     )
 
@@ -135,7 +150,7 @@ def generate_daily(
         media["durationSec"],
         media["fps"],
         cutouts=cutouts,
-        materials=materials,
+        materials=gif_materials,
         scene_json_path=base / "data" / "scene.json",
     )
     short_files = export_short(
@@ -143,12 +158,12 @@ def generate_daily(
         daily,
         base / "short",
         yyyymmdd,
-        tuple(media["shortSize"]),
+        short_size,
         media["durationSec"],
         media["fps"],
         cutouts=cutouts,
-        materials=materials,
-        # MP4 獨立產幀（20s 正常字卡節奏），不共用 GIF 加速幀
+        materials=gif_materials,
+        # MP4：正方形動畫 letterbox 成 9:16（與 GIF 同內容）
         square_frames=None,
     )
     # drop heavy frame list from return payload
@@ -156,6 +171,19 @@ def generate_daily(
     gif_files.pop("elements", None)
     social_files = write_social(base / "social", copy)
     publish_path = write_publish(base / "publish", yyyymmdd, status="draft")
+
+    mail_result = None
+    try:
+        from .mailer import send_daily_social_mail
+
+        mp4 = short_files.get("mp4")
+        mail_result = send_daily_social_mail(
+            yyyymmdd,
+            social_dir=base / "social",
+            mp4_path=Path(mp4) if mp4 else None,
+        )
+    except Exception as e:
+        mail_result = {"ok": False, "error": str(e)}
 
     generation = {
         "date": yyyymmdd,
@@ -165,10 +193,11 @@ def generate_daily(
         "openaiCopy": bool(os.environ.get(settings["openai"]["apiKeyEnv"], "").strip()),
         "imageGenerationEnabled": bool(settings["openai"].get("enableImageGeneration")),
         "sceneEngine": {
-            "template": materials.get("template"),
+            "template": gif_materials.get("template"),
             "heroId": (materials.get("hero") or {}).get("id"),
             "elementCount": len(elements),
         },
+        "mail": mail_result,
     }
     save_json(base / "data" / "generation.json", generation)
 
@@ -187,6 +216,7 @@ def generate_daily(
         "social": social_files,
         "publish": publish_path,
         "cutouts": [c["cutout"] for c in cutouts],
+        "mail": mail_result,
     }
     manifest = build_manifest(yyyymmdd, fortune, daily, materials, files)
     manifest_path = base / "manifest.json"
@@ -201,6 +231,89 @@ def generate_daily(
         background_id=(materials.get("background") or {}).get("id"),
     )
 
+    # 產生完成後自動寫入官網並 commit／push（可用 AUTO_PUBLISH_SITE=false 關閉）
+    site_publish = None
+    auto_flag = (os.getenv("AUTO_PUBLISH_SITE") or "true").strip().lower()
+    if auto_flag not in ("0", "false", "no", "off"):
+        try:
+            from .publishers.git_push import commit_and_push_site
+            from .publishers.site import publish_to_site
+
+            site_res = publish_to_site(yyyymmdd)
+            git_res = None
+            if site_res.get("ok"):
+                git_res = commit_and_push_site(yyyymmdd)
+            site_publish = {"site": site_res, "git": git_res}
+            # 更新 publish.json
+            try:
+                pub_path = Path(publish_path)
+                pub = load_json(pub_path) if pub_path.exists() else {
+                    "date": yyyymmdd,
+                    "channels": {},
+                    "confirmedAt": None,
+                    "publishedAt": None,
+                }
+                pub.setdefault("channels", {})
+                pub.setdefault("results", {})
+                pub["channels"]["site"] = bool(site_res.get("ok"))
+                pub["results"]["site"] = site_res
+                if git_res is not None:
+                    pub["results"]["git"] = git_res
+                if site_res.get("ok"):
+                    pub["status"] = "published"
+                    pub["publishedAt"] = datetime.now().isoformat(timespec="seconds")
+                    if not pub.get("confirmedAt"):
+                        pub["confirmedAt"] = pub["publishedAt"]
+                else:
+                    pub["status"] = pub.get("status") or "draft"
+                pub["autoPublished"] = True
+                save_json(pub_path, pub)
+            except Exception as pe:
+                site_publish["publishJsonError"] = str(pe)
+        except Exception as e:
+            site_publish = {"ok": False, "error": str(e)}
+
+    # 自動上傳 YouTube Shorts（需先 youtube_auth.py；AUTO_PUBLISH_YOUTUBE=false 可關）
+    youtube_publish = None
+    yt_flag = (os.getenv("AUTO_PUBLISH_YOUTUBE") or "true").strip().lower()
+    if yt_flag not in ("0", "false", "no", "off"):
+        try:
+            from .publishers.youtube import publish_day as publish_youtube_day
+            from .publishers.youtube import youtube_ready
+
+            if youtube_ready():
+                youtube_publish = publish_youtube_day(yyyymmdd)
+            else:
+                youtube_publish = {
+                    "ok": False,
+                    "skipped": True,
+                    "error": "尚未設定 YouTube（見 docs/YOUTUBE_SETUP.md）",
+                }
+            # 寫入 publish.json
+            try:
+                pub_path = Path(publish_path)
+                pub = load_json(pub_path) if pub_path.exists() else {
+                    "date": yyyymmdd,
+                    "channels": {},
+                    "results": {},
+                }
+                pub.setdefault("channels", {})
+                pub.setdefault("results", {})
+                pub["channels"]["youtube"] = bool(youtube_publish.get("ok"))
+                pub["results"]["youtube"] = youtube_publish
+                save_json(pub_path, pub)
+            except Exception as pe:
+                if isinstance(youtube_publish, dict):
+                    youtube_publish["publishJsonError"] = str(pe)
+        except Exception as e:
+            youtube_publish = {"ok": False, "error": str(e)}
+
+    generation["sitePublish"] = site_publish
+    generation["youtubePublish"] = youtube_publish
+    save_json(base / "data" / "generation.json", generation)
+    files["sitePublish"] = site_publish
+    files["youtubePublish"] = youtube_publish
+
     return {
         "ok": True,
         "date": yyyymmdd,
@@ -210,4 +323,7 @@ def generate_daily(
         "materials": materials,
         "files": files,
         "manifest": manifest,
+        "mail": mail_result,
+        "sitePublish": site_publish,
+        "youtubePublish": youtube_publish,
     }

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Sequence
 from xml.sax.saxutils import escape as xml_escape
 
-SITE_BASE = "https://oreoyanz.github.io/namingShooting"
+SITE_BASE = "https://mingxu.mingxu.workers.dev"
 _GLOSSARY_PATH = Path(__file__).resolve().parents[2] / "config" / "yi_ji_glossary.json"
 
 

@@ -1,0 +1,12 @@
+# Cloudflare Worker — 靜態官網（docs/）
+# 連到 GitHub 後，push main 會自動部署到 https://mingxu.mingxu.workers.dev/
+
+name = "mingxu"
+compatibility_date = "2025-10-01"
+workers_dev = true
+
+# 與 GitHub Pages 相同：公開根目錄為 docs/
+[assets]
+directory = "./docs"
+not_found_handling = "404-page"
+html_handling = "auto"

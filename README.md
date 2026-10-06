@@ -2,10 +2,10 @@
 
 本專案保留兩條主線：
 
-1. **形象官網**（GitHub Pages）：編輯 `site/`，公開內容在 `docs/`
+1. **形象官網**（Cloudflare Workers）：編輯 `site/`，公開內容在 `docs/`，`git push` 後自動部署
 2. **WinForms 桌面程式**（.NET Framework 4.8）：`winforms/MingxuDesktop.sln`
 
-線上網站：https://oreoyanz.github.io/namingShooting/
+線上網站：https://mingxu.mingxu.workers.dev/
 
 ---
 
@@ -14,7 +14,8 @@
 | 路徑 | 用途 |
 |------|------|
 | `site/` | 編輯用來源 |
-| `docs/` | GitHub Pages 發布內容（與 `site/` 同步） |
+| `docs/` | 正式發布內容（與 `site/` 同步；Cloudflare 部署根目錄） |
+| `wrangler.toml` | Cloudflare Worker 設定（`assets` → `./docs`） |
 | `scripts/apply_seo.py` | 套用 SEO meta／JSON-LD，並同步更新 `site/` 與 `docs/` |
 
 修改文案後建議：
@@ -23,9 +24,15 @@
 python scripts\apply_seo.py
 ```
 
-再將 `docs/` 推上 GitHub `main`。
+再將變更 **commit／push 到 GitHub `main`**。  
+Cloudflare 已連到此 repo 時，push 後會自動更新 [mingxu.mingxu.workers.dev](https://mingxu.mingxu.workers.dev/)。
+
+WinForms 匯出 PDF、DailyPaperCut 產生當日包後的「上官網」同樣是寫入 `site/`＋`docs/` 再 `git push`，因此也會更新同一網站。
 
 廣告追蹤 ID 填在：`site/js/tracking-config.js`（並同步至 `docs/js/`）。
+
+官網公開網址常數：`https://mingxu.mingxu.workers.dev`  
+（`DailyPaperCut/.env` 的 `PUBLIC_MEDIA_BASE_URL`、SEO／CTA／社群媒體網址皆使用此值）
 
 ---
 
@@ -68,8 +75,9 @@ py -3 scripts\generate_csharp_data.py
 
 ```
 NamingMethod/
-  docs/                 # GitHub Pages
+  docs/                 # Cloudflare 公開根目錄
   site/                 # 官網來源
+  wrangler.toml         # Cloudflare Worker
   scripts/              # apply_seo / generate_csharp_data
   data/                 # 字庫與規則來源資料
   winforms/             # 桌面程式方案

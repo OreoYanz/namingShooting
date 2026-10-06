@@ -338,37 +338,172 @@ def _pick(
 
 
 def pick_materials(as_of: date, theme: str) -> Dict[str, Any]:
-    """Daily cast: one random Background from materials/assets/Background/."""
+    """Daily cast: Background + Hero + Plants/Nature/Accent (theme profile).
+
+    Plants / Nature files currently live under Background/ with prefixes
+    (`plant_*`, `nature_*`, …); we resolve those so Shorts V3 has a full cast
+    without requiring empty Plants/Nature folders to be refilled first.
+    """
+    settings = load_settings()
+    rules = settings.get("reuseRules") or {}
     profile = resolve_theme_profile(theme)
+    seed = as_of.toordinal() + sum(ord(c) for c in (theme or ""))
+
+    blocked = recently_used_ids(as_of, int(rules.get("sameMaterialMinDays", 7)))
+    blocked_heroes = recently_used_heroes(as_of, int(rules.get("sameHeroVisualMinDays", 3)))
+    blocked |= blocked_heroes
+
+    seen: set = set()
+    preferred = list(profile.get("preferred_tags") or [])
+
     background = pick_random_background_from_folder(as_of, theme)
+    # Prefer true bg_* / scenic plates when possible
+    bg_files = [
+        p for p in list_background_asset_files()
+        if p.name.lower().startswith(("bg_", "season_")) or "背景" in p.stem
+    ]
+    if bg_files and not str(background.get("id") or "").startswith("bg_"):
+        # re-roll toward a scenic background if current pick looks like a cutout
+        name = str(background.get("name") or background.get("id") or "").lower()
+        if any(name.startswith(p) for p in ("plant_", "nature_", "animal_", "fortune_", "love_", "career_", "hero_")):
+            path = random.Random(seed + 3).choice(bg_files)
+            background = _background_item_from_file(path)
+            background.pop("fillColor", None)
+    seen.add(background["id"])
+
+    hero = _pick(
+        profile.get("hero_categories") or ["Hero"],
+        seed + 11,
+        blocked,
+        preferred,
+        seen,
+        force_role="hero",
+    )
+    if hero:
+        seen.add(hero["id"])
+
+    # Plants: library Plants/ first, else Background plant_* files
+    plants: List[Dict[str, Any]] = []
+    plant = _pick(["Plants"], seed + 21, blocked, preferred, seen, force_role="frame")
+    if not plant:
+        plant = _pick_prefixed_from_background("plant_", seed + 21, blocked, seen, role="frame", depth="midground", weight=50)
+    if plant:
+        plants.append(plant)
+        seen.add(plant["id"])
+        # optional second plant for left/right frame variety
+        plant2 = _pick_prefixed_from_background("plant_", seed + 22, blocked, seen, role="frame", depth="foreground", weight=40)
+        if plant2:
+            plants.append(plant2)
+            seen.add(plant2["id"])
+
+    nature = _pick(["Nature"], seed + 31, blocked, preferred, seen)
+    if not nature:
+        nature = _pick_prefixed_from_background("nature_", seed + 31, blocked, seen, role="environment", depth="environment", weight=35)
+    if nature:
+        seen.add(nature["id"])
+
+    accent_cats = list(profile.get("accent_categories") or ["Accent"])
+    profile_key = profile.get("profileKey") or "綜合"
+    prefix = {
+        "財運": "fortune_",
+        "事業": "career_",
+        "愛情": "love_",
+        "綜合": "season_",
+    }.get(profile_key, "fortune_")
+    # Prefer theme-flavored cutouts first so 財/事/愛 Shorts look distinct
+    accent = _pick_prefixed_from_background(
+        prefix, seed + 41, blocked, seen, role="decorative", depth="foreground", weight=42
+    )
+    if not accent:
+        accent = _pick(accent_cats, seed + 41, blocked, preferred, seen)
+    if accent:
+        seen.add(accent["id"])
+
+    season = _pick_prefixed_from_background(
+        "season_", seed + 51, blocked, seen, role="decorative", depth="midground", weight=30
+    )
+    if season:
+        seen.add(season["id"])
+
+    template = profile.get("template") or "balanced_scene"
+    # If we somehow have no hero/plants/accent, still allow bg_only fallback
+    if not hero and not plants and not accent:
+        template = "bg_only"
+
+    all_ids = [background["id"]]
+    for it in (hero, nature, accent, season, *plants):
+        if it and it.get("id"):
+            all_ids.append(it["id"])
 
     return {
-        "themeProfile": {**profile, "template": "bg_only"},
-        "template": "bg_only",
-        "hero": None,
+        "themeProfile": profile,
+        "template": template,
+        "hero": hero,
         "background": background,
-        "nature": None,
-        "plants": [],
-        "accent": None,
-        "accents": [],
-        "season": None,
+        "nature": nature,
+        "plants": plants,
+        "accent": accent,
+        "accents": [accent] if accent else [],
+        "season": season,
         "layers": {
             "background": background,
-            "nature": None,
-            "plants": None,
-            "animals": None,
-            "fortune": None,
+            "nature": nature,
+            "plants": plants[0] if plants else None,
+            "animals": hero,
+            "fortune": accent,
         },
         "layerOrder": [k for k, _ in VISUAL_LAYERS],
-        "animals": None,
-        "fortune": None,
-        "supports": [],
-        "environment": None,
-        "auspicious": None,
-        "allIds": [background["id"]],
-        "colorNote": {"heroFamily": None},
+        "animals": hero,
+        "fortune": accent,
+        "supports": [x for x in (nature, *plants, accent, season) if x],
+        "environment": nature,
+        "auspicious": accent,
+        "allIds": all_ids,
+        "colorNote": {"heroFamily": _color_family(hero)},
         "backgroundSource": "materials/assets/Background",
     }
+
+
+def _pick_prefixed_from_background(
+    prefix: str,
+    seed: int,
+    blocked: set,
+    seen: set,
+    *,
+    role: str,
+    depth: str,
+    weight: int,
+) -> Optional[Dict[str, Any]]:
+    """Pick a cutout-like asset from Background/ by filename prefix (plant_/nature_/…)."""
+    files = [
+        p for p in list_background_asset_files()
+        if p.name.lower().startswith(prefix.lower())
+    ]
+    if not files:
+        return None
+    candidates = [p for p in files if p.stem not in blocked and p.stem not in seen]
+    if not candidates:
+        candidates = [p for p in files if p.stem not in seen] or files
+    path = candidates[seed % len(candidates)]
+    item = _background_item_from_file(path)
+    # Re-label category from prefix so SceneEngine / ShortsLayout route correctly
+    cat_map = {
+        "plant_": "Plants",
+        "nature_": "Nature",
+        "fortune_": "Fortune",
+        "career_": "Career",
+        "love_": "Love",
+        "season_": "Season",
+        "animal_": "Hero",
+        "hero_": "Hero",
+    }
+    item["category"] = cat_map.get(prefix.lower(), item.get("category") or "Background")
+    item["role"] = role
+    item["depth"] = depth
+    item["visualWeight"] = weight
+    item["method"] = "background_prefix_cast"
+    item.pop("fillColor", None)
+    return _enrich(item)
 
 
 def record_usage(

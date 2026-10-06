@@ -113,6 +113,6 @@ def commit_and_push_site(yyyymmdd: str) -> Dict[str, Any]:
         "ok": True,
         "pushed": True,
         "commit": sha,
-        "url": f"https://oreoyanz.github.io/namingShooting/daily/{yyyymmdd}.html",
+        "url": f"https://mingxu.mingxu.workers.dev/daily/{yyyymmdd}.html",
         "message": f"已 commit／push（{sha or 'ok'}），GitHub Pages 稍後會更新",
     }

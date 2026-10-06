@@ -22,6 +22,16 @@ def main(argv=None):
     print("Short MP4:", result["files"].get("shortMp4"))
     print("Short preview:", result["files"].get("shortPreview"))
     print("Manifest:", result["files"].get("manifest"))
+    mail = result.get("mail") or {}
+    if mail.get("ok"):
+        print("Mail:", mail.get("to"), mail.get("attached"))
+    elif mail:
+        print("Mail:", mail.get("error") or mail)
+    sp = result.get("sitePublish") or {}
+    if sp.get("site"):
+        print("Site:", sp["site"].get("ok"), (sp.get("git") or {}).get("message") or (sp.get("git") or {}).get("error") or "")
+    elif sp:
+        print("Site:", sp)
 
 
 if __name__ == "__main__":

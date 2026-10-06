@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = "https://oreoyanz.github.io/namingShooting"
+BASE = "https://mingxu.mingxu.workers.dev"
 OG_IMAGE = f"{BASE}/assets/logo.png"
 CSS_VER = "1.0.15"
 

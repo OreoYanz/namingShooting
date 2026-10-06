@@ -44,70 +44,224 @@
     {
       "date": "20261005",
       "mainTheme": "祭祀開運",
-      "heroId": "",
+      "heroId": "hero_元寶_003",
       "materialIds": [
-        "season_四季花環_001"
+        "season_四季花環_001",
+        "hero_元寶_003",
+        "nature_山峰_001",
+        "fortune_寶石寶箱_001",
+        "season_秋日稻穗_001",
+        "plant_蓮葉與稻穗框_003",
+        "plant_葫蘆藤_001"
       ],
-      "recordedAt": "2026-10-02T17:07:42",
+      "recordedAt": "2026-10-05T16:45:02",
       "backgroundId": "season_四季花環_001"
     },
     {
       "date": "20261006",
       "mainTheme": "嫁娶開運",
+      "heroId": "animal_鳳凰_001",
+      "materialIds": [
+        "bg_奇幻東方仙境_001",
+        "animal_鳳凰_001",
+        "nature_雨後陽光_001",
+        "fortune_聚財金葫蘆_001",
+        "season_四季日曆_001",
+        "plant_蓮葉與稻穗框_001",
+        "plant_柳樹_001"
+      ],
+      "recordedAt": "2026-10-06T12:20:39",
+      "backgroundId": "bg_奇幻東方仙境_001"
+    },
+    {
+      "date": "20261007",
+      "mainTheme": "沐浴開運",
       "heroId": "",
       "materialIds": [
-        "plant_蓮葉與稻穗框_002"
+        "season_春日嫩芽_001"
       ],
-      "recordedAt": "2026-10-02T17:11:24",
-      "backgroundId": "plant_蓮葉與稻穗框_002"
+      "recordedAt": "2026-10-05T11:00:39",
+      "backgroundId": "season_春日嫩芽_001"
+    },
+    {
+      "date": "20261008",
+      "mainTheme": "祭祀開運",
+      "heroId": "",
+      "materialIds": [
+        "nature_薄霧_001"
+      ],
+      "recordedAt": "2026-10-05T11:18:51",
+      "backgroundId": "nature_薄霧_001"
+    },
+    {
+      "date": "20261009",
+      "mainTheme": "順水流財",
+      "heroId": "",
+      "materialIds": [
+        "fortune_金色聚寶箱_001"
+      ],
+      "recordedAt": "2026-10-05T11:28:45",
+      "backgroundId": "fortune_金色聚寶箱_001"
+    },
+    {
+      "date": "20261010",
+      "mainTheme": "嫁娶開運",
+      "heroId": "",
+      "materialIds": [
+        "plant_茉莉花_001"
+      ],
+      "recordedAt": "2026-10-05T11:53:16",
+      "backgroundId": "plant_茉莉花_001"
     },
     {
       "date": "20261011",
-      "mainTheme": "財運開展",
-      "heroId": "fortune_金幣_001",
+      "mainTheme": "貴人靠近",
+      "heroId": "",
       "materialIds": [
-        "fortune_金幣_001",
-        "bg_秋日楓林_001",
-        "nature_流星_001",
-        "fortune_豐收果籃_001",
-        "plant_石榴_001",
-        "plant_葡萄藤_001",
-        "season_秋日稻穗_001"
+        "nature_雪花_001"
       ],
-      "recordedAt": "2026-10-02T08:36:40",
-      "backgroundId": "bg_秋日楓林_001"
+      "recordedAt": "2026-10-05T12:32:09",
+      "backgroundId": "nature_雪花_001"
     },
     {
       "date": "20261012",
-      "mainTheme": "事業突破",
-      "heroId": "career_旗幟_001",
+      "mainTheme": "順水流財",
+      "heroId": "",
       "materialIds": [
-        "career_旗幟_001",
-        "bg_春日花園_001",
-        "nature_太陽光芒_001",
-        "fortune_如意_001",
-        "plant_葫蘆藤_001",
-        "plant_柳樹_001",
-        "season_冬日松枝_001"
+        "nature_流星_001"
       ],
-      "recordedAt": "2026-10-02T08:40:31",
-      "backgroundId": "bg_春日花園_001"
+      "recordedAt": "2026-10-05T12:35:31",
+      "backgroundId": "nature_流星_001"
     },
     {
       "date": "20261013",
-      "mainTheme": "愛情桃花",
-      "heroId": "animal_海豚_001",
+      "mainTheme": "嫁娶開運",
+      "heroId": "",
       "materialIds": [
-        "animal_海豚_001",
-        "bg_祥雲天空_002",
-        "nature_彩色雲朵_001",
-        "love_紅線_001",
-        "plant_梅花_001",
-        "plant_桃花_001",
-        "season_秋日微風_001"
+        "animal_猴子_001"
       ],
-      "recordedAt": "2026-10-02T08:42:30",
+      "recordedAt": "2026-10-05T13:02:53",
+      "backgroundId": "animal_猴子_001"
+    },
+    {
+      "date": "20261014",
+      "mainTheme": "貴人靠近",
+      "heroId": "",
+      "materialIds": [
+        "nature_白雲_001"
+      ],
+      "recordedAt": "2026-10-05T14:41:49",
+      "backgroundId": "nature_白雲_001"
+    },
+    {
+      "date": "20261015",
+      "mainTheme": "祭祀開運",
+      "heroId": "",
+      "materialIds": [
+        "nature_流星_001"
+      ],
+      "recordedAt": "2026-10-05T14:59:17",
+      "backgroundId": "nature_流星_001"
+    },
+    {
+      "date": "20261016",
+      "mainTheme": "順水流財",
+      "heroId": "",
+      "materialIds": [
+        "plant_薔薇_001"
+      ],
+      "recordedAt": "2026-10-05T15:09:37",
+      "backgroundId": "plant_薔薇_001"
+    },
+    {
+      "date": "20261017",
+      "mainTheme": "納採開運",
+      "heroId": "",
+      "materialIds": [
+        "animal_燕子_001"
+      ],
+      "recordedAt": "2026-10-05T15:17:47",
+      "backgroundId": "animal_燕子_001"
+    },
+    {
+      "date": "20261018",
+      "mainTheme": "解除開運",
+      "heroId": "hero_元寶_002",
+      "materialIds": [
+        "bg_湖畔荷塘_001",
+        "hero_元寶_002",
+        "nature_流金光粒子_001",
+        "fortune_紅包_001",
+        "season_春日蝴蝶_001",
+        "plant_竹子_001",
+        "plant_蘭花_001"
+      ],
+      "recordedAt": "2026-10-05T16:31:13",
+      "backgroundId": "bg_湖畔荷塘_001"
+    },
+    {
+      "date": "20261020",
+      "mainTheme": "財運",
+      "heroId": "animal_錦鯉_002",
+      "materialIds": [
+        "bg_祥雲天空_002",
+        "animal_錦鯉_002",
+        "nature_朝霞_001",
+        "fortune_聚寶盆_001",
+        "season_春燕_001",
+        "plant_銀杏樹_001",
+        "plant_牡丹_001"
+      ],
+      "recordedAt": "2026-10-05T15:40:13",
       "backgroundId": "bg_祥雲天空_002"
+    },
+    {
+      "date": "20261021",
+      "mainTheme": "事業",
+      "heroId": "animal_鳳凰_001",
+      "materialIds": [
+        "bg_錦鯉蓮池全景_001",
+        "animal_鳳凰_001",
+        "nature_流光_001",
+        "career_燈塔_001",
+        "season_秋日落葉_001",
+        "plant_紫藤_001",
+        "plant_向日葵_001"
+      ],
+      "recordedAt": "2026-10-05T15:42:23",
+      "backgroundId": "bg_錦鯉蓮池全景_001"
+    },
+    {
+      "date": "20261022",
+      "mainTheme": "愛情",
+      "heroId": "animal_金魚_001",
+      "materialIds": [
+        "bg_錦鯉蓮池全景_003",
+        "animal_金魚_001",
+        "nature_太陽光芒_001",
+        "love_桃花_001",
+        "season_秋日微風_001",
+        "plant_蓮葉與稻穗框_001",
+        "plant_楓樹_001"
+      ],
+      "recordedAt": "2026-10-05T15:44:32",
+      "backgroundId": "bg_錦鯉蓮池全景_003"
+    },
+    {
+      "date": "20261023",
+      "mainTheme": "綜合",
+      "heroId": "hero_元寶_002",
+      "materialIds": [
+        "bg_星空月夜_001",
+        "hero_元寶_002",
+        "nature_晚霞_001",
+        "season_四季花環_001",
+        "season_四季日曆_001",
+        "plant_蘭花_001",
+        "plant_荷葉_001"
+      ],
+      "recordedAt": "2026-10-05T15:46:30",
+      "backgroundId": "bg_星空月夜_001"
     }
   ]
 }

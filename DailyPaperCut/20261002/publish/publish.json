@@ -53,7 +53,7 @@
       "latest": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\docs\\data\\daily_latest.json",
       "archive": "C:\\Users\\0862\\Desktop\\qiyi\\NamingMethod\\docs\\data\\daily_archive.json",
       "page": "daily.html",
-      "url": "https://oreoyanz.github.io/namingShooting/daily.html",
+      "url": "https://mingxu.mingxu.workers.dev/daily.html",
       "note": "已寫入當日／可顯示日 20261002，並更新 live 指標。工作台發布會接著自動 commit／push。"
     },
     "git": {
@@ -61,7 +61,7 @@
       "pushed": true,
       "commit": "2ec319d",
       "message": "已 commit／push（2ec319d），GitHub Pages 稍後會更新",
-      "url": "https://oreoyanz.github.io/namingShooting/daily.html"
+      "url": "https://mingxu.mingxu.workers.dev/daily.html"
     }
   },
   "lastSelected": [

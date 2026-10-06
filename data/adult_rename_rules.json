@@ -1,0 +1,42 @@
+{
+  "rule_version": "2026.08-v13",
+  "note": "專業改名不可完全照新生兒：需原姓名評估、改名原因、希望改善方向，並做原名vs新名比較。",
+  "defaults": {
+    "exclude_classic_hot": true,
+    "exclude_hot_5y": true,
+    "avoid_same_given": true,
+    "parent_soft": true,
+    "direction_boost": 0.18
+  },
+  "rename_reasons": [
+    "字義不雅／粗俗",
+    "諧音不佳",
+    "命理不合",
+    "五格不吉",
+    "音韻不順",
+    "過於常見（菜市場名）",
+    "職場形象／專業感",
+    "性別氣質不符",
+    "其他特殊原因"
+  ],
+  "improve_directions": [
+    "命理契合",
+    "五行流通",
+    "五格吉數",
+    "音韻流暢",
+    "字義寓意",
+    "現代感",
+    "辨識度／稀有",
+    "整體綜合"
+  ],
+  "direction_keys": {
+    "命理契合": "bazi",
+    "五行流通": "wuxing",
+    "五格吉數": "wuge",
+    "音韻流暢": "phonology",
+    "字義寓意": "meaning",
+    "現代感": "style",
+    "辨識度／稀有": "rarity",
+    "整體綜合": "total"
+  }
+}

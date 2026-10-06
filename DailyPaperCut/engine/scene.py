@@ -292,13 +292,42 @@ def build_slot_scene_elements(
     if tmpl.get("bg_only") or template_name == "bg_only":
         return validate_and_fix_layout(elements, canvas_size, template_name=template_name)
 
+    # Nature (sky / sun / mountain / water) — behind plants & hero
+    nature = materials.get("nature")
+    if nature:
+        nat_anchor = "top_center"
+        nname = (nature.get("name") or "") + " " + " ".join(nature.get("tags") or [])
+        if any(k in nname for k in ("水", "湖", "海", "波", "浪")):
+            nat_anchor = "bottom_center"
+        elif any(k in nname for k in ("山", "峰")):
+            nat_anchor = "back_center"
+        elif any(k in nname for k in ("太陽", "月亮", "雲", "星", "虹", "霧")):
+            nat_anchor = "top_left" if seed % 2 == 0 else "top_right"
+        elements.append(
+            _make_element(
+                nature,
+                cutout=resolve_path(nature),
+                anchor=nat_anchor,
+                canvas_size=canvas_size,
+                role="environment",
+                depth="environment",
+                start=1.0,
+                duration=2.0,
+                scale=1.0,
+                base_w=int(w * 0.36),
+                base_h=int(h * 0.22) if h > w else int(w * 0.28),
+                visual_weight=min(40, int(nature.get("visualWeight") or 35)),
+            )
+        )
+
     max_h = int(h * float(tmpl.get("plant_max_height_ratio") or 0.28))
     size_map = tmpl.get("plant_size_scale") or {"large": 1.0, "medium": 0.72, "small": 0.48}
     plants = materials.get("plants") or []
     if isinstance(plants, dict):
         plants = [plants]
-    plant_src = plants[0] if plants else None
+    # Prefer distinct plant assets for left/right when multiple provided
     for i, slot in enumerate(tmpl.get("plant_slots") or []):
+        plant_src = plants[i] if i < len(plants) else (plants[0] if plants else None)
         if not plant_src:
             break
         use = dict(plant_src)
@@ -341,7 +370,7 @@ def build_slot_scene_elements(
             duration=2.8,
             scale=1.0,
             base_w=int(w * 0.42),
-            base_h=int(h * 0.42),
+            base_h=int(min(h, w) * 0.42),
             y_bias=float(tmpl.get("hero_y_bias") or 0),
             rotation=((seed % 5) - 2) * 0.35,
             visual_weight=92,
@@ -357,6 +386,10 @@ def build_slot_scene_elements(
         accents = [one] if one else []
     accent_item = next((a for a in accents if a), None)
     if accent_item:
+        is_particle = any(
+            k in (accent_item.get("name") or "")
+            for k in ("粒子", "光點", "twinkle")
+        ) or "accent_光" in (accent_item.get("id") or "")
         el = _make_element(
             accent_item,
             cutout=resolve_path(accent_item),
@@ -367,15 +400,36 @@ def build_slot_scene_elements(
             start=4.5,
             duration=4.0,
             scale=1.0,
-            base_w=int(w * 1.0),
-            base_h=int(h * 1.0),
+            base_w=int(w * 1.0) if is_particle else int(w * 0.28),
+            base_h=int(h * 1.0) if is_particle else int(min(h, w) * 0.28),
             rotation=0,
-            visual_weight=22,
+            visual_weight=22 if is_particle else 40,
         )
         el.x = w * 0.5
-        el.y = h * 0.5
-        el.animation_type = "particle_twinkle"
+        el.y = h * 0.5 if is_particle else h * 0.48
+        el.animation_type = "particle_twinkle" if is_particle else _anim_for(
+            accent_item.get("category") or "", "decorative", accent_item.get("name") or ""
+        )
         elements.append(el)
+
+    season = materials.get("season")
+    if season:
+        elements.append(
+            _make_element(
+                season,
+                cutout=resolve_path(season),
+                anchor="bottom_right" if seed % 2 else "bottom_left",
+                canvas_size=canvas_size,
+                role="decorative",
+                depth="midground",
+                start=7.5,
+                duration=2.0,
+                scale=1.0,
+                base_w=int(w * 0.24),
+                base_h=int(min(h, w) * 0.24),
+                visual_weight=30,
+            )
+        )
 
     return validate_and_fix_layout(elements, canvas_size, template_name=template_name)
 

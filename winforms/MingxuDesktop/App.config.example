@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+  </startup>
+  <appSettings>
+    <!-- Copy to App.config and fill in real values. App.config is gitignored. -->
+    <add key="OpenAI:ApiKey" value="YOUR_OPENAI_API_KEY" />
+    <add key="OpenAI:Model" value="gpt-4o-mini" />
+    <add key="OpenAI:BaseUrl" value="https://api.openai.com/v1" />
+    <add key="Naming:UseChatGpt" value="true" />
+    <add key="Pdf:Engine" value="WebView2" />
+    <add key="Pdf:BrowserPath" value="" />
+    <add key="Site:PublishCases" value="true" />
+    <add key="Site:RepoRoot" value="" />
+    <add key="Mail:Enabled" value="true" />
+    <add key="Mail:SmtpHost" value="smtp.gmail.com" />
+    <add key="Mail:SmtpPort" value="587" />
+    <add key="Mail:EnableSsl" value="true" />
+    <add key="Mail:User" value="YOUR_GMAIL@gmail.com" />
+    <add key="Mail:AppPassword" value="YOUR_GMAIL_APP_PASSWORD" />
+    <add key="Mail:To" value="YOUR_GMAIL@gmail.com" />
+    <add key="Mail:From" value="YOUR_GMAIL@gmail.com" />
+  </appSettings>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Buffers" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.3.0" newVersion="4.0.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Memory" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.1.2" newVersion="4.0.1.2" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.4.1" newVersion="4.0.4.1" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Numerics.Vectors" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.1.4.0" newVersion="4.1.4.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-13.0.0.0" newVersion="13.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>

@@ -1,0 +1,67 @@
+{
+  "rule_version": "2026.08-v12",
+  "note": "單一名字詳細頁可展開：基本資訊／命理／姓名學／語意／推薦理由／綜合評分。",
+  "sections": [
+    {
+      "key": "basic",
+      "title": "基本資訊"
+    },
+    {
+      "key": "destiny",
+      "title": "命理"
+    },
+    {
+      "key": "wuge",
+      "title": "姓名學"
+    },
+    {
+      "key": "meaning",
+      "title": "語意"
+    },
+    {
+      "key": "reasons",
+      "title": "推薦理由"
+    },
+    {
+      "key": "composite",
+      "title": "綜合評分"
+    }
+  ],
+  "basic_fields": [
+    "姓名",
+    "拼音",
+    "聲調",
+    "筆畫",
+    "五行"
+  ],
+  "destiny_fields": [
+    "八字契合度",
+    "五行契合度",
+    "生肖契合度"
+  ],
+  "wuge_fields": [
+    "天格",
+    "人格",
+    "地格",
+    "外格",
+    "總格",
+    "三才"
+  ],
+  "meaning_fields": [
+    "第一字",
+    "第二字",
+    "整體寓意"
+  ],
+  "reasons_fields": [
+    "命理",
+    "五行",
+    "姓名學",
+    "音韻",
+    "字義",
+    "風格",
+    "總評"
+  ],
+  "composite_fields": [
+    "綜合評分"
+  ]
+}

@@ -69,7 +69,7 @@ def animate_element(el: SceneElement, t: float, duration_total: float = 20.0) ->
         state.dy = -12 * (1 - e)
         state.scale_mul = 0.92 + 0.08 * e
     elif kind == "hero_reveal":
-        # gentle sway reveal (紙片輕晃登場)
+        # gentle sway reveal (紙片輕晃登場) — GIF path
         if lt < 0.4:
             p = lt / 0.4
             state.opacity = _ease_out_cubic(p)
@@ -88,6 +88,39 @@ def animate_element(el: SceneElement, t: float, duration_total: float = 20.0) ->
             state.scale_mul = 1.0
             state.rotation_add = -1.0 * (1 - p)
             state.dy = 0.0
+    elif kind == "hero_place":
+        # V3 Shorts: paper placed into scene (no fade-in pop)
+        # scale 0.82→0.92→1.03→1.00 · Y+30→-5→0 · rot -1→+1→0
+        state.opacity = 1.0
+        if lt < 0.35:
+            p = _ease_out_cubic(lt / 0.35)
+            state.scale_mul = 0.82 + 0.10 * p
+            state.dy = 30 * (1 - p)
+            state.rotation_add = -1.0 + 1.0 * p
+        elif lt < 0.70:
+            p = _ease_in_out((lt - 0.35) / 0.35)
+            state.scale_mul = 0.92 + 0.11 * p
+            state.dy = 30 * (1 - p) + (-5) * p  # from ~0 toward -5 after first phase
+            # continue from dy≈0 at end of phase1; blend 0 → -5
+            state.dy = -5.0 * p
+            state.rotation_add = 1.0 * p
+        else:
+            p = _ease_out_cubic((lt - 0.70) / 0.30)
+            state.scale_mul = 1.03 - 0.03 * p
+            state.dy = -5.0 * (1 - p)
+            state.rotation_add = 1.0 * (1 - p)
+    elif kind == "bg_slow_zoom":
+        # Full-bleed background: soft reveal then 1.00→1.03 over clip
+        state.opacity = min(1.0, 0.35 + 0.65 * e) if lt < 1.0 else 1.0
+        progress = _clamp01(t / max(1.0, duration_total))
+        state.scale_mul = 1.00 + 0.03 * progress
+    elif kind == "paper_reveal":
+        state.opacity = e
+        state.scale_mul = 0.94 + 0.06 * e
+        state.dy = 12 * (1 - e)
+    elif kind == "soft_scale":
+        state.opacity = e
+        state.scale_mul = 0.90 + 0.10 * e
     elif kind == "particle_twinkle":
         # 出現 → 消失 → 出現（慢速閃爍）
         elapsed = max(0.0, t - el.start_time)
@@ -126,8 +159,10 @@ def animate_element(el: SceneElement, t: float, duration_total: float = 20.0) ->
 
     # Idle micro-motion after settled (skip twinkle —它有自己的閃爍)
     if kind != "particle_twinkle":
-        idle_start = max(el.start_time + el.duration, 11.5)
-        if t >= idle_start and t < duration_total - 0.2:
+        # Shorts V3 uses hero_place / bg_slow_zoom → idle from ~10s; GIF keeps 11.5 floor
+        idle_floor = 10.0 if kind in ("hero_place", "bg_slow_zoom", "paper_reveal") else 11.5
+        idle_start = max(el.start_time + el.duration, idle_floor)
+        if t >= idle_start and t < duration_total - 0.35:
             motion = float(DEPTH_STYLE.get(el.depth, DEPTH_STYLE["midground"])["motion"])
             phase = t * (0.7 + el.visual_weight * 0.01)
             if el.depth in ("foreground", "midground") or el.role == "frame":
@@ -296,3 +331,29 @@ def card_scale_pop(t: float, start: float) -> float:
     if lt < 0.7:
         return 0.85 + 0.2 * _ease_out_cubic(lt / 0.7)
     return 1.05 - 0.05 * _ease_out_cubic((lt - 0.7) / 0.3)
+
+
+def card_opacity_window(
+    t: float,
+    start: float,
+    end: float,
+    *,
+    fade_in: float = 0.35,
+    fade_out: float = 0.35,
+) -> float:
+    """Appear at start, hold, soft fade out before end (Shorts sequential cards)."""
+    if t < start or t >= end:
+        return 0.0
+    if t < start + fade_in:
+        return _ease_out_cubic((t - start) / max(0.01, fade_in))
+    if t > end - fade_out:
+        return _ease_out_cubic((end - t) / max(0.01, fade_out))
+    return 1.0
+
+
+def card_soft_scale(t: float, start: float) -> float:
+    """Soft paper scale — no bounce (Shorts brand / hook)."""
+    lt = _clamp01((t - start) / 0.55)
+    if lt <= 0:
+        return 0.94
+    return 0.94 + 0.06 * _ease_out_cubic(lt)

@@ -1,0 +1,22 @@
+{
+  "rule_version": "2026.08-v14",
+  "note": "多來源候選池→大池組合→Hard→快速篩→完整評分→Top500→跨區域→Top50。",
+  "pipeline": [
+    "完整字庫",
+    "多來源候選池",
+    "姓名組合",
+    "Hard Filter",
+    "快速五行／音韻",
+    "完整姓名評分",
+    "Top 500",
+    "跨區域取樣",
+    "多樣性",
+    "Top 50"
+  ],
+  "top_n": 50,
+  "full_score_pool": 500,
+  "candidate_pool": 400,
+  "stable_candidate_top": 300,
+  "explore_candidate_n": 50,
+  "max_combo_sample": 22000
+}

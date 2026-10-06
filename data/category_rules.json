@@ -1,0 +1,74 @@
+{
+  "rule_version": "2026.08-v10",
+  "note": "推薦結果分類：自 Hard 通過名單依各分類分挑選；可套多樣性限制。",
+  "categories": [
+    {
+      "key": "overall",
+      "label": "綜合最佳",
+      "top_n": 10,
+      "note": "依綜合評分總分排序。",
+      "score_label": "綜合分"
+    },
+    {
+      "key": "destiny",
+      "label": "命理最佳",
+      "top_n": 5,
+      "note": "八字40%／五行20%／五格30%／生肖10%。",
+      "score_label": "命理分"
+    },
+    {
+      "key": "phonology",
+      "label": "音韻最佳",
+      "top_n": 5,
+      "note": "依音韻評分排序。",
+      "score_label": "音韻分"
+    },
+    {
+      "key": "meaning",
+      "label": "寓意最佳",
+      "top_n": 5,
+      "note": "依字義／寓意評分排序。",
+      "score_label": "寓意分"
+    },
+    {
+      "key": "modern",
+      "label": "現代最佳",
+      "top_n": 5,
+      "note": "依現代命名權重重算（偏音韻與現代風格）。",
+      "score_label": "現代分"
+    },
+    {
+      "key": "niche",
+      "label": "小眾最佳",
+      "top_n": 5,
+      "note": "依小眾精品權重重算（偏稀有度與風格辨識）。",
+      "score_label": "小眾分"
+    }
+  ],
+  "destiny_weights": {
+    "bazi": 0.4,
+    "wuxing": 0.2,
+    "wuge": 0.3,
+    "zodiac": 0.1
+  },
+  "modern_weights": {
+    "bazi": 0.15,
+    "wuxing": 0.08,
+    "wuge": 0.08,
+    "phonology": 0.25,
+    "meaning": 0.12,
+    "zodiac": 0.05,
+    "style": 0.2,
+    "rarity": 0.07
+  },
+  "niche_weights": {
+    "bazi": 0.12,
+    "wuxing": 0.08,
+    "wuge": 0.08,
+    "phonology": 0.15,
+    "meaning": 0.15,
+    "zodiac": 0.04,
+    "style": 0.18,
+    "rarity": 0.2
+  }
+}

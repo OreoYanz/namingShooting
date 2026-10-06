@@ -29,4 +29,5 @@ winforms/release/
 
 # Secrets — never commit real keys
 **/App.config.local
+**/MingxuDesktop/App.config
 **/*.exe.config.bak

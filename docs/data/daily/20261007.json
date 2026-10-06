@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T11:16:01",
+  "updatedAt": "2026-10-06T13:39:56",
   "timezone": "Asia/Taipei",
   "date": "2026-10-07",
   "dateKey": "20261007",
@@ -28,8 +28,8 @@
     "安床",
     "開市"
   ],
-  "summaryText": "今日日適合沐浴開運，遠離祭祀與嫁娶。",
-  "shortMessage": "今天適合沐浴開運，記得避開祭祀與嫁娶。",
+  "summaryText": "今天是沐浴開運的好日子，適合捕捉好運，避開祭祀。",
+  "shortMessage": "今天是甲寅日，適合沐浴開運，捕捉好運！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",
@@ -41,15 +41,18 @@
     "webp": "assets/daily/daily_20261007.webp",
     "preview": "assets/daily/daily_20261007_preview.jpg",
     "last": "assets/daily/daily_20261007_last.jpg",
+    "mp4": "assets/daily/daily_20261007.mp4",
     "shareImage": "assets/daily/daily_20261007_last.jpg",
     "scene": "assets/daily/scene_20261007.jpg",
     "scenePng": "assets/daily/scene_20261007.png",
     "gifDated": "assets/daily/daily_20261007.gif",
     "previewDated": "assets/daily/daily_20261007_preview.jpg",
     "lastDated": "assets/daily/daily_20261007_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261007.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

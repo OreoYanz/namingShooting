@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T12:45:22",
+  "updatedAt": "2026-10-06T16:27:00",
   "timezone": "Asia/Taipei",
   "date": "2026-10-12",
   "dateKey": "20261012",
@@ -26,8 +26,8 @@
     "修墳",
     "立碑"
   ],
-  "summaryText": "把握今日嫁娶與納財的良機，讓福氣隨著水流而來。",
-  "shortMessage": "今天是己未，適合嫁娶與納財，避開安葬！",
+  "summaryText": "今日適合嫁娶與祭祀，切勿開市及安葬。",
+  "shortMessage": "今天的己未日，讓我們一起嫁娶開運，順水流財！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",
@@ -39,15 +39,18 @@
     "webp": "assets/daily/daily_20261012.webp",
     "preview": "assets/daily/daily_20261012_preview.jpg",
     "last": "assets/daily/daily_20261012_last.jpg",
+    "mp4": "assets/daily/daily_20261012.mp4",
     "shareImage": "assets/daily/daily_20261012_last.jpg",
     "scene": "assets/daily/scene_20261012.jpg",
     "scenePng": "assets/daily/scene_20261012.png",
     "gifDated": "assets/daily/daily_20261012.gif",
     "previewDated": "assets/daily/daily_20261012_preview.jpg",
     "lastDated": "assets/daily/daily_20261012_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261012.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

@@ -33,14 +33,43 @@
     <loc>https://mingxu.mingxu.workers.dev/contact.html</loc>
   </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/index.html</loc>
+  </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/how-to-choose.html</loc>
+  </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/naming-methods.html</loc>
+  </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/zibei.html</loc>
+  </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/preferred-chars.html</loc>
+  </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/phonology.html</loc>
+  </url>
 
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/rename-reason.html</loc>
+  </url>
 
-<url>
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/rename-timing.html</loc>
+  </url>
+
+  <url>
+    <loc>https://mingxu.mingxu.workers.dev/guides/auspicious-days.html</loc>
+  </url>
+
+  <url>
     <loc>https://mingxu.mingxu.workers.dev/daily.html</loc>
   </url>
 
@@ -66,49 +95,6 @@
 
   <url>
     <loc>https://mingxu.mingxu.workers.dev/daily/20261006.html</loc>
-  </url>
-
-
-
-
-
-
-
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/index.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/how-to-choose.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/naming-methods.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/preferred-chars.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/phonology.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/zibei.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/rename-reason.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/rename-timing.html</loc>
-  </url>
-
-  <url>
-    <loc>https://mingxu.mingxu.workers.dev/guides/auspicious-days.html</loc>
   </url>
 
 </urlset>

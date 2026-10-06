@@ -29,7 +29,7 @@
         img.classList.remove("is-flip");
         void img.offsetWidth;
         img.src = slide.src;
-        img.alt = slide.label + "預覽";
+        img.alt = slide.alt || (slide.label + "預覽");
         img.classList.add("is-flip");
       }
       if (label) label.textContent = slide.label;

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T08:49:25",
+  "updatedAt": "2026-10-06T12:20:39",
   "timezone": "Asia/Taipei",
   "date": "2026-10-06",
   "dateKey": "20261006",
@@ -28,8 +28,8 @@
     "架馬",
     "詞訟"
   ],
-  "summaryText": "今日宜嫁娶、祈福，忌避納採與詞訟，讓美好順流而至。",
-  "shortMessage": "今天癸丑日，適合嫁娶與祈福，讓好運隨水流而至！",
+  "summaryText": "嫁娶和祭祀的吉日，忌避納採與訂盟。",
+  "shortMessage": "今天是癸丑日，適合嫁娶、祭祀，讓我們一起祈求幸福！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://oreoyanz.github.io/namingShooting/",
@@ -41,15 +41,18 @@
     "webp": "assets/daily/daily_20261006.webp",
     "preview": "assets/daily/daily_20261006_preview.jpg",
     "last": "assets/daily/daily_20261006_last.jpg",
+    "mp4": "assets/daily/daily_20261006.mp4",
     "shareImage": "assets/daily/daily_20261006_last.jpg",
     "scene": "assets/daily/scene_20261006.jpg",
     "scenePng": "assets/daily/scene_20261006.png",
     "gifDated": "assets/daily/daily_20261006.gif",
     "previewDated": "assets/daily/daily_20261006_preview.jpg",
     "lastDated": "assets/daily/daily_20261006_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261006.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

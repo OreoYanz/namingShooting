@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T12:47:54",
+  "updatedAt": "2026-10-06T16:37:30",
   "timezone": "Asia/Taipei",
   "date": "2026-10-13",
   "dateKey": "20261013",
@@ -23,11 +23,11 @@
     "出行"
   ],
   "ji": [
-    "安床",
+    "安牀",
     "安葬"
   ],
-  "summaryText": "把握今天的嫁娶良機，避開安葬與安床的安排。",
-  "shortMessage": "今天是庚申日，適合嫁娶、祭祀，讓運勢流淌！",
+  "summaryText": "今天嫁娶祈福，切忌安葬，順水流財正當時。",
+  "shortMessage": "今天的庚申日，適合嫁娶、祈福，讓我們一起順水流財！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",
@@ -39,15 +39,18 @@
     "webp": "assets/daily/daily_20261013.webp",
     "preview": "assets/daily/daily_20261013_preview.jpg",
     "last": "assets/daily/daily_20261013_last.jpg",
+    "mp4": "assets/daily/daily_20261013.mp4",
     "shareImage": "assets/daily/daily_20261013_last.jpg",
     "scene": "assets/daily/scene_20261013.jpg",
     "scenePng": "assets/daily/scene_20261013.png",
     "gifDated": "assets/daily/daily_20261013.gif",
     "previewDated": "assets/daily/daily_20261013_preview.jpg",
     "lastDated": "assets/daily/daily_20261013_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261013.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

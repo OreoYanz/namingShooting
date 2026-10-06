@@ -244,6 +244,29 @@ def page_html(g: dict) -> str:
     </div></div></section>"""
 
     crumb_name = g["h1"]
+    if slug == "index":
+        crumb_ld = f"""  <script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "名序", "item": "{BASE}/"}},
+    {{"@type": "ListItem", "position": 2, "name": "命名知識", "item": "{BASE}{path}"}}
+  ]
+}}
+  </script>"""
+    else:
+        crumb_ld = f"""  <script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{"@type": "ListItem", "position": 1, "name": "名序", "item": "{BASE}/"}},
+    {{"@type": "ListItem", "position": 2, "name": "命名知識", "item": "{BASE}/guides/index.html"}},
+    {{"@type": "ListItem", "position": 3, "name": "{crumb_name}", "item": "{BASE}{path}"}}
+  ]
+}}
+  </script>"""
     return f"""<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -275,17 +298,7 @@ def page_html(g: dict) -> str:
     .guide-list {{ line-height: 1.75; padding-left: 1.2em; }}
     .guide-list li {{ margin: 0.45rem 0; }}
   </style>
-  <script type="application/ld+json">
-{{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {{"@type": "ListItem", "position": 1, "name": "名序", "item": "{BASE}/"}},
-    {{"@type": "ListItem", "position": 2, "name": "命名知識", "item": "{BASE}/guides/index.html"}},
-    {{"@type": "ListItem", "position": 3, "name": "{crumb_name}", "item": "{BASE}{path}"}}
-  ]
-}}
-  </script>
+{crumb_ld}
 </head>
 <body data-page="guides" data-asset-base="../">
   <a class="skip-link" href="#main">跳至主要內容</a>

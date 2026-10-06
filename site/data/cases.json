@@ -3,6 +3,20 @@
   "note": "由 WinForms 匯出 PDF 時產生的 .case.json 併入此檔 cases 陣列。",
   "cases": [
     {
+      "id": "ln-20261006162859-OO",
+      "service": "liunian",
+      "serviceLabel": "流年分析",
+      "birthDate": "1993/04/11",
+      "region": "彰化縣",
+      "displayName": "陳OO",
+      "surname": "陳",
+      "isCompoundSurname": false,
+      "gender": "女",
+      "exportedAt": "2026-10-06T16:28:59+08:00",
+      "macroStage": "大運己未｜穩中求進",
+      "image": ""
+    },
+    {
       "id": "rn-20261006101920-OO",
       "service": "rename",
       "serviceLabel": "專業改名",

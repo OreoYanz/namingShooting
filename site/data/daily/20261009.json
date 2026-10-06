@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T11:29:45",
+  "updatedAt": "2026-10-06T13:54:13",
   "timezone": "Asia/Taipei",
   "date": "2026-10-09",
   "dateKey": "20261009",
@@ -24,8 +24,8 @@
   "ji": [
     "諸事不宜"
   ],
-  "summaryText": "今日祭祀能開運，避免多餘行動，讓吉運如流水般至。",
-  "shortMessage": "丙辰日，祭祀與解除不順，開啟流財好運！",
+  "summaryText": "適合祭祀以開運，勿忘解除過去的障礙。",
+  "shortMessage": "今天是丙辰日，適合祭祀開運，讓順水流財成為現實！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",
@@ -37,15 +37,18 @@
     "webp": "assets/daily/daily_20261009.webp",
     "preview": "assets/daily/daily_20261009_preview.jpg",
     "last": "assets/daily/daily_20261009_last.jpg",
+    "mp4": "assets/daily/daily_20261009.mp4",
     "shareImage": "assets/daily/daily_20261009_last.jpg",
     "scene": "assets/daily/scene_20261009.jpg",
     "scenePng": "assets/daily/scene_20261009.png",
     "gifDated": "assets/daily/daily_20261009.gif",
     "previewDated": "assets/daily/daily_20261009_preview.jpg",
     "lastDated": "assets/daily/daily_20261009_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261009.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

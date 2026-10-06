@@ -3,17 +3,41 @@ from __future__ import annotations
 
 import html
 import json
+from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, List, Sequence
+from typing import Any, Dict, List, Optional, Sequence
 from xml.sax.saxutils import escape as xml_escape
+from zoneinfo import ZoneInfo
 
 SITE_BASE = "https://mingxu.mingxu.workers.dev"
+_TAIPEI = ZoneInfo("Asia/Taipei")
 _GLOSSARY_PATH = Path(__file__).resolve().parents[2] / "config" / "yi_ji_glossary.json"
 
 
 def _esc(s: Any) -> str:
     return html.escape("" if s is None else str(s), quote=True)
+
+
+def taipei_today_key() -> str:
+    return datetime.now(_TAIPEI).strftime("%Y%m%d")
+
+
+def normalize_date_key(date_key: Any) -> str:
+    return "".join(ch for ch in str(date_key or "") if ch.isdigit())
+
+
+def is_future_date_key(date_key: Any, *, today_key: Optional[str] = None) -> bool:
+    key = normalize_date_key(date_key)
+    today = normalize_date_key(today_key) if today_key else taipei_today_key()
+    return len(key) == 8 and len(today) == 8 and key > today
+
+
+def robots_meta_for_date(date_key: Any, *, today_key: Optional[str] = None) -> str:
+    """Future day pages stay crawlable via links but stay out of Google index."""
+    if is_future_date_key(date_key, today_key=today_key):
+        return "noindex,follow"
+    return "index,follow,max-image-preview:large"
 
 
 def _roc_from_key(date_key: str) -> str:
@@ -65,9 +89,12 @@ def render_day_html(
     *,
     prev_key: str = "",
     next_key: str = "",
+    today_key: Optional[str] = None,
 ) -> str:
     """HTML for /daily/YYYYMMDD.html (paths relative to daily/)."""
     key = str(payload.get("dateKey") or "")
+    today = today_key or taipei_today_key()
+    robots = robots_meta_for_date(key, today_key=today)
     roc = payload.get("rocDate") or _roc_from_key(key)
     lunar = payload.get("lunarDate") or ""
     line2 = payload.get("dateLine2") or ""
@@ -143,7 +170,7 @@ def render_day_html(
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{_esc(title)}</title>
   <meta name="description" content="{_esc(description)}" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="robots" content="{_esc(robots)}" />
   <meta name="keywords" content="名序,每日吉祥,剪紙,{_esc(theme)},宜忌,開運" />
   <link rel="canonical" href="{_esc(page_url)}" />
   <meta name="theme-color" content="#f7f4ef" />
@@ -396,7 +423,8 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
 """
 
 
-def write_sitemap(root: Path, day_keys: List[str]) -> None:
+def write_sitemap(root: Path, day_keys: List[str], *, today_key: Optional[str] = None) -> None:
+    today = today_key or taipei_today_key()
     static = [
         f"{SITE_BASE}/",
         f"{SITE_BASE}/about.html",
@@ -420,7 +448,13 @@ def write_sitemap(root: Path, day_keys: List[str]) -> None:
     ]
     # Avoid fragment-only SEO; keep index root already listed
     static = [u for u in static if "#daily" not in u]
-    urls = static + [f"{SITE_BASE}/daily/{k}.html" for k in sorted(set(day_keys))]
+    # Only list days that are today-or-past (future pages use noindex)
+    published_days = [
+        k
+        for k in sorted({normalize_date_key(x) for x in day_keys})
+        if len(k) == 8 and not is_future_date_key(k, today_key=today)
+    ]
+    urls = static + [f"{SITE_BASE}/daily/{k}.html" for k in published_days]
     body = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ""]
     for loc in urls:
         body.append("  <url>")

@@ -246,7 +246,7 @@ def _write_seo_pages(root: Path, copied: List[str]) -> None:
         i = idx_map.get(key, -1)
         prev_key = chrono[i - 1] if i > 0 else ""
         next_key = chrono[i + 1] if 0 <= i < len(chrono) - 1 else ""
-        html = render_day_html(item, prev_key=prev_key, next_key=next_key)
+        html = render_day_html(item, prev_key=prev_key, next_key=next_key, today_key=today)
         out = out_dir / f"{key}.html"
         out.write_text(html, encoding="utf-8")
         copied.append(str(out.relative_to(root)).replace("\\", "/"))
@@ -254,7 +254,7 @@ def _write_seo_pages(root: Path, copied: List[str]) -> None:
     hub = root / "daily.html"
     hub.write_text(render_daily_hub_html(days, today), encoding="utf-8")
     copied.append("daily.html")
-    write_sitemap(root, keys)
+    write_sitemap(root, keys, today_key=today)
     copied.append("sitemap.xml")
 
     # Keep frontend glossary in sync for homepage hover tips

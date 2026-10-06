@@ -1456,6 +1456,14 @@ body.nav-open { overflow: hidden; }
 .home-cal-cell.is-today.has-gif {
   box-shadow: 0 0 0 2px rgba(166, 124, 61, 0.28);
 }
+.home-cal-cell.is-scheduled {
+  background: transparent;
+  border-color: rgba(176, 168, 158, 0.35);
+  color: #b0a89e;
+  font-weight: 500;
+  cursor: default;
+  box-shadow: none;
+}
 .home-cal-hint {
   margin: 0;
   margin-top: auto;

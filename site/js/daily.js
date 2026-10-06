@@ -680,12 +680,18 @@
         String(day).padStart(2, "0");
       const hit = byKey[key];
       const isToday = key === todayKey;
+      const isFuture = key > todayKey;
+      const isOpen = Boolean(hit) && !isFuture;
       const classes = ["home-cal-cell"];
-      if (hit) classes.push("has-gif");
+      if (isOpen) classes.push("has-gif");
+      if (hit && isFuture) classes.push("is-scheduled");
       if (isToday) classes.push("is-today");
-      const label =
-        formatRocDate(key) + (hit ? "，查看每日吉祥" : "");
-      if (hit) {
+      const label = isOpen
+        ? formatRocDate(key) + "，查看每日吉祥"
+        : hit && isFuture
+          ? formatRocDate(key) + "，尚未開放"
+          : formatRocDate(key);
+      if (isOpen) {
         const href = hit.page || ("daily/" + key + ".html");
         cells.push(
           '<a class="' +
@@ -706,7 +712,9 @@
             classes.join(" ") +
             '" data-date-key="' +
             key +
-            '" aria-hidden="true">' +
+            '"' +
+            (hit && isFuture ? ' aria-label="' + label + '"' : ' aria-hidden="true"') +
+            ">" +
             day +
             "</span>"
         );
@@ -737,11 +745,16 @@
 
       let viewYear = parseInt(todayKey.slice(0, 4), 10);
       let viewMonth = parseInt(todayKey.slice(4, 6), 10);
-      // Prefer month of newest available pack if today has none yet
-      if (!byKey[todayKey] && days[0] && String(days[0].dateKey).length === 8) {
-        const k = String(days[0].dateKey);
-        viewYear = parseInt(k.slice(0, 4), 10);
-        viewMonth = parseInt(k.slice(4, 6), 10);
+      // Prefer month of newest published (today-or-past) pack if today has none yet
+      if (!byKey[todayKey]) {
+        const visible = days.filter(function (d) {
+          return d && String(d.dateKey || "") <= todayKey;
+        });
+        if (visible[0] && String(visible[0].dateKey).length === 8) {
+          const k = String(visible[0].dateKey);
+          viewYear = parseInt(k.slice(0, 4), 10);
+          viewMonth = parseInt(k.slice(4, 6), 10);
+        }
       }
 
       function paint() {

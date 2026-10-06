@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T12:33:21",
+  "updatedAt": "2026-10-06T14:53:58",
   "timezone": "Asia/Taipei",
   "date": "2026-10-11",
   "dateKey": "20261011",
@@ -28,8 +28,8 @@
     "置產",
     "作梁"
   ],
-  "summaryText": "今日嫁娶開運，貴人襲來，出行入宅正當時。",
-  "shortMessage": "戊午日，今天是嫁娶與祭祀的吉日，貴人將靠近，抓住機會！",
+  "summaryText": "嫁娶開運良辰，避開納畜和伐木，一切順遂自會而來。",
+  "shortMessage": "今日戊午，適合嫁娶與開市，貴人靠近，別忘了避開納畜與伐木！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",
@@ -41,15 +41,18 @@
     "webp": "assets/daily/daily_20261011.webp",
     "preview": "assets/daily/daily_20261011_preview.jpg",
     "last": "assets/daily/daily_20261011_last.jpg",
+    "mp4": "assets/daily/daily_20261011.mp4",
     "shareImage": "assets/daily/daily_20261011_last.jpg",
     "scene": "assets/daily/scene_20261011.jpg",
     "scenePng": "assets/daily/scene_20261011.png",
     "gifDated": "assets/daily/daily_20261011.gif",
     "previewDated": "assets/daily/daily_20261011_preview.jpg",
     "lastDated": "assets/daily/daily_20261011_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261011.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

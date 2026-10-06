@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T11:54:37",
+  "updatedAt": "2026-10-06T14:42:40",
   "timezone": "Asia/Taipei",
   "date": "2026-10-10",
   "dateKey": "20261010",
@@ -28,8 +28,8 @@
     "伐木",
     "出行"
   ],
-  "summaryText": "今日宜嫁娶與求嗣，忌行出行以保運勢持續流暢。",
-  "shortMessage": "今天適合嫁娶、求嗣，讓運勢順水流財！",
+  "summaryText": "嫁娶求嗣的美好日子，避開上梁作灶的煩惱。",
+  "shortMessage": "今天適合嫁娶與求嗣，避免上梁與作灶。",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",
@@ -41,15 +41,18 @@
     "webp": "assets/daily/daily_20261010.webp",
     "preview": "assets/daily/daily_20261010_preview.jpg",
     "last": "assets/daily/daily_20261010_last.jpg",
+    "mp4": "assets/daily/daily_20261010.mp4",
     "shareImage": "assets/daily/daily_20261010_last.jpg",
     "scene": "assets/daily/scene_20261010.jpg",
     "scenePng": "assets/daily/scene_20261010.png",
     "gifDated": "assets/daily/daily_20261010.gif",
     "previewDated": "assets/daily/daily_20261010_preview.jpg",
     "lastDated": "assets/daily/daily_20261010_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261010.mp4",
     "latestGif": "assets/daily/latest.gif",
     "latestPreview": "assets/daily/latest_preview.jpg",
-    "latestLast": "assets/daily/latest_last.jpg"
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
   },
   "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
 }

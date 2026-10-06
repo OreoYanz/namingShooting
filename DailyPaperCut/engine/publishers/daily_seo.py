@@ -316,8 +316,8 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
     ld_list = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "名序｜每日吉祥剪紙彙整",
-        "description": "名序每日吉祥剪紙彙整：依日期查看宜忌、主題、今日總結，並下載 GIF 或圖檔。",
+        "name": "今日宜忌・每日吉祥｜名序",
+        "description": "今日宜忌與每日吉祥剪紙彙整：依日期查看冠笄、開市、嫁娶等主題與宜忌說明。",
         "url": f"{SITE_BASE}/daily.html",
         "inLanguage": "zh-Hant",
         "isPartOf": {"@type": "WebSite", "name": "名序", "url": f"{SITE_BASE}/"},
@@ -339,27 +339,28 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>名序｜每日吉祥剪紙彙整</title>
-  <meta name="description" content="名序每日吉祥剪紙彙整：依日期查看宜忌、主題、今日總結，並下載 GIF 或圖檔。" />
+  <title>今日宜忌・每日吉祥｜冠笄開市嫁娶日子參考｜名序</title>
+  <meta name="description" content="今日宜忌與每日吉祥剪紙彙整：依日期查看冠笄、開市、嫁娶等主題與宜忌說明，並下載 GIF 或圖檔。傳統曆法文化參考，非絕對指令。" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="keywords" content="名序,每日吉祥,剪紙,宜忌,開運,每日運勢" />
+  <meta name="keywords" content="今日宜忌,吉祥日,冠笄,開市,嫁娶日子,每日吉祥,剪紙,名序" />
   <link rel="canonical" href="{SITE_BASE}/daily.html" />
   <meta property="og:locale" content="zh_TW" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="名序" />
-  <meta property="og:title" content="名序｜每日吉祥剪紙彙整" />
-  <meta property="og:description" content="名序每日吉祥剪紙彙整：依日期查看宜忌、主題，並下載 GIF 或圖檔。" />
+  <meta property="og:title" content="今日宜忌・每日吉祥｜冠笄開市嫁娶日子參考｜名序" />
+  <meta property="og:description" content="今日宜忌與每日吉祥剪紙彙整：依日期查看主題與宜忌說明。" />
   <meta property="og:url" content="{SITE_BASE}/daily.html" />
   <meta property="og:image" content="{SITE_BASE}/assets/logo.png" />
   <link rel="icon" href="assets/logo.png" type="image/png" />
-  <link rel="stylesheet" href="css/site.css?v=1.0.42" />
-  <script src="js/tracking-config.js?v=1.0.42"></script>
-  <script src="js/tracking.js?v=1.0.42"></script>
+  <link rel="stylesheet" href="css/site.css?v=1.0.50" />
+  <script src="js/tracking-config.js?v=1.0.50"></script>
+  <script src="js/tracking.js?v=1.0.50"></script>
   <style>
     .daily-wrap {{ max-width: 720px; margin: 0 auto; }}
     .daily-card {{ background:#fffefb; border:1px solid #e4ddd2; padding:1.1rem 1.2rem; margin:0 0 1rem; }}
     .daily-archive-index {{ line-height:1.7; padding-left:1.2em; }}
     .daily-archive-index li {{ margin:0.35rem 0; }}
+    .daily-meta {{ color:#5c656d; line-height:1.7; margin:0; }}
   </style>
   <script type="application/ld+json">{json.dumps(ld_list, ensure_ascii=False)}</script>
 </head>
@@ -369,11 +370,16 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
   <main id="main">
     <section class="page-hero"><div class="container daily-wrap">
       <h1>每日吉祥</h1>
-      <p class="lead">名序每日剪紙宜忌與開運短語。可依日期閱讀，並下載 GIF 或圖檔。</p>
+      <p class="lead">今日宜忌與開運短語。可依日期閱讀冠笄、開市、嫁娶等主題，並下載 GIF 或圖檔。</p>
       <p class="lead"><a class="btn btn-primary" href="{_esc(today_link)}">查看今日</a>
-      <a class="btn btn-outline" href="index.html#daily" style="margin-left:0.5rem">回首頁日曆</a></p>
+      <a class="btn btn-outline" href="index.html#daily" style="margin-left:0.5rem">回首頁日曆</a>
+      <a class="btn btn-outline" href="guides/auspicious-days.html" style="margin-left:0.5rem">宜忌怎麼讀</a></p>
     </div></section>
     <section class="section"><div class="container daily-wrap">
+      <div class="daily-card">
+        <h2>怎麼使用本頁</h2>
+        <p class="daily-meta">宜忌屬於傳統曆法文化參考，可作為日程提醒，不是絕對指令。若要了解用語含義，請先讀 <a href="guides/auspicious-days.html">今日宜忌與吉祥日</a>；個人年度節奏則見 <a href="liunian.html">流年分析</a>。</p>
+      </div>
       <div class="daily-card">
         <h2>歷日彙整</h2>
         <ul class="daily-archive-index">
@@ -383,8 +389,8 @@ def render_daily_hub_html(days: List[Dict[str, Any]], today_key: str) -> str:
     </div></section>
   </main>
   <footer id="site-footer"></footer>
-  <script src="js/layout.js?v=1.0.42"></script>
-  <script src="js/site.js?v=1.0.42"></script>
+  <script src="js/layout.js?v=1.0.50"></script>
+  <script src="js/site.js?v=1.0.50"></script>
 </body>
 </html>
 """
@@ -400,6 +406,15 @@ def write_sitemap(root: Path, day_keys: List[str]) -> None:
         f"{SITE_BASE}/works.html",
         f"{SITE_BASE}/faq.html",
         f"{SITE_BASE}/contact.html",
+        f"{SITE_BASE}/guides/index.html",
+        f"{SITE_BASE}/guides/how-to-choose.html",
+        f"{SITE_BASE}/guides/naming-methods.html",
+        f"{SITE_BASE}/guides/zibei.html",
+        f"{SITE_BASE}/guides/preferred-chars.html",
+        f"{SITE_BASE}/guides/phonology.html",
+        f"{SITE_BASE}/guides/rename-reason.html",
+        f"{SITE_BASE}/guides/rename-timing.html",
+        f"{SITE_BASE}/guides/auspicious-days.html",
         f"{SITE_BASE}/daily.html",
         f"{SITE_BASE}/index.html#daily",
     ]

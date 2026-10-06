@@ -88,6 +88,7 @@
               <li><a href="${u("about.html")}">品牌故事</a></li>
               <li><a href="${u("works.html")}">真實案例</a></li>
               <li><a href="${u("faq.html")}">常見問題</a></li>
+              <li><a href="${u("guides/index.html")}">命名知識</a></li>
             </ul>
           </div>
           <div>

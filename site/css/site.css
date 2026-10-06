@@ -317,6 +317,18 @@ a:hover { text-decoration: underline; }
   margin: 0 0 14px;
   line-height: 1.45;
 }
+.hero-headline span {
+  display: block;
+}
+.hero-headline small {
+  display: block;
+  margin-top: 0.45em;
+  font-size: 0.62em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  line-height: 1.5;
+}
 .hero-sub {
   color: var(--muted);
   max-width: 28em;

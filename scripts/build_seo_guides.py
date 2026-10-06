@@ -15,7 +15,7 @@ GUIDES = [
         "title": "命名知識｜新生兒命名・專業改名・吉日宜忌｜名序",
         "description": "名序命名知識：新生兒命名怎麼選、八字姓名學五格差異、喜用字與字輩、寶寶名字音韻、為什麼想改名、改名時機、吉日與宜忌。",
         "h1": "命名知識",
-        "lead": "依搜尋需求整理：先搞懂怎麼選與怎麼取，再決定新生兒命名、專業改名或查看吉日宜忌。",
+        "lead": "",
         "keywords": "新生兒命名,寶寶取名,專業改名,改名時機,喜用字,字輩取名,八字取名,五格剖象,今日宜忌,名序",
         "body": """
       <p>內容屬文化與服務說明，不構成運勢保證；用字與戶政手續請依現行法規確認。</p>
@@ -352,7 +352,7 @@ def page_html(g: dict) -> str:
   <main id="main">
     <section class="page-hero"><div class="container">
       <h1>{g["h1"]}</h1>
-      <p class="lead">{g["lead"]}</p>
+      {f'<p class="lead">{g["lead"]}</p>' if g.get("lead") else ""}
     </div></section>
     <section class="section"><div class="container content-block reveal">
 {g["body"]}

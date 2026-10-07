@@ -60,10 +60,12 @@
     <Compile Include="Llm\ChatGptNewbornReportGenerator.cs" />
     <Compile Include="Llm\ChatGptLiunianGenerator.cs" />
     <Compile Include="Llm\OpenAiChatClient.cs" />
+    <Compile Include="Liunian\LiunianDomainLabels.cs" />
     <Compile Include="Liunian\LiunianEngine.cs" />
     <Compile Include="Mail\PdfMailSender.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Parents\ParentEvaluator.cs" />
+    <Compile Include="Parents\ParentReportBuilder.cs" />
     <Compile Include="Parents\ParentTaboo.cs" />
     <Compile Include="Pipeline\CandidatePoolBuilder.cs" />
     <Compile Include="Pipeline\Diversity.cs" />

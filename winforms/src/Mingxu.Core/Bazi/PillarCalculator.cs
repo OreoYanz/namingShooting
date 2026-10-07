@@ -26,6 +26,13 @@ internal sealed class XijiResult
 
 public static class PillarCalculator
 {
+    /// <summary>與八字排盤相同：依經度相對東經120°換算真太陽時（每度4分鐘）。</summary>
+    public static DateTime ToChartDateTime(DateTime birth, bool useTrueSolar, double longitude)
+    {
+        if (!useTrueSolar) return birth;
+        return birth.AddMinutes((longitude - 120.0) * 4.0);
+    }
+
     public static Pillars Compute(
         DateTime birth,
         string gender = "M",
@@ -33,11 +40,10 @@ public static class PillarCalculator
         double longitude = 121.56,
         string birthPlace = "")
     {
-        var dt = birth;
+        var dt = ToChartDateTime(birth, useTrueSolar, longitude);
         var notes = new List<string>();
         if (useTrueSolar)
         {
-            dt = dt.AddMinutes((longitude - 120.0) * 4.0);
             var placeTxt = string.IsNullOrWhiteSpace(birthPlace) ? "" : birthPlace + "、";
             notes.Add($"已依{placeTxt}東經 {longitude:0.0}° 換算真太陽時（相對東經120°）。");
         }
@@ -109,11 +115,18 @@ public static class PillarCalculator
             YearBranch = yz,
             BirthPlace = birthPlace,
             Longitude = longitude,
+            UseTrueSolar = useTrueSolar,
             Gender = gender,
         };
     }
 
-    public static List<DaYunEntry> DaYunList(DateTime birth, string gender, int startYear, int endYear)
+    public static List<DaYunEntry> DaYunList(
+        DateTime birth,
+        string gender,
+        int startYear,
+        int endYear,
+        bool useTrueSolar = false,
+        double longitude = 121.56)
     {
         if (endYear < startYear)
         {
@@ -121,7 +134,8 @@ public static class PillarCalculator
             startYear = endYear;
             endYear = t;
         }
-        var solar = Solar.FromYmdHms(birth.Year, birth.Month, birth.Day, birth.Hour, birth.Minute, birth.Second);
+        var dt = ToChartDateTime(birth, useTrueSolar, longitude);
+        var solar = Solar.FromYmdHms(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
         var yun = solar.Lunar.EightChar.GetYun(gender == "M" ? 1 : 0);
         var outList = new List<DaYunEntry>();
         foreach (var da in yun.GetDaYun())
@@ -139,11 +153,16 @@ public static class PillarCalculator
     }
 
     /// <summary>相容舊呼叫：由今年起算若干年。</summary>
-    public static List<DaYunEntry> DaYunList(DateTime birth, string gender, int years = 10)
+    public static List<DaYunEntry> DaYunList(
+        DateTime birth,
+        string gender,
+        int years = 10,
+        bool useTrueSolar = false,
+        double longitude = 121.56)
     {
         var start = DateTime.Now.Year;
         var n = years <= 0 ? 10 : years;
-        return DaYunList(birth, gender, start, start + n - 1);
+        return DaYunList(birth, gender, start, start + n - 1, useTrueSolar, longitude);
     }
 
     private static string ShiShen(string dayGan, string otherGan)

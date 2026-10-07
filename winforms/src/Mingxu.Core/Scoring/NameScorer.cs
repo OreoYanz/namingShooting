@@ -137,13 +137,18 @@ public static class NameScorer
             ParentScore = parent.Score,
             ParentUsed = parent.Used,
             CharWuxing = charWx,
-            Meanings = meanings.Select(m => m.Length > 24 ? m.Substring(0, 24) + "…" : m).ToList(),
+            // PDF／報告用字解析需完整字義，勿截斷
+            Meanings = meanings.ToList(),
             Reasons = reasons,
             ReasonText = string.Join("\n", reasons),
             Wuge = wuge,
         };
     }
 
+    /// <summary>
+    /// 全系統命名評等區間（綜合與各面向共用）：
+    /// 90＋卓異、80＋上佳、70＋良好、60＋中上、50＋中平、其餘待琢。
+    /// </summary>
     public static string GradeLabel(double score)
     {
         if (score >= 90) return "卓異";
@@ -152,6 +157,41 @@ public static class NameScorer
         if (score >= 60) return "中上";
         if (score >= 50) return "中平";
         return "待琢";
+    }
+
+    /// <summary>三才吉凶對應到與 <see cref="GradeLabel"/> 同一套分數刻度。</summary>
+    public static double SancaiScoreFromLuck(string luck)
+    {
+        switch (luck)
+        {
+            case "大吉": return 92;
+            case "吉": return 86;
+            case "次吉": return 70;
+            case "中性":
+            case "中": return 55;
+            case "凶": return 38;
+            case "大凶": return 28;
+            default: return 55;
+        }
+    }
+
+    /// <summary>命名各面向（標籤、分數），供報告顯示評等。</summary>
+    public static List<KeyValuePair<string, double>> DimensionScores(NameSuggestion sug)
+    {
+        var list = new List<KeyValuePair<string, double>>();
+        if (sug == null) return list;
+        list.Add(new KeyValuePair<string, double>("八字契合", sug.BaziScore));
+        list.Add(new KeyValuePair<string, double>("五格", sug.WugeScore));
+        if (sug.Wuge != null && !string.IsNullOrWhiteSpace(sug.Wuge.SancaiLuck))
+            list.Add(new KeyValuePair<string, double>("三才", SancaiScoreFromLuck(sug.Wuge.SancaiLuck)));
+        list.Add(new KeyValuePair<string, double>("音韻", sug.PhonologyScore));
+        list.Add(new KeyValuePair<string, double>("字義", sug.MeaningScore));
+        list.Add(new KeyValuePair<string, double>("生肖", sug.ZodiacScore));
+        if (sug.ParentUsed)
+            list.Add(new KeyValuePair<string, double>("父母合參", sug.ParentScore));
+        if (sug.AestheticScore > 0)
+            list.Add(new KeyValuePair<string, double>("整體美感", sug.AestheticScore));
+        return list;
     }
 
     private static double ScoreBaziFit(Pillars pillars, List<string> charWx)

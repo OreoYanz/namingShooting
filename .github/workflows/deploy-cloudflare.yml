@@ -1,7 +1,7 @@
 # Deploy docs/ to Cloudflare Worker on push to main.
-# Requires GitHub Secrets:
-#   CLOUDFLARE_API_TOKEN
-#   CLOUDFLARE_ACCOUNT_ID
+# Requires GitHub Secrets (repo Settings → Secrets and variables → Actions):
+#   TOKEN  = Cloudflare API Token (Edit Cloudflare Workers)
+#   ID     = Cloudflare Account ID
 name: Deploy Cloudflare
 
 on:
@@ -16,10 +16,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Deploy
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.TOKEN }}
+          accountId: ${{ secrets.ID }}
           command: deploy

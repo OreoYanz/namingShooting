@@ -13,6 +13,8 @@ public sealed class ChatGptNewbornReportResult
     public string Idea { get; set; }
     public string Blessing { get; set; }
     public string Hope { get; set; }
+    /// <summary>五格整體判讀：說明單格吉凶與綜合評等為何可並存。</summary>
+    public string WugeReading { get; set; }
     public List<YearLuck> Liunian { get; set; }
     public ChatGptCiPoemResult Poem { get; set; }
     public string Error { get; set; }
@@ -23,6 +25,7 @@ public sealed class ChatGptNewbornReportResult
             return !string.IsNullOrWhiteSpace(Idea)
                 || !string.IsNullOrWhiteSpace(Blessing)
                 || !string.IsNullOrWhiteSpace(Hope)
+                || !string.IsNullOrWhiteSpace(WugeReading)
                 || (Liunian != null && Liunian.Count > 0);
         }
     }
@@ -32,6 +35,7 @@ public sealed class ChatGptNewbornReportResult
         Idea = "";
         Blessing = "";
         Hope = "";
+        WugeReading = "";
         Liunian = new List<YearLuck>();
         Poem = new ChatGptCiPoemResult();
         Error = "";
@@ -102,12 +106,12 @@ public static class ChatGptNewbornReportGenerator
         if (isRename)
         {
             sb.AppendLine("這是「專業改名」報告文案任務。建議新名：「" + fullName + "」。");
-            sb.AppendLine("請一次產出：未來十年流年解說、改名理念、祝福、人生期許，以及一首嵌名宋詞（含賞析）。");
+            sb.AppendLine("請一次產出：未來十年流年解說、五格整體判讀、改名理念、祝福、人生期許，以及一首嵌名宋詞（含賞析）。");
         }
         else
         {
             sb.AppendLine("這是「新生兒命名」報告文案任務。姓名：「" + fullName + "」。");
-            sb.AppendLine("請一次產出：未來十年流年解說、命名理念、祝福、人生期許，以及一首嵌名宋詞（含賞析）。");
+            sb.AppendLine("請一次產出：未來十年流年解說、五格整體判讀、命名理念、祝福、人生期許，以及一首嵌名宋詞（含賞析）。");
         }
         sb.AppendLine();
         sb.AppendLine("【基本資料】");
@@ -138,6 +142,17 @@ public static class ChatGptNewbornReportGenerator
             sb.AppendLine("喜用：" + string.Join("、", pillars.XiYong ?? new List<string>()) +
                 "；忌：" + string.Join("、", pillars.JiShen ?? new List<string>()));
         }
+        if (sug.Wuge != null)
+        {
+            var w = sug.Wuge;
+            sb.AppendLine("【三才五格｜請據此撰寫 wuge_reading，數字與吉凶不可改動】");
+            sb.AppendLine("三才：" + FormatSancaiDots(w) + "（" + (w.SancaiLuck ?? "") + "）；關係：" + (w.SancaiNote ?? ""));
+            sb.AppendLine("天格 " + w.Tian + "・" + (w.TianLuck ?? "") +
+                "；人格 " + w.Ren + "・" + (w.RenLuck ?? "") +
+                "；地格 " + w.Di + "・" + (w.DiLuck ?? "") +
+                "；外格 " + w.Wai + "・" + (w.WaiLuck ?? "") +
+                "；總格 " + w.Zong + "・" + (w.ZongLuck ?? ""));
+        }
         if (req != null && !string.IsNullOrWhiteSpace(req.AestheticBrief))
             sb.AppendLine("審美偏好：" + req.AestheticBrief.Trim());
         sb.AppendLine();
@@ -151,6 +166,13 @@ public static class ChatGptNewbornReportGenerator
             sb.AppendLine("每一年給 level（佳／平偏佳／平／慎 四選一）與 summary（40～90字，結合新名意象、成年階段與改名後的生活方向，可柔和參考命理，勿堆砌術語）。");
         else
             sb.AppendLine("每一年給 level（佳／平偏佳／平／慎 四選一）與 summary（40～90字，結合姓名意象與成長階段，可柔和參考命理，勿堆砌術語）。");
+        sb.AppendLine();
+        sb.AppendLine("【五格整體判讀】（JSON 欄位 wuge_reading，兩段、共 120～220 字）");
+        sb.AppendLine("目的：預答家長疑問——「某格（尤其總格）為凶／需留意時，為何綜合評等仍可為上佳／良好？」");
+        sb.AppendLine("第一段：說明三才配置（用「・」分隔五行）與天人／人地關係，並概述各格表現；若總格為凶或大凶，須點出總格數與「需留意格」，語氣溫和、勿恐嚇。");
+        sb.AppendLine("第二段：明確說明本名並非單以五格吉凶判斷，而是綜合出生八字、喜用方向、字義、音韻、三才與整體名字使用感後評估；可呼應綜合評等「" + sug.Grade + "」。");
+        sb.AppendLine("範例語氣：「此名三才配置為土・金・水，天人相生、人地相生；人格與外格表現良好，地格為中性，總格 34 為本派數理中的需留意格。因此，本名並非單以五格吉凶判斷，而是綜合出生八字、喜用方向、字義、音韻、三才與整體名字使用感後評估。」");
+        sb.AppendLine("勿輸出分數數字（綜合評等文字可保留）；勿改動格位吉凶與總格數。");
         sb.AppendLine();
         if (isRename)
         {
@@ -174,6 +196,7 @@ public static class ChatGptNewbornReportGenerator
         sb.AppendLine();
         sb.AppendLine("只輸出 JSON：");
         sb.AppendLine("{");
+        sb.AppendLine("  \"wuge_reading\":\"五格整體判讀兩段文字\",");
         sb.AppendLine("  \"idea\":\"" + (isRename ? "改名理念" : "命名理念") + "\",");
         sb.AppendLine("  \"blessing\":\"祝福\",");
         sb.AppendLine("  \"hope\":\"人生期許\",");
@@ -182,6 +205,17 @@ public static class ChatGptNewbornReportGenerator
         sb.AppendLine("cipai 僅填真實詞牌；無詞牌時填空字串，勿填「無則空字串」等說明文字。");
         sb.AppendLine("}");
         return sb.ToString();
+    }
+
+    private static string FormatSancaiDots(WugeResult w)
+    {
+        if (w == null) return "";
+        if (!string.IsNullOrEmpty(w.TianWx) && !string.IsNullOrEmpty(w.RenWx) && !string.IsNullOrEmpty(w.DiWx))
+            return w.TianWx + "・" + w.RenWx + "・" + w.DiWx;
+        var s = w.Sancai ?? "";
+        if (s.Length >= 3)
+            return s[0] + "・" + s[1] + "・" + s[2];
+        return s;
     }
 
     private static ChatGptNewbornReportResult Parse(string content, List<YearLuck> skeleton, string fullName)
@@ -199,6 +233,7 @@ public static class ChatGptNewbornReportGenerator
         try
         {
             var obj = JObject.Parse(text);
+            result.WugeReading = Norm((obj["wuge_reading"] ?? obj["wugeReading"] ?? "").ToString());
             result.Idea = Norm((obj["idea"] ?? "").ToString());
             result.Blessing = Norm((obj["blessing"] ?? "").ToString());
             result.Hope = Norm((obj["hope"] ?? "").ToString());

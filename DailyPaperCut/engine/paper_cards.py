@@ -48,19 +48,32 @@ def _font(size: int, *, bold: bool = False) -> ImageFont.ImageFont:
     return ImageFont.load_default()
 
 
+def _prefer_taiwan_forms(text: str) -> str:
+    """Keep Taiwan-common forms after OpenCC (brand / almanac wording)."""
+    s = text
+    for a, b in (
+        ("臺灣", "台灣"),
+        ("竈", "灶"),
+        ("瞭解", "了解"),
+        ("汙穢", "污穢"),
+    ):
+        s = s.replace(a, b)
+    return s
+
+
 def to_traditional(text: str) -> str:
-    """Force Traditional Chinese for on-screen copy."""
+    """Force Traditional Chinese for on-screen / published copy."""
     s = str(text or "")
     try:
         from opencc import OpenCC
 
-        return OpenCC("s2t").convert(s)
+        return _prefer_taiwan_forms(OpenCC("s2t").convert(s))
     except Exception:
         pass
     try:
         import zhconv
 
-        return zhconv.convert(s, "zh-tw")
+        return _prefer_taiwan_forms(zhconv.convert(s, "zh-tw"))
     except Exception:
         pass
     table = str.maketrans(
@@ -75,11 +88,12 @@ def to_traditional(text: str) -> str:
             "订": "訂", "约": "約", "亲": "親", "继": "繼", "续": "續", "残": "殘",
             "杀": "殺", "斋": "齋", "竖": "豎", "梁": "樑", "启": "啟", "攒": "攢",
             "传": "傳", "书": "書", "词": "詞", "讼": "訟", "狱": "獄", "缝": "縫",
+            "黄": "黃", "讳": "諱", "历": "曆", "农": "農", "简": "簡", "体": "體",
         }
     )
     for a, b in (("词讼", "詞訟"), ("安门", "安門"), ("纳畜", "納畜"), ("装修", "裝修")):
         s = s.replace(a, b)
-    return s.translate(table)
+    return _prefer_taiwan_forms(s.translate(table))
 
 
 def _translucent_block(

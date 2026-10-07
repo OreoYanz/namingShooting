@@ -22,7 +22,8 @@ public static class LiunianEngine
         int startYear,
         int endYear,
         bool includeMonths,
-        bool detailedMonths)
+        bool detailedMonths,
+        bool childDomains = false)
     {
         if (endYear < startYear)
         {
@@ -32,17 +33,19 @@ public static class LiunianEngine
         }
         endYear = Math.Min(endYear, startYear + 49);
 
-        var map = PillarCalculator.DaYunList(birth, gender, startYear, endYear)
+        var useTrueSolar = pillars != null && pillars.UseTrueSolar;
+        var longitude = pillars != null ? pillars.Longitude : 121.56;
+        var map = PillarCalculator.DaYunList(birth, gender, startYear, endYear, useTrueSolar, longitude)
             .GroupBy(x => x.Year)
             .ToDictionary(g => g.Key, g => g.First());
         var list = new List<YearLuck>();
         for (var y = startYear; y <= endYear; y++)
         {
-            var year = BuildYear(pillars, sug, birth, y, map);
+            var year = BuildYear(pillars, sug, birth, y, map, childDomains);
             if (includeMonths)
             {
-                year.Months = BuildMonths(pillars, sug, birth, y, year, detailedMonths);
-                ApplyMonthRankings(year);
+                year.Months = BuildMonths(pillars, sug, birth, y, year, detailedMonths, childDomains);
+                ApplyMonthRankings(year, childDomains);
             }
             list.Add(year);
         }
@@ -55,11 +58,12 @@ public static class LiunianEngine
         DateTime birth,
         string gender,
         int years,
-        bool includeMonths = false)
+        bool includeMonths = false,
+        bool childDomains = false)
     {
         var start = DateTime.Now.Year;
         var n = years <= 0 ? 10 : Math.Min(50, years);
-        return Compute(pillars, sug, birth, gender, start, start + n - 1, includeMonths, true);
+        return Compute(pillars, sug, birth, gender, start, start + n - 1, includeMonths, true, childDomains);
     }
 
     private static YearLuck BuildYear(
@@ -67,7 +71,8 @@ public static class LiunianEngine
         NameSuggestion sug,
         DateTime birth,
         int year,
-        Dictionary<int, DaYunEntry> map)
+        Dictionary<int, DaYunEntry> map,
+        bool childDomains)
     {
         var age = year - birth.Year + 1;
         DaYunEntry row;
@@ -122,10 +127,29 @@ public static class LiunianEngine
         var suitable = BuildYearSuitable(total, bazi);
         var avoid = BuildYearAvoid(total, bazi);
         var overall = outlook;
-        var careerText = DomainText("事業", career, "推進專案與職涯布局", "穩住節奏、補強專業");
-        var wealthText = DomainText("財運", wealth, "檢視配置與長期累積", "控制支出、避免一次投入過大");
-        var relationText = DomainText("感情／人際", relationship, "拓展合作與互動", "多溝通、少急於下判斷");
-        var lifeText = DomainText("生活", total, "整理作息與身心節奏", "保留彈性、照顧睡眠與運動");
+        string careerText, wealthText, relationText, lifeText;
+        if (childDomains)
+        {
+            careerText = DomainText(LiunianDomainLabels.Career(true), career,
+                "適合探索興趣與累積能力", "宜穩住學習節奏、循序漸進");
+            wealthText = DomainText(LiunianDomainLabels.Wealth(true), wealth,
+                "適合整理支援與學習環境", "留意過度消耗、保留緩衝");
+            relationText = DomainText(LiunianDomainLabels.Relationship(true), relationship,
+                "互動較易推進，適合同儕與家人溝通", "宜放慢、多確認彼此期待");
+            lifeText = DomainText(LiunianDomainLabels.Life(true), total,
+                "適合調整作息與生活安排", "保留緩衝，照顧睡眠與身體節奏");
+        }
+        else
+        {
+            careerText = DomainText(LiunianDomainLabels.Career(false), career,
+                "推進專案與職涯布局", "穩住節奏、補強專業");
+            wealthText = DomainText(LiunianDomainLabels.Wealth(false), wealth,
+                "檢視配置與長期累積", "控制支出、避免一次投入過大");
+            relationText = DomainText(LiunianDomainLabels.Relationship(false), relationship,
+                "拓展合作與互動", "多溝通、少急於下判斷");
+            lifeText = DomainText(LiunianDomainLabels.Life(false), total,
+                "整理作息與身心節奏", "保留彈性、照顧睡眠與運動");
+        }
 
         return new YearLuck
         {
@@ -166,11 +190,12 @@ public static class LiunianEngine
         DateTime birth,
         int year,
         YearLuck yearLuck,
-        bool detailed)
+        bool detailed,
+        bool childDomains)
     {
         var months = new List<MonthLuck>();
         for (var m = 1; m <= 12; m++)
-            months.Add(BuildMonth(pillars, sug, birth, year, m, yearLuck, detailed));
+            months.Add(BuildMonth(pillars, sug, birth, year, m, yearLuck, detailed, childDomains));
         return months;
     }
 
@@ -181,7 +206,8 @@ public static class LiunianEngine
         int year,
         int month,
         YearLuck yearLuck,
-        bool detailed)
+        bool detailed,
+        bool childDomains)
     {
         string monthGz = "";
         string termRange = "";
@@ -233,25 +259,43 @@ public static class LiunianEngine
             Suitable = MonthSuitable(level),
             Avoid = MonthAvoid(level),
         };
-        FillMonthTexts(monthLuck, detailed, note);
+        FillMonthTexts(monthLuck, detailed, note, childDomains);
         return monthLuck;
     }
 
-    private static void FillMonthTexts(MonthLuck m, bool detailed, string baziNote)
+    private static void FillMonthTexts(MonthLuck m, bool detailed, string baziNote, bool childDomains)
     {
         m.Overall = "流月定位：" + m.Level + "。本月整體節奏偏" + ToneOf(m.Level) + "。";
-        m.Career = detailed
-            ? "事業：" + DomainHint(m.TotalScore, "適合推進既有事項與盤點優先序", "宜穩住產出、避免一次擴張過多")
-            : DomainHint(m.TotalScore, "可推進", "宜穩住");
-        m.Wealth = detailed
-            ? "財運：" + DomainHint(m.TotalScore, "適合整理配置與檢視收支", "留意支出節奏、避免衝動投入")
-            : DomainHint(m.TotalScore, "宜整理", "宜控管");
-        m.Relationship = detailed
-            ? "感情／人際：" + DomainHint(m.TotalScore, "互動較易推進，適合溝通協調", "宜放慢決策、多確認彼此期待")
-            : DomainHint(m.TotalScore, "可互動", "宜溝通");
-        m.Life = detailed
-            ? "生活：" + DomainHint(m.TotalScore, "適合調整作息與生活安排", "保留緩衝，照顧睡眠與身體節奏")
-            : DomainHint(m.TotalScore, "宜調整", "宜緩衝");
+        if (childDomains)
+        {
+            m.Career = detailed
+                ? LiunianDomainLabels.Career(true) + "：" + DomainHint(m.TotalScore, "適合探索興趣與練習", "宜穩住學習節奏")
+                : DomainHint(m.TotalScore, "可推進", "宜穩住");
+            m.Wealth = detailed
+                ? LiunianDomainLabels.Wealth(true) + "：" + DomainHint(m.TotalScore, "適合整理支援與環境", "留意過度消耗")
+                : DomainHint(m.TotalScore, "宜整理", "宜緩衝");
+            m.Relationship = detailed
+                ? LiunianDomainLabels.Relationship(true) + "：" + DomainHint(m.TotalScore, "互動較易推進，適合溝通", "宜放慢、多確認期待")
+                : DomainHint(m.TotalScore, "可互動", "宜溝通");
+            m.Life = detailed
+                ? LiunianDomainLabels.Life(true) + "：" + DomainHint(m.TotalScore, "適合調整作息與生活安排", "保留緩衝，照顧睡眠與身體節奏")
+                : DomainHint(m.TotalScore, "宜調整", "宜緩衝");
+        }
+        else
+        {
+            m.Career = detailed
+                ? "事業：" + DomainHint(m.TotalScore, "適合推進既有事項與盤點優先序", "宜穩住產出、避免一次擴張過多")
+                : DomainHint(m.TotalScore, "可推進", "宜穩住");
+            m.Wealth = detailed
+                ? "財運：" + DomainHint(m.TotalScore, "適合整理配置與檢視收支", "留意支出節奏、避免衝動投入")
+                : DomainHint(m.TotalScore, "宜整理", "宜控管");
+            m.Relationship = detailed
+                ? "感情／人際：" + DomainHint(m.TotalScore, "互動較易推進，適合溝通協調", "宜放慢決策、多確認彼此期待")
+                : DomainHint(m.TotalScore, "可互動", "宜溝通");
+            m.Life = detailed
+                ? "生活：" + DomainHint(m.TotalScore, "適合調整作息與生活安排", "保留緩衝，照顧睡眠與身體節奏")
+                : DomainHint(m.TotalScore, "宜調整", "宜緩衝");
+        }
         m.Advice = detailed
             ? "本月建議：以「" + m.Level + "」為基調安排節奏。" +
               (string.IsNullOrEmpty(baziNote) ? "" : "（" + baziNote + "）") +
@@ -261,7 +305,7 @@ public static class LiunianEngine
             m.Overall.Replace("流月定位：" + m.Level + "。", "");
     }
 
-    private static void ApplyMonthRankings(YearLuck year)
+    private static void ApplyMonthRankings(YearLuck year, bool childDomains = false)
     {
         if (year.Months == null || year.Months.Count == 0) return;
         year.StrongMonths = year.Months.Where(m => m.TotalScore >= 78).Select(m => m.Month).ToList();
@@ -269,9 +313,9 @@ public static class LiunianEngine
         year.AdjustMonths = year.Months.Where(m => m.TotalScore >= 52 && m.TotalScore < 65).Select(m => m.Month).ToList();
         year.CautionMonths = year.Months.Where(m => m.TotalScore < 52).Select(m => m.Month).ToList();
 
-        year.MonthGuideCareer = BuildMonthGuide("事業", year.Months, m => m.TotalScore + (m.BaziScore - 55) * 0.2);
-        year.MonthGuideWealth = BuildMonthGuide("財務", year.Months, m => m.TotalScore + (m.BaziScore - 55) * 0.15);
-        year.MonthGuideRelationship = BuildMonthGuide("感情／人際", year.Months, m => m.TotalScore + (m.ZodiacScore - 55) * 0.2);
+        year.MonthGuideCareer = BuildMonthGuide(LiunianDomainLabels.Career(childDomains), year.Months, m => m.TotalScore + (m.BaziScore - 55) * 0.2);
+        year.MonthGuideWealth = BuildMonthGuide(childDomains ? LiunianDomainLabels.Wealth(true) : "財務", year.Months, m => m.TotalScore + (m.BaziScore - 55) * 0.15);
+        year.MonthGuideRelationship = BuildMonthGuide(LiunianDomainLabels.Relationship(childDomains), year.Months, m => m.TotalScore + (m.ZodiacScore - 55) * 0.2);
     }
 
     private static string BuildMonthGuide(string title, List<MonthLuck> months, Func<MonthLuck, double> scoreFn)

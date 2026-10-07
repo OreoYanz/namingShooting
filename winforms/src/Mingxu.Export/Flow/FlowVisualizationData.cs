@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Mingxu.Core.Bazi;
 using Mingxu.Core.Models;
+using Mingxu.Core.Parents;
+using Mingxu.Core.Scoring;
 
 namespace Mingxu.Export.Flow
 {
@@ -39,7 +41,11 @@ namespace Mingxu.Export.Flow
         public string Idea { get; set; }
         public string Blessing { get; set; }
         public string Hope { get; set; }
+        /// <summary>五格整體判讀（說明單格吉凶與綜合評等）。</summary>
+        public string WugeReading { get; set; }
         public string ParentsText { get; set; }
+        /// <summary>父母姓名合參（新生兒／改名共用）。</summary>
+        public ParentReportBlock ParentReport { get; set; }
         /// <summary>改名：原姓名。</summary>
         public string OriginalName { get; set; }
         /// <summary>改名：原因／改善方向／關注（純文字備援）。</summary>
@@ -94,6 +100,15 @@ namespace Mingxu.Export.Flow
         public FlowWugeVisual Wuge { get; set; }
         public string CharWuxingText { get; set; }
         public double TotalScore { get; set; }
+        public string Grade { get; set; }
+        /// <summary>各面向評等（與綜合同一 GradeLabel 區間；報告只顯示評等文字）。</summary>
+        public List<FlowScoreDim> ScoreDims { get; set; }
+    }
+
+    public sealed class FlowScoreDim
+    {
+        public string Label { get; set; }
+        public double Score { get; set; }
         public string Grade { get; set; }
     }
 
@@ -330,7 +345,14 @@ namespace Mingxu.Export.Flow
                 JiShenText = pillars != null && pillars.JiShen != null ? string.Join("、", pillars.JiShen) : "",
                 CharWuxingText = sug.CharWuxing != null ? string.Join("、", sug.CharWuxing) : "",
                 TotalScore = sug.Total,
-                Grade = sug.Grade ?? "",
+                Grade = sug.Grade ?? NameScorer.GradeLabel(sug.Total),
+                ScoreDims = NameScorer.DimensionScores(sug)
+                    .Select(kv => new FlowScoreDim
+                    {
+                        Label = kv.Key,
+                        Score = kv.Value,
+                        Grade = NameScorer.GradeLabel(kv.Value),
+                    }).ToList(),
             };
             if (sug.Wuge != null)
             {
@@ -559,8 +581,10 @@ namespace Mingxu.Export.Flow
             int reportEnd = years.Max(y => y.Year);
 
             // 優先用八字大運表，範圍含報告前後以便切出完整大運段再裁切
+            var lon = req.Longitude != 0 ? req.Longitude : 121.56;
             var entries = PillarCalculator.DaYunList(
-                birth, req.Gender ?? "M", birth.Year, Math.Max(reportEnd + 9, birth.Year + 89));
+                birth, req.Gender ?? "M", birth.Year, Math.Max(reportEnd + 9, birth.Year + 89),
+                req.UseTrueSolar, lon);
             if (entries != null && entries.Count > 0)
             {
                 string currentGz = null;

@@ -392,7 +392,12 @@ public static class NamingService
         }
 
         if (result.Suggestions.Count > 0)
-            result.Liunian = ComputeLiunian(pillars, result.Suggestions[0], req.Birth, req.Gender, Math.Min(10, req.LiunianYears), repo);
+        {
+            var childDomains = string.Equals(req.Mode, "newborn", StringComparison.OrdinalIgnoreCase);
+            result.Liunian = ComputeLiunian(
+                pillars, result.Suggestions[0], req.Birth, req.Gender,
+                Math.Min(10, req.LiunianYears), repo, childDomains);
+        }
 
         return result;
     }
@@ -498,9 +503,10 @@ public static class NamingService
     }
 
     public static List<YearLuck> ComputeLiunian(
-        Pillars pillars, NameSuggestion sug, DateTime birth, string gender, int years, ICharacterRepository repo)
+        Pillars pillars, NameSuggestion sug, DateTime birth, string gender, int years, ICharacterRepository repo,
+        bool childDomains = false)
     {
-        return LiunianEngine.Compute(pillars, sug, birth, gender, years, includeMonths: false);
+        return LiunianEngine.Compute(pillars, sug, birth, gender, years, includeMonths: false, childDomains: childDomains);
     }
 
     public static List<YearLuck> ComputeLiunianRange(
@@ -511,9 +517,10 @@ public static class NamingService
         int startYear,
         int endYear,
         bool includeMonths,
-        bool detailedMonths)
+        bool detailedMonths,
+        bool childDomains = false)
     {
-        return LiunianEngine.Compute(pillars, sug, birth, gender, startYear, endYear, includeMonths, detailedMonths);
+        return LiunianEngine.Compute(pillars, sug, birth, gender, startYear, endYear, includeMonths, detailedMonths, childDomains);
     }
 
     /// <summary>ChatGPT 只覆蓋文字欄位；本地分數／流月骨架必須保留。</summary>

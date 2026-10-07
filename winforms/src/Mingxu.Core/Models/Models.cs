@@ -40,6 +40,7 @@ public sealed class Pillars
     public string YearBranch { get; set; } = "";
     public string BirthPlace { get; set; } = "";
     public double Longitude { get; set; }
+    public bool UseTrueSolar { get; set; }
     public string Gender { get; set; } = "M";
 }
 

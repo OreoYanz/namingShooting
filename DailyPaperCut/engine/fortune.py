@@ -33,10 +33,10 @@ def _score_from_yi_ji(yi: List[str], ji: List[str], gan_zhi: str) -> int:
 
 def _lucky_color_from_stem(stem: str) -> str:
     mapping = {
-        "甲": "木綠", "乙": "木青", "丙": "火紅", "丁": "火橙", "戊": "土黄",
+        "甲": "木綠", "乙": "木青", "丙": "火紅", "丁": "火橙", "戊": "土黃",
         "己": "土褐", "庚": "金白", "辛": "金銀", "壬": "水藍", "癸": "水墨",
     }
-    return mapping.get(stem, "米白")
+    return to_traditional(mapping.get(stem, "米白"))
 
 
 def _lucky_direction_from_branch(branch: str) -> str:

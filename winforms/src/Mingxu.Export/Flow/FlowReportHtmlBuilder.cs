@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Mingxu.Core.Liunian;
 using Mingxu.Core.Models;
+using Mingxu.Core.Parents;
 using Mingxu.Core.Scoring;
 using Mingxu.Core.Llm;
 
@@ -22,6 +24,7 @@ namespace Mingxu.Export.Flow
             var p = data.Profile ?? new FlowProfile();
             var mode = (data.ReportMode ?? "liunian").Trim().ToLowerInvariant();
             var isNaming = mode == "newborn" || mode == "rename";
+            var childDomains = mode == "newborn";
             var reportTitle = !string.IsNullOrWhiteSpace(data.ReportTitle)
                 ? data.ReportTitle
                 : (isNaming ? "新生兒命名剖象" : "流年大運分析");
@@ -73,10 +76,10 @@ namespace Mingxu.Export.Flow
             sb.Append("<div class=\"cover-foot\">").Append(H(data.GeneratedAt)).AppendLine("</div>");
             sb.AppendLine("</section>");
 
-            // Profile
-            sb.AppendLine("<section class=\"page\">");
+            // Profile（緊湊版：五格整體判讀需同頁）
+            sb.AppendLine("<section class=\"page profile-page\">");
             sb.AppendLine("<h1>命盤摘要</h1>");
-            sb.AppendLine("<div class=\"grid-2\">");
+            sb.AppendLine("<div class=\"grid-2 profile-meta\">");
             Meta(sb, "姓名", p.FullName);
             Meta(sb, "性別", p.GenderLabel);
             Meta(sb, "出生日期", p.BirthDateText);
@@ -91,15 +94,19 @@ namespace Mingxu.Export.Flow
             PillarCard(sb, "日柱", p.DayPillar);
             PillarCard(sb, "時柱", p.HourPillar);
             sb.AppendLine("</div>");
-            sb.AppendLine("<div class=\"grid-2 mt\">");
-            Meta(sb, "日主", (p.DayMaster ?? "") + (p.DayMasterWuxing ?? ""));
-            Meta(sb, "喜用", p.XiYongText);
-            Meta(sb, "忌神", p.JiShenText);
-            Meta(sb, "姓名五行", p.CharWuxingText);
-            Meta(sb, "綜合評估", string.IsNullOrWhiteSpace(p.Grade) ? NameScorer.GradeLabel(p.TotalScore) : p.Grade);
-            sb.AppendLine("</div>");
+            sb.AppendLine(BuildKeyFactsBar(p));
+            if (p.ScoreDims != null && p.ScoreDims.Count > 0)
+            {
+                sb.AppendLine("<h2>面向評等</h2>");
+                sb.AppendLine("<p class=\"lead dim-grade-note\">與綜合評估同一評等分類：卓異、上佳、良好、中上、中平、待琢</p>");
+                sb.AppendLine(BuildDimGradeGrid(p));
+            }
             sb.AppendLine("<h2>三才五格</h2>");
-            sb.AppendLine(BuildWugeBoard(p.Wuge));
+            // compact 示意圖較矮；判讀放右側色塊，不再另開區塊
+            var wugeSide = (isNaming && data.Naming != null)
+                ? StripNamingScores(data.Naming.WugeReading)
+                : null;
+            sb.AppendLine(BuildWugeBoard(p.Wuge, compact: true, sideReading: wugeSide));
             sb.AppendLine("</section>");
 
             // 命名剖象（新生兒／改名）
@@ -158,39 +165,22 @@ namespace Mingxu.Export.Flow
             var trends = data.YearlyTrend ?? new List<YearTrendPoint>();
             var singleYear = trends.Count < 2;
 
-            // Dayun timeline：多年才顯示整頁；單年改寫進流年總覽標題旁
+            // Dayun timeline：固定約十年，整頁緊湊呈現；單年改寫進流年總覽標題旁
             if (!singleYear)
             {
                 sb.AppendLine("<section class=\"page dayun-page\">");
                 sb.AppendLine("<h1>人生大運時間軸</h1>");
                 var dayunSegs = FilterDayunForReport(data.DayunTimeline, data.ReportStartYear, data.ReportEndYear);
                 sb.AppendLine(BuildDayunSvg(dayunSegs, data.DayunPeriods));
-                sb.AppendLine("<div class=\"dayun-list\">");
-                foreach (var seg in dayunSegs)
-                {
-                    sb.Append("<div class=\"dayun-item")
-                        .Append(seg.IsCurrent ? " current" : "")
-                        .Append("\">");
-                    sb.Append("<div class=\"dayun-gz\">")
-                        .Append(seg.IsCurrent ? "★ " : "")
-                        .Append(seg.StartYear).Append("　").Append(H(seg.Ganzhi));
-                    if (!string.IsNullOrWhiteSpace(seg.DaYun))
-                        sb.Append("　大運 ").Append(H(seg.DaYun));
-                    sb.Append(seg.IsCurrent ? "　目前" : "")
-                        .AppendLine("</div>");
-                    sb.Append("<div class=\"muted\">虛歲 ").Append(seg.StartAge).AppendLine("</div>");
-                    if (!string.IsNullOrWhiteSpace(seg.Summary))
-                        sb.Append("<div class=\"dayun-sum\">").Append(H(seg.Summary)).AppendLine("</div>");
-                    sb.AppendLine("</div>");
-                }
-                sb.AppendLine("</div>");
+                sb.AppendLine(BuildDayunYearGrid(dayunSegs));
                 sb.AppendLine("</section>");
             }
 
-            // Yearly trends：僅多年有參考價值；單年整頁隱藏
+            // Yearly trends：折線圖壓矮，與下方評等表同頁
             if (!singleYear && trends.Count > 0)
             {
-            sb.AppendLine("<section class=\"page\">");
+            const double trendChartH = 148;
+            sb.AppendLine("<section class=\"page trend-page\">");
             sb.AppendLine(isNaming ? "<h1>成長流年趨勢</h1>" : "<h1>未來年度趨勢</h1>");
             sb.AppendLine("<p class=\"lead\">綜合評等走勢</p>");
             sb.AppendLine(BuildLineChart(
@@ -199,27 +189,31 @@ namespace Mingxu.Export.Flow
                 {
                     new ChartSeries("綜合", "#1f4e5f", trends.Select(t => t.TotalScore).ToList()),
                 },
-                "年", "評等", gradeYAxis: true));
+                "年", "評等", width: 640, height: trendChartH, gradeYAxis: true));
             sb.AppendLine("<h2>三大面向趨勢</h2>");
-            sb.AppendLine("<p class=\"lead\">事業／財運／感情評等走勢</p>");
+            sb.Append("<p class=\"lead\">").Append(H(LiunianDomainLabels.TriadLead(childDomains))).AppendLine("</p>");
             sb.AppendLine(BuildLineChart(
                 trends.Select(t => (double)t.Year).ToList(),
                 new List<ChartSeries>
                 {
-                    new ChartSeries("事業", "#2a6f7a", trends.Select(t => t.CareerScore).ToList()),
-                    new ChartSeries("財運", "#8b6914", trends.Select(t => t.WealthScore).ToList()),
-                    new ChartSeries("感情", "#6b4c7a", trends.Select(t => t.RelationshipScore).ToList()),
+                    new ChartSeries(LiunianDomainLabels.Career(childDomains), "#2a6f7a", trends.Select(t => t.CareerScore).ToList()),
+                    new ChartSeries(LiunianDomainLabels.Wealth(childDomains), "#8b6914", trends.Select(t => t.WealthScore).ToList()),
+                    new ChartSeries(LiunianDomainLabels.RelationshipShort(childDomains), "#6b4c7a", trends.Select(t => t.RelationshipScore).ToList()),
                 },
-                "年", "評等", gradeYAxis: true));
-            sb.AppendLine("<table class=\"compact\"><thead><tr><th>年</th><th>干支</th><th>綜合</th><th>事業</th><th>財運</th><th>感情</th><th>關鍵字</th></tr></thead><tbody>");
+                "年", "評等", width: 640, height: trendChartH, gradeYAxis: true));
+            sb.Append("<table class=\"compact\"><thead><tr><th>年</th><th>干支</th><th>綜合</th><th>")
+                .Append(H(LiunianDomainLabels.Career(childDomains))).Append("</th><th>")
+                .Append(H(LiunianDomainLabels.Wealth(childDomains))).Append("</th><th>")
+                .Append(H(LiunianDomainLabels.RelationshipShort(childDomains)))
+                .AppendLine("</th><th>關鍵字</th></tr></thead><tbody>");
             foreach (var t in trends)
             {
                 sb.Append("<tr><td>").Append(t.Year).Append("</td><td>")
                     .Append(H(t.Ganzhi)).Append("</td><td>")
-                    .Append(H(NameScorer.GradeLabel(t.TotalScore))).Append("</td><td>")
-                    .Append(H(NameScorer.GradeLabel(t.CareerScore))).Append("</td><td>")
-                    .Append(H(NameScorer.GradeLabel(t.WealthScore))).Append("</td><td>")
-                    .Append(H(NameScorer.GradeLabel(t.RelationshipScore))).Append("</td><td>")
+                    .Append(GradeBadgeHtml(NameScorer.GradeLabel(t.TotalScore))).Append("</td><td>")
+                    .Append(GradeBadgeHtml(NameScorer.GradeLabel(t.CareerScore))).Append("</td><td>")
+                    .Append(GradeBadgeHtml(NameScorer.GradeLabel(t.WealthScore))).Append("</td><td>")
+                    .Append(GradeBadgeHtml(NameScorer.GradeLabel(t.RelationshipScore))).Append("</td><td>")
                     .Append(H(t.Keyword)).AppendLine("</td></tr>");
             }
             sb.AppendLine("</tbody></table>");
@@ -279,9 +273,9 @@ namespace Mingxu.Export.Flow
 
                 sb.AppendLine("<div class=\"score-row\">");
                 GradeChip(sb, "綜合", y.TotalScore);
-                GradeChip(sb, "事業", y.CareerScore);
-                GradeChip(sb, "財運", y.WealthScore);
-                GradeChip(sb, "感情", y.RelationshipScore);
+                GradeChip(sb, LiunianDomainLabels.Career(childDomains), y.CareerScore);
+                GradeChip(sb, LiunianDomainLabels.Wealth(childDomains), y.WealthScore);
+                GradeChip(sb, LiunianDomainLabels.RelationshipShort(childDomains), y.RelationshipScore);
                 sb.AppendLine("</div>");
 
                 var showNamingSummary = isNaming && !string.IsNullOrWhiteSpace(y.Summary);
@@ -296,10 +290,10 @@ namespace Mingxu.Export.Flow
                 else if (!string.IsNullOrWhiteSpace(y.Overall)
                     && !string.Equals(y.Overall.Trim(), y.Summary.Trim(), StringComparison.Ordinal))
                     Block(sb, "整體", y.Overall);
-                Block(sb, "事業", y.Career);
-                Block(sb, "財運", y.Wealth);
-                Block(sb, "感情／人際", y.Relationship);
-                Block(sb, "生活", y.Life);
+                Block(sb, LiunianDomainLabels.Career(childDomains), y.Career);
+                Block(sb, LiunianDomainLabels.Wealth(childDomains), y.Wealth);
+                Block(sb, LiunianDomainLabels.Relationship(childDomains), y.Relationship);
+                Block(sb, LiunianDomainLabels.Life(childDomains), y.Life);
 
                 if ((y.Suitable != null && y.Suitable.Count > 0) || (y.Avoid != null && y.Avoid.Count > 0))
                 {
@@ -324,9 +318,12 @@ namespace Mingxu.Export.Flow
                     RhythmRow(sb, "調整", "tag-adjust", "建議保守調整", y.AdjustMonths);
                     RhythmRow(sb, "留意", "tag-caution", "較需留意", y.CautionMonths);
                     sb.AppendLine("</div>");
-                    if (!string.IsNullOrWhiteSpace(y.MonthGuideCareer)) Block(sb, "事業月份指南", y.MonthGuideCareer);
-                    if (!string.IsNullOrWhiteSpace(y.MonthGuideWealth)) Block(sb, "財運月份指南", y.MonthGuideWealth);
-                    if (!string.IsNullOrWhiteSpace(y.MonthGuideRelationship)) Block(sb, "感情月份指南", y.MonthGuideRelationship);
+                    if (!string.IsNullOrWhiteSpace(y.MonthGuideCareer))
+                        Block(sb, LiunianDomainLabels.Career(childDomains) + "月份指南", y.MonthGuideCareer);
+                    if (!string.IsNullOrWhiteSpace(y.MonthGuideWealth))
+                        Block(sb, LiunianDomainLabels.Wealth(childDomains) + "月份指南", y.MonthGuideWealth);
+                    if (!string.IsNullOrWhiteSpace(y.MonthGuideRelationship))
+                        Block(sb, LiunianDomainLabels.RelationshipShort(childDomains) + "月份指南", y.MonthGuideRelationship);
                 }
                 sb.AppendLine("</section>");
 
@@ -364,7 +361,7 @@ namespace Mingxu.Export.Flow
                             .Append("<span class=\"mh-title\">").Append(m.Month).Append("月</span>");
                         if (!string.IsNullOrWhiteSpace(m.MonthGanzhi))
                             sb.Append("<span class=\"mh-gz\">").Append(H(m.MonthGanzhi)).Append("</span>");
-                        sb.Append("<span class=\"mh-score\">").Append(H(NameScorer.GradeLabel(m.TotalScore))).Append("</span>");
+                        sb.Append(GradeBadgeHtml(NameScorer.GradeLabel(m.TotalScore)));
                         if (!string.IsNullOrWhiteSpace(m.Level)
                             && !string.Equals(m.Level, NameScorer.GradeLabel(m.TotalScore), StringComparison.Ordinal))
                             sb.Append("<span class=\"mh-level\">").Append(H(m.Level)).Append("</span>");
@@ -373,10 +370,10 @@ namespace Mingxu.Export.Flow
                             sb.Append("<div class=\"month-card-term\">節氣區間：").Append(H(m.SolarTermRange)).AppendLine("</div>");
 
                         MonthCardBlock(sb, "整體", StripMonthMetaPrefix(m.Overall, m));
-                        MonthCardBlock(sb, "事業", m.Career);
-                        MonthCardBlock(sb, "財運", m.Wealth);
-                        MonthCardBlock(sb, "感情／人際", m.Relationship);
-                        MonthCardBlock(sb, "生活", m.Life);
+                        MonthCardBlock(sb, LiunianDomainLabels.Career(childDomains), m.Career);
+                        MonthCardBlock(sb, LiunianDomainLabels.Wealth(childDomains), m.Wealth);
+                        MonthCardBlock(sb, LiunianDomainLabels.Relationship(childDomains), m.Relationship);
+                        MonthCardBlock(sb, LiunianDomainLabels.Life(childDomains), m.Life);
                         if (m.Suitable != null && m.Suitable.Count > 0)
                             MonthCardBlock(sb, "宜", string.Join("、", m.Suitable));
                         if (m.Avoid != null && m.Avoid.Count > 0)
@@ -394,7 +391,10 @@ namespace Mingxu.Export.Flow
             {
                 sb.AppendLine("<section class=\"page\">");
                 sb.AppendLine("<h1>專屬寄語</h1>");
-                sb.Append("<div class=\"prose\">").Append(Nl(ChatGptCiPoemGenerator.SanitizePoemDisplay(data.Narrative.Poem))).AppendLine("</div>");
+                var poemText = FormatPoemWithDedication(
+                    ChatGptCiPoemGenerator.SanitizePoemDisplay(data.Narrative.Poem),
+                    p.FullName);
+                sb.Append("<div class=\"prose\">").Append(Nl(poemText)).AppendLine("</div>");
                 sb.AppendLine("</section>");
             }
 
@@ -405,6 +405,35 @@ namespace Mingxu.Export.Flow
             sb.AppendLine("</section>");
 
             sb.AppendLine("</body></html>");
+            return sb.ToString();
+        }
+
+        /// <summary>十年大運年份一覽（單欄；虛歲與年同行，保留摘要）。</summary>
+        private static string BuildDayunYearGrid(List<DayunSegment> segments)
+        {
+            var list = (segments ?? new List<DayunSegment>()).OrderBy(s => s.StartYear).ToList();
+            if (list.Count == 0) return "";
+            var sb = new StringBuilder();
+            sb.AppendLine("<div class=\"dayun-year-grid\">");
+            foreach (var seg in list)
+            {
+                sb.Append("<div class=\"dayun-year-card")
+                    .Append(seg.IsCurrent ? " current" : "")
+                    .Append("\">");
+                sb.Append("<div class=\"dy-main\">")
+                    .Append(seg.IsCurrent ? "★ " : "")
+                    .Append(seg.StartYear)
+                    .Append("　虛歲 ").Append(seg.StartAge)
+                    .Append("　").Append(H(seg.Ganzhi ?? ""));
+                if (!string.IsNullOrWhiteSpace(seg.DaYun))
+                    sb.Append("　大運 ").Append(H(seg.DaYun));
+                if (seg.IsCurrent) sb.Append("　目前");
+                sb.AppendLine("</div>");
+                if (!string.IsNullOrWhiteSpace(seg.Summary))
+                    sb.Append("<div class=\"dy-sum\">").Append(H(seg.Summary.Trim())).AppendLine("</div>");
+                sb.AppendLine("</div>");
+            }
+            sb.AppendLine("</div>");
             return sb.ToString();
         }
 
@@ -433,13 +462,24 @@ namespace Mingxu.Export.Flow
             if (xs == null || xs.Count == 0 || series == null || series.Count == 0)
                 return "<p class=\"muted\">（無圖表資料）</p>";
 
-            var padL = gradeYAxis ? 58.0 : 44.0;
-            const double padR = 16, padT = 20, padB = 36;
+            // 左：評等二字；上：圖例列；下：年份刻度
+            var padL = gradeYAxis ? 42.0 : 44.0;
+            const double padR = 14;
+            var legendRows = series.Count > 0 ? 1 : 0;
+            var padT = height < 180
+                ? (14.0 + legendRows * 16.0)
+                : (20.0 + legendRows * 16.0);
+            var padB = height < 180 ? 24.0 : 36.0;
             var plotW = width - padL - padR;
             var plotH = height - padT - padB;
-            double minY = 0, maxY = 100;
+            if (plotH < 48) plotH = 48;
+
+            // 評等軸對齊 GradeLabel 門檻，避免 0–50 空白把刻度擠歪
+            double minY = gradeYAxis ? 40 : 0, maxY = 100;
             if (!gradeYAxis)
             {
+                minY = double.MaxValue;
+                maxY = double.MinValue;
                 foreach (var s in series)
                 {
                     foreach (var v in s.Values)
@@ -448,6 +488,7 @@ namespace Mingxu.Export.Flow
                         if (v > maxY) maxY = v;
                     }
                 }
+                if (minY == double.MaxValue) { minY = 0; maxY = 100; }
                 if (Math.Abs(maxY - minY) < 1) { minY = 0; maxY = 100; }
                 maxY = Math.Ceiling(maxY / 10.0) * 10;
                 minY = Math.Floor(minY / 10.0) * 10;
@@ -457,7 +498,13 @@ namespace Mingxu.Export.Flow
             if (Math.Abs(maxX - minX) < 0.0001) maxX = minX + 1;
 
             Func<double, double> mapX = x => padL + (x - minX) / (maxX - minX) * plotW;
-            Func<double, double> mapY = y => padT + (1.0 - (y - minY) / (maxY - minY)) * plotH;
+            Func<double, double> mapY = y =>
+            {
+                var t = (y - minY) / (maxY - minY);
+                if (t < 0) t = 0;
+                if (t > 1) t = 1;
+                return padT + (1.0 - t) * plotH;
+            };
 
             var sb = new StringBuilder();
             sb.AppendFormat(CultureInfo.InvariantCulture,
@@ -469,7 +516,6 @@ namespace Mingxu.Export.Flow
 
             if (gradeYAxis)
             {
-                // 五個文字等級刻度（與 NameScorer.GradeLabel 一致）
                 var ticks = new[] { 50.0, 60.0, 70.0, 80.0, 90.0 };
                 foreach (var v in ticks)
                 {
@@ -478,8 +524,8 @@ namespace Mingxu.Export.Flow
                         "<line x1=\"{0}\" y1=\"{1}\" x2=\"{2}\" y2=\"{1}\" stroke=\"#e8e2d8\" stroke-width=\"1\"/>",
                         padL, yy, padL + plotW);
                     sb.AppendFormat(CultureInfo.InvariantCulture,
-                        "<text x=\"{0}\" y=\"{1}\" class=\"axis axis-grade\">{2}</text>",
-                        padL - 6, yy + 4, H(NameScorer.GradeLabel(v)));
+                        "<text x=\"{0}\" y=\"{1}\" class=\"axis axis-grade\" text-anchor=\"end\" dominant-baseline=\"middle\">{2}</text>",
+                        padL - 5, yy, H(NameScorer.GradeLabel(v)));
                 }
             }
             else
@@ -492,8 +538,8 @@ namespace Mingxu.Export.Flow
                         "<line x1=\"{0}\" y1=\"{1}\" x2=\"{2}\" y2=\"{1}\" stroke=\"#e8e2d8\" stroke-width=\"1\"/>",
                         padL, yy, padL + plotW);
                     sb.AppendFormat(CultureInfo.InvariantCulture,
-                        "<text x=\"{0}\" y=\"{1}\" class=\"axis\">{2:0}</text>",
-                        padL - 8, yy + 4, v);
+                        "<text x=\"{0}\" y=\"{1}\" class=\"axis\" text-anchor=\"end\" dominant-baseline=\"middle\">{2:0}</text>",
+                        padL - 6, yy, v);
                 }
             }
 
@@ -503,7 +549,7 @@ namespace Mingxu.Export.Flow
                 var xx = mapX(xs[i]);
                 sb.AppendFormat(CultureInfo.InvariantCulture,
                     "<text x=\"{0}\" y=\"{1}\" class=\"axis-x\">{2:0}</text>",
-                    xx, height - 12, xs[i]);
+                    xx, height - 8, xs[i]);
             }
 
             foreach (var s in series)
@@ -527,17 +573,19 @@ namespace Mingxu.Export.Flow
                 }
             }
 
+            // 圖例固定在繪圖區上方，間距依中文標籤加寬
             var legendX = padL;
-            var legendY = 14.0;
+            var legendY = 12.0;
             foreach (var s in series)
             {
                 sb.AppendFormat(CultureInfo.InvariantCulture,
                     "<rect x=\"{0}\" y=\"{1}\" width=\"10\" height=\"10\" fill=\"{2}\"/>",
-                    legendX, legendY - 9, s.Color);
+                    legendX, legendY - 8, s.Color);
                 sb.AppendFormat(CultureInfo.InvariantCulture,
-                    "<text x=\"{0}\" y=\"{1}\" class=\"legend\">{2}</text>",
-                    legendX + 14, legendY, H(s.Name));
-                legendX += 70;
+                    "<text x=\"{0}\" y=\"{1}\" class=\"legend\" dominant-baseline=\"middle\">{2}</text>",
+                    legendX + 14, legendY - 3, H(s.Name));
+                var nameLen = string.IsNullOrEmpty(s.Name) ? 2 : s.Name.Length;
+                legendX += Math.Max(72, 22 + nameLen * 13);
             }
 
             sb.Append("</svg>");
@@ -784,6 +832,98 @@ body {
   z-index: 1;
 }
 .page:last-child { page-break-after: auto; }
+/* 命盤摘要緊湊：讓三才五格＋整體判讀同頁 */
+.profile-page { padding: 1mm 0 3mm; }
+.profile-page h1 {
+  font-size: 14pt;
+  margin: 0 0 2.5mm;
+  padding-bottom: 1.5mm;
+}
+.profile-page h2 {
+  font-size: 10.5pt;
+  margin: 2.5mm 0 1.2mm;
+}
+.profile-page .profile-meta {
+  gap: 0.8mm 4mm;
+}
+.profile-page .meta-label { font-size: 7.5pt; }
+.profile-page .meta-value {
+  font-size: 9.5pt;
+  margin-bottom: 0.6mm;
+}
+.profile-page .pillars {
+  gap: 1.5mm;
+  margin: 1mm 0 1.5mm;
+}
+.profile-page .pillar { padding: 1.5mm 1mm; }
+.profile-page .pillar .k { font-size: 7pt; }
+.profile-page .pillar .v { font-size: 12pt; margin-top: 0.4mm; }
+.profile-page .key-facts { margin: 0 0 2mm; }
+.profile-page .key-facts .kf { padding: 1.2mm 1.5mm; }
+.profile-page .key-facts .k { font-size: 7pt; margin-bottom: 0.3mm; }
+.profile-page .key-facts .v { font-size: 9.5pt; }
+.profile-page .dim-grade-note { margin: 0 0 1mm; font-size: 7.5pt; }
+.profile-page .dim-grade-grid { gap: 1.2mm; margin: 0 0 1.5mm; }
+.profile-page .dim-grade-grid .chip {
+  min-height: 10mm;
+  padding: 1mm 0.8mm;
+}
+.profile-page .dim-grade-grid .chip .k { font-size: 7pt; }
+.profile-page .dim-grade-grid .chip .v { font-size: 10pt; }
+.profile-page .dim-grade-grid .chip-total { min-height: 22mm; }
+.profile-page .dim-grade-grid .chip-total .v { font-size: 13pt; }
+.profile-page .wuge-schematic {
+  margin-top: 0;
+  padding: 1mm 2mm 1.5mm;
+  page-break-inside: auto;
+}
+.profile-page .wuge-schematic-title {
+  font-size: 9.5pt;
+  margin: 0 0 0.5mm;
+  letter-spacing: 0.12em;
+}
+/* 命盤頁：示意圖在上，判讀色塊在下 */
+.profile-page .wuge-body--compact {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2mm;
+}
+.profile-page .wuge-svg--compact {
+  max-width: 70%;
+  flex: 0 0 auto;
+  width: 70% !important;
+  margin: 0 auto;
+  display: block;
+}
+.profile-page .wuge-side--compact {
+  flex: 0 0 auto !important;
+  width: 100%;
+  padding: 1.2mm 1.5mm;
+  gap: 0.8mm;
+}
+.profile-page .wuge-side--compact.wuge-side--reading {
+  flex: 0 0 auto !important;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  padding: 2mm 2.5mm;
+  justify-content: flex-start;
+}
+.profile-page .wuge-side--compact .sancai-note { font-size: 8pt; }
+.profile-page .wuge-side--compact .wuge-luck-line { font-size: 7.5pt; line-height: 1.35; }
+.profile-page .wuge-side--compact .wuge-reading {
+  font-size: 12pt;
+  line-height: 1.35;
+  color: #2a2622;
+  white-space: pre-wrap;
+}
+.profile-page .block {
+  margin: 1.5mm 0 0;
+  page-break-before: avoid;
+  page-break-inside: avoid;
+}
+.profile-page .block .t { font-size: 8pt; margin-bottom: 0.3mm; }
+.profile-page .block .c { font-size: 9pt; line-height: 1.35; }
 .dayun-legend {
   display: flex;
   flex-wrap: wrap;
@@ -858,7 +998,7 @@ h3 { font-size: 10.5pt; color: #3d4f56; margin: 0 0 1mm; }
 .mt { margin-top: 4mm; }
 .meta-label { font-size: 8.5pt; color: #8a8378; }
 .meta-value { font-size: 10.5pt; color: #1c1a17; margin-bottom: 2mm; }
-.pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 3mm 0 5mm; }
+.pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 3mm 0 3mm; }
 .pillar {
   border: 1px solid #e2ddd4;
   border-radius: 4px;
@@ -868,14 +1008,103 @@ h3 { font-size: 10.5pt; color: #3d4f56; margin: 0 0 1mm; }
 }
 .pillar .k { font-size: 8pt; color: #8a8378; }
 .pillar .v { font-size: 14pt; color: #1f4e5f; font-weight: 600; margin-top: 1mm; }
+.key-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin: 0 0 4mm;
+  border: 1px solid #e2ddd4;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #faf8f4;
+}
+.key-facts .kf {
+  padding: 2mm 2.5mm;
+  border-right: 1px solid #e8e2d8;
+  text-align: center;
+}
+.key-facts .kf:last-child { border-right: none; }
+.key-facts .k { display: block; font-size: 7.5pt; color: #8a8378; margin-bottom: 0.6mm; }
+.key-facts .v { display: block; font-size: 10.5pt; color: #1f4e5f; font-weight: 600; line-height: 1.25; }
 .chart { margin: 2mm 0 4mm; }
-.axis { font-size: 9px; fill: #8a8378; text-anchor: end; }
-.axis-grade { font-size: 10px; fill: #5a534a; }
+.trend-page { padding: 2mm 0 3mm; }
+.trend-page h1 {
+  font-size: 14pt;
+  margin: 0 0 2mm;
+  padding-bottom: 1.5mm;
+}
+.trend-page h2 {
+  font-size: 10.5pt;
+  margin: 2.5mm 0 1mm;
+}
+.trend-page .lead { margin: 0 0 1.5mm; font-size: 9pt; }
+.trend-page .chart { margin: 0.5mm 0 2mm; }
+.trend-page table.compact {
+  margin-top: 1.5mm;
+  font-size: 8.5pt;
+}
+.trend-page table.compact th,
+.trend-page table.compact td { padding: 1mm 1.5mm; }
+.trend-page .grade-badge { font-size: 8pt; padding: 0.2mm 1.2mm; }
+.axis { font-size: 10px; fill: #8a8378; text-anchor: end; }
+.axis-grade { font-size: 11px; fill: #5a534a; font-weight: 600; }
 .axis-x { font-size: 9px; fill: #8a8378; text-anchor: middle; }
-.legend { font-size: 10px; fill: #3a3530; }
+.legend { font-size: 11px; fill: #3a3530; }
+.trend-page .chart { overflow: visible; }
 .dayun-label { font-size: 10px; fill: #1f4e5f; text-anchor: middle; font-weight: 600; }
+.dayun-page {
+  overflow: visible;
+  padding: 2mm 0 3mm;
+  display: flex;
+  flex-direction: column;
+  min-height: 262mm;
+  box-sizing: border-box;
+}
+.dayun-page h1 {
+  font-size: 14pt;
+  margin: 0 0 2.5mm;
+  padding-bottom: 1.5mm;
+  flex: 0 0 auto;
+}
+.dayun-page .chart { margin: 1mm 0 2mm; flex: 0 0 auto; }
+.dayun-page .dayun-legend { margin: 0 0 2.5mm; gap: 1.5mm 3mm; }
+.dayun-year-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  gap: 3.5mm;
+  margin-top: 2mm;
+}
+.dayun-year-card {
+  border: 1px solid #e2ddd4;
+  border-left: 3px solid #d9d2c5;
+  border-radius: 3px;
+  padding: 2.8mm 3mm;
+  background: #faf8f4;
+  page-break-inside: avoid;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dayun-year-card.current {
+  border-left-color: #1f4e5f;
+  background: #f3f7f8;
+}
+.dayun-year-card .dy-main {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #1f4e5f;
+  line-height: 1.35;
+}
+.dayun-year-card .dy-sum {
+  font-size: 8.5pt;
+  color: #4a453f;
+  margin-top: 1mm;
+  line-height: 1.4;
+}
 .dayun-list { margin-top: 4mm; }
-.dayun-page { overflow: visible; }
 .dayun-item {
   border-left: 3px solid #d9d2c5;
   padding: 2mm 0 2mm 4mm;
@@ -899,6 +1128,32 @@ table.compact th, table.compact td {
 }
 table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
 .score-row { display: flex; gap: 3mm; margin: 3mm 0 4mm; }
+.dim-grade-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto;
+  gap: 2mm;
+  margin: 2mm 0 3mm;
+}
+.dim-grade-grid .chip {
+  flex: none;
+  padding: 2mm 1.5mm;
+  box-sizing: border-box;
+  min-height: 14mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dim-grade-grid .chip .v { font-size: 11pt; }
+.dim-grade-grid .chip-total {
+  grid-column: 5;
+  grid-row: 1 / span 2;
+  justify-content: center;
+  min-height: 30mm;
+}
+.dim-grade-grid .chip-total .k { font-size: 9pt; margin-bottom: 1mm; }
+.dim-grade-grid .chip-total .v { font-size: 16pt; }
+.dim-grade-note { font-size: 8.5pt; color: #8a8378; margin: 0 0 1.5mm; }
 .chip {
   flex: 1;
   background: #f7f5f1;
@@ -910,6 +1165,34 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
 .chip .k { font-size: 8pt; color: #8a8378; }
 .chip .v { font-size: 14pt; color: #1f4e5f; font-weight: 600; }
 .chip .l { font-size: 8pt; color: #6a635a; }
+.chip.grade-zhuoyi { background: #e8f3f1; border-color: #9bc4bb; }
+.chip.grade-zhuoyi .v { color: #0f5c52; }
+.chip.grade-shangjia { background: #eaf3f7; border-color: #9bb8c7; }
+.chip.grade-shangjia .v { color: #1f4e5f; }
+.chip.grade-lianghao { background: #eef6ee; border-color: #a3c4a5; }
+.chip.grade-lianghao .v { color: #2e6b3a; }
+.chip.grade-zhongshang { background: #f7f2e8; border-color: #d0b98a; }
+.chip.grade-zhongshang .v { color: #8a6914; }
+.chip.grade-zhongping { background: #f3f1ed; border-color: #cfc8bc; }
+.chip.grade-zhongping .v { color: #6a635a; }
+.chip.grade-daizhuo { background: #f7ecec; border-color: #d4a8a8; }
+.chip.grade-daizhuo .v { color: #8b3a3a; }
+.grade-badge {
+  display: inline-block;
+  font-size: 9pt;
+  font-weight: 600;
+  padding: 0.4mm 1.8mm;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.grade-badge.grade-zhuoyi { background: #e8f3f1; border-color: #9bc4bb; color: #0f5c52; }
+.grade-badge.grade-shangjia { background: #eaf3f7; border-color: #9bb8c7; color: #1f4e5f; }
+.grade-badge.grade-lianghao { background: #eef6ee; border-color: #a3c4a5; color: #2e6b3a; }
+.grade-badge.grade-zhongshang { background: #f7f2e8; border-color: #d0b98a; color: #8a6914; }
+.grade-badge.grade-zhongping { background: #f3f1ed; border-color: #cfc8bc; color: #6a635a; }
+.grade-badge.grade-daizhuo { background: #f7ecec; border-color: #d4a8a8; color: #8b3a3a; }
 .keyword {
   font-size: 13pt;
   color: #1f4e5f;
@@ -1224,6 +1507,58 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
 .naming-msg-card--blessing .nm-title { color: #6b4c7a; }
 .naming-msg-card--hope { background: linear-gradient(135deg, #eef7f0 0%, #fafffb 100%); }
 .naming-msg-card--hope .nm-title { color: #2e7d4f; }
+.naming-msg-card--parent {
+  background: #f5f7f5;
+  margin: 2mm 0;
+  padding: 2mm 2.5mm;
+  max-height: 62mm;
+  overflow: hidden;
+}
+.naming-msg-card--parent .nm-title {
+  color: #3d5c4a;
+  font-size: 9pt;
+  margin-bottom: 1mm;
+  display: inline;
+  margin-right: 2mm;
+}
+.naming-msg-card--parent .nm-body { font-size: 8.5pt; line-height: 1.35; }
+.parent-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1mm 3mm;
+  margin-bottom: 1.2mm;
+}
+.parent-status { font-size: 8.5pt; color: #4a453f; margin: 0; display: inline; }
+.parent-grade { font-size: 8.5pt; color: #1f4e5f; margin: 0; display: inline; }
+.parent-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1mm 2mm;
+  margin: 0 0 1.5mm;
+}
+.parent-meta .meta-label { font-size: 7.5pt; }
+.parent-meta .meta-value { font-size: 9pt; margin-bottom: 0; }
+.parent-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5mm 3mm;
+  margin-top: 0;
+}
+.parent-check {
+  font-size: 8.5pt;
+  line-height: 1.35;
+  color: #2a2622;
+  padding: 0;
+}
+.parent-check.ok { color: #2e7d4f; }
+.parent-check.fail { color: #9b2c2c; }
+.parent-check-label {
+  font-size: 8pt;
+  color: #8a8378;
+  margin: 0 2mm 0 0;
+  display: inline;
+}
 .rename-dir-card {
   margin: 2mm 0 4mm;
   padding: 3.5mm 4mm;
@@ -1462,6 +1797,13 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
   color: #5a534a;
   line-height: 1.55;
 }
+.wuge-side .wuge-reading {
+  margin: 0;
+  font-size: 8.5pt;
+  color: #2a2622;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
 .wuge-luck-line {
   margin-top: 2mm;
   font-size: 9pt;
@@ -1517,7 +1859,7 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
                 .Append("</div><div class=\"v\">").Append(H(string.IsNullOrEmpty(value) ? "—" : value))
                 .AppendLine("</div></div>");
         }
-        private static string BuildWugeBoard(FlowWugeVisual w, bool compact = false)
+        private static string BuildWugeBoard(FlowWugeVisual w, bool compact = false, string sideReading = null)
         {
             if (w == null)
                 return "<p class=\"muted\">（無三才五格資料）</p>";
@@ -1728,30 +2070,41 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
             SbGridBox(sb, zongBoxX, zongLineY + 6, boxW + 10, boxH, "總格", w.Zong, w.ZongWx);
 
             sb.AppendLine("</svg>");
-            sb.AppendLine(compact ? "<aside class=\"wuge-side wuge-side--compact\">" : "<aside class=\"wuge-side\">");
-            if (!string.IsNullOrWhiteSpace(w.SancaiNote))
-                sb.Append("<div class=\"sancai-note\">").Append(H(w.SancaiNote)).AppendLine("</div>");
-            else
+            var hasReading = !string.IsNullOrWhiteSpace(sideReading);
+            sb.Append("<aside class=\"wuge-side");
+            if (compact) sb.Append(" wuge-side--compact");
+            if (hasReading) sb.Append(" wuge-side--reading");
+            sb.AppendLine("\">");
+            if (hasReading)
             {
-                sb.Append("<div class=\"sancai-note\">三才 ")
-                    .Append(H(string.IsNullOrEmpty(w.Sancai) ? (w.TianWx + w.RenWx + w.DiWx) : w.Sancai))
-                    .Append("（").Append(H(w.SancaiLuck)).Append("）")
-                    .AppendLine("</div>");
-            }
-            if (compact)
-            {
-                sb.Append("<div class=\"wuge-luck-line\">吉凶：天 ").Append(H(w.TianLuck))
-                    .Append("　人 ").Append(H(w.RenLuck))
-                    .Append("　地 ").Append(H(w.DiLuck))
-                    .Append("　外 ").Append(H(w.WaiLuck))
-                    .Append("　總 ").Append(H(w.ZongLuck)).AppendLine("</div>");
+                sb.Append("<div class=\"wuge-reading\">").Append(H(sideReading.Trim())).AppendLine("</div>");
             }
             else
             {
-                sb.Append("<div class=\"wuge-luck-line\">吉凶：天 ")
-                    .Append(H(w.TianLuck)).Append("<br/>人 ").Append(H(w.RenLuck))
-                    .Append("<br/>地 ").Append(H(w.DiLuck)).Append("<br/>外 ").Append(H(w.WaiLuck))
-                    .Append("<br/>總 ").Append(H(w.ZongLuck)).AppendLine("</div>");
+                if (!string.IsNullOrWhiteSpace(w.SancaiNote))
+                    sb.Append("<div class=\"sancai-note\">").Append(H(w.SancaiNote)).AppendLine("</div>");
+                else
+                {
+                    sb.Append("<div class=\"sancai-note\">三才 ")
+                        .Append(H(string.IsNullOrEmpty(w.Sancai) ? (w.TianWx + w.RenWx + w.DiWx) : w.Sancai))
+                        .Append("（").Append(H(w.SancaiLuck)).Append("）")
+                        .AppendLine("</div>");
+                }
+                if (compact)
+                {
+                    sb.Append("<div class=\"wuge-luck-line\">吉凶：天 ").Append(H(w.TianLuck))
+                        .Append("　人 ").Append(H(w.RenLuck))
+                        .Append("　地 ").Append(H(w.DiLuck))
+                        .Append("　外 ").Append(H(w.WaiLuck))
+                        .Append("　總 ").Append(H(w.ZongLuck)).AppendLine("</div>");
+                }
+                else
+                {
+                    sb.Append("<div class=\"wuge-luck-line\">吉凶：天 ")
+                        .Append(H(w.TianLuck)).Append("<br/>人 ").Append(H(w.RenLuck))
+                        .Append("<br/>地 ").Append(H(w.DiLuck)).Append("<br/>外 ").Append(H(w.WaiLuck))
+                        .Append("<br/>總 ").Append(H(w.ZongLuck)).AppendLine("</div>");
+                }
             }
             sb.AppendLine("</aside>");
             sb.AppendLine("</div>"); // wuge-body
@@ -1877,9 +2230,102 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
 
         private static void GradeChip(StringBuilder sb, string label, double score)
         {
-            sb.Append("<div class=\"chip\"><div class=\"k\">").Append(H(label))
-                .Append("</div><div class=\"v\">").Append(H(NameScorer.GradeLabel(score))).Append("</div>");
+            var grade = NameScorer.GradeLabel(score);
+            sb.Append("<div class=\"chip ").Append(GradeToneClass(grade)).Append("\"><div class=\"k\">").Append(H(label))
+                .Append("</div><div class=\"v\">").Append(H(grade)).Append("</div>");
             sb.AppendLine("</div>");
+        }
+
+        private static string GradeToneClass(string grade)
+        {
+            switch ((grade ?? "").Trim())
+            {
+                case "卓異": return "grade-zhuoyi";
+                case "上佳": return "grade-shangjia";
+                case "良好": return "grade-lianghao";
+                case "中上": return "grade-zhongshang";
+                case "中平": return "grade-zhongping";
+                case "待琢": return "grade-daizhuo";
+                default: return "grade-zhongping";
+            }
+        }
+
+        private static string GradeBadgeHtml(string grade)
+        {
+            var g = grade ?? "";
+            return "<span class=\"grade-badge " + GradeToneClass(g) + "\">" + H(g) + "</span>";
+        }
+
+        private static string BuildKeyFactsBar(FlowProfile p)
+        {
+            if (p == null) return "";
+            var sb = new StringBuilder();
+            sb.AppendLine("<div class=\"key-facts\">");
+            AppendKeyFact(sb, "日主", (p.DayMaster ?? "") + (p.DayMasterWuxing ?? ""));
+            AppendKeyFact(sb, "喜用", string.IsNullOrWhiteSpace(p.XiYongText) ? "—" : p.XiYongText);
+            AppendKeyFact(sb, "忌神", string.IsNullOrWhiteSpace(p.JiShenText) ? "—" : p.JiShenText);
+            AppendKeyFact(sb, "姓名五行", string.IsNullOrWhiteSpace(p.CharWuxingText) ? "—" : p.CharWuxingText);
+            sb.AppendLine("</div>");
+            return sb.ToString();
+        }
+
+        private static void AppendKeyFact(StringBuilder sb, string label, string value)
+        {
+            sb.Append("<div class=\"kf\"><span class=\"k\">").Append(H(label))
+                .Append("</span><span class=\"v\">").Append(H(string.IsNullOrWhiteSpace(value) ? "—" : value))
+                .AppendLine("</span></div>");
+        }
+
+        private static string BuildDimGradeGrid(FlowProfile p)
+        {
+            if (p == null || p.ScoreDims == null || p.ScoreDims.Count == 0) return "";
+            var dims = p.ScoreDims.Where(d => d != null && !string.IsNullOrWhiteSpace(d.Label)).Take(8).ToList();
+            var totalGrade = string.IsNullOrWhiteSpace(p.Grade) ? NameScorer.GradeLabel(p.TotalScore) : p.Grade;
+            var sb = new StringBuilder();
+            sb.AppendLine("<div class=\"dim-grade-grid\">");
+            // 列1：面向 1～4；第5欄跨兩列＝綜合評估；列2：面向 5～8
+            for (var i = 0; i < 4; i++)
+                AppendDimChip(sb, i < dims.Count ? dims[i] : null);
+            sb.Append("<div class=\"chip chip-total ").Append(GradeToneClass(totalGrade))
+                .Append("\"><div class=\"k\">綜合評估</div><div class=\"v\">")
+                .Append(H(totalGrade)).AppendLine("</div></div>");
+            for (var i = 4; i < 8; i++)
+                AppendDimChip(sb, i < dims.Count ? dims[i] : null);
+            sb.AppendLine("</div>");
+            return sb.ToString();
+        }
+
+        private static void AppendDimChip(StringBuilder sb, FlowScoreDim d)
+        {
+            if (d == null)
+            {
+                sb.AppendLine("<div class=\"chip\" style=\"visibility:hidden\" aria-hidden=\"true\"></div>");
+                return;
+            }
+            var grade = string.IsNullOrWhiteSpace(d.Grade) ? NameScorer.GradeLabel(d.Score) : d.Grade;
+            sb.Append("<div class=\"chip ").Append(GradeToneClass(grade)).Append("\"><div class=\"k\">")
+                .Append(H(d.Label)).Append("</div><div class=\"v\">").Append(H(grade))
+                .AppendLine("</div></div>");
+        }
+
+        private static string FormatPoemWithDedication(string poem, string fullName)
+        {
+            if (string.IsNullOrWhiteSpace(poem)) return "";
+            var name = (fullName ?? "").Trim();
+            if (string.IsNullOrEmpty(name)) return poem;
+            var lines = poem.Replace("\r\n", "\n").Split('\n');
+            for (var i = 0; i < lines.Length; i++)
+            {
+                var t = (lines[i] ?? "").TrimEnd();
+                var trimmed = t.TrimStart();
+                if (!trimmed.StartsWith("《", StringComparison.Ordinal) || trimmed.IndexOf('》') < 0)
+                    continue;
+                if (trimmed.IndexOf("所作", StringComparison.Ordinal) >= 0)
+                    break;
+                lines[i] = trimmed + " —— 為 " + name + " 所作";
+                break;
+            }
+            return string.Join("\n", lines);
         }
 
         /// <summary>將命名文案中的分數改為評等文字，或直接剔除數字分數。</summary>
@@ -2269,6 +2715,47 @@ table.compact th { color: #6a635a; font-weight: 600; background: #f7f5f1; }
             sb.Append("<div class=\"char-card char-card--meta ").Append(cssClass).Append("\">");
             sb.Append("<div class=\"cc-label\">").Append(H(label)).Append("</div>");
             sb.Append("<div class=\"cc-body\">").Append(H(text)).AppendLine("</div></div>");
+        }
+
+        private static string BuildParentCoRefCard(FlowNamingCopy naming)
+        {
+            if (naming == null || naming.ParentReport == null) return "";
+            var r = naming.ParentReport;
+            var sb = new StringBuilder();
+            sb.AppendLine("<div class=\"naming-msg-card naming-msg-card--parent\">");
+            sb.AppendLine("<div class=\"nm-body\">");
+            sb.AppendLine("<div class=\"parent-head\">");
+            sb.Append("<div class=\"nm-title\">父母姓名合參</div>");
+            if (!string.IsNullOrWhiteSpace(r.StatusText))
+                sb.Append("<span class=\"parent-status\">").Append(H(r.StatusText)).Append("</span>");
+            if (r.HasAnyParent && !string.IsNullOrWhiteSpace(r.Grade))
+                sb.Append("<span class=\"parent-grade\">合參評等").Append(H(r.Grade)).Append("</span>");
+            sb.AppendLine("</div>");
+
+            sb.AppendLine("<div class=\"parent-meta\">");
+            Meta(sb, "父姓", r.FatherSurname);
+            Meta(sb, "父名", r.FatherGiven);
+            Meta(sb, "母姓", r.MotherSurname);
+            Meta(sb, "母名", r.MotherGiven);
+            sb.AppendLine("</div>");
+
+            if (r.HasAnyParent && r.Checks != null && r.Checks.Count > 0)
+            {
+                sb.AppendLine("<div class=\"parent-checks\">");
+                sb.Append("<span class=\"parent-check-label\">避諱檢查</span>");
+                foreach (var c in r.Checks)
+                {
+                    if (c == null || string.IsNullOrWhiteSpace(c.Text)) continue;
+                    sb.Append("<span class=\"parent-check ").Append(c.Ok ? "ok" : "fail").Append("\">")
+                        .Append(c.Ok ? "✓ " : "✗ ")
+                        .Append(H(c.Text))
+                        .Append("</span>");
+                }
+                sb.AppendLine("</div>");
+            }
+
+            sb.AppendLine("</div></div>");
+            return sb.ToString();
         }
 
         private static string BuildNewbornMessageGrid(FlowNamingCopy naming)

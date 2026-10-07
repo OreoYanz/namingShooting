@@ -37,8 +37,9 @@ public static class ContentPackBuilder
             return string.IsNullOrEmpty(ch) ? m : ch + "：" + m;
         }));
         var combo = "「" + sug.FullName + "」綜合評等" + sug.Grade + "。";
-        if (sug.AestheticScore > 0)
-            combo += "組合美感評等" + NameScorer.GradeLabel(sug.AestheticScore) + "。";
+        var dims = NameScorer.DimensionScores(sug);
+        if (dims.Count > 0)
+            combo += "各面向：" + string.Join("、", dims.Select(kv => kv.Key + NameScorer.GradeLabel(kv.Value))) + "。";
         var destiny = pillars == null
             ? ""
             : "日主" + pillars.DayMaster + pillars.DayMasterWuxing + "（" + pillars.Strength + "），喜用" + string.Join("、", pillars.XiYong) + "。";
@@ -59,6 +60,7 @@ public static class ContentPackBuilder
         var hope = "願此名成為人生序章，承載祝福與方向。";
         var poem = BuildPoem(primaryWx, sug.Grade);
         var draft = "【手寫稿建議】\n正楷書「" + sug.FullName + "」；署名可採" + primaryWx + "行之氣韻（" + string.Join("、", imageTags) + "）。";
+        var wugeReading = BuildWugeReading(sug);
 
         return new Dictionary<string, string>
         {
@@ -71,15 +73,61 @@ public static class ContentPackBuilder
             ["idea"] = idea,
             ["blessing"] = blessing,
             ["hope"] = hope,
+            ["wuge_reading"] = wugeReading,
             ["poem"] = poem,
             ["handwriting_draft"] = draft,
             ["report_text"] =
                 "《" + title + "　" + sug.FullName + "》\n命名日期：" + day + "\n\n" +
                 "【命名解析】\n" + chars + "\n" + combo + "\n" + destiny + "\n\n" +
+                "【五格整體判讀】\n" + wugeReading + "\n\n" +
                 "【意象】\n" + image + "\n\n【命名故事】\n" + story + "\n\n" +
                 "【命名理念】\n" + idea + "\n\n【祝福】\n" + blessing + "\n\n【人生期許】\n" + hope +
                 "\n\n【七言詩】\n" + poem + "\n\n" + draft + "\n",
         };
+    }
+
+    /// <summary>本地備援：五格整體判讀（API 失敗或未設定時使用）。</summary>
+    public static string BuildWugeReading(NameSuggestion sug)
+    {
+        if (sug == null || sug.Wuge == null) return "";
+        var w = sug.Wuge;
+        var sancai = !string.IsNullOrEmpty(w.TianWx) && !string.IsNullOrEmpty(w.RenWx) && !string.IsNullOrEmpty(w.DiWx)
+            ? w.TianWx + "・" + w.RenWx + "・" + w.DiWx
+            : (w.Sancai ?? "");
+        var rel = (w.SancaiNote ?? "").Replace("；", "、").Trim();
+        if (string.IsNullOrEmpty(rel)) rel = "天人、人地關係見三才配置";
+
+        var mid = new List<string>();
+        AppendGePhrase(mid, "天格", w.Tian, w.TianLuck);
+        AppendGePhrase(mid, "人格", w.Ren, w.RenLuck);
+        AppendGePhrase(mid, "地格", w.Di, w.DiLuck);
+        AppendGePhrase(mid, "外格", w.Wai, w.WaiLuck);
+        AppendGePhrase(mid, "總格", w.Zong, w.ZongLuck);
+
+        var p1 = "此名三才配置為" + sancai;
+        if (!string.IsNullOrEmpty(rel)) p1 += "，" + rel;
+        if (mid.Count > 0) p1 += "；" + string.Join("，", mid);
+        p1 += "。";
+
+        var grade = string.IsNullOrWhiteSpace(sug.Grade) ? NameScorer.GradeLabel(sug.Total) : sug.Grade;
+        var p2 = "因此，本名並非單以五格吉凶判斷，而是綜合出生八字、喜用方向、字義、音韻、三才與整體名字使用感後評估"
+            + "（綜合評等" + grade + "）。";
+        return p1 + "\n" + p2;
+    }
+
+    private static void AppendGePhrase(List<string> parts, string name, int num, string luck)
+    {
+        luck = (luck ?? "").Trim();
+        if (luck == "凶" || luck == "大凶")
+            parts.Add(name + " " + num + " 為本派數理中的需留意格");
+        else if (luck == "中性" || luck == "中")
+            parts.Add(name + "為中性");
+        else if (luck == "次吉")
+            parts.Add(name + "尚可");
+        else if (luck == "吉" || luck == "大吉")
+            parts.Add(name + "表現良好");
+        else if (!string.IsNullOrEmpty(luck))
+            parts.Add(name + "為" + luck);
     }
 
     private static string PrimaryWx(NameSuggestion sug, Pillars pillars)
@@ -99,8 +147,7 @@ public static class ContentPackBuilder
             parts.Add("對照命盤喜用「" + string.Join("、", pillars.XiYong) + "」，使名字與命局相互呼應。");
         if (sug.Reasons != null && sug.Reasons.Count > 0)
             parts.Add(string.Join("；", sug.Reasons.Take(3)) + "。");
-        if (sug.ParentUsed)
-            parts.Add("並納入父母姓名合參（合參評等" + NameScorer.GradeLabel(sug.ParentScore) + "）。");
+        // 父母合參細節改由報告「父母姓名合參」區塊呈現，此處不重複薄弱一句。
         return string.Join("", parts);
     }
 

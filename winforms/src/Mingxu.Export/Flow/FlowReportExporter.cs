@@ -5,6 +5,7 @@ using System.Linq;
 using Mingxu.Core.Content;
 using Mingxu.Core.Llm;
 using Mingxu.Core.Models;
+using Mingxu.Core.Parents;
 using Mingxu.Core.Scoring;
 
 namespace Mingxu.Export.Flow
@@ -86,6 +87,7 @@ namespace Mingxu.Export.Flow
                     }
                     else
                     {
+                        if (!string.IsNullOrWhiteSpace(pack.WugeReading)) content["wuge_reading"] = pack.WugeReading;
                         if (!string.IsNullOrWhiteSpace(pack.Idea)) content["idea"] = pack.Idea;
                         if (!string.IsNullOrWhiteSpace(pack.Blessing)) content["blessing"] = pack.Blessing;
                         if (!string.IsNullOrWhiteSpace(pack.Hope)) content["hope"] = pack.Hope;
@@ -133,9 +135,13 @@ namespace Mingxu.Export.Flow
                 Idea = ValueOrEmpty(content, "idea"),
                 Blessing = ValueOrEmpty(content, "blessing"),
                 Hope = ValueOrEmpty(content, "hope"),
+                WugeReading = ValueOrEmpty(content, "wuge_reading"),
                 ParentsText = parents,
+                ParentReport = ParentReportBuilder.Build(req, sug),
                 CharEntries = BuildCharEntries(sug),
             };
+            if (string.IsNullOrWhiteSpace(data.Naming.WugeReading))
+                data.Naming.WugeReading = ContentPackBuilder.BuildWugeReading(sug);
             if (req.Mode == "rename")
             {
                 data.Naming.OriginalName = !string.IsNullOrWhiteSpace(req.CurrentFullName)

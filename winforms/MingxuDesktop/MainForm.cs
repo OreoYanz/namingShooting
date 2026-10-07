@@ -364,24 +364,36 @@ public sealed class MainForm : Form
         _surname.Width = 100;
         AddRow(FieldGroup.Surname, 32, Lbl("姓氏"), _surname);
 
-        _birthDate.Width = 160;
+        _birthDate.Width = 180;
         _birthDate.Format = DateTimePickerFormat.Custom;
-        _birthDate.CustomFormat = "yyyy-MM-dd";
-        _birthDate.Value = new DateTime(2021, 9, 29);
+        _birthDate.ShowCheckBox = true;
+        _birthDate.Checked = false;
+        _birthDate.Value = DateTime.Today;
+        SyncBirthDateFormat();
+        EventHandler syncBirthDate = (s, e) => SyncBirthDateFormat();
+        _birthDate.ValueChanged += syncBirthDate;
+        _birthDate.DropDown += syncBirthDate;
+        _birthDate.CloseUp += syncBirthDate;
+        _birthDate.MouseUp += (s, e) => SyncBirthDateFormat();
         AddRow(FieldGroup.Birth, 32, Lbl("出生日期"), _birthDate);
 
-        _birthTime.Width = 120;
+        _birthTime.Width = 140;
         _birthTime.Format = DateTimePickerFormat.Custom;
-        _birthTime.CustomFormat = "HH:mm";
         _birthTime.ShowUpDown = true;
-        _birthTime.Value = DateTime.Today.AddHours(9).AddMinutes(48);
+        _birthTime.ShowCheckBox = true;
+        _birthTime.Checked = false;
+        _birthTime.Value = DateTime.Today;
+        SyncBirthTimeFormat();
+        EventHandler syncBirthTime = (s, e) => SyncBirthTimeFormat();
+        _birthTime.ValueChanged += syncBirthTime;
+        _birthTime.MouseUp += (s, e) => SyncBirthTimeFormat();
         AddRow(FieldGroup.Birth, 32, Lbl("出生時間"), _birthTime);
 
         _place.DropDownStyle = ComboBoxStyle.DropDownList;
         _place.Width = 160;
         _place.Items.Clear();
         _place.Items.AddRange(Places);
-        _place.SelectedItem = "高雄市";
+        _place.SelectedIndex = -1; // 預設不填
         _trueSolar.Width = 100;
         _trueSolar.Text = "真太陽時";
         _trueSolar.Checked = true;
@@ -722,17 +734,60 @@ public sealed class MainForm : Form
         }
     }
 
+    private void SyncBirthDateFormat()
+    {
+        _birthDate.CustomFormat = _birthDate.Checked ? "yyyy-MM-dd" : " ";
+    }
+
+    private void SyncBirthTimeFormat()
+    {
+        _birthTime.CustomFormat = _birthTime.Checked ? "HH:mm" : " ";
+    }
+
+    private bool TryReadBirth(out DateTime birth, out string birthPlace, out string error)
+    {
+        birth = default(DateTime);
+        birthPlace = "";
+        error = null;
+        if (!_birthDate.Checked)
+        {
+            error = "請選擇出生日期。";
+            return false;
+        }
+        if (!_birthTime.Checked)
+        {
+            error = "請選擇出生時間。";
+            return false;
+        }
+        if (_place.SelectedItem == null || string.IsNullOrWhiteSpace(_place.SelectedItem.ToString()))
+        {
+            error = "請選擇出生地。";
+            return false;
+        }
+        birth = _birthDate.Value.Date
+            .AddHours(_birthTime.Value.Hour)
+            .AddMinutes(_birthTime.Value.Minute);
+        birthPlace = _place.SelectedItem.ToString();
+        return true;
+    }
+
     private AnalysisRequest BuildRequest()
     {
         var mode = CurrentMode();
+        DateTime birth;
+        string birthPlace;
+        string birthError;
+        if (!TryReadBirth(out birth, out birthPlace, out birthError))
+            throw new InvalidOperationException(birthError);
+
         return new AnalysisRequest
         {
             Mode = mode,
             Gender = CurrentGender(),
-            Birth = _birthDate.Value.Date.AddHours(_birthTime.Value.Hour).AddMinutes(_birthTime.Value.Minute),
+            Birth = birth,
             Surname = _surname.Text.Trim(),
             CurrentFullName = _currentName.Text.Trim(),
-            BirthPlace = _place.SelectedItem != null ? _place.SelectedItem.ToString() : "台北市",
+            BirthPlace = birthPlace,
             UseTrueSolar = _trueSolar.Checked,
             FatherName = mode == "liunian" ? "" : _father.Text.Trim(),
             MotherName = mode == "liunian" ? "" : _mother.Text.Trim(),

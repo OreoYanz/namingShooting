@@ -97,6 +97,18 @@ def _update_archive(root: Path, entry: Dict[str, Any]) -> str:
     return str(archive_path.relative_to(root)).replace("\\", "/")
 
 
+def _trad_text(value: Any) -> str:
+    from ..paper_cards import to_traditional
+
+    return to_traditional(str(value or ""))
+
+
+def _trad_list(values: Any) -> List[str]:
+    if not values:
+        return []
+    return [_trad_text(x) for x in values if str(x).strip()]
+
+
 def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]) -> Dict[str, Any]:
     gif_dated = f"assets/daily/daily_{yyyymmdd}.gif"
     preview_dated = f"assets/daily/daily_{yyyymmdd}_preview.jpg"
@@ -110,25 +122,25 @@ def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]
         "timezone": "Asia/Taipei",
         "date": daily.get("date"),
         "dateKey": yyyymmdd,
-        "rocDate": daily.get("rocDate"),
-        "lunarDate": daily.get("lunarDate"),
-        "dateLine1": daily.get("dateLine1"),
-        "dateLine2": daily.get("dateLine2"),
+        "rocDate": _trad_text(daily.get("rocDate")),
+        "lunarDate": _trad_text(daily.get("lunarDate")),
+        "dateLine1": _trad_text(daily.get("dateLine1")),
+        "dateLine2": _trad_text(daily.get("dateLine2")),
         "dayGanZhi": daily.get("dayGanZhi"),
-        "dayAnimalHint": daily.get("dayAnimalHint"),
-        "fortuneLevel": daily.get("fortuneLevel"),
+        "dayAnimalHint": _trad_text(daily.get("dayAnimalHint")),
+        "fortuneLevel": _trad_text(daily.get("fortuneLevel")),
         "fortuneScore": daily.get("fortuneScore"),
-        "mainTheme": daily.get("mainTheme"),
-        "secondaryTheme": daily.get("secondaryTheme"),
-        "yi": daily.get("yi") or [],
-        "ji": daily.get("ji") or [],
-        "summaryText": daily.get("summaryText") or "",
-        "shortMessage": daily.get("shortMessage") or "",
-        "ctaLine": daily.get("ctaLine"),
-        "ctaProduct": daily.get("ctaProduct"),
+        "mainTheme": _trad_text(daily.get("mainTheme")),
+        "secondaryTheme": _trad_text(daily.get("secondaryTheme")),
+        "yi": _trad_list(daily.get("yi") or []),
+        "ji": _trad_list(daily.get("ji") or []),
+        "summaryText": _trad_text(daily.get("summaryText") or ""),
+        "shortMessage": _trad_text(daily.get("shortMessage") or ""),
+        "ctaLine": _trad_text(daily.get("ctaLine")),
+        "ctaProduct": _trad_text(daily.get("ctaProduct")),
         "ctaUrl": daily.get("ctaUrl"),
-        "brandName": daily.get("brandName") or "名序",
-        "brandTagline": daily.get("brandTagline") or "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+        "brandName": _trad_text(daily.get("brandName") or "名序"),
+        "brandTagline": _trad_text(daily.get("brandTagline") or "新生兒命名 ‧ 專業改名 ‧ 流年運勢"),
         "page": f"daily/{yyyymmdd}.html",
         "media": {
             # Prefer dated paths so the site can schedule by calendar day.
@@ -149,7 +161,9 @@ def _build_payload(yyyymmdd: str, daily: Dict[str, Any], fortune: Dict[str, Any]
             "latestLast": "assets/daily/latest_last.jpg",
             "latestMp4": "assets/daily/latest.mp4",
         },
-        "fortuneNote": fortune.get("note") or "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。",
+        "fortuneNote": _trad_text(
+            fortune.get("note") or "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+        ),
     }
 
 

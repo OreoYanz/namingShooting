@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-07T10:01:32",
+  "updatedAt": "2026-10-07T10:28:21",
   "timezone": "Asia/Taipei",
   "todayKey": "20261007",
-  "count": 19,
+  "count": 20,
   "days": [
+    {
+      "dateKey": "20261020",
+      "date": "2026-10-20",
+      "dateLine1": "115年10月20日 農曆九月十一",
+      "dateLine2": "丙午 [馬] 年戊戌月丁卯日",
+      "fortuneLevel": "平",
+      "mainTheme": "嫁娶開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "在丁卯日裡，嫁娶與祈福的祝福可以讓運勢更佳，切記避免入…",
+      "rocDate": "115年10月20日",
+      "gif": "assets/daily/daily_20261020.gif",
+      "preview": "assets/daily/daily_20261020_preview.jpg",
+      "last": "assets/daily/daily_20261020_last.jpg",
+      "mp4": "assets/daily/daily_20261020.mp4",
+      "page": "daily/20261020.html"
+    },
     {
       "dateKey": "20261019",
       "date": "2026-10-19",

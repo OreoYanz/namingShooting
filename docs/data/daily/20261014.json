@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T14:55:21",
+  "updatedAt": "2026-10-07T09:37:38",
   "timezone": "Asia/Taipei",
   "date": "2026-10-14",
   "dateKey": "20261014",
@@ -20,14 +20,14 @@
     "祈福",
     "求嗣",
     "動土",
-    "安床"
+    "安牀"
   ],
   "ji": [
     "開光",
     "栽種"
   ],
-  "summaryText": "在辛酉日裡，嫁娶與祈福合時，切忌開光與栽種。",
-  "shortMessage": "今天是辛酉日，適合嫁娶與祈福，讓我們迎接貴人的光臨！",
+  "summaryText": "今日嫁娶祭祀最好，避開開光栽種可迎好運。",
+  "shortMessage": "今天的辛酉日，貴人靠近，適合嫁娶與祈福，讓好運隨行！",
   "ctaLine": "想知道的不只是今天，還有你今年的方向？",
   "ctaProduct": "名序｜流年分析",
   "ctaUrl": "https://mingxu.mingxu.workers.dev/",

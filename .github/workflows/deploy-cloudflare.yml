@@ -1,7 +1,10 @@
 # Deploy docs/ to Cloudflare Worker on push to main.
-# Requires GitHub Secrets (repo Settings → Secrets and variables → Actions):
-#   TOKEN  = Cloudflare API Token (Edit Cloudflare Workers)
-#   ID     = Cloudflare Account ID
+#
+# GitHub → Settings → Secrets and variables → Actions，需有：
+#   CLOUDFLARE_API_TOKEN   = Cloudflare API Token（權限含 Edit Cloudflare Workers）
+#   CLOUDFLARE_ACCOUNT_ID  = 儀表板右側 Account ID（僅英數／連字號／底線，勿加空白或引號）
+#
+# 若仍用舊名稱 TOKEN / ID，請刪除後改建成上述兩個名稱。
 name: Deploy Cloudflare
 
 on:
@@ -17,9 +20,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+
+      - name: Check Cloudflare secrets
+        env:
+          ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$ACCOUNT_ID" ]; then
+            echo "::error::Missing secret CLOUDFLARE_ACCOUNT_ID. Add it in repo Settings → Secrets."
+            exit 1
+          fi
+          if [ -z "$API_TOKEN" ]; then
+            echo "::error::Missing secret CLOUDFLARE_API_TOKEN. Add it in repo Settings → Secrets."
+            exit 1
+          fi
+          if ! printf '%s' "$ACCOUNT_ID" | grep -Eq '^[A-Za-z0-9_-]+$'; then
+            echo "::error::CLOUDFLARE_ACCOUNT_ID has invalid characters (spaces, quotes, or punctuation). Paste only the Account ID hex string."
+            exit 1
+          fi
+          echo "Cloudflare secrets look present and Account ID format is OK."
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v4
         with:
-          apiToken: ${{ secrets.TOKEN }}
-          accountId: ${{ secrets.ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy

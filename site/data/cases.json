@@ -3,6 +3,20 @@
   "note": "由 WinForms 匯出 PDF 時產生的 .case.json 併入此檔 cases 陣列。",
   "cases": [
     {
+      "id": "rn-20261007171214-OO",
+      "service": "rename",
+      "serviceLabel": "專業改名",
+      "birthDate": "1993-01",
+      "region": "彰化縣",
+      "displayName": "王OO",
+      "surname": "王",
+      "isCompoundSurname": false,
+      "gender": "男",
+      "exportedAt": "2026-10-07T17:12:14+08:00",
+      "image": "光明、熱誠、華彩煥發",
+      "macroStage": ""
+    },
+    {
       "id": "nb-20261007132415-OO",
       "service": "newborn",
       "serviceLabel": "新生兒命名",

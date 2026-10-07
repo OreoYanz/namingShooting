@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-07T10:28:24",
+  "updatedAt": "2026-10-07T11:29:42",
   "timezone": "Asia/Taipei",
   "todayKey": "20261007",
-  "count": 20,
+  "count": 21,
   "days": [
+    {
+      "dateKey": "20261021",
+      "date": "2026-10-21",
+      "dateLine1": "115年10月21日 農曆九月十二",
+      "dateLine2": "丙午 [馬] 年戊戌月戊辰日",
+      "fortuneLevel": "平",
+      "mainTheme": "祭祀開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今天適合祭祀沐浴助運，忌嫁娶搬家遠行。",
+      "rocDate": "115年10月21日",
+      "gif": "assets/daily/daily_20261021.gif",
+      "preview": "assets/daily/daily_20261021_preview.jpg",
+      "last": "assets/daily/daily_20261021_last.jpg",
+      "mp4": "assets/daily/daily_20261021.mp4",
+      "page": "daily/20261021.html"
+    },
     {
       "dateKey": "20261020",
       "date": "2026-10-20",

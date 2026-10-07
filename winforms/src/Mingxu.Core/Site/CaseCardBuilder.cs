@@ -27,7 +27,8 @@ namespace Mingxu.Core.Site
             var genderLabel = GenderLabel(req.Gender);
             var surname = sug.Surname ?? "";
             var displayName = MaskDisplayName(surname, sug.Given);
-            var birthDate = req.Birth.ToString("yyyy/MM/dd");
+            // 公開案例僅顯示年月，避免完整出生日期外洩
+            var birthDate = req.Birth.ToString("yyyy-MM");
             var region = string.IsNullOrWhiteSpace(req.BirthPlace) ? "" : req.BirthPlace.Trim();
             var id = BuildId(mode, req.Birth, displayName);
 

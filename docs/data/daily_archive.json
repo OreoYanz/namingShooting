@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T12:36:05",
+  "updatedAt": "2026-10-08T12:40:07",
   "timezone": "Asia/Taipei",
   "todayKey": "20261008",
-  "count": 25,
+  "count": 26,
   "days": [
+    {
+      "dateKey": "20261026",
+      "date": "2026-10-26",
+      "dateLine1": "115年10月26日 農曆九月十七",
+      "dateLine2": "丙午 [馬] 年戊戌月癸酉日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "嫁娶開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今天適合嫁娶與出行，記得遠離開市與爭執的煩惱，讓運勢隨…",
+      "rocDate": "115年10月26日",
+      "gif": "assets/daily/daily_20261026.gif",
+      "preview": "assets/daily/daily_20261026_preview.jpg",
+      "last": "assets/daily/daily_20261026_last.jpg",
+      "mp4": "assets/daily/daily_20261026.mp4",
+      "page": "daily/20261026.html"
+    },
     {
       "dateKey": "20261025",
       "date": "2026-10-25",

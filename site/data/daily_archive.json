@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T12:34:09",
+  "updatedAt": "2026-10-08T12:36:04",
   "timezone": "Asia/Taipei",
   "todayKey": "20261008",
-  "count": 24,
+  "count": 25,
   "days": [
+    {
+      "dateKey": "20261025",
+      "date": "2026-10-25",
+      "dateLine1": "115年10月25日 農曆九月十六",
+      "dateLine2": "丙午 [馬] 年戊戌月壬申日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "順水流財",
+      "secondaryTheme": "祭祀開運",
+      "summaryText": "今天適宜祭祀祈福，讓順水流財的運勢常伴身旁。",
+      "rocDate": "115年10月25日",
+      "gif": "assets/daily/daily_20261025.gif",
+      "preview": "assets/daily/daily_20261025_preview.jpg",
+      "last": "assets/daily/daily_20261025_last.jpg",
+      "mp4": "assets/daily/daily_20261025.mp4",
+      "page": "daily/20261025.html"
+    },
     {
       "dateKey": "20261024",
       "date": "2026-10-24",

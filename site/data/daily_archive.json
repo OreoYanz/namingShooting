@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T11:15:58",
+  "updatedAt": "2026-11-06T11:17:18",
   "timezone": "Asia/Taipei",
   "todayKey": "20261106",
-  "count": 41,
+  "count": 42,
   "days": [
     {
       "dateKey": "20261112",
@@ -116,6 +116,22 @@
       "last": "assets/daily/daily_20261106_last.jpg",
       "mp4": "assets/daily/daily_20261106.mp4",
       "page": "daily/20261106.html"
+    },
+    {
+      "dateKey": "20261104",
+      "date": "2026-11-04",
+      "dateLine1": "115年11月4日 農曆九月廿六",
+      "dateLine2": "丙午 [馬] 年戊戌月壬午日",
+      "fortuneLevel": "平",
+      "mainTheme": "造車器開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今日適合造車器開運，記得避開上樑等忌事。",
+      "rocDate": "115年11月4日",
+      "gif": "assets/daily/daily_20261104.gif",
+      "preview": "assets/daily/daily_20261104_preview.jpg",
+      "last": "assets/daily/daily_20261104_last.jpg",
+      "mp4": "assets/daily/daily_20261104.mp4",
+      "page": "daily/20261104.html"
     },
     {
       "dateKey": "20261103",

@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T14:51:29",
+  "updatedAt": "2026-11-06T10:11:30",
   "timezone": "Asia/Taipei",
-  "todayKey": "20261008",
-  "count": 27,
+  "todayKey": "20261106",
+  "count": 28,
   "days": [
+    {
+      "dateKey": "20261106",
+      "date": "2026-11-06",
+      "dateLine1": "115年11月6日 農曆九月廿八",
+      "dateLine2": "丙午 [馬] 年戊戌月甲申日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "嫁娶開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今天適宜訂盟嫁娶，謹記避免開市與出貨財。",
+      "rocDate": "115年11月6日",
+      "gif": "assets/daily/daily_20261106.gif",
+      "preview": "assets/daily/daily_20261106_preview.jpg",
+      "last": "assets/daily/daily_20261106_last.jpg",
+      "mp4": "assets/daily/daily_20261106.mp4",
+      "page": "daily/20261106.html"
+    },
     {
       "dateKey": "20261027",
       "date": "2026-10-27",

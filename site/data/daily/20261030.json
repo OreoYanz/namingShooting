@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-06T10:42:02",
+  "timezone": "Asia/Taipei",
+  "date": "2026-10-30",
+  "dateKey": "20261030",
+  "rocDate": "115年10月30日",
+  "lunarDate": "農曆九月廿一",
+  "dateLine1": "115年10月30日 農曆九月廿一",
+  "dateLine2": "丙午 [馬] 年戊戌月丁丑日",
+  "dayGanZhi": "丁丑",
+  "dayAnimalHint": "馬",
+  "fortuneLevel": "平",
+  "fortuneScore": 61,
+  "mainTheme": "祭祀開運",
+  "secondaryTheme": "順水流財",
+  "yi": [
+    "祭祀",
+    "平治道塗",
+    "餘事勿取"
+  ],
+  "ji": [
+    "嫁娶",
+    "開市"
+  ],
+  "summaryText": "今天適合祭祀開運，避免嫁娶與開市的安排。",
+  "shortMessage": "今天是丁丑日，適合祭祀開運，避免嫁娶與開市！",
+  "ctaLine": "想知道的不只是今天，還有你今年的方向？",
+  "ctaProduct": "名序｜流年分析",
+  "ctaUrl": "https://mingxu.mingxu.workers.dev/",
+  "brandName": "名序",
+  "brandTagline": "新生兒命名 ‧ 專業改名 ‧ 流年運勢",
+  "page": "daily/20261030.html",
+  "media": {
+    "gif": "assets/daily/daily_20261030.gif",
+    "webp": "assets/daily/daily_20261030.webp",
+    "preview": "assets/daily/daily_20261030_preview.jpg",
+    "last": "assets/daily/daily_20261030_last.jpg",
+    "mp4": "assets/daily/daily_20261030.mp4",
+    "shareImage": "assets/daily/daily_20261030_last.jpg",
+    "scene": "assets/daily/scene_20261030.jpg",
+    "scenePng": "assets/daily/scene_20261030.png",
+    "gifDated": "assets/daily/daily_20261030.gif",
+    "previewDated": "assets/daily/daily_20261030_preview.jpg",
+    "lastDated": "assets/daily/daily_20261030_last.jpg",
+    "mp4Dated": "assets/daily/daily_20261030.mp4",
+    "latestGif": "assets/daily/latest.gif",
+    "latestPreview": "assets/daily/latest_preview.jpg",
+    "latestLast": "assets/daily/latest_last.jpg",
+    "latestMp4": "assets/daily/latest.mp4"
+  },
+  "fortuneNote": "公共日曆吉凶；宜忌來自農曆通書資料，非個人命盤。"
+}

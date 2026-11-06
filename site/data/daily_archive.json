@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T10:38:47",
+  "updatedAt": "2026-11-06T10:40:22",
   "timezone": "Asia/Taipei",
   "todayKey": "20261106",
-  "count": 29,
+  "count": 30,
   "days": [
     {
       "dateKey": "20261106",
@@ -20,6 +20,22 @@
       "last": "assets/daily/daily_20261106_last.jpg",
       "mp4": "assets/daily/daily_20261106.mp4",
       "page": "daily/20261106.html"
+    },
+    {
+      "dateKey": "20261029",
+      "date": "2026-10-29",
+      "dateLine1": "115年10月29日 農曆九月二十",
+      "dateLine2": "丙午 [馬] 年戊戌月丙子日",
+      "fortuneLevel": "平",
+      "mainTheme": "納採開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今天適合納採開運與會友，卻要小心避免入宅。",
+      "rocDate": "115年10月29日",
+      "gif": "assets/daily/daily_20261029.gif",
+      "preview": "assets/daily/daily_20261029_preview.jpg",
+      "last": "assets/daily/daily_20261029_last.jpg",
+      "mp4": "assets/daily/daily_20261029.mp4",
+      "page": "daily/20261029.html"
     },
     {
       "dateKey": "20261028",

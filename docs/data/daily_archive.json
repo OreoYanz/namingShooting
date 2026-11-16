@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T08:41:26",
+  "updatedAt": "2026-11-16T08:42:48",
   "timezone": "Asia/Taipei",
   "todayKey": "20261116",
-  "count": 50,
+  "count": 51,
   "days": [
+    {
+      "dateKey": "20261120",
+      "date": "2026-11-20",
+      "dateLine1": "115年11月20日 農曆十月十二",
+      "dateLine2": "丙午 [馬] 年己亥月戊戌日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "合帳開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今日合帳開運，宜嫁娶裁衣，忌置產掘井，讓財運隨之而來。",
+      "rocDate": "115年11月20日",
+      "gif": "assets/daily/daily_20261120.gif",
+      "preview": "assets/daily/daily_20261120_preview.jpg",
+      "last": "assets/daily/daily_20261120_last.jpg",
+      "mp4": "assets/daily/daily_20261120.mp4",
+      "page": "daily/20261120.html"
+    },
     {
       "dateKey": "20261119",
       "date": "2026-11-19",

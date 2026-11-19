@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T08:41:15",
+  "updatedAt": "2026-11-19T08:41:07",
   "timezone": "Asia/Taipei",
-  "todayKey": "20261118",
-  "count": 55,
+  "todayKey": "20261119",
+  "count": 56,
   "days": [
+    {
+      "dateKey": "20261125",
+      "date": "2026-11-25",
+      "dateLine1": "115年11月25日 農曆十月十七",
+      "dateLine2": "丙午 [馬] 年己亥月癸卯日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "嫁娶開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今天適合嫁娶與訂盟，避免置產與掘井。",
+      "rocDate": "115年11月25日",
+      "gif": "assets/daily/daily_20261125.gif",
+      "preview": "assets/daily/daily_20261125_preview.jpg",
+      "last": "assets/daily/daily_20261125_last.jpg",
+      "mp4": "assets/daily/daily_20261125.mp4",
+      "page": "daily/20261125.html"
+    },
     {
       "dateKey": "20261124",
       "date": "2026-11-24",

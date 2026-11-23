@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-23T08:41:36",
+  "updatedAt": "2026-11-23T08:43:09",
   "timezone": "Asia/Taipei",
   "todayKey": "20261123",
-  "count": 58,
+  "count": 59,
   "days": [
+    {
+      "dateKey": "20261128",
+      "date": "2026-11-28",
+      "dateLine1": "115年11月28日 農曆十月二十",
+      "dateLine2": "丙午 [馬] 年己亥月丙午日",
+      "fortuneLevel": "平",
+      "mainTheme": "貴人靠近",
+      "secondaryTheme": "祭祀開運",
+      "summaryText": "祭祀掃舍可吸引貴人，避開嫁娶與入宅的變化。",
+      "rocDate": "115年11月28日",
+      "gif": "assets/daily/daily_20261128.gif",
+      "preview": "assets/daily/daily_20261128_preview.jpg",
+      "last": "assets/daily/daily_20261128_last.jpg",
+      "mp4": "assets/daily/daily_20261128.mp4",
+      "page": "daily/20261128.html"
+    },
     {
       "dateKey": "20261127",
       "date": "2026-11-27",

@@ -1,10 +1,26 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-26T08:41:06",
+  "updatedAt": "2026-11-27T08:41:06",
   "timezone": "Asia/Taipei",
-  "todayKey": "20261126",
-  "count": 63,
+  "todayKey": "20261127",
+  "count": 64,
   "days": [
+    {
+      "dateKey": "20261203",
+      "date": "2026-12-03",
+      "dateLine1": "115年12月3日 農曆十月廿五",
+      "dateLine2": "丙午 [馬] 年己亥月辛亥日",
+      "fortuneLevel": "中吉",
+      "mainTheme": "祭祀開運",
+      "secondaryTheme": "順水流財",
+      "summaryText": "今天適合祭祀沐浴順水流財，忌開市動土讓運勢更佳。",
+      "rocDate": "115年12月3日",
+      "gif": "assets/daily/daily_20261203.gif",
+      "preview": "assets/daily/daily_20261203_preview.jpg",
+      "last": "assets/daily/daily_20261203_last.jpg",
+      "mp4": "assets/daily/daily_20261203.mp4",
+      "page": "daily/20261203.html"
+    },
     {
       "dateKey": "20261202",
       "date": "2026-12-02",
